@@ -198,4 +198,4 @@ with initial condition, a suitably chosen &lt;span class="math"&gt;\(x_0 \in \ma
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="math"></category><category term="numerical-analysis"></category></entry></feed>
+&lt;/script&gt;</content><category term="math"></category><category term="numerical-analysis"></category><category term="algorithm"></category></entry></feed>
