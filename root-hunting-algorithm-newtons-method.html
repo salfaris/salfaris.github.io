@@ -85,7 +85,7 @@
 with initial condition, a suitably chosen <span class="math">\(x_0 \in \mathbb{R}\)</span>.</p>
 <hr>
 <h3>Code implementation</h3>
-<p>An iterative implementation of the Newton's method is given below:</p>
+<p>An iterative implementation of the Newton's method in Python is given below:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">iterative_newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Solves f(x) = 0 using the Newton&#39;s method.</span>
 
@@ -104,7 +104,7 @@ with initial condition, a suitably chosen <span class="math">\(x_0 \in \mathbb{R
         <span class="n">res</span> <span class="o">=</span> <span class="n">last</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">last</span><span class="p">)</span><span class="o">/</span><span class="n">df</span><span class="p">(</span><span class="n">last</span><span class="p">)</span>
         <span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">xs</span>
 </code></pre></div>
 
 <p>Using the same parameters as above, we can also implement a one-liner recursive implementation:</p>
@@ -115,6 +115,11 @@ with initial condition, a suitably chosen <span class="math">\(x_0 \in \mathbb{R
 <p>Observe that both algorithms have <span class="math">\(\mathcal{O}(n)\)</span> space complexity where <span class="math">\(n\)</span> is the number of iterations or depth of the recursion. The time complexity for the iterative implementation is also <span class="math">\(\mathcal{O}(n)\)</span>, but for the recursive implementation, it is a bit tricky to compute (so we leave it as an exercise!).</p>
 <p>Note that there is a small caveat to the Newton's method which we have implicitly highlight in this post, can you spot it?</p>
 <p><strong>Code to generate Newton's method plot</strong></p>
+<p>We will utilize the <code>numpy</code> and <code>matplotlib</code> packages.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</code></pre></div>
+
 <p>We first need two helper functions.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">finite_diff</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Returns the derivative of f(x) based on the</span>
@@ -140,6 +145,7 @@ with initial condition, a suitably chosen <span class="math">\(x_0 \in \mathbb{R
 <div class="highlight"><pre><span></span><code><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">finite_diff</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">iterative_newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>  <span class="c1"># To utilize numpy broadcasting later.</span>
 </code></pre></div>
 
 <p>We finally plot the function.</p>
