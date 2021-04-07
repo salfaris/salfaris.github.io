@@ -15,7 +15,7 @@
 &lt;li&gt;an empty space for students to follow along and fill in the blanks live in class.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I tried to reproduce his box environment when I was writing my very first math notes on &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt; – my Linear Algebra &amp;amp; Geometry II notes. &lt;/p&gt;
-&lt;p&gt;&lt;img alt="Linear Algebra &amp;amp; Geometry II notes" src="/images/my-first-box-2.png"&gt;
+&lt;p&gt;&lt;img alt="Linear Algebra &amp;amp; Geometry II notes" src="/images/my-first-box.png"&gt;
 &lt;center&gt;&lt;em&gt;A snippet of my Linear Algebra &amp;amp; Geometry II notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;It was achievable using the &lt;code&gt;fbox&lt;/code&gt; environment alone, but for it to generalize well, I have to throw in a &lt;code&gt;minipage&lt;/code&gt; usage as well. The code implementation is quite simple and requires no package imports:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;% Simple box environment.&lt;/span&gt;
