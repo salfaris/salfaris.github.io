@@ -62,7 +62,7 @@
 <hr>
 <h3>Newton's idea (an overview)</h3>
 <p>One way of solving this problem is to <em>linearize</em> the function <span class="math">\(f(x)\)</span> around a certain point <span class="math">\(x_0\)</span> of our choice so that we can easily solve the resulting linear equation. Say we get <span class="math">\(x_1\)</span> as a solution, then we repeat linearizing <span class="math">\(f(x)\)</span> around <span class="math">\(x_1\)</span>; so on and so forth. The initial point <span class="math">\(x_0\)</span> is chosen such that it is close to our hoped solution, say, <span class="math">\(x^*\)</span>. The idea is that if <span class="math">\(x_0\)</span> is suitably chosen, then the solutions <span class="math">\(x_1, x_2, x_3, \ldots\)</span> to each linear approximation of <span class="math">\(f(x)\)</span> approximates <span class="math">\(x^*\)</span> better and better, and in the limit converges to <span class="math">\(x^*\)</span>. This whole process is known as the <strong>Newton's method</strong>. Here is a nice picture of the method applied to <span class="math">\(f(x) = x^2\)</span> over <span class="math">\(n = 10\)</span> iterations, starting at <span class="math">\(x_0 = 1\)</span>.</p>
-<p><img alt="Newton's method illustration" src="/images/newton-method.png"></p>
+<p><img alt="Newton's method illustration" src="https://salfaris.github.io/images/newton-method.png"></p>
 <p>We see from the illustration that the Newton's method converges towards <span class="math">\(x^* = 0\)</span>, as expected. For the code to generate this plot, see end of post.</p>
 <hr>
 <h3>Newton's idea (the algebra)</h3>
