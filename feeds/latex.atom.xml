@@ -134,4 +134,4 @@
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</content><category term="latex"></category><category term="latex"></category><category term="hacks"></category></entry></feed>
+&lt;/script&gt;</content><category term="latex"></category><category term="latex"></category><category term="writing"></category></entry></feed>
