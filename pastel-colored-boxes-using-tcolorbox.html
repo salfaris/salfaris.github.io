@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">  
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="https://salfaris.github.io/theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="https://salfaris.github.io/theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://salfaris.github.io/theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Salman">
+  <meta name="description" content="Posts and writings by Salman">
+
+  <link href="https://salfaris.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Salman Faris Atom" />
+
+<meta name="keywords" content="latex, hacks">
+
+  <title>
+    Salman Faris
+&ndash; Making pastel-colored boxes using tcolorbox in LaTeX  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="https://salfaris.github.io">
+        <img src="https://salfaris.github.io/images/avatar_circ.png" alt="logo">
+      </a>
+      <h2><a href="https://salfaris.github.io">Salman Faris</a></h2>
+      <p>I talk about math, machine learning and stats.</p>
+      <ul>
+        <!-- <li><a href="https://salfaris.github.io">blog</a></li> -->
+        <li><a href="https://salfaris.github.io/pages/about.html">about</a></li>
+        <li><a href="https://salfaris.github.io/pages/resources.html">resources</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="https://salfaris.github.io">Index</a> &brvbar; <a href="https://salfaris.github.io/archives.html">Archives</a>
+      &brvbar; <a href="https://salfaris.github.io/feeds/all.atom.xml">Atom</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html">Making pastel-colored boxes using tcolorbox in LaTeX</a></h1>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Wed 07 April 2021</p>
+  </div>
+  <div class="article_text">
+    <p>One of the many questions I get when people see my <span class="math">\(\LaTeX\)</span>-ed math notes is <em>how do you create these nice pastel-colored boxes?</em> </p>
+<p><img alt="Example tcolorbox" src="/images/example-box.png">
+<img alt="Example 2 tcolorbox" src="/images/example-box-2.png">
+<center><em>Two examples of pastel-colored boxes from my math notes</em></center></p>
+<p>I feel like this is a very relevant and important question, because I asked the exact same thing when I was new to <span class="math">\(\LaTeX\)</span>.</p>
+<h3>Simple box using <em>fbox</em> and <em>minipage</em></h3>
+<p>My first exposure to <span class="math">\(\LaTeX\)</span> box-like environments was my mentor <a href="https://sites.google.com/site/tsoighaleo/">Ghaleo</a>'s genius tutorial notes. He used them for two main reasons: </p>
+<ul>
+<li>to highlight important theorems, lemmas, etc;</li>
+<li>an empty space for students to follow along and fill in the blanks live in class.</li>
+</ul>
+<p>I tried to reproduce his box environment when I was writing my very first math notes on <span class="math">\(\LaTeX\)</span> – my Linear Algebra &amp; Geometry II notes. </p>
+<p><img alt="Linear Algebra &amp; Geometry II notes" src="/images/my-first-box-2.png">
+<center><em>A snippet of my Linear Algebra &amp; Geometry II notes</em></center></p>
+<p>It was achievable using the <code>fbox</code> environment alone, but for it to generalize well, I have to throw in a <code>minipage</code> usage as well. The code implementation is quite simple and requires no package imports:</p>
+<div class="highlight"><pre><span></span><code><span class="c">% Simple box environment.</span>
+<span class="k">\fbox</span><span class="nb">{</span> <span class="c">%</span>
+<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[t]<span class="nb">{</span>0.9<span class="k">\textwidth</span><span class="nb">}</span>
+    <span class="c">% Your text here.</span>
+<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+<span class="nb">}</span>
+</code></pre></div>
+
+<p>The problem with this box is that... it's just plain black and white. I want something more vibrant and colourful, so I decided to start learning the <a href="https://ctan.org/pkg/tcolorbox">tcolorbox</a> package. </p>
+<h3>Transition to <em>tcolorbox</em></h3>
+<p>As usual, the best way to learn is to straight dive in and do. After (very) little reading on the package's documentation, I started to recreate pretty boxes that other people have made from scratch. These boxes are usually from notes I found online like:</p>
+<ul>
+<li>Evan Chen's <a href="https://web.evanchen.cc/napkin.html">The Napkin project</a>;</li>
+<li>Tony Zhang's notes snippets from his <a href="https://www.quora.com/Does-anybody-use-LaTeX-to-take-notes-especially-during-class-If-not-what-do-you-use-especially-when-you-need-to-write-down-equations">Quora post</a>;</li>
+<li>or even the tcolorbox documentation itself. </li>
+</ul>
+<p>With my then minimal knowledge, I started writing my Real Analysis notes. I was quite happy with the end product but the overall design felt a bit odd (as you can see in the figure below). Nevertheless, my initial goal was to just make prettier boxes and I think I've achieved just that.</p>
+<p><img alt="Real Analysis notes" src="/images/my-second-box.png">
+<center><em>A snippet of my Real Analysis notes</em></center></p>
+<p>To reproduce the (proof) box above with a Cerulean colour, use the following code in your document's preamble:</p>
+<div class="highlight"><pre><span></span><code><span class="k">\usepackage</span><span class="na">[dvipsnames]</span><span class="nb">{</span>xcolor<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="na">[many]</span><span class="nb">{</span>tcolorbox<span class="nb">}</span>
+
+<span class="k">\newtcolorbox</span><span class="nb">{</span>myAwesomeBox<span class="nb">}{</span>
+    enhanced,
+    sharp corners,
+    breakable,  <span class="c">% Allows page break.</span>
+    borderline west=<span class="nb">{</span>2pt<span class="nb">}{</span>0pt<span class="nb">}{</span>Cerulean<span class="nb">}</span>,
+    colback=Cerulean!10,  <span class="c">% Background color.</span>
+    colframe=Cerulean!10  <span class="c">% Frame (border) color.</span>
+<span class="nb">}</span>
+</code></pre></div>
+
+<p>This should yield a box similar to:</p>
+<p><img alt="Blue pastel box" src="/images/my-third-box.png"></p>
+<p>I want to note two things regarding the imports:</p>
+<ol>
+<li>
+<p>The <code>dvipsnames</code> option for xcolor is simply a choice of the set of colors I want from <code>xcolor</code>. It does affect the name of colors you can pass as arguments, for example, here I used <code>Cerulean</code>. For a full set of possible colors in <code>xcolor</code>, see <a href="https://en.wikibooks.org/wiki/LaTeX/Colors">here</a>.</p>
+</li>
+<li>
+<p>The <code>many</code> option for <code>tcolorbox</code> loads additional libraries which allows us to use more features from <code>tcolorbox</code>. In particular for our use case, we want to be able to use <code>enhanced</code>. See the <a href="https://mirrors.nxthost.com/ctan/macros/latex/contrib/tcolorbox/tcolorbox.pdf">documentation</a> for other options.</p>
+</li>
+</ol>
+<p>Here are some tweaks that you might want to consider:</p>
+<ul>
+<li>
+<p>If you want to <em>add a nice smooth border-like effect</em>, do this: instead of using <code>colframe=Cerulean!10</code>, remove that line and put <code>boxrule=0pt</code> instead. In general, <code>boxrule</code> adjusts the border stroke.</p>
+</li>
+<li>
+<p>If you want to <em>remove padding inside the box</em>, add <code>boxsep=0pt</code>. In general, <code>boxsep</code> controls the inside padding.</p>
+</li>
+</ul>
+<p>There are many more parameters that you can control and these can be found in the <a href="https://mirrors.nxthost.com/ctan/macros/latex/contrib/tcolorbox/tcolorbox.pdf">tcolorbox documentation</a>.</p>
+<p>Nowadays, I write my notes using the <a href="https://github.com/Adhumunt/NotesTeX">NotesTex</a> package which coincidentally uses tcolorbox with a similar setting as mine. I guess this is one of the reasons why it was a no brainer for me to use it in the first place. The nice thing about the package is that it provides a complete framework to write notes in <span class="math">\(\LaTeX\)</span>. In particular, you don't have to reinvent the wheel for everything (e.g. theorem environment, sidenotes). And for features that you feel are missing, you can simply add it on your own with ease. I've added plenty of features already and they integrate quite well. I'd highly recommend checking NotesTex out!</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+  </div>
+  <div class="article_meta">
+    <p>Category: <a href="https://salfaris.github.io/category/latex.html">latex</a>
+ &ndash; Tags:
+      <a href="https://salfaris.github.io/tag/latex.html">latex</a>,      <a href="https://salfaris.github.io/tag/hacks.html">hacks</a>    </p>
+  </div>
+
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Salman. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>
+
+<!-- This script solves the issue of mathjax not rendering on homepage -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Salman Faris - latex</title><link href="https://salfaris.github.io/" rel="alternate"></link><link href="https://salfaris.github.io/feeds/latex.atom.xml" rel="self"></link><id>https://salfaris.github.io/</id><updated>2021-04-07T15:46:00+01:00</updated><entry><title>Making pastel-colored boxes using tcolorbox in LaTeX</title><link href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html" rel="alternate"></link><published>2021-04-07T15:46:00+01:00</published><updated>2021-04-07T15:46:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-04-07:/pastel-colored-boxes-using-tcolorbox.html</id><summary type="html">&lt;p&gt;One of the many questions I get when people see my &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt;-ed math notes is &lt;em&gt;how do you create these nice pastel-colored boxes?&lt;/em&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="Example tcolorbox" src="/images/example-box.png"&gt;
+&lt;img alt="Example 2 tcolorbox" src="/images/example-box-2.png"&gt;
+&lt;center&gt;&lt;em&gt;Two examples of pastel-colored boxes from my math notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;I feel like this is a very relevant and important question, because I asked the exact same …&lt;/p&gt;</summary><content type="html">&lt;p&gt;One of the many questions I get when people see my &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt;-ed math notes is &lt;em&gt;how do you create these nice pastel-colored boxes?&lt;/em&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="Example tcolorbox" src="/images/example-box.png"&gt;
+&lt;img alt="Example 2 tcolorbox" src="/images/example-box-2.png"&gt;
+&lt;center&gt;&lt;em&gt;Two examples of pastel-colored boxes from my math notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;I feel like this is a very relevant and important question, because I asked the exact same thing when I was new to &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt;.&lt;/p&gt;
+&lt;h3&gt;Simple box using &lt;em&gt;fbox&lt;/em&gt; and &lt;em&gt;minipage&lt;/em&gt;&lt;/h3&gt;
+&lt;p&gt;My first exposure to &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt; box-like environments was my mentor &lt;a href="https://sites.google.com/site/tsoighaleo/"&gt;Ghaleo&lt;/a&gt;'s genius tutorial notes. He used them for two main reasons: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;to highlight important theorems, lemmas, etc;&lt;/li&gt;
+&lt;li&gt;an empty space for students to follow along and fill in the blanks live in class.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I tried to reproduce his box environment when I was writing my very first math notes on &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt; – my Linear Algebra &amp;amp; Geometry II notes. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="Linear Algebra &amp;amp; Geometry II notes" src="/images/my-first-box-2.png"&gt;
+&lt;center&gt;&lt;em&gt;A snippet of my Linear Algebra &amp;amp; Geometry II notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;It was achievable using the &lt;code&gt;fbox&lt;/code&gt; environment alone, but for it to generalize well, I have to throw in a &lt;code&gt;minipage&lt;/code&gt; usage as well. The code implementation is quite simple and requires no package imports:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;% Simple box environment.&lt;/span&gt;
+&lt;span class="k"&gt;\fbox&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt; &lt;span class="c"&gt;%&lt;/span&gt;
+&lt;span class="k"&gt;\begin&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;minipage&lt;span class="nb"&gt;}&lt;/span&gt;[t]&lt;span class="nb"&gt;{&lt;/span&gt;0.9&lt;span class="k"&gt;\textwidth&lt;/span&gt;&lt;span class="nb"&gt;}&lt;/span&gt;
+    &lt;span class="c"&gt;% Your text here.&lt;/span&gt;
+&lt;span class="k"&gt;\end&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;minipage&lt;span class="nb"&gt;}&lt;/span&gt;
+&lt;span class="nb"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The problem with this box is that... it's just plain black and white. I want something more vibrant and colourful, so I decided to start learning the &lt;a href="https://ctan.org/pkg/tcolorbox"&gt;tcolorbox&lt;/a&gt; package. &lt;/p&gt;
+&lt;h3&gt;Transition to &lt;em&gt;tcolorbox&lt;/em&gt;&lt;/h3&gt;
+&lt;p&gt;As usual, the best way to learn is to straight dive in and do. After (very) little reading on the package's documentation, I started to recreate pretty boxes that other people have made from scratch. These boxes are usually from notes I found online like:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Evan Chen's &lt;a href="https://web.evanchen.cc/napkin.html"&gt;The Napkin project&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;Tony Zhang's notes snippets from his &lt;a href="https://www.quora.com/Does-anybody-use-LaTeX-to-take-notes-especially-during-class-If-not-what-do-you-use-especially-when-you-need-to-write-down-equations"&gt;Quora post&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;or even the tcolorbox documentation itself. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With my then minimal knowledge, I started writing my Real Analysis notes. I was quite happy with the end product but the overall design felt a bit odd (as you can see in the figure below). Nevertheless, my initial goal was to just make prettier boxes and I think I've achieved just that.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Real Analysis notes" src="/images/my-second-box.png"&gt;
+&lt;center&gt;&lt;em&gt;A snippet of my Real Analysis notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;To reproduce the (proof) box above with a Cerulean colour, use the following code in your document's preamble:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;\usepackage&lt;/span&gt;&lt;span class="na"&gt;[dvipsnames]&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;xcolor&lt;span class="nb"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;\usepackage&lt;/span&gt;&lt;span class="na"&gt;[many]&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;tcolorbox&lt;span class="nb"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;\newtcolorbox&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;myAwesomeBox&lt;span class="nb"&gt;}{&lt;/span&gt;
+    enhanced,
+    sharp corners,
+    breakable,  &lt;span class="c"&gt;% Allows page break.&lt;/span&gt;
+    borderline west=&lt;span class="nb"&gt;{&lt;/span&gt;2pt&lt;span class="nb"&gt;}{&lt;/span&gt;0pt&lt;span class="nb"&gt;}{&lt;/span&gt;Cerulean&lt;span class="nb"&gt;}&lt;/span&gt;,
+    colback=Cerulean!10,  &lt;span class="c"&gt;% Background color.&lt;/span&gt;
+    colframe=Cerulean!10  &lt;span class="c"&gt;% Frame (border) color.&lt;/span&gt;
+&lt;span class="nb"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This should yield a box similar to:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Blue pastel box" src="/images/my-third-box.png"&gt;&lt;/p&gt;
+&lt;p&gt;I want to note two things regarding the imports:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;dvipsnames&lt;/code&gt; option for xcolor is simply a choice of the set of colors I want from &lt;code&gt;xcolor&lt;/code&gt;. It does affect the name of colors you can pass as arguments, for example, here I used &lt;code&gt;Cerulean&lt;/code&gt;. For a full set of possible colors in &lt;code&gt;xcolor&lt;/code&gt;, see &lt;a href="https://en.wikibooks.org/wiki/LaTeX/Colors"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;many&lt;/code&gt; option for &lt;code&gt;tcolorbox&lt;/code&gt; loads additional libraries which allows us to use more features from &lt;code&gt;tcolorbox&lt;/code&gt;. In particular for our use case, we want to be able to use &lt;code&gt;enhanced&lt;/code&gt;. See the &lt;a href="https://mirrors.nxthost.com/ctan/macros/latex/contrib/tcolorbox/tcolorbox.pdf"&gt;documentation&lt;/a&gt; for other options.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here are some tweaks that you might want to consider:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;If you want to &lt;em&gt;add a nice smooth border-like effect&lt;/em&gt;, do this: instead of using &lt;code&gt;colframe=Cerulean!10&lt;/code&gt;, remove that line and put &lt;code&gt;boxrule=0pt&lt;/code&gt; instead. In general, &lt;code&gt;boxrule&lt;/code&gt; adjusts the border stroke.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you want to &lt;em&gt;remove padding inside the box&lt;/em&gt;, add &lt;code&gt;boxsep=0pt&lt;/code&gt;. In general, &lt;code&gt;boxsep&lt;/code&gt; controls the inside padding.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;There are many more parameters that you can control and these can be found in the &lt;a href="https://mirrors.nxthost.com/ctan/macros/latex/contrib/tcolorbox/tcolorbox.pdf"&gt;tcolorbox documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Nowadays, I write my notes using the &lt;a href="https://github.com/Adhumunt/NotesTeX"&gt;NotesTex&lt;/a&gt; package which coincidentally uses tcolorbox with a similar setting as mine. I guess this is one of the reasons why it was a no brainer for me to use it in the first place. The nice thing about the package is that it provides a complete framework to write notes in &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt;. In particular, you don't have to reinvent the wheel for everything (e.g. theorem environment, sidenotes). And for features that you feel are missing, you can simply add it on your own with ease. I've added plenty of features already and they integrate quite well. I'd highly recommend checking NotesTex out!&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="latex"></category><category term="latex"></category><category term="hacks"></category></entry></feed>
