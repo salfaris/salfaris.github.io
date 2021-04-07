@@ -71,7 +71,7 @@
 <p>I tried to reproduce his box environment when I was writing my very first math notes on <span class="math">\(\LaTeX\)</span> – my Linear Algebra &amp; Geometry II notes. </p>
 <p><img alt="Linear Algebra &amp; Geometry II notes" src="/images/my-first-box.png">
 <center><em>A snippet of my Linear Algebra &amp; Geometry II notes</em></center></p>
-<p>It was achievable using the <code>fbox</code> environment alone, but for it to generalize well, I have to throw in a <code>minipage</code> usage as well. The code implementation is quite simple and requires no package imports:</p>
+<p>It was achievable using the <code>fbox</code> environment alone, but for it to generalize well, I have to throw in a <code>minipage</code> usage as well. The code implementation is quite simple and requires no package imports. Just use the following code directly in your document:</p>
 <div class="highlight"><pre><span></span><code><span class="c">% Simple box environment.</span>
 <span class="k">\fbox</span><span class="nb">{</span> <span class="c">%</span>
 <span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[t]<span class="nb">{</span>0.9<span class="k">\textwidth</span><span class="nb">}</span>
@@ -80,7 +80,23 @@
 <span class="nb">}</span>
 </code></pre></div>
 
-<p>The problem with this box is that... it's just plain black and white. I want something more vibrant and colourful, so I decided to start learning the <a href="https://ctan.org/pkg/tcolorbox">tcolorbox</a> package. </p>
+<p>To make the box look cleaner, use the <code>center</code> environment as well. Here is a concrete example of using this box. The code:</p>
+<div class="highlight"><pre><span></span><code><span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>center<span class="nb">}</span>
+<span class="k">\fbox</span><span class="nb">{</span> <span class="c">%</span>
+<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[t]<span class="nb">{</span>0.9<span class="k">\textwidth</span><span class="nb">}</span>
+    This is a plain small box.
+<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>center<span class="nb">}</span>
+
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</code></pre></div>
+
+<p>would yield the box:</p>
+<p><img alt="plainbox" src="/images/plain-box.png"></p>
+<p>Now the problem with this simple fbox is that... it's just plain black and white. I want something more vibrant and colourful, so I decided to start learning the <a href="https://ctan.org/pkg/tcolorbox">tcolorbox</a> package. </p>
 <h3>Transition to <em>tcolorbox</em></h3>
 <p>As usual, the best way to learn is to straight dive in and do. After (very) little reading on the package's documentation, I started to recreate pretty boxes that other people have made from scratch. These boxes are usually from notes I found online like:</p>
 <ul>
@@ -92,7 +108,8 @@
 <p><img alt="Real Analysis notes" src="/images/my-second-box.png">
 <center><em>A snippet of my Real Analysis notes</em></center></p>
 <p>To reproduce the (proof) box above with a Cerulean colour, use the following code in your document's preamble:</p>
-<div class="highlight"><pre><span></span><code><span class="k">\usepackage</span><span class="na">[dvipsnames]</span><span class="nb">{</span>xcolor<span class="nb">}</span>
+<div class="highlight"><pre><span></span><code><span class="c">% In preamble.</span>
+<span class="k">\usepackage</span><span class="na">[dvipsnames]</span><span class="nb">{</span>xcolor<span class="nb">}</span>
 <span class="k">\usepackage</span><span class="na">[many]</span><span class="nb">{</span>tcolorbox<span class="nb">}</span>
 
 <span class="k">\newtcolorbox</span><span class="nb">{</span>myAwesomeBox<span class="nb">}{</span>
@@ -105,7 +122,17 @@
 <span class="nb">}</span>
 </code></pre></div>
 
-<p>This should yield a box similar to:</p>
+<p>To see this box in action, we instantiate this environment in our document:</p>
+<div class="highlight"><pre><span></span><code><span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>myAwesomeBox<span class="nb">}</span>
+    This nice blue pastel box!
+<span class="k">\end</span><span class="nb">{</span>myAwesomeBox<span class="nb">}</span>
+
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</code></pre></div>
+
+<p>This code should then yield:</p>
 <p><img alt="Blue pastel box" src="/images/my-third-box.png"></p>
 <p>I want to note two things regarding the imports:</p>
 <ol>
