@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">  
+
+<head>
+  <!-- ## for client-side less
+  <link rel="stylesheet/less" type="text/css" href="https://salfaris.github.io/theme/css/style.less">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
+  -->
+  <link rel="stylesheet" type="text/css" href="https://salfaris.github.io/theme/css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://salfaris.github.io/theme/css/pygments.css">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Salman Faris">
+  <meta name="description" content="Posts and writings by Salman Faris">
+
+  <link href="https://salfaris.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Salman Faris Atom" />
+
+<meta name="keywords" content="reinforcement-learning">
+
+  <title>
+    Salman Faris
+&ndash; The N-armed bandit problem  </title>
+
+</head>
+
+<body>
+  <aside>
+    <div id="user_meta">
+      <a href="https://salfaris.github.io">
+        <img src="https://salfaris.github.io/images/avatar_circ.png" alt="logo">
+      </a>
+      <h2><a href="https://salfaris.github.io">Salman Faris</a></h2>
+      <p>I talk about math, machine learning and stats.</p>
+      <ul>
+        <!-- <li><a href="https://salfaris.github.io">blog</a></li> -->
+        <li><a href="https://salfaris.github.io/pages/about.html">about</a></li>
+        <li><a href="https://salfaris.github.io/pages/resources.html">resources</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <p>
+      <a href="https://salfaris.github.io">Index</a> &brvbar; <a href="https://salfaris.github.io/archives.html">Archives</a>
+      &brvbar; <a href="https://salfaris.github.io/feeds/all.atom.xml">Atom</a>
+      </p>
+    </header>
+
+<article>
+  <div class="article_title">
+    <h1><a href="https://salfaris.github.io/drafts/n-armed-bandits.html">The N-armed bandit problem</a></h1>
+  </div>
+  <div class="article_meta">
+    <p>Posted on: Sat 10 April 2021</p>
+  </div>
+  <div class="article_text">
+    <!-- Before I even start talking, let me just make sure that we are on the same page on the terminology aspect – especially for those speaking English as a second language.  -->
+
+<p><strong>Terminology.</strong> A <strong>one-armed bandit</strong> is basically a slot machine. It is called that way because it resembles a bandit with one knife that keeps taking your money away. An <strong><span class="math">\(N\)</span>-armed bandit</strong> is essentially a generalization of this resemblance. You can think of it as either <span class="math">\(N\)</span> slot machines or one slot machine with <span class="math">\(N\)</span> levers.</p>
+<p>With that out of the way, let's talk about the main idea as it is actually pretty simple. </p>
+<h3>Layman's setup</h3>
+<p>Forget slot machines because then your mind starts to imagine all the combinations you can get on every pull of the lever and things get complicated. Just imagine that you have 2 buttons, RED and BLUE, in front of you that you can press. The game now is for you to repeatedly press any of these two buttons. Occasionally, you may get a monetary reward upon a press, say, £2 or £100. Sometimes, things can go against you and you lose money instead.</p>
+<p>The goal now is to simply learn <strong>which button</strong> to press <strong>at what time</strong> so that over some fixed time period you <em>attain maximal reward</em>. This learning problem is what is called the <span class="math">\(2\)</span>-armed bandit problem; and you can replace <span class="math">\(2\)</span> by an arbitrary positive integer <span class="math">\(N\)</span> to get the idea of the <span class="math">\(N\)</span>-armed bandit problem.</p>
+<h3>Formal setup</h3>
+<p>The formal setup extends the layman's setup by some mere math. You still have 2 buttons RED and BLUE, and the game is to repeatedly press them <span class="math">\(T\)</span> times. We call <span class="math">\(T\)</span> the number of <em>time steps</em>, and it is a positive integer. </p>
+<p><strong>Notation.</strong> Fix <span class="math">\(t \leq T\)</span> to be a time within the time step. Then let <span class="math">\(B_t \in \{ \text{RED}, \text{BLUE} \}\)</span> denotes the button chosen at time <span class="math">\(t\)</span>; and let <span class="math">\(r_t\)</span> denotes the payoff of choosing <span class="math">\(B_t\)</span> (at time <span class="math">\(t\)</span>).</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+  </div>
+  <div class="article_meta">
+    <p>Category: <a href="https://salfaris.github.io/category/ml.html">ML</a>
+ &ndash; Tags:
+      <a href="https://salfaris.github.io/tag/reinforcement-learning.html">reinforcement-learning</a>    </p>
+  </div>
+
+
+</article>
+
+
+    <div id="ending_message">
+      <p>&copy; Salman Faris. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+    </div>
+  </main>
+</body>
+</html>
+
+<!-- This script solves the issue of mathjax not rendering on homepage -->
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+</script>
