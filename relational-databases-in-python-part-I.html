@@ -32,7 +32,7 @@
         <img src="https://salfaris.github.io/images/avatar_circ.png" alt="logo">
       </a>
       <h2><a href="https://salfaris.github.io">Salman Faris</a></h2>
-      <p>I talk about math, stats and machine learning.</p>
+      <p>I talk about math, statistics, data and machine learning.</p>
       <ul>
         <!-- <li><a href="https://salfaris.github.io">blog</a></li> -->
         <li><a href="https://salfaris.github.io/pages/about.html">about</a></li>
@@ -76,7 +76,8 @@
 <p><em>Those of you who have built web applications with Flask or Django might realize that we usually handle data using an object-oriented approach – using so-called data models. This is the Object Relational Model (ORM) approach, which is one of the two main components of SQLAlchemy. The other main component is called the "core part" of SQLAlchemy which is really centred around the relational model of the database. The latter is the one that we will be focusing on in this post today.</em></p>
 </li>
 </ul>
-<h2>Talking to a database, first steps</h2>
+<hr>
+<h2>💬 Talking to a database, first steps</h2>
 <h3>Step 1: Create an engine</h3>
 <p>To write something on a paper, you would need a pencil. To turn the lights on, you would need to switch the toggle. <em>To interact with a database, you would need a so-called</em> <strong>engine</strong>. </p>
 <p>In theory, a database relies on this engine just like how a car would rely on its (car) engine. But I found that thinking of this engine as a mediator rather than a literal engine is much easier to digest.</p>
@@ -107,7 +108,8 @@
 </code></pre></div>
 
 <p>which means that I have only one table named <code>'race_table'</code>. In practice, you would usually have a few tables.</p>
-<h2>Querying the database</h2>
+<hr>
+<h2>📝 Querying the database using SQLAlchemy</h2>
 <p>From now on, we assume that we have instantiated an <code>engine</code> and <code>connection</code> object exactly like what we did previously.</p>
 <h3>Raw SQL queries, ResultProxy and ResultSet</h3>
 <p>Recall that we use the SQL language to make CRUD operations – create, read, update and delete. If you are not familiar with this, I highly recommend that you learn a bit of SQL after reading this - my recommendation is <a href="https://www.mikedane.com/databases/sql/" target="_blank">Mike Dane's</a> free and complete SQL course, from installing MySQL to joining tables. However, for now, it is sufficient to know the "Hello World" of SQL – which is <code>SELECT * FROM this_table</code> where <code>this_table</code> is some table in the database. The query <code>SELECT * FROM this_table</code> does exactly what you expect it to do, it selects every possible row (symbolized by the asterisk <code>*</code>) in the table <code>this_table</code> and returns it to the user. In my case, with my <code>race_data.db</code> database, I would want to execute <code>SELECT * FROM race_table</code>. So how would I do this with SQLAlchemy? This is where <code>connection</code> from Step 2 comes in.</p>
@@ -139,15 +141,10 @@
 <div class="highlight"><pre><span></span><code>&gt;&gt; <span class="o">[</span><span class="s1">&#39;Race #&#39;</span>, <span class="s1">&#39;WPM&#39;</span>, <span class="s1">&#39;Accuracy&#39;</span>, <span class="s1">&#39;Rank&#39;</span>, <span class="s1">&#39;# Racers&#39;</span>, <span class="s1">&#39;Text ID&#39;</span>, <span class="s1">&#39;Date/Time (UTC)&#39;</span><span class="o">]</span>
 </code></pre></div>
 
-<p>If we already know which column of interest we want to look at for a particular row, we can access the attribute of the row just like how we would normally do to access the value of a key in a dictionary. For example, if I'm interested in knowing the <code>Accuracy</code> of this <code>row</code>, I would just execute either <code>row.Accuracy</code> or <code>row["Accuracy"]</code> to get</p>
-<div class="highlight"><pre><span></span><code>&gt;&gt; <span class="m">1</span>
-</code></pre></div>
-
-<p>as expected.</p>
-<h3>Querying with SQLAlchemy</h3>
-<p>I know I promised that SQLAlchemy can help abstract away complex SQL queries and database differences, and using raw SQL queries like we did so far doesn't seem to agree with this promise. Enter SQLAlchemy's neat and Pythonic way of querying using table <strong>reflection</strong>. </p>
-<h4>Table reflection</h4>
-<p>A reflection is basically a process which reads the desired database, looks for your desired table and copies it into a <code>Table</code> object (see below) as if you wrote a whole raw SQL query to create this table. Personally, the term reflection is quite misleading for me and I would more prefer the term <em>autocopy</em> – because that is literally what the process does, and my philosophy is that explicit is better than nano-misleadings.</p>
+<p>If we already know which column of interest we want to look at for a particular row, we can access the attribute of the row just like how we would normally do to access the value of a key in a dictionary. For example, if I'm interested in knowing the <code>Accuracy</code> of this <code>row</code>, I would just execute either <code>row.Accuracy</code> or <code>row["Accuracy"]</code> which returns <code>1</code> as expected.</p>
+<h3>SQLAlchemy queries</h3>
+<p>I know I promised that SQLAlchemy can help abstract away complex SQL queries and database differences, and using raw SQL queries like we did so far doesn't seem to agree with this promise. Enter SQLAlchemy's neat and Pythonic way of querying using <strong>table reflection</strong>. </p>
+<p>A table reflection or just <strong>reflection</strong> is basically a process which reads the desired database, looks for your desired table and copies it into a <code>Table</code> object (see below) as if you wrote a whole raw SQL query to create this table. Personally, the term reflection is quite misleading for me and I would more prefer the term <em>autocopy</em> – because that is literally what the process does, and my philosophy is that explicit is better than nano-misleadings.</p>
 <p>To make a reflection, you would need to import two classes from the <code>sqlalchemy</code> library: <code>MetaData</code> and <code>Table</code>. It is worth understanding a basic idea of what these things do:</p>
 <ul>
 <li>
@@ -175,7 +172,6 @@
 <div class="highlight"><pre><span></span><code>&gt;&gt; Table<span class="o">(</span><span class="s1">&#39;race_table&#39;</span>, MetaData<span class="o">(</span><span class="nv">bind</span><span class="o">=</span>None<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;Race #&#39;</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;WPM&#39;</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;Accuracy&#39;</span>, REAL<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;Rank&#39;</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;# Racers&#39;</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;Text ID&#39;</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;Date/Time (UTC)&#39;</span>, TEXT<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, <span class="nv">schema</span><span class="o">=</span>None<span class="o">)</span>
 </code></pre></div>
 
-<h4>The SELECT statement, but in SQLAlchemy</h4>
 <p>The true power of the SQLAlchemy way of querying comes now. To replicate our raw SQL query of <code>SELECT * FROM race_table</code>, we can import and use the <code>select</code> function from the <code>sqlalchemy</code> library. The <code>select</code> function can take a (list of) <code>Table</code> object to select all the rows in that table. The equivalent query to <code>SELECT * FROM race_table</code> is then <code>select([race_table])</code>. More completely, we execute the following code:</p>
 <div class="highlight"><pre><span></span><code><span class="n">q</span> <span class="o">=</span> <span class="n">select</span><span class="p">([</span><span class="n">race_table</span><span class="p">])</span>
 <span class="n">result_proxy</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>  <span class="c1"># ResultProxy</span>
