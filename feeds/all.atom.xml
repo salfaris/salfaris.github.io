@@ -1,5 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Salman Faris</title><link href="https://salfaris.github.io/" rel="alternate"></link><link href="https://salfaris.github.io/feeds/all.atom.xml" rel="self"></link><id>https://salfaris.github.io/</id><updated>2021-04-11T12:57:00+01:00</updated><entry><title>Making pastel-colored boxes using tcolorbox in LaTeX</title><link href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html" rel="alternate"></link><published>2021-04-07T15:46:00+01:00</published><updated>2021-04-11T12:57:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-04-07:/pastel-colored-boxes-using-tcolorbox.html</id><summary type="html">&lt;p&gt;One of the many questions I get when people see my &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt;-ed math notes is &lt;em&gt;how do you create these nice pastel-colored boxes?&lt;/em&gt; &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Salman Faris</title><link href="https://salfaris.github.io/" rel="alternate"></link><link href="https://salfaris.github.io/feeds/all.atom.xml" rel="self"></link><id>https://salfaris.github.io/</id><updated>2021-04-30T21:46:00+01:00</updated><entry><title>Relational Databases in Python (part I)</title><link href="https://salfaris.github.io/relational-databases-in-python-part-I.html" rel="alternate"></link><published>2021-04-30T21:46:00+01:00</published><updated>2021-04-30T21:46:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-04-30:/relational-databases-in-python-part-I.html</id><summary type="html">&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/rel-database-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;A relational database is like an Excel file. It is made up of &lt;strong&gt;tables&lt;/strong&gt; (note that this is plural) which holds data …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/rel-database-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;A relational database is like an Excel file. It is made up of &lt;strong&gt;tables&lt;/strong&gt; (note that this is plural) which holds data in the form of columns and rows. In the Excel analogy, tables are basically &lt;em&gt;sheets&lt;/em&gt;. Moreover, tables can be &lt;em&gt;related&lt;/em&gt; to each other but they need a column to act as a bridge linking them. Such a column is usually called a &lt;strong&gt;key&lt;/strong&gt; (either primary key or foreign key). This feature of being related explains the &lt;em&gt;relational&lt;/em&gt; term in relational databases. Relational databases is part of the &lt;strong&gt;relational model&lt;/strong&gt; which is a much more general framework of structuring and handling data management.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;From now on, we shall simply refer to relational databases as just databases.&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;Introduction to SQLAlchemy&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install sqlalchemy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Great, we now know what databases are, but how do we work with them? If this is an Excel file, we just open it and the rest is obvious (at least we think it's obvious because we're used to working with it). How do we open and interact with a database? There are many ways to do this and there's no one right way. For example, you can work directly with SQLite or MySQL in the command line but things can really get messy if you do it this way.&lt;/p&gt;
+&lt;p&gt;If you're using Python, then enter &lt;strong&gt;SQLAlchemy&lt;/strong&gt;! SQLAlchemy gives you the power of interacting with databases using SQL queries straight from Python. Plus, it helps us abstract away complex queries and the difference in databases (remember that there are a lot of popular databases e.g. MySQL, PostgreSQL and Oracle with subtle differences among them). So querying databases becomes cleaner (and more exciting?) via SQLAlchemy. To &lt;strong&gt;install SQLAlchemy&lt;/strong&gt; is as easy as executing the line of code you see below this section's title in your favorite terminal. If you're using Anaconda, then it is already shipped and ready to use!&lt;/p&gt;
+&lt;p&gt;Additional notes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;This is not an excuse to not learn writing raw SQL queries because understanding SQL is still important when working with tools like SQLAlchemy!&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;em&gt;Those of you who have built web applications with Flask or Django might realize that we usually handle data using an object-oriented approach – using so-called data models. This is the Object Relational Model (ORM) approach, which is one of the two main components of SQLAlchemy. The other main component is called the "core part" of SQLAlchemy which is really centred around the relational model of the database. The latter is the one that we will be focusing on in this post today.&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Talking to a database, first steps&lt;/h2&gt;
+&lt;h3&gt;Step 1: Create an engine&lt;/h3&gt;
+&lt;p&gt;To write something on a paper, you would need a pencil. To turn the lights on, you would need to switch the toggle. &lt;em&gt;To interact with a database, you would need a so-called&lt;/em&gt; &lt;strong&gt;engine&lt;/strong&gt;. &lt;/p&gt;
+&lt;p&gt;In theory, a database relies on this engine just like how a car would rely on its (car) engine. But I found that thinking of this engine as a mediator rather than a literal engine is much easier to digest.&lt;/p&gt;
+&lt;p&gt;To create an engine, you first have to import the &lt;code&gt;create_engine&lt;/code&gt; function from &lt;code&gt;sqlalchemy&lt;/code&gt;. Then, you need to pass in a &lt;strong&gt;connection string&lt;/strong&gt; which in its simplest form specifies two things: (i) the database you want to talk to, and (ii) the path to the database. For example, if I want to connect to &lt;code&gt;race_data.db&lt;/code&gt; which is a SQLite database in my current directory, the connection string would be &lt;code&gt;"sqlite:///race_data.db"&lt;/code&gt;. So together, they would look something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;engine&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sqlite:///race_data.db&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Key terms&lt;/strong&gt; &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The &lt;strong&gt;engine&lt;/strong&gt; is a mediator for SQLAlchemy to interact with a database.&lt;/li&gt;
+&lt;li&gt;A &lt;strong&gt;connection string&lt;/strong&gt; specifies the details of the database we want to interact with.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Step 2: Establish a connection&lt;/h3&gt;
+&lt;p&gt;In the previous step, we have simply created an engine but have yet to &lt;strong&gt;connect&lt;/strong&gt; to it! To establish a connection, you can simply invoke another one-liner:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;connection&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;One thing worth pointing out is that SQLAlchemy is clever enough to not actually make a connection until we pass in some queries for it to execute.&lt;/p&gt;
+&lt;h3&gt;Step 3: Checking table names&lt;/h3&gt;
+&lt;p&gt;Recall that tables are to databases just like sheets are to Excel files. So you'd want to know what tables (not columns of a table, yet!) are available before making queries. To do this, you can simply execute&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;table_names&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to get a list of available tables to work with. For me, this returns &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt; [&amp;#39;race_table&amp;#39;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which means that I have only one table named &lt;code&gt;'race_table'&lt;/code&gt;. In practice, you would usually have a few tables.&lt;/p&gt;
+&lt;h2&gt;Querying the database&lt;/h2&gt;
+&lt;p&gt;From now on, we assume that we have instantiated an &lt;code&gt;engine&lt;/code&gt; and &lt;code&gt;connection&lt;/code&gt; object exactly like what we did previously.&lt;/p&gt;
+&lt;h3&gt;Raw SQL queries, ResultProxy and ResultSet&lt;/h3&gt;
+&lt;p&gt;Recall that we use the SQL language to make CRUD operations – create, read, update and delete. If you are not familiar with this, I highly recommend that you learn a bit of SQL after reading this - my recommendation is &lt;a href="https://www.mikedane.com/databases/sql/" target="_blank"&gt;Mike Dane's&lt;/a&gt; free and complete SQL course, from installing MySQL to joining tables. However, for now, it is sufficient to know the "Hello World" of SQL – which is &lt;code&gt;SELECT * FROM this_table&lt;/code&gt; where &lt;code&gt;this_table&lt;/code&gt; is some table in the database. The query &lt;code&gt;SELECT * FROM this_table&lt;/code&gt; does exactly what you expect it to do, it selects every possible row (symbolized by the asterisk &lt;code&gt;*&lt;/code&gt;) in the table &lt;code&gt;this_table&lt;/code&gt; and returns it to the user. In my case, with my &lt;code&gt;race_data.db&lt;/code&gt; database, I would want to execute &lt;code&gt;SELECT * FROM race_table&lt;/code&gt;. So how would I do this with SQLAlchemy? This is where &lt;code&gt;connection&lt;/code&gt; from Step 2 comes in.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;connection&lt;/code&gt; object has a method &lt;code&gt;.execute()&lt;/code&gt; which can execute raw SQL queries like &lt;code&gt;SELECT * FROM race_table&lt;/code&gt;. This will then return a &lt;code&gt;ResultProxy&lt;/code&gt; object which can be utilized in various ways to get the data we want (based on our query). Here are some examples of how we would want our data:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Sometimes, we know our query will return a unique result (e.g. because we query based on a unique ID), so it is trivial that we want the &lt;strong&gt;first and only result&lt;/strong&gt;;&lt;/li&gt;
+&lt;li&gt;Sometimes, we want the &lt;strong&gt;whole result&lt;/strong&gt;;&lt;/li&gt;
+&lt;li&gt;Sometimes, we want only the &lt;strong&gt;top 10&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Imagine processing 500k rows of data just because we want the top 10, not so efficient right? This is why we would want a two-layer process before getting our actual data, the first layer being the &lt;code&gt;ResultProxy&lt;/code&gt; object. Getting the actual data from the &lt;code&gt;ResultProxy&lt;/code&gt; object is simply a matter of invoking a method. For example, if we would want to get the whole result, we use the &lt;code&gt;.fetchall()&lt;/code&gt; method. If we want the top 10 result, we use the &lt;code&gt;.fetchmany()&lt;/code&gt; method with &lt;code&gt;size&lt;/code&gt; argument set to 10. Invoking these methods returns a &lt;code&gt;ResultSet&lt;/code&gt; object, which basically contains the data we want. Here is an example of a complete implementation:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;SELECT * FROM race_table&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;result_proxy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;connection&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# ResultProxy&lt;/span&gt;
+&lt;span class="n"&gt;results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;result_proxy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fetchmany&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# ResultSet&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Querying data in Python is a two-layer process:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;A &lt;strong&gt;ResultProxy&lt;/strong&gt; gives us flexibility to access the data that we queried – do you want 1, 10 or 500k?.&lt;/li&gt;
+&lt;li&gt;A &lt;strong&gt;ResultSet&lt;/strong&gt; contains the actual data that we queried, retrieved via a ResultProxy method.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Working with ResultSet&lt;/h3&gt;
+&lt;p&gt;The ResultSet &lt;code&gt;results&lt;/code&gt; is a &lt;strong&gt;list&lt;/strong&gt; of tuples whose entries corresponds to columns in the table. Let's get the first row in &lt;code&gt;results&lt;/code&gt;. Since it is a list, we do this by accessing the zeroth element in the list via &lt;code&gt;row = results[0]&lt;/code&gt;. We can print the row &lt;strong&gt;to get the actual data&lt;/strong&gt;, a tuple with entries:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;88&lt;/span&gt;, &lt;span class="m"&gt;0&lt;/span&gt;.95, &lt;span class="m"&gt;1&lt;/span&gt;, &lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="m"&gt;436&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;2013-11-03 13:19:25&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To &lt;strong&gt;get the column names&lt;/strong&gt; that correspond to each entry, we can invoke &lt;code&gt;row.keys()&lt;/code&gt; to get:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt; &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Race #&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;WPM&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Accuracy&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Rank&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;# Racers&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Text ID&amp;#39;&lt;/span&gt;, &lt;span class="s1"&gt;&amp;#39;Date/Time (UTC)&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If we already know which column of interest we want to look at for a particular row, we can access the attribute of the row just like how we would normally do to access the value of a key in a dictionary. For example, if I'm interested in knowing the &lt;code&gt;Accuracy&lt;/code&gt; of this &lt;code&gt;row&lt;/code&gt;, I would just execute either &lt;code&gt;row.Accuracy&lt;/code&gt; or &lt;code&gt;row["Accuracy"]&lt;/code&gt; to get&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;as expected.&lt;/p&gt;
+&lt;h3&gt;Querying with SQLAlchemy&lt;/h3&gt;
+&lt;p&gt;I know I promised that SQLAlchemy can help abstract away complex SQL queries and database differences, and using raw SQL queries like we did so far doesn't seem to agree with this promise. Enter SQLAlchemy's neat and Pythonic way of querying using table &lt;strong&gt;reflection&lt;/strong&gt;. &lt;/p&gt;
+&lt;h4&gt;Table reflection&lt;/h4&gt;
+&lt;p&gt;A reflection is basically a process which reads the desired database, looks for your desired table and copies it into a &lt;code&gt;Table&lt;/code&gt; object (see below) as if you wrote a whole raw SQL query to create this table. Personally, the term reflection is quite misleading for me and I would more prefer the term &lt;em&gt;autocopy&lt;/em&gt; – because that is literally what the process does, and my philosophy is that explicit is better than nano-misleadings.&lt;/p&gt;
+&lt;p&gt;To make a reflection, you would need to import two classes from the &lt;code&gt;sqlalchemy&lt;/code&gt; library: &lt;code&gt;MetaData&lt;/code&gt; and &lt;code&gt;Table&lt;/code&gt;. It is worth understanding a basic idea of what these things do:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;strong&gt;MetaData&lt;/strong&gt; class can be thought of a folder or catalog that keeps information about database stuffs such as tables. In this way, we don't have to keep looking up table information because we have "organized" things nicely.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;strong&gt;Table&lt;/strong&gt; class does exactly what you expect it to do. It stores and handles the reflected (i.e. autocopied) version of your desired table so that SQLAlchemy can interact with it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now we know the required ingredients, let's see how to actually do a table reflection. Recall that we have instantiated an &lt;code&gt;engine&lt;/code&gt; and &lt;code&gt;connection&lt;/code&gt; object from the previous section. We now instantiate a &lt;code&gt;MetaData&lt;/code&gt; object via &lt;code&gt;metadata = MetaData()&lt;/code&gt;; and then instantiate a &lt;code&gt;Table&lt;/code&gt; object passing the arguments:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Our desired table; in my case, &lt;code&gt;"race_table"&lt;/code&gt; (this is a string, cf. Step 3 of checking table names).&lt;/li&gt;
+&lt;li&gt;The instantiated &lt;code&gt;metadata&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Set &lt;code&gt;autoload&lt;/code&gt; to True, and put &lt;code&gt;autoload_with&lt;/code&gt; our &lt;code&gt;engine&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Overall, it should look like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;sqlalchemy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MetaData&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Table&lt;/span&gt;
+&lt;span class="n"&gt;metadata&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MetaData&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Table reflection&lt;/span&gt;
+&lt;span class="n"&gt;race_table&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;race_table&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;metadata&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;autoload&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;autoload_with&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The first thing you might want to do then is to use the &lt;code&gt;repr&lt;/code&gt; function on &lt;code&gt;race_table&lt;/code&gt; to learn our table's details such as the column names together with their types such as REAL, INTEGER or TEXT. Mine returns this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt; Table&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;race_table&amp;#39;&lt;/span&gt;, MetaData&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;bind&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;None&lt;span class="o"&gt;)&lt;/span&gt;, Column&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Race #&amp;#39;&lt;/span&gt;, INTEGER&lt;span class="o"&gt;()&lt;/span&gt;, &lt;span class="nv"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;race_table&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;, Column&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;WPM&amp;#39;&lt;/span&gt;, INTEGER&lt;span class="o"&gt;()&lt;/span&gt;, &lt;span class="nv"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;race_table&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;, Column&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Accuracy&amp;#39;&lt;/span&gt;, REAL&lt;span class="o"&gt;()&lt;/span&gt;, &lt;span class="nv"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;race_table&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;, Column&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Rank&amp;#39;&lt;/span&gt;, INTEGER&lt;span class="o"&gt;()&lt;/span&gt;, &lt;span class="nv"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;race_table&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;, Column&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;# Racers&amp;#39;&lt;/span&gt;, INTEGER&lt;span class="o"&gt;()&lt;/span&gt;, &lt;span class="nv"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;race_table&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;, Column&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Text ID&amp;#39;&lt;/span&gt;, INTEGER&lt;span class="o"&gt;()&lt;/span&gt;, &lt;span class="nv"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;race_table&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;, Column&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Date/Time (UTC)&amp;#39;&lt;/span&gt;, TEXT&lt;span class="o"&gt;()&lt;/span&gt;, &lt;span class="nv"&gt;table&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&amp;lt;race_table&amp;gt;&lt;span class="o"&gt;)&lt;/span&gt;, &lt;span class="nv"&gt;schema&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;None&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;The SELECT statement, but in SQLAlchemy&lt;/h4&gt;
+&lt;p&gt;The true power of the SQLAlchemy way of querying comes now. To replicate our raw SQL query of &lt;code&gt;SELECT * FROM race_table&lt;/code&gt;, we can import and use the &lt;code&gt;select&lt;/code&gt; function from the &lt;code&gt;sqlalchemy&lt;/code&gt; library. The &lt;code&gt;select&lt;/code&gt; function can take a (list of) &lt;code&gt;Table&lt;/code&gt; object to select all the rows in that table. The equivalent query to &lt;code&gt;SELECT * FROM race_table&lt;/code&gt; is then &lt;code&gt;select([race_table])&lt;/code&gt;. More completely, we execute the following code:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;select&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;race_table&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;result_proxy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;connection&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# ResultProxy&lt;/span&gt;
+&lt;span class="n"&gt;results&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;result_proxy&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fetchmany&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# ResultSet&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Observe that the last two lines are identical as to when we were writing raw SQL queries, the only difference being the first line. Hence, the way we access &lt;code&gt;results&lt;/code&gt; is exactly the same as we've discussed earlier. For the SELECT query, it might be trivial to use the &lt;code&gt;select&lt;/code&gt; function but you can imagine that when the queries gets more complex, this will be really nice and clean. Note that you can get the raw SQL query of &lt;code&gt;q&lt;/code&gt; by simply printing it to the console.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;References&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[1]: &lt;em&gt;Introduction to Databases in Python&lt;/em&gt;, DataCamp&lt;/li&gt;
+&lt;li&gt;[2]: &lt;a href="https://stackoverflow.com/a/44098950/13698939" target="_blank"&gt;&lt;em&gt;Sam Hartman's Answer to Understanding MetaData() from SQLAlchemy in Python&lt;/em&gt;&lt;/a&gt;, Stack Overflow&lt;/li&gt;
+&lt;/ul&gt;</content><category term="data-analysis"></category><category term="python"></category><category term="data-wrangling"></category><category term="sql"></category><category term="databases"></category></entry><entry><title>Making pastel-colored boxes using tcolorbox in LaTeX</title><link href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html" rel="alternate"></link><published>2021-04-07T15:46:00+01:00</published><updated>2021-04-11T12:57:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-04-07:/pastel-colored-boxes-using-tcolorbox.html</id><summary type="html">&lt;p&gt;One of the many questions I get when people see my &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt;-ed math notes is &lt;em&gt;how do you create these nice pastel-colored boxes?&lt;/em&gt; &lt;/p&gt;
 &lt;p&gt;&lt;img alt="Example tcolorbox" src="https://salfaris.github.io/images/example-box.png"&gt;
 &lt;img alt="Example 2 tcolorbox" src="https://salfaris.github.io/images/example-box-2.png"&gt;
 &lt;center&gt;&lt;em&gt;Two examples of pastel-colored boxes from my math notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
