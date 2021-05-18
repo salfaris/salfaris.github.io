@@ -51,13 +51,13 @@
 
 <article>
   <div class="article_title">
-    <h1><a href="https://salfaris.github.io/drafts/unit-testing-with-pytest.html">Unit Testing with pytest</a></h1>
+    <h1><a href="https://salfaris.github.io/unit-testing-with-pytest.html">Unit Testing with pytest</a></h1>
   </div>
   <div class="article_meta">
     <p>Posted on: Mon 03 May 2021</p>
   </div>
   <div class="article_text">
-    <h2>Why unit test?</h2>
+    <p><img alt="Post header" src="https://salfaris.github.io/images/header-unit-testing-with-pytest.png"></p>
 <p>It is a common scene that we want to test our functions after we've done writing them. In Python, we can usually do this by printing to the console. For example, suppose we are interested in testing the following function:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">add_positive</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Add two positive integers x and y. If the sum</span>
@@ -80,7 +80,9 @@
 </code></pre></div>
 
 <p>and then we eyeball each of the output to see if it as expected. </p>
-<p>This is of course a correct way to do it as we can evaluate whether the output on the console is as expected; but is it efficient? In a typical life cycle of a function, there are three situations where we would want to test our functions:</p>
+<p>This is of course a correct way to do it as we can evaluate whether the output on the console is as expected; but is it efficient? </p>
+<h2>🧠 Why unit testing is a no-brainer</h2>
+<p>In a typical life cycle of a function, there are three situations where we would want to test our functions:</p>
 <ol>
 <li>The <strong>first time</strong> it is implemented.</li>
 <li><strong>When a test fails</strong>, we fix the bug, and then we have to redo testing.</li>
@@ -167,14 +169,14 @@
 </code></pre></div>
 
 <p>If the implementation of <code>add_positive()</code> is correct (with respect to our tests), you should see a test report like this.</p>
-<p><img alt="Unit-test-pass" src="https://salfaris.github.io/drafts/images/unit-test-1.png"></p>
+<p><img alt="Unit-test-pass" src="https://salfaris.github.io/images/unit-test-1.png"></p>
 <p>Just ignore everything above "collected 4 items" as it is not too important. The breakdown of this test report is the following:</p>
 <ul>
 <li>"Collected 4 items" means that we will be executing 4 unit tests.</li>
 <li>The 4 green dots indicates that we have pass all 4 of them, and they are sequential (see what happens when 1 fail below).</li>
 <li>The obvious "4 passed in 0.02s" message is the summary.</li>
 </ul>
-<h2>📌 Why unit tests are important</h2>
+<h2>📌 Why unit tests are important in prod</h2>
 <p>Three months after the <code>add_positive.py</code> code has been deployed, your colleague Gilfoyle modified the <code>add_positive()</code> function returning only the sum:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">add_positive</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Add two positive integers x and y. If the sum</span>
@@ -184,7 +186,7 @@
 
 <p>Apparently, he didn't read the short description of the function; he thought that you're adding an unnecesary check. However, the function is supposed to work like that – only returning if the sum is positive (think of another module which relies on the correctness of this function). </p>
 <p>If there were no unit tests written to check this modification, this seemingly trivial edit by Gilfoyle could have been merged into the main branch and could possibly crash the whole system! Thankfully, we implemented continuous integration and upon making a pull request, Gilfoyle was bombarded with the following test report:</p>
-<p><img alt="Unit-test-fail" src="https://salfaris.github.io/drafts/images/unit-test-2.png"></p>
+<p><img alt="Unit-test-fail" src="https://salfaris.github.io/images/unit-test-2.png"></p>
 <p>Here is a breakdown of the report:</p>
 <ul>
 <li>"Collected 4 items" means the same as before.</li>
@@ -207,7 +209,7 @@
   <div id="article_comments">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-        var disqus_identifier = "drafts/unit-testing-with-pytest.html";
+        var disqus_identifier = "unit-testing-with-pytest.html";
         (function() {
              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
              dsq.src = '//salfaris.disqus.com/embed.js';

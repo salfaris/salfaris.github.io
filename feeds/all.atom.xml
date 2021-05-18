@@ -1,8 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Salman Faris</title><link href="https://salfaris.github.io/" rel="alternate"></link><link href="https://salfaris.github.io/feeds/all.atom.xml" rel="self"></link><id>https://salfaris.github.io/</id><updated>2021-04-30T21:46:00+01:00</updated><entry><title>Relational Databases in Python (part I)</title><link href="https://salfaris.github.io/relational-databases-in-python-part-I.html" rel="alternate"></link><published>2021-04-30T21:46:00+01:00</published><updated>2021-04-30T21:46:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-04-30:/relational-databases-in-python-part-I.html</id><summary type="html">&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/rel-database-1.png"&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Salman Faris</title><link href="https://salfaris.github.io/" rel="alternate"></link><link href="https://salfaris.github.io/feeds/all.atom.xml" rel="self"></link><id>https://salfaris.github.io/</id><updated>2021-05-18T11:33:00+01:00</updated><entry><title>Unit Testing with pytest</title><link href="https://salfaris.github.io/unit-testing-with-pytest.html" rel="alternate"></link><published>2021-05-03T12:36:00+01:00</published><updated>2021-05-18T11:33:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-05-03:/unit-testing-with-pytest.html</id><summary type="html">&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-unit-testing-with-pytest.png"&gt;&lt;/p&gt;
+&lt;p&gt;It is a common scene that we want to test our functions after we've done writing them. In Python, we can usually do this by printing to the console. For example, suppose we are interested in testing the following function:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Add two positive integers x and …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-unit-testing-with-pytest.png"&gt;&lt;/p&gt;
+&lt;p&gt;It is a common scene that we want to test our functions after we've done writing them. In Python, we can usually do this by printing to the console. For example, suppose we are interested in testing the following function:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Add two positive integers x and y. If the sum&lt;/span&gt;
+&lt;span class="sd"&gt;     is negative or zero, return None.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which returns the sum of the two integers &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; if the output is strictly positive, or else return &lt;code&gt;None&lt;/code&gt;. Since we are adding two &lt;strong&gt;positive integers&lt;/strong&gt;, we expect that the &lt;code&gt;add_positive&lt;/code&gt; function returns a positive integer as well. So we can try a few pairs, say, &lt;code&gt;add_positive(2, 3)&lt;/code&gt; and &lt;code&gt;add_positive(1, 1)&lt;/code&gt;, and we expect these to return 5 and 2 respectively; both greater than 0. If we try &lt;code&gt;add_positive(-1, -5)&lt;/code&gt;, then this should return &lt;code&gt;None&lt;/code&gt; as it yields -6 instead which is less than 0. If we want to test our function with multiple inputs, we can do something like a &lt;code&gt;for&lt;/code&gt; loop. So maybe something like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;90&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+    &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which should yield&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt; &lt;span class="m"&gt;5&lt;/span&gt;
+&amp;gt;&amp;gt; &lt;span class="m"&gt;2&lt;/span&gt;
+&amp;gt;&amp;gt; None
+&amp;gt;&amp;gt; &lt;span class="m"&gt;190&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and then we eyeball each of the output to see if it as expected. &lt;/p&gt;
+&lt;p&gt;This is of course a correct way to do it as we can evaluate whether the output on the console is as expected; but is it efficient? &lt;/p&gt;
+&lt;h2&gt;🧠 Why unit testing is a no-brainer&lt;/h2&gt;
+&lt;p&gt;In a typical life cycle of a function, there are three situations where we would want to test our functions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The &lt;strong&gt;first time&lt;/strong&gt; it is implemented.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;When a test fails&lt;/strong&gt;, we fix the bug, and then we have to redo testing.&lt;/li&gt;
+&lt;li&gt;When implementing a &lt;strong&gt;new feature&lt;/strong&gt; or &lt;strong&gt;refactoring code&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Imagine how many times we would have to manually test this function. If it would take 3 minutes per (manual) test, and if we would have to do it 100 times over the function's whole life cycle, then we would have effectively spent 3 x 100 = 300 minutes, which is roughly &lt;strong&gt;5 hours of testing&lt;/strong&gt;! Now if we have 10 functions to test, it would take us 50 hours or roughly &lt;strong&gt;2 days worth of time to test these functions&lt;/strong&gt;! I don't know about you, but that sounds like a lot of time to me for only 10 functions. This is why we would want to automate the testing process by writing unit tests, which, together with the planning phase, requires about an hour to write in perpetuity (in theory).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Manually testing a function throughout its whole life cycle may take you 5 hours; whereas writing a properly planned unit test may take you only an hour, and this is one-fifth of the former.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;There are a variety of Python libraries to do unit testing, some of which are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;pytest&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;unittest&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nosetests&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;doctest&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;🧪 Basic unit testing procedure&lt;/h2&gt;
+&lt;p&gt;In this post, we will look at &lt;code&gt;pytest&lt;/code&gt; because it is simply the most popular (hence, a lot of support, say, on StackOverflow) and easiest to use. We start by installing &lt;code&gt;pytest&lt;/code&gt; if it's not already installed:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install pytest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Step 1: Creating the test module&lt;/h3&gt;
+&lt;p&gt;Assume that the &lt;code&gt;add_positive()&lt;/code&gt; function lies in a module called &lt;code&gt;add_positive.py&lt;/code&gt;. We begin the unit testing process by creating a file called &lt;code&gt;test_add_positive.py&lt;/code&gt; in the same directory as &lt;code&gt;add_positive.py&lt;/code&gt;. Such a file will contain the unit tests of functions in &lt;code&gt;add_positive.py&lt;/code&gt;, and is called a &lt;strong&gt;test module&lt;/strong&gt;. The &lt;code&gt;test_&lt;/code&gt; in front of &lt;code&gt;test_add_positive.py&lt;/code&gt; is important as it lets &lt;code&gt;pytest&lt;/code&gt; knows that this is a file containing unit tests.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Remark: The test module for the module &lt;code&gt;add_positive.py&lt;/code&gt; does not have to be named &lt;code&gt;test_add_positive.py&lt;/code&gt;. You can name it &lt;code&gt;test_x.py&lt;/code&gt; or &lt;code&gt;test_covid.py&lt;/code&gt; or whatever as long as it is prepended with &lt;code&gt;test_&lt;/code&gt;. But it is good practice to follow the naming convention of &lt;code&gt;test_module_name&lt;/code&gt; to trace which module is this test module testing.&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;Step 2: Importing inside the test module&lt;/h3&gt;
+&lt;p&gt;The next step is to (mainly) import two things:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The &lt;code&gt;pytest&lt;/code&gt; module;&lt;/li&gt;
+&lt;li&gt;and the module (or function) we want to test.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;So at the top of our test module &lt;code&gt;test_add_positive.py&lt;/code&gt;, we would have:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pytest&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;add_positive&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Step 3: Begin writing unit tests&lt;/h3&gt;
+&lt;p&gt;A unit test is basically a Python function, no more and no less. The only thing special about a unit test is that it is prepended by &lt;code&gt;test_&lt;/code&gt; in its name. This is just to tell &lt;code&gt;pytest&lt;/code&gt; to use it as part of the testing procedure. Here is an example of a unit test declaration:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_for_positive_pairs&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Inside the body of a unit test are &lt;strong&gt;assertions&lt;/strong&gt;, and this is the actual testing process. We want to test if our &lt;code&gt;add_positive()&lt;/code&gt; function returns correctly if positive pairs (&lt;code&gt;x&lt;/code&gt;, &lt;code&gt;y&lt;/code&gt;) are passed into the function. So we assert the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_for_positive_pairs&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;99999&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;99999&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;199998&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;How about if we want to add a second unit test which tests when a zero pair i.e. (0, 0) is passed into the function? Well we just write another function right below it. We expect &lt;code&gt;add_positive(0, 0)&lt;/code&gt; to return None, so we write exactly that:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_for_positive_pairs&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;99999&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;99999&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;199998&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_for_zero_pair&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I would like to add two more tests which test the &lt;code&gt;add_positive&lt;/code&gt; function when negative and mixed pairs are fed into the function. The whole test module should now look something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pytest&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;add_positive&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_for_positive_pairs&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;99999&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;99999&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;199998&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_for_negative_pairs&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;99&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;99&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_for_zero_pair&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_for_mixed_pairs&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;900&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;Remark: Note that you can get as creative as you'd like with the values you're testing. It is good practice to always consider edge cases in the unit test, but this is a topic of a later post.&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;Step 4: Running pytest and reading the test report&lt;/h3&gt;
+&lt;p&gt;Once you're done with writing the test module, testing is as easy as opening your terminal, &lt;code&gt;cd&lt;/code&gt;-ing into the directory containing the test module, and executing:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pytest test_add_positive.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If the implementation of &lt;code&gt;add_positive()&lt;/code&gt; is correct (with respect to our tests), you should see a test report like this.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Unit-test-pass" src="https://salfaris.github.io/images/unit-test-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;Just ignore everything above "collected 4 items" as it is not too important. The breakdown of this test report is the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;"Collected 4 items" means that we will be executing 4 unit tests.&lt;/li&gt;
+&lt;li&gt;The 4 green dots indicates that we have pass all 4 of them, and they are sequential (see what happens when 1 fail below).&lt;/li&gt;
+&lt;li&gt;The obvious "4 passed in 0.02s" message is the summary.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;📌 Why unit tests are important in prod&lt;/h2&gt;
+&lt;p&gt;Three months after the &lt;code&gt;add_positive.py&lt;/code&gt; code has been deployed, your colleague Gilfoyle modified the &lt;code&gt;add_positive()&lt;/code&gt; function returning only the sum:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Add two positive integers x and y. If the sum&lt;/span&gt;
+&lt;span class="sd"&gt;     is negative or zero, return None.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Apparently, he didn't read the short description of the function; he thought that you're adding an unnecesary check. However, the function is supposed to work like that – only returning if the sum is positive (think of another module which relies on the correctness of this function). &lt;/p&gt;
+&lt;p&gt;If there were no unit tests written to check this modification, this seemingly trivial edit by Gilfoyle could have been merged into the main branch and could possibly crash the whole system! Thankfully, we implemented continuous integration and upon making a pull request, Gilfoyle was bombarded with the following test report:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Unit-test-fail" src="https://salfaris.github.io/images/unit-test-2.png"&gt;&lt;/p&gt;
+&lt;p&gt;Here is a breakdown of the report:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;"Collected 4 items" means the same as before.&lt;/li&gt;
+&lt;li&gt;The first green dot means we passed the first unit test, but the subsequent F's means we failed the second, third and fourth unit test;&lt;/li&gt;
+&lt;li&gt;this is reflected in the FAILURES section below it, showing which exact lines contribute to these failures.&lt;/li&gt;
+&lt;li&gt;The "3 failed, 1 passed in 0.19s" message is the summary.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sometimes, we just want to run the test up until the first failure. This can be done by adding a &lt;code&gt;-x&lt;/code&gt; flag like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pytest -x test_add_positive.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now you might be wondering, what to do if we have multiple functions to test in the same module given that this one single &lt;code&gt;add_positive&lt;/code&gt; function alone requires 4 unit tests. Things can start getting really messy right? To solve this issue, we can create a class containing these unit tests for each function we want to test. This will be a topic of a future post on testing, thanks for reading.&lt;/p&gt;</content><category term="python"></category><category term="python"></category><category term="testing"></category><category term="software-engineering"></category></entry><entry><title>Relational Databases in Python (part I)</title><link href="https://salfaris.github.io/relational-databases-in-python-part-I.html" rel="alternate"></link><published>2021-04-30T21:46:00+01:00</published><updated>2021-04-30T21:46:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-04-30:/relational-databases-in-python-part-I.html</id><summary type="html">&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-rel-database-1.png"&gt;&lt;/p&gt;
 &lt;p&gt;A relational database is like an Excel file. It is made up of &lt;strong&gt;tables&lt;/strong&gt; (note that this is plural) which holds data …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/rel-database-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-rel-database-1.png"&gt;&lt;/p&gt;
 &lt;p&gt;A relational database is like an Excel file. It is made up of &lt;strong&gt;tables&lt;/strong&gt; (note that this is plural) which holds data in the form of columns and rows. In the Excel analogy, tables are basically &lt;em&gt;sheets&lt;/em&gt;. Moreover, tables can be &lt;em&gt;related&lt;/em&gt; to each other but they need a column to act as a bridge linking them. Such a column is usually called a &lt;strong&gt;key&lt;/strong&gt; (either primary key or foreign key). This feature of being related explains the &lt;em&gt;relational&lt;/em&gt; term in relational databases. Relational databases is part of the &lt;strong&gt;relational model&lt;/strong&gt; which is a much more general framework of structuring and handling data management.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;From now on, we shall simply refer to relational databases as just databases.&lt;/em&gt;&lt;/p&gt;
 &lt;h2&gt;Introduction to SQLAlchemy&lt;/h2&gt;
