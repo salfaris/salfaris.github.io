@@ -1,70 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">  
 
+<html lang="en">
 <head>
-  <!-- ## for client-side less
+<!-- ## for client-side less
   <link rel="stylesheet/less" type="text/css" href="https://salfaris.github.io/theme/css/style.less">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
   -->
-  <link rel="stylesheet" type="text/css" href="https://salfaris.github.io/theme/css/style.css">
-  <link rel="stylesheet" type="text/css" href="https://salfaris.github.io/theme/css/pygments.css">
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
-
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="Salman Faris">
-  <meta name="description" content="Posts and writings by Salman Faris">
-
-  <link href="https://salfaris.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Salman Faris Atom" />
-
-<meta name="keywords" content="python, sql, sqlalchemy, databases, data-handling">
-
-  <title>
+<link href="https://salfaris.github.io/theme/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="https://salfaris.github.io/theme/css/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono" rel="stylesheet" type="text/css"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Salman Faris" name="author"/>
+<meta content="Posts and writings by Salman Faris" name="description"/>
+<link href="https://salfaris.github.io/feeds/all.atom.xml" rel="alternate" title="Salman Faris Atom" type="application/atom+xml">
+<meta content="python, sql, sqlalchemy, databases, data-handling" name="keywords"/>
+<title>
     Salman Faris
-&ndash; Relational Databases in Python (part I)  </title>
-
-</head>
-
+– Relational Databases in Python (part I)  </title>
+</link><link href="https://salfaris.github.io/relational-databases-in-python-part-I.html" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Salman Faris", "item": "https://salfaris.github.io"}, {"@type": "ListItem", "position": 2, "name": "Relational databases in python part i", "item": "https://salfaris.github.io/relational-databases-in-python-part-I.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Salman Faris"}, "publisher": {"@type": "Organization", "name": "Salman Faris"}, "headline": "Relational Databases in Python (part I)", "about": "data-science", "datePublished": "2021-04-30 21:46"}</script></head>
 <body>
-  <aside>
-    <div id="user_meta">
-      <a href="https://salfaris.github.io">
-        <img src="https://salfaris.github.io/images/avatar_circ.png" alt="logo">
-      </a>
-      <h2><a href="https://salfaris.github.io">Salman Faris</a></h2>
-      <p>I talk about math, machine learning and python.</p>
-      <ul>
-        <!-- <li><a href="https://salfaris.github.io">blog</a></li> -->
-        <li><a href="https://salfaris.github.io/pages/about.html">about</a></li>
-        <li><a href="https://salfaris.github.io/pages/resources.html">resources</a></li>
-      </ul>
-    </div>
-  </aside>
-
-  <main>
-    <header>
-      <p>
-      <a href="https://salfaris.github.io">Index</a> &brvbar; <a href="https://salfaris.github.io/archives.html">Archives</a>
-      &brvbar; <a href="https://salfaris.github.io/feeds/all.atom.xml">Atom</a>
-      </p>
-    </header>
-
+<aside>
+<div id="user_meta">
+<a href="https://salfaris.github.io">
+<img alt="logo" src="https://salfaris.github.io/images/avatar_circ.png"/>
+</a>
+<h2><a href="https://salfaris.github.io">Salman Faris</a></h2>
+<p>I talk about math, machine learning and python.</p>
+<ul>
+<!-- <li><a href="https://salfaris.github.io">blog</a></li> -->
+<li><a href="https://salfaris.github.io/pages/about.html">about</a></li>
+<li><a href="https://salfaris.github.io/pages/resources.html">resources</a></li>
+</ul>
+</div>
+</aside>
+<main>
+<header>
+<p>
+<a href="https://salfaris.github.io">Index</a> ¦ <a href="https://salfaris.github.io/archives.html">Archives</a>
+      ¦ <a href="https://salfaris.github.io/feeds/all.atom.xml">Atom</a>
+</p>
+</header>
 <article>
-  <div class="article_title">
-    <h1><a href="https://salfaris.github.io/relational-databases-in-python-part-I.html">Relational Databases in Python (part I)</a></h1>
-  </div>
-  <div class="article_meta">
-    <p>Posted on: Fri 30 April 2021</p>
-  </div>
-  <div class="article_text">
-    <p>We usually hear the word <em>databases</em> being thrown around especially when talking about data-related things. So what is it, and what is the more precise term <em>relational databases</em>?</p>
-<p><img alt="Post header" src="https://salfaris.github.io/images/header-rel-database-1.png"></p>
+<div class="article_title">
+<h1><a href="https://salfaris.github.io/relational-databases-in-python-part-I.html">Relational Databases in Python (part I)</a></h1>
+</div>
+<div class="article_meta">
+<p>Posted on: Fri 30 April 2021</p>
+</div>
+<div class="article_text">
+<p>We usually hear the word <em>databases</em> being thrown around especially when talking about data-related things. So what is it, and what is the more precise term <em>relational databases</em>?</p>
+<p><img alt="Post header" src="https://salfaris.github.io/images/header-rel-database-1.png"/></p>
 <p>A relational database is like an Excel file. It is made up of <strong>tables</strong> (note that this is plural) which holds data in the form of columns and rows. In the Excel analogy, tables are basically <em>sheets</em>. Moreover, tables can be <em>related</em> to each other but they need a column to act as a bridge linking them. Such a column is usually called a <strong>key</strong> (either primary key or foreign key). This feature of being related explains the <em>relational</em> term in relational databases. Relational databases is part of the <strong>relational model</strong> which is a much more general framework of structuring and handling data management.</p>
 <p><em>From now on, we shall simply refer to relational databases as just databases.</em></p>
 <h2>Introduction to SQLAlchemy</h2>
 <div class="highlight"><pre><span></span><code>pip install sqlalchemy
 </code></pre></div>
-
 <p>Great, we now know what databases are, but how do we work with them? If this is an Excel file, we just open it and the rest is obvious (at least we think it's obvious because we're used to working with it). How do we open and interact with a database? There are many ways to do this and there's no one right way. For example, you can work directly with SQLite or MySQL in the command line but things can really get messy if you do it this way.</p>
 <p>If you're using Python, then enter <strong>SQLAlchemy</strong>! SQLAlchemy gives you the power of interacting with databases using SQL queries straight from Python. Plus, it helps us abstract away complex queries and the difference in databases (remember that there are a lot of popular databases e.g. MySQL, PostgreSQL and Oracle with subtle differences among them). So querying databases becomes cleaner (and more exciting?) via SQLAlchemy. To <strong>install SQLAlchemy</strong> is as easy as executing the line of code you see below this section's title in your favorite terminal. If you're using Anaconda, then it is already shipped and ready to use!</p>
 <p>Additional notes:</p>
@@ -76,15 +67,14 @@
 <p><em>Those of you who have built web applications with Flask or Django might realize that we usually handle data using an object-oriented approach – using so-called data models. This is the Object Relational Model (ORM) approach, which is one of the two main components of SQLAlchemy. The other main component is called the "core part" of SQLAlchemy which is really centred around the relational model of the database. The latter is the one that we will be focusing on in this post today.</em></p>
 </li>
 </ul>
-<hr>
+<hr/>
 <h2>💬 Talking to a database, first steps</h2>
 <h3>Step 1: Create an engine</h3>
 <p>To write something on a paper, you would need a pencil. To turn the lights on, you would need to switch the toggle. <em>To interact with a database, you would need a so-called</em> <strong>engine</strong>. </p>
 <p>In theory, a database relies on this engine just like how a car would rely on its (car) engine. But I found that thinking of this engine as a mediator rather than a literal engine is much easier to digest.</p>
 <p>To create an engine, you first have to import the <code>create_engine</code> function from <code>sqlalchemy</code>. Then, you need to pass in a <strong>connection string</strong> which in its simplest form specifies two things: (i) the database you want to talk to, and (ii) the path to the database. For example, if I want to connect to <code>race_data.db</code> which is a SQLite database in my current directory, the connection string would be <code>"sqlite:///race_data.db"</code>. So together, they would look something like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s2">&quot;sqlite:///race_data.db&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s2">"sqlite:///race_data.db"</span><span class="p">)</span>
 </code></pre></div>
-
 <blockquote>
 <p><strong>Key terms</strong> </p>
 <ol>
@@ -96,19 +86,16 @@
 <p>In the previous step, we have simply created an engine but have yet to <strong>connect</strong> to it! To establish a connection, you can simply invoke another one-liner:</p>
 <div class="highlight"><pre><span></span><code><span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 </code></pre></div>
-
 <p>One thing worth pointing out is that SQLAlchemy is clever enough to not actually make a connection until we pass in some queries for it to execute.</p>
 <h3>Step 3: Checking table names</h3>
 <p>Recall that tables are to databases just like sheets are to Excel files. So you'd want to know what tables (not columns of a table, yet!) are available before making queries. To do this, you can simply execute</p>
 <div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">engine</span><span class="o">.</span><span class="n">table_names</span><span class="p">())</span>
 </code></pre></div>
-
 <p>to get a list of available tables to work with. For me, this returns </p>
-<div class="highlight"><pre><span></span><code>&gt;&gt; [&#39;race_table&#39;]
+<div class="highlight"><pre><span></span><code>&gt;&gt; ['race_table']
 </code></pre></div>
-
 <p>which means that I have only one table named <code>'race_table'</code>. In practice, you would usually have a few tables.</p>
-<hr>
+<hr/>
 <h2>📝 Querying the database using SQLAlchemy</h2>
 <p>From now on, we assume that we have instantiated an <code>engine</code> and <code>connection</code> object exactly like what we did previously.</p>
 <h3>Raw SQL queries, ResultProxy and ResultSet</h3>
@@ -120,11 +107,10 @@
 <li>Sometimes, we want only the <strong>top 10</strong>.</li>
 </ol>
 <p>Imagine processing 500k rows of data just because we want the top 10, not so efficient right? This is why we would want a two-layer process before getting our actual data, the first layer being the <code>ResultProxy</code> object. Getting the actual data from the <code>ResultProxy</code> object is simply a matter of invoking a method. For example, if we would want to get the whole result, we use the <code>.fetchall()</code> method. If we want the top 10 result, we use the <code>.fetchmany()</code> method with <code>size</code> argument set to 10. Invoking these methods returns a <code>ResultSet</code> object, which basically contains the data we want. Here is an example of a complete implementation:</p>
-<div class="highlight"><pre><span></span><code><span class="n">q</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM race_table&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">q</span> <span class="o">=</span> <span class="s2">"SELECT * FROM race_table"</span>
 <span class="n">result_proxy</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>  <span class="c1"># ResultProxy</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">result_proxy</span><span class="o">.</span><span class="n">fetchmany</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># ResultSet</span>
 </code></pre></div>
-
 <blockquote>
 <p>Querying data in Python is a two-layer process:</p>
 <ol>
@@ -134,13 +120,11 @@
 </blockquote>
 <h3>Working with ResultSet</h3>
 <p>The ResultSet <code>results</code> is a <strong>list</strong> of tuples whose entries corresponds to columns in the table. Let's get the first row in <code>results</code>. Since it is a list, we do this by accessing the zeroth element in the list via <code>row = results[0]</code>. We can print the row <strong>to get the actual data</strong>, a tuple with entries:</p>
-<div class="highlight"><pre><span></span><code>&gt;&gt; <span class="o">(</span><span class="m">1</span>, <span class="m">88</span>, <span class="m">0</span>.95, <span class="m">1</span>, <span class="m">5</span>, <span class="m">436</span>, <span class="s1">&#39;2013-11-03 13:19:25&#39;</span><span class="o">)</span>
+<div class="highlight"><pre><span></span><code>&gt;&gt; <span class="o">(</span><span class="m">1</span>, <span class="m">88</span>, <span class="m">0</span>.95, <span class="m">1</span>, <span class="m">5</span>, <span class="m">436</span>, <span class="s1">'2013-11-03 13:19:25'</span><span class="o">)</span>
 </code></pre></div>
-
 <p>To <strong>get the column names</strong> that correspond to each entry, we can invoke <code>row.keys()</code> to get:</p>
-<div class="highlight"><pre><span></span><code>&gt;&gt; <span class="o">[</span><span class="s1">&#39;Race #&#39;</span>, <span class="s1">&#39;WPM&#39;</span>, <span class="s1">&#39;Accuracy&#39;</span>, <span class="s1">&#39;Rank&#39;</span>, <span class="s1">&#39;# Racers&#39;</span>, <span class="s1">&#39;Text ID&#39;</span>, <span class="s1">&#39;Date/Time (UTC)&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span><code>&gt;&gt; <span class="o">[</span><span class="s1">'Race #'</span>, <span class="s1">'WPM'</span>, <span class="s1">'Accuracy'</span>, <span class="s1">'Rank'</span>, <span class="s1">'# Racers'</span>, <span class="s1">'Text ID'</span>, <span class="s1">'Date/Time (UTC)'</span><span class="o">]</span>
 </code></pre></div>
-
 <p>If we already know which column of interest we want to look at for a particular row, we can access the attribute of the row just like how we would normally do to access the value of a key in a dictionary. For example, if I'm interested in knowing the <code>Accuracy</code> of this <code>row</code>, I would just execute either <code>row.Accuracy</code> or <code>row["Accuracy"]</code> which returns <code>1</code> as expected.</p>
 <h3>SQLAlchemy queries</h3>
 <p>I know I promised that SQLAlchemy can help abstract away complex SQL queries and database differences, and using raw SQL queries like we did so far doesn't seem to agree with this promise. Enter SQLAlchemy's neat and Pythonic way of querying using <strong>table reflection</strong>. </p>
@@ -165,35 +149,31 @@
 <span class="n">metadata</span> <span class="o">=</span> <span class="n">MetaData</span><span class="p">()</span>
 
 <span class="c1"># Table reflection</span>
-<span class="n">race_table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">&quot;race_table&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">autoload_with</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
+<span class="n">race_table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s2">"race_table"</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">autoload</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">autoload_with</span><span class="o">=</span><span class="n">engine</span><span class="p">)</span>
 </code></pre></div>
-
 <p>The first thing you might want to do then is to use the <code>repr</code> function on <code>race_table</code> to learn our table's details such as the column names together with their types such as REAL, INTEGER or TEXT. Mine returns this:</p>
-<div class="highlight"><pre><span></span><code>&gt;&gt; Table<span class="o">(</span><span class="s1">&#39;race_table&#39;</span>, MetaData<span class="o">(</span><span class="nv">bind</span><span class="o">=</span>None<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;Race #&#39;</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;WPM&#39;</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;Accuracy&#39;</span>, REAL<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;Rank&#39;</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;# Racers&#39;</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;Text ID&#39;</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">&#39;Date/Time (UTC)&#39;</span>, TEXT<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, <span class="nv">schema</span><span class="o">=</span>None<span class="o">)</span>
+<div class="highlight"><pre><span></span><code>&gt;&gt; Table<span class="o">(</span><span class="s1">'race_table'</span>, MetaData<span class="o">(</span><span class="nv">bind</span><span class="o">=</span>None<span class="o">)</span>, Column<span class="o">(</span><span class="s1">'Race #'</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">'WPM'</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">'Accuracy'</span>, REAL<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">'Rank'</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">'# Racers'</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">'Text ID'</span>, INTEGER<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, Column<span class="o">(</span><span class="s1">'Date/Time (UTC)'</span>, TEXT<span class="o">()</span>, <span class="nv">table</span><span class="o">=</span>&lt;race_table&gt;<span class="o">)</span>, <span class="nv">schema</span><span class="o">=</span>None<span class="o">)</span>
 </code></pre></div>
-
 <p>The true power of the SQLAlchemy way of querying comes now. To replicate our raw SQL query of <code>SELECT * FROM race_table</code>, we can import and use the <code>select</code> function from the <code>sqlalchemy</code> library. The <code>select</code> function can take a (list of) <code>Table</code> object to select all the rows in that table. The equivalent query to <code>SELECT * FROM race_table</code> is then <code>select([race_table])</code>. More completely, we execute the following code:</p>
 <div class="highlight"><pre><span></span><code><span class="n">q</span> <span class="o">=</span> <span class="n">select</span><span class="p">([</span><span class="n">race_table</span><span class="p">])</span>
 <span class="n">result_proxy</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>  <span class="c1"># ResultProxy</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">result_proxy</span><span class="o">.</span><span class="n">fetchmany</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># ResultSet</span>
 </code></pre></div>
-
 <p>Observe that the last two lines are identical as to when we were writing raw SQL queries, the only difference being the first line. Hence, the way we access <code>results</code> is exactly the same as we've discussed earlier. For the SELECT query, it might be trivial to use the <code>select</code> function but you can imagine that when the queries gets more complex, this will be really nice and clean. Note that you can get the raw SQL query of <code>q</code> by simply printing it to the console.</p>
 <p><strong>References</strong></p>
 <ul>
 <li>[1]: <em>Introduction to Databases in Python</em>, DataCamp</li>
 <li>[2]: <a href="https://stackoverflow.com/a/44098950/13698939" target="_blank"><em>Sam Hartman's Answer to Understanding MetaData() from SQLAlchemy in Python</em></a>, Stack Overflow</li>
 </ul>
-  </div>
-  <div class="article_meta">
-    <p>Category: <a href="https://salfaris.github.io/category/data-science.html">data-science</a>
- &ndash; Tags:
-      <a href="https://salfaris.github.io/tag/python.html">python</a>,      <a href="https://salfaris.github.io/tag/sql.html">sql</a>,      <a href="https://salfaris.github.io/tag/sqlalchemy.html">sqlalchemy</a>,      <a href="https://salfaris.github.io/tag/databases.html">databases</a>,      <a href="https://salfaris.github.io/tag/data-handling.html">data-handling</a>    </p>
-  </div>
-
-  <div id="article_comments">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
+</div>
+<div class="article_meta">
+<p>Category: <a href="https://salfaris.github.io/category/data-science.html">data-science</a>
+ – Tags:
+      <a href="https://salfaris.github.io/tag/python.html">python</a>,      <a href="https://salfaris.github.io/tag/sql.html">sql</a>,      <a href="https://salfaris.github.io/tag/sqlalchemy.html">sqlalchemy</a>,      <a href="https://salfaris.github.io/tag/databases.html">databases</a>,      <a href="https://salfaris.github.io/tag/data-handling.html">data-handling</a> </p>
+</div>
+<div id="article_comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
         var disqus_identifier = "relational-databases-in-python-part-I.html";
         (function() {
              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -201,19 +181,14 @@
              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
          })();
     </script>
-  </div>
-
+</div>
 </article>
-
-
-    <div id="ending_message">
-      <p>&copy; Salman Faris. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
-    </div>
-  </main>
+<div id="ending_message">
+<p>© Salman Faris. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+</div>
+</main>
 </body>
 </html>
-
 <!-- This script solves the issue of mathjax not rendering on homepage -->
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+<script async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML" type="text/javascript">
 </script>

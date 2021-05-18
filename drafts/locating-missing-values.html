@@ -1,82 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">  
 
+<html lang="en">
 <head>
-  <!-- ## for client-side less
+<!-- ## for client-side less
   <link rel="stylesheet/less" type="text/css" href="https://salfaris.github.io/theme/css/style.less">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js" type="text/javascript"></script>
   -->
-  <link rel="stylesheet" type="text/css" href="https://salfaris.github.io/theme/css/style.css">
-  <link rel="stylesheet" type="text/css" href="https://salfaris.github.io/theme/css/pygments.css">
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono">
-
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="Salman Faris">
-  <meta name="description" content="Posts and writings by Salman Faris">
-
-  <link href="https://salfaris.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Salman Faris Atom" />
-
-<meta name="keywords" content="data-cleaning, data-handling">
-
-  <title>
+<link href="https://salfaris.github.io/theme/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="https://salfaris.github.io/theme/css/pygments.css" rel="stylesheet" type="text/css"/>
+<link href="//fonts.googleapis.com/css?family=PT+Sans|PT+Serif|PT+Mono" rel="stylesheet" type="text/css"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Salman Faris" name="author"/>
+<meta content="Posts and writings by Salman Faris" name="description"/>
+<link href="https://salfaris.github.io/feeds/all.atom.xml" rel="alternate" title="Salman Faris Atom" type="application/atom+xml">
+<meta content="data-cleaning, data-handling" name="keywords"/>
+<title>
     Salman Faris
-&ndash; Step-by-step Exploratory Data Analysis  </title>
-
-</head>
-
+– Step-by-step Exploratory Data Analysis  </title>
+</link><link href="https://salfaris.github.io/drafts/locating-missing-values.html" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Salman Faris", "item": "https://salfaris.github.io"}, {"@type": "ListItem", "position": 2, "name": "Drafts", "item": "https://salfaris.github.io/drafts"}, {"@type": "ListItem", "position": 3, "name": "Locating missing values", "item": "https://salfaris.github.io/drafts/locating-missing-values.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Salman Faris"}, "publisher": {"@type": "Organization", "name": "Salman Faris"}, "headline": "Step-by-step Exploratory Data Analysis", "about": "data-science", "datePublished": "2021-04-13 13:37"}</script></head>
 <body>
-  <aside>
-    <div id="user_meta">
-      <a href="https://salfaris.github.io">
-        <img src="https://salfaris.github.io/images/avatar_circ.png" alt="logo">
-      </a>
-      <h2><a href="https://salfaris.github.io">Salman Faris</a></h2>
-      <p>I talk about math, machine learning and python.</p>
-      <ul>
-        <!-- <li><a href="https://salfaris.github.io">blog</a></li> -->
-        <li><a href="https://salfaris.github.io/pages/about.html">about</a></li>
-        <li><a href="https://salfaris.github.io/pages/resources.html">resources</a></li>
-      </ul>
-    </div>
-  </aside>
-
-  <main>
-    <header>
-      <p>
-      <a href="https://salfaris.github.io">Index</a> &brvbar; <a href="https://salfaris.github.io/archives.html">Archives</a>
-      &brvbar; <a href="https://salfaris.github.io/feeds/all.atom.xml">Atom</a>
-      </p>
-    </header>
-
+<aside>
+<div id="user_meta">
+<a href="https://salfaris.github.io">
+<img alt="logo" src="https://salfaris.github.io/images/avatar_circ.png"/>
+</a>
+<h2><a href="https://salfaris.github.io">Salman Faris</a></h2>
+<p>I talk about math, machine learning and python.</p>
+<ul>
+<!-- <li><a href="https://salfaris.github.io">blog</a></li> -->
+<li><a href="https://salfaris.github.io/pages/about.html">about</a></li>
+<li><a href="https://salfaris.github.io/pages/resources.html">resources</a></li>
+</ul>
+</div>
+</aside>
+<main>
+<header>
+<p>
+<a href="https://salfaris.github.io">Index</a> ¦ <a href="https://salfaris.github.io/archives.html">Archives</a>
+      ¦ <a href="https://salfaris.github.io/feeds/all.atom.xml">Atom</a>
+</p>
+</header>
 <article>
-  <div class="article_title">
-    <h1><a href="https://salfaris.github.io/drafts/locating-missing-values.html">Step-by-step Exploratory Data Analysis</a></h1>
-  </div>
-  <div class="article_meta">
-    <p>Posted on: Tue 13 April 2021</p>
-  </div>
-  <div class="article_text">
-    <p>I think that people tend to get lost in the whole data analysis process. When I first learnt statistical modelling, I was taught to first visualize the data to get the bigger picture towards understanding the data. Usually, visualizing data would help you notice gaps in the available data almost immediately. So this strategy is not bad at all, until it does become bad. The problem is the following: in a statistical modelling class, the data you are given to work with are <em>almost surely</em> well-cleaned by someone already. Moreover, you might work with data that has only a single predictor (i.e. feature) for which you can almost infer some results visually. However, things are messier than this.</p>
+<div class="article_title">
+<h1><a href="https://salfaris.github.io/drafts/locating-missing-values.html">Step-by-step Exploratory Data Analysis</a></h1>
+</div>
+<div class="article_meta">
+<p>Posted on: Tue 13 April 2021</p>
+</div>
+<div class="article_text">
+<p>I think that people tend to get lost in the whole data analysis process. When I first learnt statistical modelling, I was taught to first visualize the data to get the bigger picture towards understanding the data. Usually, visualizing data would help you notice gaps in the available data almost immediately. So this strategy is not bad at all, until it does become bad. The problem is the following: in a statistical modelling class, the data you are given to work with are <em>almost surely</em> well-cleaned by someone already. Moreover, you might work with data that has only a single predictor (i.e. feature) for which you can almost infer some results visually. However, things are messier than this.</p>
 <p>In reality, there is no one perfect way to do exact exploratory data analysis (EDA). This is simply because of how messy data is. In this post, my goal is to formalize a general set of rules to do EDA that is applicable to almost any problem. I will be working with <code>Python</code> and in particular, with <code>pandas</code>. We will be working with an imaginary dataset which we have put into a dataframe <code>df</code>. In other words, we assume that we have executed the following code:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;some-dataset.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'some-dataset.csv'</span><span class="p">)</span>
 </code></pre></div>
-
 <h2>Learning the data</h2>
 <h3>Step I: head and shape</h3>
 <p>The first step that one should always do is checking the first few data by <code>df.head()</code>. This gives a glimpse of the content of data. The next step to do is what a lot of people usually skip until they start having problems: <strong>checking the shape</strong> of the dataframe. This can be done by simply invoking <code>df.shape</code>. This step might seem superfluous (especially when the data is small), but it helps you know how many rows and columns you are working with. In particular, when we start looking at missing values later on, <strong>there are sometimes odd cases</strong> where there is one whole column with missing values equal to the number of available rows! Not paying attention to this, one could end up force cleaning the data with respect to this column (e.g. by filling constant values) and use it as a predictor. This is a waste of computational power.</p>
 <h3>Step II: removing unnecessary columns</h3>
-  </div>
-  <div class="article_meta">
-    <p>Category: <a href="https://salfaris.github.io/category/data-science.html">data-science</a>
- &ndash; Tags:
-      <a href="https://salfaris.github.io/tag/data-cleaning.html">data-cleaning</a>,      <a href="https://salfaris.github.io/tag/data-handling.html">data-handling</a>    </p>
-  </div>
-
-  <div id="article_comments">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
+</div>
+<div class="article_meta">
+<p>Category: <a href="https://salfaris.github.io/category/data-science.html">data-science</a>
+ – Tags:
+      <a href="https://salfaris.github.io/tag/data-cleaning.html">data-cleaning</a>,      <a href="https://salfaris.github.io/tag/data-handling.html">data-handling</a> </p>
+</div>
+<div id="article_comments">
+<div id="disqus_thread"></div>
+<script type="text/javascript">
         var disqus_identifier = "drafts/locating-missing-values.html";
         (function() {
              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -84,19 +74,14 @@
              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
          })();
     </script>
-  </div>
-
+</div>
 </article>
-
-
-    <div id="ending_message">
-      <p>&copy; Salman Faris. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
-    </div>
-  </main>
+<div id="ending_message">
+<p>© Salman Faris. Built using <a href="http://getpelican.com" target="_blank">Pelican</a>. Theme by Giulio Fidente on <a href="https://github.com/gfidente/pelican-svbhack" target="_blank">github</a>. </p>
+</div>
+</main>
 </body>
 </html>
-
 <!-- This script solves the issue of mathjax not rendering on homepage -->
-<script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
+<script async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML" type="text/javascript">
 </script>
