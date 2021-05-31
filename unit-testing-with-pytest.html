@@ -18,12 +18,12 @@
 <meta content="@salmannfaris" name="twitter:creator">
 <link href="https://salfaris.github.io/feeds/all.atom.xml" rel="alternate" title="Salman Faris Atom" type="application/atom+xml">
 <meta content="python, testing, software-engineering" name="keywords"/>
-<meta content="Unit Testing with pytest" property="twitter:title">
-<meta content="https://salfaris.github.io/images/header-unit-testing-with-pytest.png" property="twitter:image"/>
+<meta content="Unit Testing with pytest" property="twitter:title"/>
+<meta content="https://salfaris.github.io/header-unit-testing-with-pytest.png" property="twitter:image"/>
 <title>
     Salman Faris
 – Unit Testing with pytest  </title>
-</meta></link></meta></meta></meta><link href="https://salfaris.github.io/unit-testing-with-pytest.html" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Salman Faris", "item": "https://salfaris.github.io"}, {"@type": "ListItem", "position": 2, "name": "Unit testing with pytest", "item": "https://salfaris.github.io/unit-testing-with-pytest.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Salman Faris"}, "publisher": {"@type": "Organization", "name": "Salman Faris"}, "headline": "Unit Testing with pytest", "about": "python", "datePublished": "2021-05-03 12:36", "image": "images/header-unit-testing-with-pytest.png"}</script></head>
+</link></meta></meta></meta><link href="https://salfaris.github.io/unit-testing-with-pytest.html" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Salman Faris", "item": "https://salfaris.github.io"}, {"@type": "ListItem", "position": 2, "name": "Unit testing with pytest", "item": "https://salfaris.github.io/unit-testing-with-pytest.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Salman Faris"}, "publisher": {"@type": "Organization", "name": "Salman Faris"}, "headline": "Unit Testing with pytest", "about": "python", "datePublished": "2021-05-03 12:36", "image": "header-unit-testing-with-pytest.png"}</script></head>
 <body>
 <aside>
 <div id="user_meta">
@@ -33,7 +33,7 @@
 <h2><a href="https://salfaris.github.io">Salman Faris</a></h2>
 <p>I talk about math, machine learning and python.</p>
 <ul>
-<!-- <li><a href="https://salfaris.github.io">blog</a></li> -->
+<li><a href="https://salfaris.github.io">blog</a></li>
 <li><a href="https://salfaris.github.io/pages/about.html">about</a></li>
 <li><a href="https://salfaris.github.io/pages/resources.html">resources</a></li>
 </ul>
@@ -53,8 +53,11 @@
 <div class="article_meta">
 <p>Posted on: Mon 03 May 2021</p>
 </div>
-<div class="article_text">
-<p><img alt="Post header" src="https://salfaris.github.io/images/header-unit-testing-with-pytest.png"/></p>
+<!--   <div class="article_meta">
+    <p>Last modified: 2021-05-18 11:33:00+01:00</p>
+  </div>
+  -->
+<div class="article_text"><p><a href="https://salfaris.github.io/unit-testing-with-pytest.html"><img alt="Post header" src="https://salfaris.github.io/images/header-unit-testing-with-pytest.png"/></a></p>
 <p>It is a common scene that we want to test our functions after we've done writing them. In Python, we can usually do this by printing to the console. For example, suppose we are interested in testing the following function:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">add_positive</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="sd">"""Add two positive integers x and y. If the sum</span>
@@ -73,8 +76,8 @@
 &gt;&gt; None
 &gt;&gt; <span class="m">190</span>
 </code></pre></div>
-<p>and then we eyeball each of the output to see if it as expected. </p>
-<p>This is of course a correct way to do it as we can evaluate whether the output on the console is as expected; but is it efficient? </p>
+<p>and then we eyeball each of the output to see if it as expected.</p>
+<p>This is of course a correct way to do it as we can evaluate whether the output on the console is as expected; but is it efficient?</p>
 <h2>🧠 Why unit testing is a no-brainer</h2>
 <p>In a typical life cycle of a function, there are three situations where we would want to test our functions:</p>
 <ol>
@@ -101,7 +104,7 @@
 </code></pre></div>
 <h3>Step 1: Creating the test module</h3>
 <p>Assume that the <code>add_positive()</code> function lies in a module called <code>add_positive.py</code>. We begin the unit testing process by creating a file called <code>test_add_positive.py</code> in the same directory as <code>add_positive.py</code>. Such a file will contain the unit tests of functions in <code>add_positive.py</code>, and is called a <strong>test module</strong>. The <code>test_</code> in front of <code>test_add_positive.py</code> is important as it lets <code>pytest</code> knows that this is a file containing unit tests.</p>
-<p><em>Remark: The test module for the module <code>add_positive.py</code> does not have to be named <code>test_add_positive.py</code>. You can name it <code>test_x.py</code> or <code>test_covid.py</code> or whatever as long as it is prepended with <code>test_</code>. But it is good practice to follow the naming convention of <code>test_module_name</code> to trace which module is this test module testing.</em></p>
+<p>_Remark: The test module for the module <code>add_positive.py</code> does not have to be named <code>test_add_positive.py</code>. You can name it <code>test_x.py</code> or <code>test_covid.py</code> or whatever as long as it is prepended with <code>test_</code>. But it is good practice to follow the naming convention of <code>test*module_name</code> to trace which module is this test module testing.*</p>
 <h3>Step 2: Importing inside the test module</h3>
 <p>The next step is to (mainly) import two things:</p>
 <ol>
@@ -170,7 +173,7 @@
 <span class="sd">     is negative or zero, return None."""</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 </code></pre></div>
-<p>Apparently, he didn't read the short description of the function; he thought that you're adding an unnecesary check. However, the function is supposed to work like that – only returning if the sum is positive (think of another module which relies on the correctness of this function). </p>
+<p>Apparently, he didn't read the short description of the function; he thought that you're adding an unnecesary check. However, the function is supposed to work like that – only returning if the sum is positive (think of another module which relies on the correctness of this function).</p>
 <p>If there were no unit tests written to check this modification, this seemingly trivial edit by Gilfoyle could have been merged into the main branch and could possibly crash the whole system! Thankfully, we implemented continuous integration and upon making a pull request, Gilfoyle was bombarded with the following test report:</p>
 <p><img alt="Unit-test-fail" src="https://salfaris.github.io/images/unit-test-2.png"/></p>
 <p>Here is a breakdown of the report:</p>
@@ -183,22 +186,27 @@
 <p>Sometimes, we just want to run the test up until the first failure. This can be done by adding a <code>-x</code> flag like so:</p>
 <div class="highlight"><pre><span></span><code>pytest -x test_add_positive.py
 </code></pre></div>
-<p>Now you might be wondering, what to do if we have multiple functions to test in the same module given that this one single <code>add_positive</code> function alone requires 4 unit tests. Things can start getting really messy right? To solve this issue, we can create a class containing these unit tests for each function we want to test. This will be a topic of a future post on testing, thanks for reading.</p>
-</div>
+<p>Now you might be wondering, what to do if we have multiple functions to test in the same module given that this one single <code>add_positive</code> function alone requires 4 unit tests. Things can start getting really messy right? To solve this issue, we can create a class containing these unit tests for each function we want to test. This will be a topic of a future post on testing, thanks for reading.</p></div>
 <div class="article_meta">
-<p>Category: <a href="https://salfaris.github.io/category/python.html">python</a>
- – Tags:
-      <a href="https://salfaris.github.io/tag/python.html">python</a>,      <a href="https://salfaris.github.io/tag/testing.html">testing</a>,      <a href="https://salfaris.github.io/tag/software-engineering.html">software-engineering</a> </p>
+<p>
+      Category:
+      <a href="https://salfaris.github.io/category/python.html">python</a>
+ – Tags:       <a href="https://salfaris.github.io/tag/python.html">python</a>,       <a href="https://salfaris.github.io/tag/testing.html">testing</a>,       <a href="https://salfaris.github.io/tag/software-engineering.html">software-engineering</a> </p>
 </div>
 <div id="article_comments">
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-        var disqus_identifier = "unit-testing-with-pytest.html";
-        (function() {
-             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-             dsq.src = '//salfaris.disqus.com/embed.js';
-             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-         })();
+      var disqus_identifier = "unit-testing-with-pytest.html";
+      (function () {
+        var dsq = document.createElement("script");
+        dsq.type = "text/javascript";
+        dsq.async = true;
+        dsq.src = "//salfaris.disqus.com/embed.js";
+        (
+          document.getElementsByTagName("head")[0] ||
+          document.getElementsByTagName("body")[0]
+        ).appendChild(dsq);
+      })();
     </script>
 </div>
 </article>

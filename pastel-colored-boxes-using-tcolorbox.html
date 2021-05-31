@@ -18,12 +18,12 @@
 <meta content="@salmannfaris" name="twitter:creator">
 <link href="https://salfaris.github.io/feeds/all.atom.xml" rel="alternate" title="Salman Faris Atom" type="application/atom+xml">
 <meta content="latex, writing" name="keywords"/>
-<meta content="Making pastel-colored boxes using tcolorbox in LaTeX" property="twitter:title">
-<meta content="https://salfaris.github.io/images/example-box.png" property="twitter:image"/>
+<meta content="Making pastel-colored boxes using tcolorbox in LaTeX" property="twitter:title"/>
+<meta content="https://salfaris.github.io/example-box.png" property="twitter:image"/>
 <title>
     Salman Faris
 – Making pastel-colored boxes using tcolorbox in LaTeX  </title>
-</meta></link></meta></meta></meta><link href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Salman Faris", "item": "https://salfaris.github.io"}, {"@type": "ListItem", "position": 2, "name": "Pastel colored boxes using tcolorbox", "item": "https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Salman Faris"}, "publisher": {"@type": "Organization", "name": "Salman Faris"}, "headline": "Making pastel-colored boxes using tcolorbox in LaTeX", "about": "latex", "datePublished": "2021-04-07 15:46", "image": "images/example-box.png"}</script></head>
+</link></meta></meta></meta><link href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Salman Faris", "item": "https://salfaris.github.io"}, {"@type": "ListItem", "position": 2, "name": "Pastel colored boxes using tcolorbox", "item": "https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Salman Faris"}, "publisher": {"@type": "Organization", "name": "Salman Faris"}, "headline": "Making pastel-colored boxes using tcolorbox in LaTeX", "about": "latex", "datePublished": "2021-04-07 15:46", "image": "example-box.png"}</script></head>
 <body>
 <aside>
 <div id="user_meta">
@@ -33,7 +33,7 @@
 <h2><a href="https://salfaris.github.io">Salman Faris</a></h2>
 <p>I talk about math, machine learning and python.</p>
 <ul>
-<!-- <li><a href="https://salfaris.github.io">blog</a></li> -->
+<li><a href="https://salfaris.github.io">blog</a></li>
 <li><a href="https://salfaris.github.io/pages/about.html">about</a></li>
 <li><a href="https://salfaris.github.io/pages/resources.html">resources</a></li>
 </ul>
@@ -53,22 +53,25 @@
 <div class="article_meta">
 <p>Posted on: Wed 07 April 2021</p>
 </div>
-<div class="article_text">
-<p>One of the many questions I get when people see my <span class="math">\(\LaTeX\)</span>-ed math notes is <em>how do you create these nice pastel-colored boxes?</em> </p>
-<p><img alt="Example tcolorbox" src="https://salfaris.github.io/images/example-box.png"/>
-<img alt="Example 2 tcolorbox" src="https://salfaris.github.io/images/example-box-2.png"/>
-<center><em>Two examples of pastel-colored boxes from my math notes</em></center></p>
+<!--   <div class="article_meta">
+    <p>Last modified: 2021-04-11 12:57:00+01:00</p>
+  </div>
+  -->
+<div class="article_text"><p>One of the many questions I get when people see my <span class="math">\(\LaTeX\)</span>-ed math notes is <em>how do you create these nice pastel-colored boxes?</em></p>
+<p><a href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html"><img alt="Example tcolorbox" src="https://salfaris.github.io/images/example-box.png"/></a>
+<a href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html"><img alt="Example 2 tcolorbox" src="https://salfaris.github.io/images/example-box-2.png"/></a></p>
+<p><center><em>Two examples of pastel-colored boxes from my math notes</em></center></p>
 <p>I feel like this is a very relevant and important question, because I asked the exact same thing when I was new to <span class="math">\(\LaTeX\)</span>.</p>
 <hr/>
 <h3>Simple box using <em>fbox</em> and <em>minipage</em></h3>
-<p>My first exposure to <span class="math">\(\LaTeX\)</span> box-like environments was my mentor <a href="https://sites.google.com/site/tsoighaleo/">Ghaleo</a>'s genius tutorial notes. He used them for two main reasons: </p>
+<p>My first exposure to <span class="math">\(\LaTeX\)</span> box-like environments was my mentor <a href="https://sites.google.com/site/tsoighaleo/">Ghaleo</a>'s genius tutorial notes. He used them for two main reasons:</p>
 <ul>
 <li>to highlight important theorems, lemmas, etc;</li>
 <li>an empty space for students to follow along and fill in the blanks live in class.</li>
 </ul>
-<p>I tried to reproduce his box environment when I was writing my very first math notes on <span class="math">\(\LaTeX\)</span> – my Linear Algebra &amp; Geometry II notes. </p>
-<p><img alt="Linear Algebra &amp; Geometry II notes" src="https://salfaris.github.io/images/my-first-box.png"/>
-<center><em>A snippet of my Linear Algebra &amp; Geometry II notes</em></center></p>
+<p>I tried to reproduce his box environment when I was writing my very first math notes on <span class="math">\(\LaTeX\)</span> – my Linear Algebra &amp; Geometry II notes.</p>
+<p><img alt="Linear Algebra &amp; Geometry II notes" src="https://salfaris.github.io/images/my-first-box.png"/></p>
+<p><center><em>A snippet of my Linear Algebra &amp; Geometry II notes</em></center></p>
 <p>It was achievable using the <code>fbox</code> environment alone, but for it to generalize well, I have to throw in a <code>minipage</code> usage as well. The code implementation is quite simple and requires no package imports. Just use the following code directly in your document:</p>
 <div class="highlight"><pre><span></span><code><span class="c">% Simple box environment.</span>
 <span class="k">\fbox</span><span class="nb">{</span> <span class="c">%</span>
@@ -92,18 +95,18 @@
 </code></pre></div>
 <p>would yield the box:</p>
 <p><img alt="plainbox" src="https://salfaris.github.io/images/plain-box.png"/></p>
-<p>Now the problem with this simple fbox is that... it's just plain black and white. I want something more vibrant and colourful, so I decided to start learning the <a href="https://ctan.org/pkg/tcolorbox">tcolorbox</a> package. </p>
+<p>Now the problem with this simple fbox is that... it's just plain black and white. I want something more vibrant and colourful, so I decided to start learning the <a href="https://ctan.org/pkg/tcolorbox">tcolorbox</a> package.</p>
 <hr/>
 <h3>Transition to <em>tcolorbox</em></h3>
 <p>As usual, the best way to learn is to straight dive in and do. After (very) little reading on the package's documentation, I started to recreate pretty boxes that other people have made from scratch. These boxes are usually from notes I found online like:</p>
 <ul>
 <li>Evan Chen's <a href="https://web.evanchen.cc/napkin.html">The Napkin project</a>;</li>
 <li>Tony Zhang's notes snippets from his <a href="https://www.quora.com/Does-anybody-use-LaTeX-to-take-notes-especially-during-class-If-not-what-do-you-use-especially-when-you-need-to-write-down-equations">Quora post</a>;</li>
-<li>or even the tcolorbox documentation itself. </li>
+<li>or even the tcolorbox documentation itself.</li>
 </ul>
 <p>With my then minimal knowledge, I started writing my Real Analysis notes. I was quite happy with the end product but the overall design felt a bit odd (as you can see in the figure below). Nevertheless, my initial goal was to just make prettier boxes and I think I've achieved just that.</p>
-<p><img alt="Real Analysis notes" src="https://salfaris.github.io/images/my-second-box.png"/>
-<center><em>A snippet of my Real Analysis notes</em></center></p>
+<p><img alt="Real Analysis notes" src="https://salfaris.github.io/images/my-second-box.png"/></p>
+<p><center><em>A snippet of my Real Analysis notes</em></center></p>
 <p>To reproduce the (proof) box above with a Cerulean colour, use the following code in your document's preamble:</p>
 <div class="highlight"><pre><span></span><code><span class="c">% In preamble.</span>
 <span class="k">\usepackage</span><span class="na">[dvipsnames]</span><span class="nb">{</span>xcolor<span class="nb">}</span>
@@ -210,22 +213,27 @@
     (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-</script>
-</div>
+</script></div>
 <div class="article_meta">
-<p>Category: <a href="https://salfaris.github.io/category/latex.html">latex</a>
- – Tags:
-      <a href="https://salfaris.github.io/tag/latex.html">latex</a>,      <a href="https://salfaris.github.io/tag/writing.html">writing</a> </p>
+<p>
+      Category:
+      <a href="https://salfaris.github.io/category/latex.html">latex</a>
+ – Tags:       <a href="https://salfaris.github.io/tag/latex.html">latex</a>,       <a href="https://salfaris.github.io/tag/writing.html">writing</a> </p>
 </div>
 <div id="article_comments">
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-        var disqus_identifier = "pastel-colored-boxes-using-tcolorbox.html";
-        (function() {
-             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-             dsq.src = '//salfaris.disqus.com/embed.js';
-             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-         })();
+      var disqus_identifier = "pastel-colored-boxes-using-tcolorbox.html";
+      (function () {
+        var dsq = document.createElement("script");
+        dsq.type = "text/javascript";
+        dsq.async = true;
+        dsq.src = "//salfaris.disqus.com/embed.js";
+        (
+          document.getElementsByTagName("head")[0] ||
+          document.getElementsByTagName("body")[0]
+        ).appendChild(dsq);
+      })();
     </script>
 </div>
 </article>

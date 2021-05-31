@@ -18,12 +18,12 @@
 <meta content="@salmannfaris" name="twitter:creator">
 <link href="https://salfaris.github.io/feeds/all.atom.xml" rel="alternate" title="Salman Faris Atom" type="application/atom+xml">
 <meta content="python, sql, sqlalchemy, databases, data-handling" name="keywords"/>
-<meta content="Relational Databases in Python (part I)" property="twitter:title">
-<meta content="https://salfaris.github.io/images/header-rel-database-1.png" property="twitter:image"/>
+<meta content="Relational Databases in Python (part I)" property="twitter:title"/>
+<meta content="https://salfaris.github.io/header-relational-databases-in-python-part-I.png" property="twitter:image"/>
 <title>
     Salman Faris
 – Relational Databases in Python (part I)  </title>
-</meta></link></meta></meta></meta><link href="https://salfaris.github.io/relational-databases-in-python-part-I.html" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Salman Faris", "item": "https://salfaris.github.io"}, {"@type": "ListItem", "position": 2, "name": "Relational databases in python part i", "item": "https://salfaris.github.io/relational-databases-in-python-part-I.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Salman Faris"}, "publisher": {"@type": "Organization", "name": "Salman Faris"}, "headline": "Relational Databases in Python (part I)", "about": "data-science", "datePublished": "2021-04-30 21:46", "image": "images/header-rel-database-1.png"}</script></head>
+</link></meta></meta></meta><link href="https://salfaris.github.io/relational-databases-in-python-part-I.html" rel="canonical"/><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Salman Faris", "item": "https://salfaris.github.io"}, {"@type": "ListItem", "position": 2, "name": "Relational databases in python part i", "item": "https://salfaris.github.io/relational-databases-in-python-part-I.html"}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "author": {"@type": "Person", "name": "Salman Faris"}, "publisher": {"@type": "Organization", "name": "Salman Faris"}, "headline": "Relational Databases in Python (part I)", "about": "data-science", "datePublished": "2021-04-30 21:46", "image": "header-relational-databases-in-python-part-I.png"}</script></head>
 <body>
 <aside>
 <div id="user_meta">
@@ -33,7 +33,7 @@
 <h2><a href="https://salfaris.github.io">Salman Faris</a></h2>
 <p>I talk about math, machine learning and python.</p>
 <ul>
-<!-- <li><a href="https://salfaris.github.io">blog</a></li> -->
+<li><a href="https://salfaris.github.io">blog</a></li>
 <li><a href="https://salfaris.github.io/pages/about.html">about</a></li>
 <li><a href="https://salfaris.github.io/pages/resources.html">resources</a></li>
 </ul>
@@ -53,9 +53,12 @@
 <div class="article_meta">
 <p>Posted on: Fri 30 April 2021</p>
 </div>
-<div class="article_text">
+<!--   <div class="article_meta">
+    <p>Last modified: 2021-04-30 21:46:00+01:00</p>
+  </div>
+  -->
+<div class="article_text"><p><a href="https://salfaris.github.io/relational-databases-in-python-part-I.html"><img alt="Post header" src="https://salfaris.github.io/images/header-relational-databases-in-python-part-I.png"/></a></p>
 <p>We usually hear the word <em>databases</em> being thrown around especially when talking about data-related things. So what is it, and what is the more precise term <em>relational databases</em>?</p>
-<p><img alt="Post header" src="https://salfaris.github.io/images/header-rel-database-1.png"/></p>
 <p>A relational database is like an Excel file. It is made up of <strong>tables</strong> (note that this is plural) which holds data in the form of columns and rows. In the Excel analogy, tables are basically <em>sheets</em>. Moreover, tables can be <em>related</em> to each other but they need a column to act as a bridge linking them. Such a column is usually called a <strong>key</strong> (either primary key or foreign key). This feature of being related explains the <em>relational</em> term in relational databases. Relational databases is part of the <strong>relational model</strong> which is a much more general framework of structuring and handling data management.</p>
 <p><em>From now on, we shall simply refer to relational databases as just databases.</em></p>
 <h2>Introduction to SQLAlchemy</h2>
@@ -75,13 +78,13 @@
 <hr/>
 <h2>💬 Talking to a database, first steps</h2>
 <h3>Step 1: Create an engine</h3>
-<p>To write something on a paper, you would need a pencil. To turn the lights on, you would need to switch the toggle. <em>To interact with a database, you would need a so-called</em> <strong>engine</strong>. </p>
+<p>To write something on a paper, you would need a pencil. To turn the lights on, you would need to switch the toggle. <em>To interact with a database, you would need a so-called</em> <strong>engine</strong>.</p>
 <p>In theory, a database relies on this engine just like how a car would rely on its (car) engine. But I found that thinking of this engine as a mediator rather than a literal engine is much easier to digest.</p>
 <p>To create an engine, you first have to import the <code>create_engine</code> function from <code>sqlalchemy</code>. Then, you need to pass in a <strong>connection string</strong> which in its simplest form specifies two things: (i) the database you want to talk to, and (ii) the path to the database. For example, if I want to connect to <code>race_data.db</code> which is a SQLite database in my current directory, the connection string would be <code>"sqlite:///race_data.db"</code>. So together, they would look something like this:</p>
 <div class="highlight"><pre><span></span><code><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s2">"sqlite:///race_data.db"</span><span class="p">)</span>
 </code></pre></div>
 <blockquote>
-<p><strong>Key terms</strong> </p>
+<p><strong>Key terms</strong></p>
 <ol>
 <li>The <strong>engine</strong> is a mediator for SQLAlchemy to interact with a database.</li>
 <li>A <strong>connection string</strong> specifies the details of the database we want to interact with.</li>
@@ -96,7 +99,7 @@
 <p>Recall that tables are to databases just like sheets are to Excel files. So you'd want to know what tables (not columns of a table, yet!) are available before making queries. To do this, you can simply execute</p>
 <div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">engine</span><span class="o">.</span><span class="n">table_names</span><span class="p">())</span>
 </code></pre></div>
-<p>to get a list of available tables to work with. For me, this returns </p>
+<p>to get a list of available tables to work with. For me, this returns</p>
 <div class="highlight"><pre><span></span><code>&gt;&gt; ['race_table']
 </code></pre></div>
 <p>which means that I have only one table named <code>'race_table'</code>. In practice, you would usually have a few tables.</p>
@@ -132,16 +135,12 @@
 </code></pre></div>
 <p>If we already know which column of interest we want to look at for a particular row, we can access the attribute of the row just like how we would normally do to access the value of a key in a dictionary. For example, if I'm interested in knowing the <code>Accuracy</code> of this <code>row</code>, I would just execute either <code>row.Accuracy</code> or <code>row["Accuracy"]</code> which returns <code>1</code> as expected.</p>
 <h3>SQLAlchemy queries</h3>
-<p>I know I promised that SQLAlchemy can help abstract away complex SQL queries and database differences, and using raw SQL queries like we did so far doesn't seem to agree with this promise. Enter SQLAlchemy's neat and Pythonic way of querying using <strong>table reflection</strong>. </p>
+<p>I know I promised that SQLAlchemy can help abstract away complex SQL queries and database differences, and using raw SQL queries like we did so far doesn't seem to agree with this promise. Enter SQLAlchemy's neat and Pythonic way of querying using <strong>table reflection</strong>.</p>
 <p>A table reflection or just <strong>reflection</strong> is basically a process which reads the desired database, looks for your desired table and copies it into a <code>Table</code> object (see below) as if you wrote a whole raw SQL query to create this table. Personally, the term reflection is quite misleading for me and I would more prefer the term <em>autocopy</em> – because that is literally what the process does, and my philosophy is that explicit is better than nano-misleadings.</p>
 <p>To make a reflection, you would need to import two classes from the <code>sqlalchemy</code> library: <code>MetaData</code> and <code>Table</code>. It is worth understanding a basic idea of what these things do:</p>
 <ul>
-<li>
-<p>The <strong>MetaData</strong> class can be thought of a folder or catalog that keeps information about database stuffs such as tables. In this way, we don't have to keep looking up table information because we have "organized" things nicely.</p>
-</li>
-<li>
-<p>The <strong>Table</strong> class does exactly what you expect it to do. It stores and handles the reflected (i.e. autocopied) version of your desired table so that SQLAlchemy can interact with it.</p>
-</li>
+<li>The <strong>MetaData</strong> class can be thought of a folder or catalog that keeps information about database stuffs such as tables. In this way, we don't have to keep looking up table information because we have "organized" things nicely.</li>
+<li>The <strong>Table</strong> class does exactly what you expect it to do. It stores and handles the reflected (i.e. autocopied) version of your desired table so that SQLAlchemy can interact with it.</li>
 </ul>
 <p>Now we know the required ingredients, let's see how to actually do a table reflection. Recall that we have instantiated an <code>engine</code> and <code>connection</code> object from the previous section. We now instantiate a <code>MetaData</code> object via <code>metadata = MetaData()</code>; and then instantiate a <code>Table</code> object passing the arguments:</p>
 <ol>
@@ -169,22 +168,27 @@
 <ul>
 <li>[1]: <em>Introduction to Databases in Python</em>, DataCamp</li>
 <li>[2]: <a href="https://stackoverflow.com/a/44098950/13698939" target="_blank"><em>Sam Hartman's Answer to Understanding MetaData() from SQLAlchemy in Python</em></a>, Stack Overflow</li>
-</ul>
-</div>
+</ul></div>
 <div class="article_meta">
-<p>Category: <a href="https://salfaris.github.io/category/data-science.html">data-science</a>
- – Tags:
-      <a href="https://salfaris.github.io/tag/python.html">python</a>,      <a href="https://salfaris.github.io/tag/sql.html">sql</a>,      <a href="https://salfaris.github.io/tag/sqlalchemy.html">sqlalchemy</a>,      <a href="https://salfaris.github.io/tag/databases.html">databases</a>,      <a href="https://salfaris.github.io/tag/data-handling.html">data-handling</a> </p>
+<p>
+      Category:
+      <a href="https://salfaris.github.io/category/data-science.html">data-science</a>
+ – Tags:       <a href="https://salfaris.github.io/tag/python.html">python</a>,       <a href="https://salfaris.github.io/tag/sql.html">sql</a>,       <a href="https://salfaris.github.io/tag/sqlalchemy.html">sqlalchemy</a>,       <a href="https://salfaris.github.io/tag/databases.html">databases</a>,       <a href="https://salfaris.github.io/tag/data-handling.html">data-handling</a> </p>
 </div>
 <div id="article_comments">
 <div id="disqus_thread"></div>
 <script type="text/javascript">
-        var disqus_identifier = "relational-databases-in-python-part-I.html";
-        (function() {
-             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-             dsq.src = '//salfaris.disqus.com/embed.js';
-             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-         })();
+      var disqus_identifier = "relational-databases-in-python-part-I.html";
+      (function () {
+        var dsq = document.createElement("script");
+        dsq.type = "text/javascript";
+        dsq.async = true;
+        dsq.src = "//salfaris.disqus.com/embed.js";
+        (
+          document.getElementsByTagName("head")[0] ||
+          document.getElementsByTagName("body")[0]
+        ).appendChild(dsq);
+      })();
     </script>
 </div>
 </article>

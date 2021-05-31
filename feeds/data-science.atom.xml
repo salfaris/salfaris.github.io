@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Salman Faris - data-science</title><link href="https://salfaris.github.io/" rel="alternate"></link><link href="https://salfaris.github.io/feeds/data-science.atom.xml" rel="self"></link><id>https://salfaris.github.io/</id><updated>2021-04-30T21:46:00+01:00</updated><entry><title>Relational Databases in Python (part I)</title><link href="https://salfaris.github.io/relational-databases-in-python-part-I.html" rel="alternate"></link><published>2021-04-30T21:46:00+01:00</published><updated>2021-04-30T21:46:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-04-30:/relational-databases-in-python-part-I.html</id><summary type="html">&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-rel-database-1.png"&gt;&lt;/p&gt;
-&lt;p&gt;A relational database is like an Excel file. It is made up of &lt;strong&gt;tables&lt;/strong&gt; (note that this is plural) which holds data …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-rel-database-1.png"&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Salman Faris - data-science</title><link href="https://salfaris.github.io/" rel="alternate"></link><link href="https://salfaris.github.io/feeds/data-science.atom.xml" rel="self"></link><id>https://salfaris.github.io/</id><updated>2021-04-30T21:46:00+01:00</updated><entry><title>Relational Databases in Python (part I)</title><link href="https://salfaris.github.io/relational-databases-in-python-part-I.html" rel="alternate"></link><published>2021-04-30T21:46:00+01:00</published><updated>2021-04-30T21:46:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-04-30:/relational-databases-in-python-part-I.html</id><summary type="html">&lt;p&gt;&lt;a href="https://salfaris.github.io/relational-databases-in-python-part-I.html"&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-relational-databases-in-python-part-I.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
+&lt;p&gt;A relational database is like an Excel file. It is made up of &lt;strong&gt;tables&lt;/strong&gt; (note that this is plural) which holds data …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://salfaris.github.io/relational-databases-in-python-part-I.html"&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-relational-databases-in-python-part-I.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
 &lt;p&gt;A relational database is like an Excel file. It is made up of &lt;strong&gt;tables&lt;/strong&gt; (note that this is plural) which holds data in the form of columns and rows. In the Excel analogy, tables are basically &lt;em&gt;sheets&lt;/em&gt;. Moreover, tables can be &lt;em&gt;related&lt;/em&gt; to each other but they need a column to act as a bridge linking them. Such a column is usually called a &lt;strong&gt;key&lt;/strong&gt; (either primary key or foreign key). This feature of being related explains the &lt;em&gt;relational&lt;/em&gt; term in relational databases. Relational databases is part of the &lt;strong&gt;relational model&lt;/strong&gt; which is a much more general framework of structuring and handling data management.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;From now on, we shall simply refer to relational databases as just databases.&lt;/em&gt;&lt;/p&gt;
 &lt;h2&gt;Introduction to SQLAlchemy&lt;/h2&gt;
@@ -23,14 +23,14 @@
 &lt;hr&gt;
 &lt;h2&gt;💬 Talking to a database, first steps&lt;/h2&gt;
 &lt;h3&gt;Step 1: Create an engine&lt;/h3&gt;
-&lt;p&gt;To write something on a paper, you would need a pencil. To turn the lights on, you would need to switch the toggle. &lt;em&gt;To interact with a database, you would need a so-called&lt;/em&gt; &lt;strong&gt;engine&lt;/strong&gt;. &lt;/p&gt;
+&lt;p&gt;To write something on a paper, you would need a pencil. To turn the lights on, you would need to switch the toggle. &lt;em&gt;To interact with a database, you would need a so-called&lt;/em&gt; &lt;strong&gt;engine&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;In theory, a database relies on this engine just like how a car would rely on its (car) engine. But I found that thinking of this engine as a mediator rather than a literal engine is much easier to digest.&lt;/p&gt;
 &lt;p&gt;To create an engine, you first have to import the &lt;code&gt;create_engine&lt;/code&gt; function from &lt;code&gt;sqlalchemy&lt;/code&gt;. Then, you need to pass in a &lt;strong&gt;connection string&lt;/strong&gt; which in its simplest form specifies two things: (i) the database you want to talk to, and (ii) the path to the database. For example, if I want to connect to &lt;code&gt;race_data.db&lt;/code&gt; which is a SQLite database in my current directory, the connection string would be &lt;code&gt;"sqlite:///race_data.db"&lt;/code&gt;. So together, they would look something like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;engine&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sqlite:///race_data.db&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Key terms&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Key terms&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;The &lt;strong&gt;engine&lt;/strong&gt; is a mediator for SQLAlchemy to interact with a database.&lt;/li&gt;
 &lt;li&gt;A &lt;strong&gt;connection string&lt;/strong&gt; specifies the details of the database we want to interact with.&lt;/li&gt;
@@ -47,7 +47,7 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;table_names&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;to get a list of available tables to work with. For me, this returns &lt;/p&gt;
+&lt;p&gt;to get a list of available tables to work with. For me, this returns&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt; [&amp;#39;race_table&amp;#39;]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -87,16 +87,12 @@
 
 &lt;p&gt;If we already know which column of interest we want to look at for a particular row, we can access the attribute of the row just like how we would normally do to access the value of a key in a dictionary. For example, if I'm interested in knowing the &lt;code&gt;Accuracy&lt;/code&gt; of this &lt;code&gt;row&lt;/code&gt;, I would just execute either &lt;code&gt;row.Accuracy&lt;/code&gt; or &lt;code&gt;row["Accuracy"]&lt;/code&gt; which returns &lt;code&gt;1&lt;/code&gt; as expected.&lt;/p&gt;
 &lt;h3&gt;SQLAlchemy queries&lt;/h3&gt;
-&lt;p&gt;I know I promised that SQLAlchemy can help abstract away complex SQL queries and database differences, and using raw SQL queries like we did so far doesn't seem to agree with this promise. Enter SQLAlchemy's neat and Pythonic way of querying using &lt;strong&gt;table reflection&lt;/strong&gt;. &lt;/p&gt;
+&lt;p&gt;I know I promised that SQLAlchemy can help abstract away complex SQL queries and database differences, and using raw SQL queries like we did so far doesn't seem to agree with this promise. Enter SQLAlchemy's neat and Pythonic way of querying using &lt;strong&gt;table reflection&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;A table reflection or just &lt;strong&gt;reflection&lt;/strong&gt; is basically a process which reads the desired database, looks for your desired table and copies it into a &lt;code&gt;Table&lt;/code&gt; object (see below) as if you wrote a whole raw SQL query to create this table. Personally, the term reflection is quite misleading for me and I would more prefer the term &lt;em&gt;autocopy&lt;/em&gt; – because that is literally what the process does, and my philosophy is that explicit is better than nano-misleadings.&lt;/p&gt;
 &lt;p&gt;To make a reflection, you would need to import two classes from the &lt;code&gt;sqlalchemy&lt;/code&gt; library: &lt;code&gt;MetaData&lt;/code&gt; and &lt;code&gt;Table&lt;/code&gt;. It is worth understanding a basic idea of what these things do:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;strong&gt;MetaData&lt;/strong&gt; class can be thought of a folder or catalog that keeps information about database stuffs such as tables. In this way, we don't have to keep looking up table information because we have "organized" things nicely.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;strong&gt;Table&lt;/strong&gt; class does exactly what you expect it to do. It stores and handles the reflected (i.e. autocopied) version of your desired table so that SQLAlchemy can interact with it.&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;MetaData&lt;/strong&gt; class can be thought of a folder or catalog that keeps information about database stuffs such as tables. In this way, we don't have to keep looking up table information because we have "organized" things nicely.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;Table&lt;/strong&gt; class does exactly what you expect it to do. It stores and handles the reflected (i.e. autocopied) version of your desired table so that SQLAlchemy can interact with it.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Now we know the required ingredients, let's see how to actually do a table reflection. Recall that we have instantiated an &lt;code&gt;engine&lt;/code&gt; and &lt;code&gt;connection&lt;/code&gt; object from the previous section. We now instantiate a &lt;code&gt;MetaData&lt;/code&gt; object via &lt;code&gt;metadata = MetaData()&lt;/code&gt;; and then instantiate a &lt;code&gt;Table&lt;/code&gt; object passing the arguments:&lt;/p&gt;
 &lt;ol&gt;

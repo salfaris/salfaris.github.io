@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Salman Faris</title><link href="https://salfaris.github.io/" rel="alternate"></link><link href="https://salfaris.github.io/feeds/all.atom.xml" rel="self"></link><id>https://salfaris.github.io/</id><updated>2021-05-18T11:33:00+01:00</updated><entry><title>Unit Testing with pytest</title><link href="https://salfaris.github.io/unit-testing-with-pytest.html" rel="alternate"></link><published>2021-05-03T12:36:00+01:00</published><updated>2021-05-18T11:33:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-05-03:/unit-testing-with-pytest.html</id><summary type="html">&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-unit-testing-with-pytest.png"&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Salman Faris</title><link href="https://salfaris.github.io/" rel="alternate"></link><link href="https://salfaris.github.io/feeds/all.atom.xml" rel="self"></link><id>https://salfaris.github.io/</id><updated>2021-05-18T11:33:00+01:00</updated><entry><title>Unit Testing with pytest</title><link href="https://salfaris.github.io/unit-testing-with-pytest.html" rel="alternate"></link><published>2021-05-03T12:36:00+01:00</published><updated>2021-05-18T11:33:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-05-03:/unit-testing-with-pytest.html</id><summary type="html">&lt;p&gt;&lt;a href="https://salfaris.github.io/unit-testing-with-pytest.html"&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-unit-testing-with-pytest.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;It is a common scene that we want to test our functions after we've done writing them. In Python, we can usually do this by printing to the console. For example, suppose we are interested in testing the following function:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Add two positive integers x and …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-unit-testing-with-pytest.png"&gt;&lt;/p&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Add two positive integers x and …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://salfaris.github.io/unit-testing-with-pytest.html"&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-unit-testing-with-pytest.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;It is a common scene that we want to test our functions after we've done writing them. In Python, we can usually do this by printing to the console. For example, suppose we are interested in testing the following function:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Add two positive integers x and y. If the sum&lt;/span&gt;
@@ -24,8 +24,8 @@
 &amp;gt;&amp;gt; &lt;span class="m"&gt;190&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;and then we eyeball each of the output to see if it as expected. &lt;/p&gt;
-&lt;p&gt;This is of course a correct way to do it as we can evaluate whether the output on the console is as expected; but is it efficient? &lt;/p&gt;
+&lt;p&gt;and then we eyeball each of the output to see if it as expected.&lt;/p&gt;
+&lt;p&gt;This is of course a correct way to do it as we can evaluate whether the output on the console is as expected; but is it efficient?&lt;/p&gt;
 &lt;h2&gt;🧠 Why unit testing is a no-brainer&lt;/h2&gt;
 &lt;p&gt;In a typical life cycle of a function, there are three situations where we would want to test our functions:&lt;/p&gt;
 &lt;ol&gt;
@@ -53,7 +53,7 @@
 
 &lt;h3&gt;Step 1: Creating the test module&lt;/h3&gt;
 &lt;p&gt;Assume that the &lt;code&gt;add_positive()&lt;/code&gt; function lies in a module called &lt;code&gt;add_positive.py&lt;/code&gt;. We begin the unit testing process by creating a file called &lt;code&gt;test_add_positive.py&lt;/code&gt; in the same directory as &lt;code&gt;add_positive.py&lt;/code&gt;. Such a file will contain the unit tests of functions in &lt;code&gt;add_positive.py&lt;/code&gt;, and is called a &lt;strong&gt;test module&lt;/strong&gt;. The &lt;code&gt;test_&lt;/code&gt; in front of &lt;code&gt;test_add_positive.py&lt;/code&gt; is important as it lets &lt;code&gt;pytest&lt;/code&gt; knows that this is a file containing unit tests.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Remark: The test module for the module &lt;code&gt;add_positive.py&lt;/code&gt; does not have to be named &lt;code&gt;test_add_positive.py&lt;/code&gt;. You can name it &lt;code&gt;test_x.py&lt;/code&gt; or &lt;code&gt;test_covid.py&lt;/code&gt; or whatever as long as it is prepended with &lt;code&gt;test_&lt;/code&gt;. But it is good practice to follow the naming convention of &lt;code&gt;test_module_name&lt;/code&gt; to trace which module is this test module testing.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;_Remark: The test module for the module &lt;code&gt;add_positive.py&lt;/code&gt; does not have to be named &lt;code&gt;test_add_positive.py&lt;/code&gt;. You can name it &lt;code&gt;test_x.py&lt;/code&gt; or &lt;code&gt;test_covid.py&lt;/code&gt; or whatever as long as it is prepended with &lt;code&gt;test_&lt;/code&gt;. But it is good practice to follow the naming convention of &lt;code&gt;test*module_name&lt;/code&gt; to trace which module is this test module testing.*&lt;/p&gt;
 &lt;h3&gt;Step 2: Importing inside the test module&lt;/h3&gt;
 &lt;p&gt;The next step is to (mainly) import two things:&lt;/p&gt;
 &lt;ol&gt;
@@ -129,7 +129,7 @@
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Apparently, he didn't read the short description of the function; he thought that you're adding an unnecesary check. However, the function is supposed to work like that – only returning if the sum is positive (think of another module which relies on the correctness of this function). &lt;/p&gt;
+&lt;p&gt;Apparently, he didn't read the short description of the function; he thought that you're adding an unnecesary check. However, the function is supposed to work like that – only returning if the sum is positive (think of another module which relies on the correctness of this function).&lt;/p&gt;
 &lt;p&gt;If there were no unit tests written to check this modification, this seemingly trivial edit by Gilfoyle could have been merged into the main branch and could possibly crash the whole system! Thankfully, we implemented continuous integration and upon making a pull request, Gilfoyle was bombarded with the following test report:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Unit-test-fail" src="https://salfaris.github.io/images/unit-test-2.png"&gt;&lt;/p&gt;
 &lt;p&gt;Here is a breakdown of the report:&lt;/p&gt;
@@ -143,10 +143,10 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pytest -x test_add_positive.py
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Now you might be wondering, what to do if we have multiple functions to test in the same module given that this one single &lt;code&gt;add_positive&lt;/code&gt; function alone requires 4 unit tests. Things can start getting really messy right? To solve this issue, we can create a class containing these unit tests for each function we want to test. This will be a topic of a future post on testing, thanks for reading.&lt;/p&gt;</content><category term="python"></category><category term="python"></category><category term="testing"></category><category term="software-engineering"></category></entry><entry><title>Relational Databases in Python (part I)</title><link href="https://salfaris.github.io/relational-databases-in-python-part-I.html" rel="alternate"></link><published>2021-04-30T21:46:00+01:00</published><updated>2021-04-30T21:46:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-04-30:/relational-databases-in-python-part-I.html</id><summary type="html">&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-rel-database-1.png"&gt;&lt;/p&gt;
-&lt;p&gt;A relational database is like an Excel file. It is made up of &lt;strong&gt;tables&lt;/strong&gt; (note that this is plural) which holds data …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-rel-database-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;Now you might be wondering, what to do if we have multiple functions to test in the same module given that this one single &lt;code&gt;add_positive&lt;/code&gt; function alone requires 4 unit tests. Things can start getting really messy right? To solve this issue, we can create a class containing these unit tests for each function we want to test. This will be a topic of a future post on testing, thanks for reading.&lt;/p&gt;</content><category term="python"></category><category term="python"></category><category term="testing"></category><category term="software-engineering"></category></entry><entry><title>Relational Databases in Python (part I)</title><link href="https://salfaris.github.io/relational-databases-in-python-part-I.html" rel="alternate"></link><published>2021-04-30T21:46:00+01:00</published><updated>2021-04-30T21:46:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-04-30:/relational-databases-in-python-part-I.html</id><summary type="html">&lt;p&gt;&lt;a href="https://salfaris.github.io/relational-databases-in-python-part-I.html"&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-relational-databases-in-python-part-I.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
+&lt;p&gt;A relational database is like an Excel file. It is made up of &lt;strong&gt;tables&lt;/strong&gt; (note that this is plural) which holds data …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://salfaris.github.io/relational-databases-in-python-part-I.html"&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-relational-databases-in-python-part-I.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We usually hear the word &lt;em&gt;databases&lt;/em&gt; being thrown around especially when talking about data-related things. So what is it, and what is the more precise term &lt;em&gt;relational databases&lt;/em&gt;?&lt;/p&gt;
 &lt;p&gt;A relational database is like an Excel file. It is made up of &lt;strong&gt;tables&lt;/strong&gt; (note that this is plural) which holds data in the form of columns and rows. In the Excel analogy, tables are basically &lt;em&gt;sheets&lt;/em&gt;. Moreover, tables can be &lt;em&gt;related&lt;/em&gt; to each other but they need a column to act as a bridge linking them. Such a column is usually called a &lt;strong&gt;key&lt;/strong&gt; (either primary key or foreign key). This feature of being related explains the &lt;em&gt;relational&lt;/em&gt; term in relational databases. Relational databases is part of the &lt;strong&gt;relational model&lt;/strong&gt; which is a much more general framework of structuring and handling data management.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;From now on, we shall simply refer to relational databases as just databases.&lt;/em&gt;&lt;/p&gt;
 &lt;h2&gt;Introduction to SQLAlchemy&lt;/h2&gt;
@@ -167,14 +167,14 @@
 &lt;hr&gt;
 &lt;h2&gt;💬 Talking to a database, first steps&lt;/h2&gt;
 &lt;h3&gt;Step 1: Create an engine&lt;/h3&gt;
-&lt;p&gt;To write something on a paper, you would need a pencil. To turn the lights on, you would need to switch the toggle. &lt;em&gt;To interact with a database, you would need a so-called&lt;/em&gt; &lt;strong&gt;engine&lt;/strong&gt;. &lt;/p&gt;
+&lt;p&gt;To write something on a paper, you would need a pencil. To turn the lights on, you would need to switch the toggle. &lt;em&gt;To interact with a database, you would need a so-called&lt;/em&gt; &lt;strong&gt;engine&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;In theory, a database relies on this engine just like how a car would rely on its (car) engine. But I found that thinking of this engine as a mediator rather than a literal engine is much easier to digest.&lt;/p&gt;
 &lt;p&gt;To create an engine, you first have to import the &lt;code&gt;create_engine&lt;/code&gt; function from &lt;code&gt;sqlalchemy&lt;/code&gt;. Then, you need to pass in a &lt;strong&gt;connection string&lt;/strong&gt; which in its simplest form specifies two things: (i) the database you want to talk to, and (ii) the path to the database. For example, if I want to connect to &lt;code&gt;race_data.db&lt;/code&gt; which is a SQLite database in my current directory, the connection string would be &lt;code&gt;"sqlite:///race_data.db"&lt;/code&gt;. So together, they would look something like this:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;engine&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_engine&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sqlite:///race_data.db&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Key terms&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Key terms&lt;/strong&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;The &lt;strong&gt;engine&lt;/strong&gt; is a mediator for SQLAlchemy to interact with a database.&lt;/li&gt;
 &lt;li&gt;A &lt;strong&gt;connection string&lt;/strong&gt; specifies the details of the database we want to interact with.&lt;/li&gt;
@@ -191,7 +191,7 @@
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;table_names&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;to get a list of available tables to work with. For me, this returns &lt;/p&gt;
+&lt;p&gt;to get a list of available tables to work with. For me, this returns&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&amp;gt;&amp;gt; [&amp;#39;race_table&amp;#39;]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -231,16 +231,12 @@
 
 &lt;p&gt;If we already know which column of interest we want to look at for a particular row, we can access the attribute of the row just like how we would normally do to access the value of a key in a dictionary. For example, if I'm interested in knowing the &lt;code&gt;Accuracy&lt;/code&gt; of this &lt;code&gt;row&lt;/code&gt;, I would just execute either &lt;code&gt;row.Accuracy&lt;/code&gt; or &lt;code&gt;row["Accuracy"]&lt;/code&gt; which returns &lt;code&gt;1&lt;/code&gt; as expected.&lt;/p&gt;
 &lt;h3&gt;SQLAlchemy queries&lt;/h3&gt;
-&lt;p&gt;I know I promised that SQLAlchemy can help abstract away complex SQL queries and database differences, and using raw SQL queries like we did so far doesn't seem to agree with this promise. Enter SQLAlchemy's neat and Pythonic way of querying using &lt;strong&gt;table reflection&lt;/strong&gt;. &lt;/p&gt;
+&lt;p&gt;I know I promised that SQLAlchemy can help abstract away complex SQL queries and database differences, and using raw SQL queries like we did so far doesn't seem to agree with this promise. Enter SQLAlchemy's neat and Pythonic way of querying using &lt;strong&gt;table reflection&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;A table reflection or just &lt;strong&gt;reflection&lt;/strong&gt; is basically a process which reads the desired database, looks for your desired table and copies it into a &lt;code&gt;Table&lt;/code&gt; object (see below) as if you wrote a whole raw SQL query to create this table. Personally, the term reflection is quite misleading for me and I would more prefer the term &lt;em&gt;autocopy&lt;/em&gt; – because that is literally what the process does, and my philosophy is that explicit is better than nano-misleadings.&lt;/p&gt;
 &lt;p&gt;To make a reflection, you would need to import two classes from the &lt;code&gt;sqlalchemy&lt;/code&gt; library: &lt;code&gt;MetaData&lt;/code&gt; and &lt;code&gt;Table&lt;/code&gt;. It is worth understanding a basic idea of what these things do:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;strong&gt;MetaData&lt;/strong&gt; class can be thought of a folder or catalog that keeps information about database stuffs such as tables. In this way, we don't have to keep looking up table information because we have "organized" things nicely.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The &lt;strong&gt;Table&lt;/strong&gt; class does exactly what you expect it to do. It stores and handles the reflected (i.e. autocopied) version of your desired table so that SQLAlchemy can interact with it.&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;MetaData&lt;/strong&gt; class can be thought of a folder or catalog that keeps information about database stuffs such as tables. In this way, we don't have to keep looking up table information because we have "organized" things nicely.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;Table&lt;/strong&gt; class does exactly what you expect it to do. It stores and handles the reflected (i.e. autocopied) version of your desired table so that SQLAlchemy can interact with it.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Now we know the required ingredients, let's see how to actually do a table reflection. Recall that we have instantiated an &lt;code&gt;engine&lt;/code&gt; and &lt;code&gt;connection&lt;/code&gt; object from the previous section. We now instantiate a &lt;code&gt;MetaData&lt;/code&gt; object via &lt;code&gt;metadata = MetaData()&lt;/code&gt;; and then instantiate a &lt;code&gt;Table&lt;/code&gt; object passing the arguments:&lt;/p&gt;
 &lt;ol&gt;
@@ -271,25 +267,25 @@
 &lt;ul&gt;
 &lt;li&gt;[1]: &lt;em&gt;Introduction to Databases in Python&lt;/em&gt;, DataCamp&lt;/li&gt;
 &lt;li&gt;[2]: &lt;a href="https://stackoverflow.com/a/44098950/13698939" target="_blank"&gt;&lt;em&gt;Sam Hartman's Answer to Understanding MetaData() from SQLAlchemy in Python&lt;/em&gt;&lt;/a&gt;, Stack Overflow&lt;/li&gt;
-&lt;/ul&gt;</content><category term="data-science"></category><category term="python"></category><category term="sql"></category><category term="sqlalchemy"></category><category term="databases"></category><category term="data-handling"></category></entry><entry><title>Making pastel-colored boxes using tcolorbox in LaTeX</title><link href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html" rel="alternate"></link><published>2021-04-07T15:46:00+01:00</published><updated>2021-04-11T12:57:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-04-07:/pastel-colored-boxes-using-tcolorbox.html</id><summary type="html">&lt;p&gt;One of the many questions I get when people see my &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt;-ed math notes is &lt;em&gt;how do you create these nice pastel-colored boxes?&lt;/em&gt; &lt;/p&gt;
-&lt;p&gt;&lt;img alt="Example tcolorbox" src="https://salfaris.github.io/images/example-box.png"&gt;
-&lt;img alt="Example 2 tcolorbox" src="https://salfaris.github.io/images/example-box-2.png"&gt;
-&lt;center&gt;&lt;em&gt;Two examples of pastel-colored boxes from my math notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
-&lt;p&gt;I feel like this is a very relevant and important question, because I asked the exact same …&lt;/p&gt;</summary><content type="html">&lt;p&gt;One of the many questions I get when people see my &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt;-ed math notes is &lt;em&gt;how do you create these nice pastel-colored boxes?&lt;/em&gt; &lt;/p&gt;
-&lt;p&gt;&lt;img alt="Example tcolorbox" src="https://salfaris.github.io/images/example-box.png"&gt;
-&lt;img alt="Example 2 tcolorbox" src="https://salfaris.github.io/images/example-box-2.png"&gt;
-&lt;center&gt;&lt;em&gt;Two examples of pastel-colored boxes from my math notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/ul&gt;</content><category term="data-science"></category><category term="python"></category><category term="sql"></category><category term="sqlalchemy"></category><category term="databases"></category><category term="data-handling"></category></entry><entry><title>Making pastel-colored boxes using tcolorbox in LaTeX</title><link href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html" rel="alternate"></link><published>2021-04-07T15:46:00+01:00</published><updated>2021-04-11T12:57:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-04-07:/pastel-colored-boxes-using-tcolorbox.html</id><summary type="html">&lt;p&gt;One of the many questions I get when people see my &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt;-ed math notes is &lt;em&gt;how do you create these nice pastel-colored boxes?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html"&gt;&lt;img alt="Example tcolorbox" src="https://salfaris.github.io/images/example-box.png"&gt;&lt;/a&gt;
+&lt;a href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html"&gt;&lt;img alt="Example 2 tcolorbox" src="https://salfaris.github.io/images/example-box-2.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;&lt;em&gt;Two examples of pastel-colored boxes from my math notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;I feel like this is a very relevant and important question, because I asked the exact same …&lt;/p&gt;</summary><content type="html">&lt;p&gt;One of the many questions I get when people see my &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt;-ed math notes is &lt;em&gt;how do you create these nice pastel-colored boxes?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html"&gt;&lt;img alt="Example tcolorbox" src="https://salfaris.github.io/images/example-box.png"&gt;&lt;/a&gt;
+&lt;a href="https://salfaris.github.io/pastel-colored-boxes-using-tcolorbox.html"&gt;&lt;img alt="Example 2 tcolorbox" src="https://salfaris.github.io/images/example-box-2.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;&lt;em&gt;Two examples of pastel-colored boxes from my math notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;I feel like this is a very relevant and important question, because I asked the exact same thing when I was new to &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt;.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3&gt;Simple box using &lt;em&gt;fbox&lt;/em&gt; and &lt;em&gt;minipage&lt;/em&gt;&lt;/h3&gt;
-&lt;p&gt;My first exposure to &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt; box-like environments was my mentor &lt;a href="https://sites.google.com/site/tsoighaleo/"&gt;Ghaleo&lt;/a&gt;'s genius tutorial notes. He used them for two main reasons: &lt;/p&gt;
+&lt;p&gt;My first exposure to &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt; box-like environments was my mentor &lt;a href="https://sites.google.com/site/tsoighaleo/"&gt;Ghaleo&lt;/a&gt;'s genius tutorial notes. He used them for two main reasons:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;to highlight important theorems, lemmas, etc;&lt;/li&gt;
 &lt;li&gt;an empty space for students to follow along and fill in the blanks live in class.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;I tried to reproduce his box environment when I was writing my very first math notes on &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt; – my Linear Algebra &amp;amp; Geometry II notes. &lt;/p&gt;
-&lt;p&gt;&lt;img alt="Linear Algebra &amp;amp; Geometry II notes" src="https://salfaris.github.io/images/my-first-box.png"&gt;
-&lt;center&gt;&lt;em&gt;A snippet of my Linear Algebra &amp;amp; Geometry II notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;I tried to reproduce his box environment when I was writing my very first math notes on &lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt; – my Linear Algebra &amp;amp; Geometry II notes.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Linear Algebra &amp;amp; Geometry II notes" src="https://salfaris.github.io/images/my-first-box.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;&lt;em&gt;A snippet of my Linear Algebra &amp;amp; Geometry II notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;It was achievable using the &lt;code&gt;fbox&lt;/code&gt; environment alone, but for it to generalize well, I have to throw in a &lt;code&gt;minipage&lt;/code&gt; usage as well. The code implementation is quite simple and requires no package imports. Just use the following code directly in your document:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;% Simple box environment.&lt;/span&gt;
 &lt;span class="k"&gt;\fbox&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt; &lt;span class="c"&gt;%&lt;/span&gt;
@@ -315,18 +311,18 @@
 
 &lt;p&gt;would yield the box:&lt;/p&gt;
 &lt;p&gt;&lt;img alt="plainbox" src="https://salfaris.github.io/images/plain-box.png"&gt;&lt;/p&gt;
-&lt;p&gt;Now the problem with this simple fbox is that... it's just plain black and white. I want something more vibrant and colourful, so I decided to start learning the &lt;a href="https://ctan.org/pkg/tcolorbox"&gt;tcolorbox&lt;/a&gt; package. &lt;/p&gt;
+&lt;p&gt;Now the problem with this simple fbox is that... it's just plain black and white. I want something more vibrant and colourful, so I decided to start learning the &lt;a href="https://ctan.org/pkg/tcolorbox"&gt;tcolorbox&lt;/a&gt; package.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3&gt;Transition to &lt;em&gt;tcolorbox&lt;/em&gt;&lt;/h3&gt;
 &lt;p&gt;As usual, the best way to learn is to straight dive in and do. After (very) little reading on the package's documentation, I started to recreate pretty boxes that other people have made from scratch. These boxes are usually from notes I found online like:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Evan Chen's &lt;a href="https://web.evanchen.cc/napkin.html"&gt;The Napkin project&lt;/a&gt;;&lt;/li&gt;
 &lt;li&gt;Tony Zhang's notes snippets from his &lt;a href="https://www.quora.com/Does-anybody-use-LaTeX-to-take-notes-especially-during-class-If-not-what-do-you-use-especially-when-you-need-to-write-down-equations"&gt;Quora post&lt;/a&gt;;&lt;/li&gt;
-&lt;li&gt;or even the tcolorbox documentation itself. &lt;/li&gt;
+&lt;li&gt;or even the tcolorbox documentation itself.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;With my then minimal knowledge, I started writing my Real Analysis notes. I was quite happy with the end product but the overall design felt a bit odd (as you can see in the figure below). Nevertheless, my initial goal was to just make prettier boxes and I think I've achieved just that.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Real Analysis notes" src="https://salfaris.github.io/images/my-second-box.png"&gt;
-&lt;center&gt;&lt;em&gt;A snippet of my Real Analysis notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Real Analysis notes" src="https://salfaris.github.io/images/my-second-box.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;&lt;em&gt;A snippet of my Real Analysis notes&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;To reproduce the (proof) box above with a Cerulean colour, use the following code in your document's preamble:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;% In preamble.&lt;/span&gt;
 &lt;span class="k"&gt;\usepackage&lt;/span&gt;&lt;span class="na"&gt;[dvipsnames]&lt;/span&gt;&lt;span class="nb"&gt;{&lt;/span&gt;xcolor&lt;span class="nb"&gt;}&lt;/span&gt;
@@ -476,8 +472,8 @@ with initial condition, a suitably chosen &lt;span class="math"&gt;\(x_0 \in \ma
 &lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
     &lt;span class="n"&gt;xs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="c1"&gt;# Sequence of xn.&lt;/span&gt;
 
-    &lt;span class="c1"&gt;# Get latest x value in sequence and &lt;/span&gt;
-    &lt;span class="c1"&gt;# apply the Newton recurrence formula. &lt;/span&gt;
+    &lt;span class="c1"&gt;# Get latest x value in sequence and&lt;/span&gt;
+    &lt;span class="c1"&gt;# apply the Newton recurrence formula.&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;last&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;xs&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
         &lt;span class="n"&gt;res&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;df&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -550,7 +546,7 @@ with initial condition, a suitably chosen &lt;span class="math"&gt;\(x_0 \in \ma
 &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;xtan0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ytan0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Linearization 1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;xtan1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ytan1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Linearization 2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;xtan2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ytan2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Linearization 3&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;alpha&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;darkmagenta&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;res&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;darkmagenta&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
         &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Newton&amp;#39;s method&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;approximations&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
         &lt;span class="n"&gt;marker&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;o&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;linestyle&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;None&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;markersize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
