@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Salman Faris - python</title><link href="https://salfaris.me/" rel="alternate"></link><link href="https://salfaris.me/feeds/python.atom.xml" rel="self"></link><id>https://salfaris.me/</id><updated>2021-05-18T11:33:00+01:00</updated><entry><title>Unit Testing with pytest</title><link href="https://salfaris.me/unit-testing-with-pytest.html" rel="alternate"></link><published>2021-05-03T12:36:00+01:00</published><updated>2021-05-18T11:33:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.me,2021-05-03:/unit-testing-with-pytest.html</id><summary type="html">&lt;p&gt;&lt;a href="https://salfaris.github.io/unit-testing-with-pytest.html"&gt;&lt;img alt="Post header" src="https://salfaris.me/images/header-unit-testing-with-pytest.png"&gt;&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Salman Faris - python</title><link href="https://salfaris.github.io/" rel="alternate"></link><link href="https://salfaris.github.io/feeds/python.atom.xml" rel="self"></link><id>https://salfaris.github.io/</id><updated>2021-05-18T11:33:00+01:00</updated><entry><title>Unit Testing with pytest</title><link href="https://salfaris.github.io/unit-testing-with-pytest.html" rel="alternate"></link><published>2021-05-03T12:36:00+01:00</published><updated>2021-05-18T11:33:00+01:00</updated><author><name>Salman Faris</name></author><id>tag:salfaris.github.io,2021-05-03:/unit-testing-with-pytest.html</id><summary type="html">&lt;p&gt;&lt;a href="https://salfaris.github.io/unit-testing-with-pytest.html"&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-unit-testing-with-pytest.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;It is a common scene that we want to test our functions after we've done writing them. In Python, we can usually do this by printing to the console. For example, suppose we are interested in testing the following function:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Add two positive integers x and …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://salfaris.github.io/unit-testing-with-pytest.html"&gt;&lt;img alt="Post header" src="https://salfaris.me/images/header-unit-testing-with-pytest.png"&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Add two positive integers x and …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://salfaris.github.io/unit-testing-with-pytest.html"&gt;&lt;img alt="Post header" src="https://salfaris.github.io/images/header-unit-testing-with-pytest.png"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;It is a common scene that we want to test our functions after we've done writing them. In Python, we can usually do this by printing to the console. For example, suppose we are interested in testing the following function:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add_positive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Add two positive integers x and y. If the sum&lt;/span&gt;
@@ -114,7 +114,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;If the implementation of &lt;code&gt;add_positive()&lt;/code&gt; is correct (with respect to our tests), you should see a test report like this.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Unit-test-pass" src="https://salfaris.me/images/unit-test-1.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Unit-test-pass" src="https://salfaris.github.io/images/unit-test-1.png"&gt;&lt;/p&gt;
 &lt;p&gt;Just ignore everything above "collected 4 items" as it is not too important. The breakdown of this test report is the following:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;"Collected 4 items" means that we will be executing 4 unit tests.&lt;/li&gt;
@@ -131,7 +131,7 @@
 
 &lt;p&gt;Apparently, he didn't read the short description of the function; he thought that you're adding an unnecesary check. However, the function is supposed to work like that – only returning if the sum is positive (think of another module which relies on the correctness of this function).&lt;/p&gt;
 &lt;p&gt;If there were no unit tests written to check this modification, this seemingly trivial edit by Gilfoyle could have been merged into the main branch and could possibly crash the whole system! Thankfully, we implemented continuous integration and upon making a pull request, Gilfoyle was bombarded with the following test report:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Unit-test-fail" src="https://salfaris.me/images/unit-test-2.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Unit-test-fail" src="https://salfaris.github.io/images/unit-test-2.png"&gt;&lt;/p&gt;
 &lt;p&gt;Here is a breakdown of the report:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;"Collected 4 items" means the same as before.&lt;/li&gt;
