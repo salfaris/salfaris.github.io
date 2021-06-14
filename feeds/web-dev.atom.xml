@@ -159,4 +159,4 @@
 &lt;blockquote&gt;
 &lt;p&gt;Note: Stating the obvious but since the layout setting is extracted from the Plotly documentation, it is the work of the people behind Plotly. Thank you for the awesome theme!&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;The final step is to pass this layout into the layout parameter of the Plotly plot, and you get your favorite default Plotly.py theme again but now directly in Plotly.js!&lt;/p&gt;</content><category term="web-dev"></category><category term="javascript"></category><category term="plotly"></category></entry></feed>
+&lt;p&gt;The final step is to pass this layout into the layout parameter of the Plotly plot, and you get your favorite default Plotly.py theme again but now directly in Plotly.js!&lt;/p&gt;</content><category term="web-dev"></category><category term="javascript"></category><category term="plotly"></category><category term="python"></category></entry></feed>
