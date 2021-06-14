@@ -57,7 +57,7 @@
   -->
 <div class="article_text"><p>If you're like me who is used to using Plotly.py (i.e. Plotly Python) and then suddenly decided to use Plotly.js directly, you might immediately realize that there are some significant differences in terms of the plot design.</p>
 <p><img alt="Plotly Python Plot" src="https://salfaris.me/blog/images/plotly_py_plot.png"/></p>
-<p>For one, your default plot in Plotly.js has a white background and not the steel blue colour as you would expected from a default Plotly.py plot. The reason is that the plots produced in the python version of Plotly comes prepackaged with nice out-of-the-box themes. For example, the plot image above is a Plotly.py scatter plot with the default <em>plotly</em> template. So how do we reproduce these themes inside of Plotly.js?</p>
+<p>For one, your default plot in Plotly.js has a white background and not the steel blue colour as you would expect from a default Plotly.py plot. The reason is that the plots produced in the python version of Plotly come prepackaged with nice out-of-the-box themes. For example, the plot image above is a Plotly.py scatter plot with the default <em>plotly</em> template. So how do we reproduce these themes inside of Plotly.js?</p>
 <p>Diving deeper into the Plotly documentation, I discovered that you can actually get the "theme settings" for the Plotly.py templates with just 4 lines of Python code.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">plotly.io</span> <span class="k">as</span> <span class="nn">pio</span>
 <span class="n">template</span> <span class="o">=</span> <span class="s2">"plotly"</span>
@@ -209,7 +209,7 @@
 </noscript>
 </div>
 <blockquote>
-<p>Note: Stating the obvious but since the layout setting is extracted from the Plotly documentation, it is the work of the people behind Plotly. Thank you for the awesome theme!</p>
+<p>Note: Stating the obvious but since the layout setting is extracted from the Plotly documentation, it is the hard work of the people behind Plotly. Thank you for the awesome theme!</p>
 </blockquote>
 <p>The final step is to pass this layout into the layout parameter of the Plotly plot, and you get your favorite default Plotly.py theme again but now directly in Plotly.js!</p></div>
 <div class="article_meta">
