@@ -86,7 +86,7 @@
 <blockquote>
 <p>Note that the mean and standard deviation value of 0.5 should be calculated from the <strong>training set</strong> in advance. Here, we just assume that mean = std = 0.5 for simplicity.</p>
 </blockquote>
-<h3>💾 From dataset to Dataloader</h3>
+<h3>💾 From dataset to DataLoader</h3>
 <p>The next step is to finally fetch the dataset, passing our transform above as an argument. The FashionMNIST dataset can be accessed via <code>datasets.FashionMNIST</code>, no surprise there. We can then fetch the 60,000 training examples using the following code:</p>
 <div class="highlight"><pre><span></span><code><span class="n">trainset</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">FashionMNIST</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">'./data'</span><span class="p">,</span>
                                  <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -150,7 +150,7 @@
 </code></pre></div>
 <p>Here, we get a t-shirt which is expected since we are dealing with a fashion dataset after all. If you run the exact code, you might get a different output since the dataset is shuffled and I did not specify a seed.</p>
 <p><img alt="Plot of image from Fashion MNIST" src="https://salfaris.me/blog/images/2021-09-07-tshirt.png"/></p>
-<p>For the jupyter notebook version of this blog post: <a href="https://github.com/salfaris/notebooks/blob/main/2021_09_07_preparing_image_dataset_in_pytorch.ipynb">notebook version</a>.</p></div>
+<p>For the jupyter notebook version of this blog post: <a href="https://github.com/salfaris/notebooks/blob/main/2021_09_07_preparing_image_dataset_in_pytorch.ipynb" target="_blank">notebook version</a>.</p></div>
 <div class="article_meta">
 <p>
       Category:

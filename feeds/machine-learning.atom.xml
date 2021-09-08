@@ -34,7 +34,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;Note that the mean and standard deviation value of 0.5 should be calculated from the &lt;strong&gt;training set&lt;/strong&gt; in advance. Here, we just assume that mean = std = 0.5 for simplicity.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3&gt;💾 From dataset to Dataloader&lt;/h3&gt;
+&lt;h3&gt;💾 From dataset to DataLoader&lt;/h3&gt;
 &lt;p&gt;The next step is to finally fetch the dataset, passing our transform above as an argument. The FashionMNIST dataset can be accessed via &lt;code&gt;datasets.FashionMNIST&lt;/code&gt;, no surprise there. We can then fetch the 60,000 training examples using the following code:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;trainset&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;datasets&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FashionMNIST&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;root&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./data&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                                  &lt;span class="n"&gt;download&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
@@ -105,4 +105,4 @@
 
 &lt;p&gt;Here, we get a t-shirt which is expected since we are dealing with a fashion dataset after all. If you run the exact code, you might get a different output since the dataset is shuffled and I did not specify a seed.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Plot of image from Fashion MNIST" src="https://salfaris.me/blog/images/2021-09-07-tshirt.png"&gt;&lt;/p&gt;
-&lt;p&gt;For the jupyter notebook version of this blog post: &lt;a href="https://github.com/salfaris/notebooks/blob/main/2021_09_07_preparing_image_dataset_in_pytorch.ipynb"&gt;notebook version&lt;/a&gt;.&lt;/p&gt;</content><category term="machine-learning"></category><category term="pytorch"></category><category term="computer-vision"></category><category term="data-preprocessing"></category></entry></feed>
+&lt;p&gt;For the jupyter notebook version of this blog post: &lt;a href="https://github.com/salfaris/notebooks/blob/main/2021_09_07_preparing_image_dataset_in_pytorch.ipynb" target="_blank"&gt;notebook version&lt;/a&gt;.&lt;/p&gt;</content><category term="machine-learning"></category><category term="pytorch"></category><category term="computer-vision"></category><category term="data-preprocessing"></category></entry></feed>
