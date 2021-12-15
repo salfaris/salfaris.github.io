@@ -49,22 +49,53 @@
 <div class="article_text"><h3>🔍 data science projects</h3>
 <h4>⁍ <a href="https://app.datacamp.com/workspace/w/38945e69-453d-48f2-b384-909c3135d659" target="_blank"><strong>Reducing High Fatality Accidents in the UK</strong></a></h4>
 <div style="text-indent: 15px">
-<p><strong>Problem statement</strong>: What characterises high fatality accidents? Can we find areas of focus to reduce such accidents?</p>
+<p><em>Problem statement: What characterises high fatal accidents? Can we find areas of focus to reduce such accidents?</em></p>
 </div>
-<p>The goal of this project is to answer these questions. In this project, I identified 9 improvement opportunities to reduce high fatal accidents and raised key questions to guide the exploration of such opportunities. The project involves a lot of fun visualisation techniques such as plotting a dendrogram based on Ward's hierarchical clustering method and plotting a choropleth map of the UK which involves getting your hands dirty with GeoJSON files. Here, I also implemented SMOTE (Synthetic Minority Oversampling Technique) to mitigate dataset imbalance as there are only 200 serious accidents (target class) in a pool of 91000+ accidents!</p>
+<ul>
+<li>
+<p>In this project, I have identified 9 improvement opportunities to reduce high fatal accidents and raised key questions to guide the exploration of such opportunities.</p>
+</li>
+<li>
+<p>The project involves a lot of fun viz techniques such as plotting a dendrogram based on Ward's clustering method to visualise correlated features, and plotting a choropleth map of the UK which get your hands dirty with GeoJSON files.</p>
+</li>
+<li>
+<p>To identify 11 key features of high fatal accidents, I applied feature selection using Chi-squared test, mutual information gain, and tree-based MDI. I then take a deeper look at these selected features to see which criteria that separates high fatal accidents and verify these criteria using a 2 proportion Z-test.</p>
+</li>
+<li>
+<p>Since the dataset was extremely imbalanced with 200 high fatal accidents in a pool of 91000+ accidents (roughly 0.002 ratio), I implemented SMOTE to oversample the minority label since uniform downsampling is not suitable since location is a key feature.</p>
+</li>
+</ul>
 <p><span style="font-size:0.8em"><em>This project is hosted on DataCamp Workspace.</em></span></p>
 <hr/>
 <h4>⁍ <a href="https://app.datacamp.com/workspace/w/697541bd-83ce-4ee7-809c-1bc22b3f1613" target="_blank">Regression Analysis on TfL Santander Cycles</a></h4>
-<p>The idea of the project is <strong>to understand trends in the usage of TfL Santander Cycles (aka Boris bikes)</strong>. For example, what kind of weather are Boris bikes mostly hired in? Once we have a good idea of the distribution in cycle hires, the project aims to model the dataset to predict future cycle hires.</p>
+<div style="text-indent: 15px">
+<p><em>Problem statement: To what extent can we use (only) linear models to predict cycle hires with lowest RMSE?</em></p>
+</div>
+<p>The idea of the project is to understand trends in the usage of TfL Santander Cycles (aka Boris bikes) and then predict cycle hires using linear models which are scalable and lightweight. In this project, I have</p>
+<ul>
+<li>
+<p>Investigated suitability of fitting a linear model by checking existence of trends in the residuals vs fitted plot.</p>
+</li>
+<li>
+<p>Verified normality of cycle hires after Yeo-Johnson normalisation using a density, histogram and QQ plot.</p>
+</li>
+<li>
+<p>Applied feature engineering methods such as forward search model selection, one-hot encoding, moving average, and Yeo-Johnson normalisation.</p>
+</li>
+<li>
+<p>Implemented a linear model with 99% lower RMSE (935.5 to 3.5) and 155% higher R 2 score (0.27 to 0.69) relative to the baseline naive linear model.</p>
+</li>
+</ul>
 <p><span style="font-size:0.8em"><em>This project was hosted on Deepnote and then hosted on DataCamp Workspace.</em></span></p>
 <hr/>
 <h4>⁍ <a href="https://app.datacamp.com/workspace/w/fed0a2a6-1763-4433-930f-cdfc94072aec" target="_blank">Is handwashing really effective?</a></h4>
 <p>The Covid-19 pandemic made me want to look back at the history of handwashing when it was originally introduced. In this data exploration, we are able to answer questions like: (i) "How significant was the change between pre-handwashing era and post-handwashing era?" and (ii) "What is the 90% confidence interval of the mean of difference between these eras?".</p>
 <p><span style="font-size:0.8em"><em>This project was hosted on Deepnote and then hosted on DataCamp Workspace.</em></span></p>
 <p><br/></p>
-<h3>💻 web apps</h3>
+<h3>💻 web app projects</h3>
 <h4>⁍ <a href="https://github.com/salfaris/tradelogger" target="_blank">TradeLogger</a></h4>
 <p>This project is written in Python using the Flask framework. One of the <strong>problems with stock traders is that they do not keep the big picture of where they are in their trading journey</strong>. For example. if they are losing, do they realise that they are losing 5 trades consecutively? This tool is designed for traders to trade better. A machine learning pipeline is also added to learn the time series pattern of whether the trader has a good chance on the next trade given the outcomes of the previous trades.</p>
+<hr/>
 <h4>⁍ <a href="https://github.com/salfaris/allpow" target="_blank">allpow</a></h4>
 <p>This project is written in Python using Streamlit. It is a simple calculator to estimate one's monthly budget (in London by default). I originally made it to help my fellow Malaysian students who are coming to London for the first time organise their finances better. The first problem of coming to a new country far away from home (and also most probably first time renting a property in their life) is to estimate the prices of groceries, transport, rent and the like. This calculator solves that problem.</p>
 <p>Link to the deployed calculator: click <a href="https://salfaris.me/allpow" target="_blank">here</a></p>
