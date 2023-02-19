@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Salman Faris">
+<meta name="dcterms.date" content="2021-09-07">
+
+<title>salman faris - Preparing Image Dataset for Neural Networks in PyTorch</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="salman faris - Preparing Image Dataset for Neural Networks in PyTorch">
+<meta name="twitter:description" content="Preparing and handling data is a core step of any machine learning pipeline. Today, we will look at handling data when the data is an image (or image-like) in PyTorch.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title"><strong>salman faris</strong></span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">about</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html">
+ <span class="menu-text">projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources.html">
+ <span class="menu-text">resources</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/salfaris/"><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/salfaris"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Preparing Image Dataset for Neural Networks in PyTorch</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">machine learning</div>
+                <div class="quarto-category">computer vision</div>
+                <div class="quarto-category">pytorch</div>
+                <div class="quarto-category">data preprocessing</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Salman Faris </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 7, 2021</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">September 8, 2021</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#pytorch-and-torchvision" id="toc-pytorch-and-torchvision" class="nav-link active" data-scroll-target="#pytorch-and-torchvision">PyTorch and Torchvision</a></li>
+  <li><a href="#fashion-mnist-dataset-and-composing-transformations" id="toc-fashion-mnist-dataset-and-composing-transformations" class="nav-link" data-scroll-target="#fashion-mnist-dataset-and-composing-transformations">👜 Fashion MNIST dataset and composing transformations</a></li>
+  <li><a href="#from-dataset-to-dataloader" id="toc-from-dataset-to-dataloader" class="nav-link" data-scroll-target="#from-dataset-to-dataloader">💾 From dataset to DataLoader</a></li>
+  <li><a href="#inspecting-the-dataset-in-dataloader-form" id="toc-inspecting-the-dataset-in-dataloader-form" class="nav-link" data-scroll-target="#inspecting-the-dataset-in-dataloader-form">🕵️ Inspecting the dataset in DataLoader form</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Preparing and handling data is a core step of any machine learning pipeline. Today, we will look at handling data when the data is an image (or image-like) in PyTorch.</p>
+<section id="pytorch-and-torchvision" class="level3">
+<h3 class="anchored" data-anchor-id="pytorch-and-torchvision">PyTorch and Torchvision</h3>
+<p>PyTorch provides us with the amazing <code>torchvision</code> package for dealing with common image transformations such as normalizing, scaling, random flipping and converting arrays to PyTorch tensors. It also provides us with common computer vision datasets such as MNIST, Fashion MNIST and CIFAR-10. In this post, we will focus on preparing the Fashion MNIST dataset.</p>
+<p>To begin, we start by importing <code>torch</code> and <code>torchvision</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchvision <span class="im">import</span> datasets, transforms</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>Note that we will refer to the submodule <code>datasets</code> and <code>transforms</code> directly from now on (i.e.&nbsp;we will not emphasize that it’s part of <code>torchvision</code>).</p>
+</blockquote>
+</section>
+<section id="fashion-mnist-dataset-and-composing-transformations" class="level3">
+<h3 class="anchored" data-anchor-id="fashion-mnist-dataset-and-composing-transformations">👜 Fashion MNIST dataset and composing transformations</h3>
+<p>The <a href="https://github.com/zalandoresearch/fashion-mnist">Fashion MNIST dataset by Zalando Research</a> is a famous benchmark dataset in computer vision, perhaps second only to MNIST. It is a dataset containing 60,000 training examples and 10,000 test examples where each example is a 28 x 28 grayscale image. Since the images are in grayscale, they only have a single channel. If the image is in RGB format instead (e.g.&nbsp;if we are dealing with <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a>), then it has 3 channels one for each red, green and blue.</p>
+<p>As mentioned before, the Fashion MNIST dataset is already part of PyTorch. However, this does not mean that the dataset is already in perfect shape to pass into a PyTorch neural net. We would need to apply some (image) transformations to the dataset upon fetching. For brevity, we will apply only two simple transformations:</p>
+<ol type="1">
+<li>Converting the images to a PyTorch <code>tensor</code> – by using <code>transforms.ToTensor()</code>.</li>
+<li>Normalize the channel of the resulting tensor – by using <code>transforms.Normalize()</code>.</li>
+</ol>
+<p><strong><em>Why do we do these transformations?</em></strong></p>
+<ol type="1">
+<li><em>Since we will be working with neural nets in PyTorch, it is only natural that we want the image to be a PyTorch tensor. This enables the PyTorch API to interact properly with our dataset.</em></li>
+<li><em>Normalization is important to ensure that our neural nets learn better. For an idea of how normalization works, check out this <a href="https://discuss.pytorch.org/t/understanding-transform-normalize/21730/2">discussion</a>.</em></li>
+</ol>
+<p>We can then compose these transformations using <code>transforms.Compose()</code> as below.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>transform <span class="op">=</span> transforms.Compose([</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    transforms.ToTensor(),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    transforms.Normalize(mean<span class="op">=</span>(<span class="fl">0.5</span>), std<span class="op">=</span>(<span class="fl">0.5</span>)),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>Note that the mean and standard deviation value of 0.5 should be calculated from the <strong>training set</strong> in advance. Here, we just assume that mean = std = 0.5 for simplicity.</p>
+</blockquote>
+</section>
+<section id="from-dataset-to-dataloader" class="level3">
+<h3 class="anchored" data-anchor-id="from-dataset-to-dataloader">💾 From dataset to DataLoader</h3>
+<p>The next step is to finally fetch the dataset, passing our transform above as an argument. The FashionMNIST dataset can be accessed via <code>datasets.FashionMNIST</code>, no surprise there. We can then fetch the 60,000 training examples using the following code:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>trainset <span class="op">=</span> datasets.FashionMNIST(root<span class="op">=</span><span class="st">'./data'</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                                 download<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                                 train<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                                 transform<span class="op">=</span>transform)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let us break down what each argument means.</p>
+<ol type="1">
+<li><code>root</code> specifies the location of the dataset. Here, we specify that it should be in the directory <code>'./data'</code>.</li>
+<li><code>download</code> is a boolean flag which determines if we want to download the dataset if the data is not already in <code>root</code>.</li>
+<li><code>train</code> is another boolean flag which determines if we want the training set. Getting the test set is as simple as passing <code>train=False</code>.</li>
+<li><code>transform</code> is the transformations we would like to apply to the dataset upon fetching.</li>
+</ol>
+<p>Once we have our transformed train set, we can now start training neural nets on this data using PyTorch. However, let us take a second to think about the following:</p>
+<ul>
+<li>What if we want to work with <strong><em>minibatches of this dataset</em></strong> instead of single examples? This is definitely a need when the dataset is too large like ours to be trained entirely.</li>
+<li>We would also want to <strong><em>reshuffle this dataset</em></strong> on each epoch so that our neural net generalizes better.</li>
+<li>If the data is big, we might even want to <strong><em>load the data in parallel</em></strong> using <code>multiprocessing</code> workers to retrieve our data faster.</li>
+</ul>
+<p>This is where PyTorch’s so-called <code>DataLoader</code> comes in. It is an iterable that provides all the above features out of the box on top of providing a smooth API for working with data!</p>
+<p>To use the <code>DataLoader</code> object on our train set, we simply access <code>torch.utils.data.DataLoader</code> and feed <code>trainset</code> into it.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>trainloader <span class="op">=</span> torch.utils.data.DataLoader(trainset, batch_size<span class="op">=</span><span class="dv">64</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                                          shuffle<span class="op">=</span><span class="va">True</span>, num_workers<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, we have decided to use a <code>batch_size</code> of 64 images, which are sampled randomly on each epoch due to <code>shuffle=True</code>. We also put <code>num_workers=0</code> meaning we are not loading the data in parallel.</p>
+<p>We can fetch the Fashion MNIST test dataset in a similar fashion. The only difference is that we now have <code>train=False</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>testset <span class="op">=</span> datasets.FashionMNIST(root<span class="op">=</span><span class="st">'./data'</span>,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                                download<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                train<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                                transform<span class="op">=</span>transform)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>testloader <span class="op">=</span> torch.utils.data.DataLoader(testset, batch_size<span class="op">=</span><span class="dv">64</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                         shuffle<span class="op">=</span><span class="va">True</span>, num_workers<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="inspecting-the-dataset-in-dataloader-form" class="level3">
+<h3 class="anchored" data-anchor-id="inspecting-the-dataset-in-dataloader-form">🕵️ Inspecting the dataset in DataLoader form</h3>
+<p>Once we have the dataset in DataLoader form, we can start inspecting our dataset. For example, we can get the shapes of our trainset.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Train shape:"</span>, trainloader.dataset.data.shape)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test shape:"</span>, testloader.dataset.data.shape)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt;&gt;&gt; Train shape: torch.Size([60000, 28, 28])</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt;&gt;&gt; Test shape: torch.Size([10000, 28, 28])</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can also get the minibatch size as specified when initializing the DataLoader.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Train batch size:"</span>, trainloader.batch_size)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test batch size:"</span>, testloader.batch_size)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt;&gt;&gt; Train batch size: 64</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt;&gt;&gt; Test batch size: 64</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For a more advanced inspection, we can even look at the <strong>sampler</strong> and the <strong>collate function</strong> used in the DataLoader. The sampler determines how the data is shuffled and the collate function specifies how the data is batched.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sampler:"</span>, trainloader.sampler)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Collate function:"</span>, trainloader.collate_fn)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt;&gt;&gt; Sampler: &lt;torch.utils.data.sampler.RandomSampler object at 0x7fcc02b23b90&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt;&gt;&gt; Collate function: &lt;function default_collate at 0x7fcc05c9a710&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Since we did not pass anything during initialization, we get the default <code>RandomSampler</code> object for the sampler and the default <code>default_collate</code> collate function as expected.</p>
+<p>As we are dealing with an image dataset, it is a shame if we are not plotting anything during inspection. Let’s plot the first image from the first batch in <code>trainloader</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>images, labels <span class="op">=</span> <span class="bu">next</span>(<span class="bu">iter</span>(trainloader))  <span class="co"># Gets a batch of 64 images in the training set</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>first_image <span class="op">=</span> images[<span class="dv">0</span>]  <span class="co"># Get the first image out of the 64 images.</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.imshow(first_image.numpy().squeeze(), cmap<span class="op">=</span><span class="st">'Greys_r'</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here, we get a t-shirt which is expected since we are dealing with a fashion dataset after all. If you run the exact code, you might get a different output since the dataset is shuffled and I did not specify a seed.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="2021-09-07-tshirt.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Plot of image from Fashion MNIST</figcaption><p></p>
+</figure>
+</div>
+<p>For the simplified version of this post in jupyter notebook format: <a href="https://github.com/salfaris/notebooks/blob/main/2021_09_07_preparing_image_dataset_in_pytorch.ipynb">notebook version</a>{:target=“_blank”}.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
