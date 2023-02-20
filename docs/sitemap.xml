@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://salfaris.github.io/index.html</loc>
+    <lastmod>2023-02-20T19:38:54.539Z</lastmod>
+  </url>
+  <url>
     <loc>https://salfaris.github.io/posts/2021-05-03-unit-testing-with-pytest/index.html</loc>
-    <lastmod>2023-02-19T21:43:57.738Z</lastmod>
+    <lastmod>2023-02-20T19:28:53.301Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/posts/2021-04-05-newton-method/index.html</loc>
-    <lastmod>2023-02-19T21:43:58.610Z</lastmod>
+    <lastmod>2023-02-20T19:28:54.136Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/posts/2021-08-18-coding-kata/index.html</loc>
-    <lastmod>2023-02-19T21:43:59.225Z</lastmod>
+    <lastmod>2023-02-20T19:38:56.912Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html</loc>
-    <lastmod>2023-02-19T21:43:59.864Z</lastmod>
+    <lastmod>2023-02-20T19:28:55.500Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/posts/2021-04-05-first-post/index.html</loc>
-    <lastmod>2023-02-19T21:44:00.237Z</lastmod>
+    <lastmod>2023-02-20T19:28:55.955Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/posts/2021-04-07-tcolorbox/index.html</loc>
-    <lastmod>2023-02-19T21:44:00.942Z</lastmod>
+    <lastmod>2023-02-20T19:31:08.251Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html</loc>
-    <lastmod>2023-02-19T21:44:01.671Z</lastmod>
+    <lastmod>2023-02-20T19:28:57.485Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/posts/2021-04-30-relational-databases-in-python-part-I/index.html</loc>
-    <lastmod>2023-02-19T21:44:02.388Z</lastmod>
+    <lastmod>2023-02-20T19:28:58.800Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/projects.html</loc>
-    <lastmod>2023-02-19T21:44:03.129Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/index.html</loc>
-    <lastmod>2023-02-19T21:44:03.577Z</lastmod>
+    <lastmod>2023-02-20T19:28:59.694Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/about.html</loc>
-    <lastmod>2023-02-19T21:44:03.929Z</lastmod>
+    <lastmod>2023-02-20T19:29:00.133Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/resources.html</loc>
-    <lastmod>2023-02-19T21:44:04.263Z</lastmod>
+    <lastmod>2023-02-20T19:29:00.616Z</lastmod>
   </url>
 </urlset>
