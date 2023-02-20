@@ -8,8 +8,6 @@ jupyter: python3
 image: ""
 ---
 
-This is a coding kata!!
-
 A coding kata is _an exercise to sharpen your programming skills and muscle memory via repetition_. I learnt this concept when I was reading **The Clean Coder** (highly recommended!) and have since adopted it as part of my programming routine. It helps my hands "know" what to type when I need to type.
 
 I have also adapted the concept of kata as a means to learn/revise programming languages effectively. Instead of writing a random script doing god knows what after learning the syntax, I would implement the simple linear regression algorithm from scratch in this language. Why this is a good kata you ask? Here is why among others:
