@@ -5,3 +5,4 @@ This is the source code for my personal website, [salfaris.github.io](https://sa
 - source file is in the `src` folder
 - published files are in the `docs` folder
 
+Powered by Quarto.
