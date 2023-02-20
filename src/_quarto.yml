@@ -1,0 +1,28 @@
+project:
+  type: website
+  output-dir: "../docs2"
+
+website:
+  title: "**salman faris**"
+  favicon: favicon.ico
+  twitter-card: true
+  site-url: https://salfaris.github.io
+  navbar:
+    right:
+      - about.qmd
+      - projects.qmd
+      - resources.qmd
+      - icon: linkedin
+        href: https://www.linkedin.com/in/salfaris/
+      - icon: github
+        href: https://github.com/salfaris
+  # sidebar:
+  #   contents: auto
+format:
+  html:
+    theme: cosmo
+    fontsize: 1.1em
+    css: styles.css
+
+
+

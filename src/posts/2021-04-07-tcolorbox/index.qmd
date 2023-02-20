@@ -1,0 +1,135 @@
+---
+title: "Making pastel-colored boxes using tcolorbox in LaTeX"
+categories: [latex, writing]
+author: "Salman Faris"
+date: "4/7/2021"
+date-modified: "4/11/2021"
+image: "images/example-box.png"
+jupyter: python3
+format:
+  html:
+    toc: true
+    html-math-method: katex
+---
+
+One of the many questions I get when people see my $\LaTeX$-ed math notes is _how do you create these nice pastel-colored boxes?_
+
+![Example tcolorbox](images/example-box.png)
+![Example 2 tcolorbox](images/example-box-2.png)
+
+<center>*Two examples of pastel-colored boxes from my math notes*</center>
+
+I feel like this is a very relevant and important question, because I asked the exact same thing when I was new to $\LaTeX$.
+
+---
+
+### Simple box using _fbox_ and _minipage_
+
+My first exposure to $\LaTeX$ box-like environments was my mentor [Ghaleo](https://sites.google.com/site/tsoighaleo/)'s genius tutorial notes. He used them for two main reasons:
+
+- to highlight important theorems, lemmas, etc;
+- an empty space for students to follow along and fill in the blanks live in class.
+
+I tried to reproduce his box environment when I was writing my very first math notes on $\LaTeX$ – my Linear Algebra & Geometry II notes.
+
+![Linear Algebra & Geometry II notes](images/my-first-box.png)
+
+<center>*A snippet of my Linear Algebra & Geometry II notes*</center>
+
+It was achievable using the `fbox` environment alone, but for it to generalize well, I have to throw in a `minipage` usage as well. The code implementation is quite simple and requires no package imports. Just use the following code directly in your document:
+
+```latex
+% Simple box environment.
+\fbox{ %
+\begin{minipage}[t]{0.9\textwidth}
+    % Your text here.
+\end{minipage}
+}
+```
+
+To make the box look cleaner, use the `center` environment as well. Here is a concrete example of using this box. The code:
+
+```latex
+\begin{document}
+
+\begin{center}
+\fbox{ %
+\begin{minipage}[t]{0.9\textwidth}
+    This is a plain small box.
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+```
+
+would yield the box:
+
+![plainbox](images/plain-box.png)
+
+Now the problem with this simple fbox is that... it's just plain black and white. I want something more vibrant and colourful, so I decided to start learning the [tcolorbox](https://ctan.org/pkg/tcolorbox) package.
+
+---
+
+### Transition to _tcolorbox_
+
+As usual, the best way to learn is to straight dive in and do. After (very) little reading on the package's documentation, I started to recreate pretty boxes that other people have made from scratch. These boxes are usually from notes I found online like:
+
+- Evan Chen's [The Napkin project](https://web.evanchen.cc/napkin.html);
+- Tony Zhang's notes snippets from his [Quora post](https://www.quora.com/Does-anybody-use-LaTeX-to-take-notes-especially-during-class-If-not-what-do-you-use-especially-when-you-need-to-write-down-equations);
+- or even the tcolorbox documentation itself.
+
+With my then minimal knowledge, I started writing my Real Analysis notes. I was quite happy with the end product but the overall design felt a bit odd (as you can see in the figure below). Nevertheless, my initial goal was to just make prettier boxes and I think I've achieved just that.
+
+![Real Analysis notes](images/my-second-box.png)
+
+<center>*A snippet of my Real Analysis notes*</center>
+
+To reproduce the (proof) box above with a Cerulean colour, use the following code in your document's preamble:
+
+```latex
+% In preamble.
+\usepackage[dvipsnames]{xcolor}
+\usepackage[many]{tcolorbox}
+
+\newtcolorbox{myAwesomeBox}{
+    enhanced,
+    sharp corners,
+    breakable,  % Allows page break.
+    borderline west={2pt}{0pt}{Cerulean},
+    colback=Cerulean!10,  % Background color.
+    colframe=Cerulean!10  % Frame (border) color.
+}
+```
+
+To see this box in action, we instantiate this environment in our document:
+
+```latex
+\begin{document}
+
+\begin{myAwesomeBox}
+    This nice blue pastel box!
+\end{myAwesomeBox}
+
+\end{document}
+```
+
+This code should then yield:
+
+![Blue pastel box](images/my-third-box.png)
+
+I want to note two things regarding the imports:
+
+1. The `dvipsnames` option for xcolor is simply a choice of the set of colors I want from `xcolor`. It does affect the name of colors you can pass as arguments, for example, here I used `Cerulean`. For a full set of possible colors in `xcolor`, see [here](https://en.wikibooks.org/wiki/LaTeX/Colors).
+
+2. The `many` option for `tcolorbox` loads additional libraries which allows us to use more features from `tcolorbox`. In particular for our use case, we want to be able to use `enhanced`. See the [documentation](https://mirrors.nxthost.com/ctan/macros/latex/contrib/tcolorbox/tcolorbox.pdf) for other options.
+
+Here are some tweaks that you might want to consider:
+
+- If you want to _add a nice smooth border-like effect_, do this: instead of using `colframe=Cerulean!10`, remove that line and put `boxrule=0pt` instead. In general, `boxrule` adjusts the border stroke.
+
+- If you want to _remove padding inside the box_, add `boxsep=0pt`. In general, `boxsep` controls the inside padding.
+
+There are many more parameters that you can control and these can be found in the [tcolorbox documentation](https://mirrors.nxthost.com/ctan/macros/latex/contrib/tcolorbox/tcolorbox.pdf).
+
+Nowadays, I write my notes using the [NotesTex](https://github.com/Adhumunt/NotesTeX) package which coincidentally uses tcolorbox with a similar setting as mine. I guess this is one of the reasons why it was a no brainer for me to use it in the first place. The nice thing about the package is that it provides a complete framework to write notes in $\LaTeX$. In particular, you don't have to reinvent the wheel for everything (e.g. theorem environment, sidenotes). And for features that you feel are missing, you can simply add it on your own with ease. I've added plenty of features already and they integrate quite well. I'd highly recommend checking NotesTex out!

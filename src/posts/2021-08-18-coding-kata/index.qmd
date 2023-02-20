@@ -1,0 +1,127 @@
+---
+title: "The Coding Kata"
+categories: [software engineering, clean coding]
+author: "Salman Faris"
+date: "8/18/2021"
+date-modified: "8/19/2021"
+jupyter: python3
+image: ""
+---
+
+A coding kata is _an exercise to sharpen your programming skills and muscle memory via repetition_. I learnt this concept when I was reading **The Clean Coder** (highly recommended!) and have since adopted it as part of my programming routine. It helps my hands "know" what to type when I need to type.
+
+I have also adapted the concept of kata as a means to learn/revise programming languages effectively. Instead of writing a random script doing god knows what after learning the syntax, I would implement the simple linear regression algorithm from scratch in this language. Why this is a good kata you ask? Here is why among others:
+
+1. You can practice using OOP in the new lang
+2. You will deal with ints, doubles, static and dynamic arrays.
+3. You will do some basic math operations.
+4. You will implement at least one function.
+5. You will implement at least a for loop.
+6. You might use an import.
+
+To put simply, it ensures you use a lot of the functionalities in the language and actually spend time doing it.
+
+I recently wanted to refresh my mind on the C++ lang and I also want to reinforce my JavaScript knowledge. So here's my linear regression implementation in these two languages (although the way data is expected is a bit different in the JS implementation compared to the C++ implementation).
+
+::: {.panel-tabset}
+## C++
+
+``` {.cpp}
+#include <vector>
+using namespace std;
+
+class LinearRegression {
+    private:
+        int m_epoch;
+        double m_learningRate;
+        vector<double> weights;
+
+    public:
+        LinearRegression(int epoch, double learningRate) {
+            this->m_epoch = epoch;
+            this->m_learningRate = learningRate;
+        }
+
+        void fit(vector<double> x, vector<double> y) {
+            vector<double> weights = {0, 0};
+            int dataLength = x.size();
+
+            int epoch = this->m_epoch;
+            for (int e = 0; e < epoch; e++) {
+                for (int i = 0; i < dataLength; i++) {
+                    double estimate = weights[0] + x[i]*weights[1];
+                    double error = y[i] - estimate;
+
+                    weights[0] += this->m_learningRate * error;
+                    weights[1] += this->m_learningRate * error * x[i];
+                }
+            }
+
+            this->weights = weights;
+        }
+
+        vector<double> predict(vector<double> x) {
+            int dataLength = x.size();
+            vector<double> yPred;
+            yPred.reserve(dataLength);  // Preallocate length of yPred based on size of x.
+
+            vector<double> weights = this->weights;
+            for (int i = 0; i < dataLength; i++) {
+                yPred.push_back(weights[0] + x[i]*weights[1]);
+            }
+
+            return yPred;
+        }
+};
+```
+
+## JavaScript
+
+``` {.javascript}
+class LinearRegression {
+  constructor(params = {}) {
+    this.weights = params.weights || [];
+    this.learningRate = params.learningRate || 0.01;
+    this.data = [];
+    this.fittedValues = [];
+  }
+
+  estimator(x, weights) {
+    const [w0, w1] = weights;
+    return w0 + x * w1;
+  }
+
+  fit(data) {
+    this.data = data;
+    if (this.weights === undefined || this.weights.length === 0) {
+      this.weights = [0, 0];
+    }
+
+    for (let i = 0; i < this.data.length; i++) {
+      const { x, y } = this.data[i];
+
+      const estimate = this.estimator(x, this.weights);
+      const error = y - estimate;
+
+      let [w0, w1] = this.weights;
+
+      w0 += this.learningRate * error;
+      w1 += this.learningRate * error * x;
+
+      this.weights = [w0, w1];
+    }
+
+    this.fittedValues = this.getFittedValues();
+  }
+
+  getFittedValues() {
+    return this.data.map(({ x, y }) => {
+      return { x: x, y: this.estimator(x, this.weights) };
+    });
+  }
+}
+```
+
+:::
+
+I leave the Python implementation to you ;)

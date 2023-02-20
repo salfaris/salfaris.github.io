@@ -1,0 +1,17 @@
+---
+title: "resources"
+about:
+  template: solana
+  image-width: 10em
+---
+
+### Undergraduate stuff
+
+- My [dissertation](/downloads/dissertation.pdf) – Diophantine Equations, supervised by Prof. Payman Kassaei.
+
+Throughout my undergrad math life at King's College London, I have written my notes in $\LaTeX$ to help me understand better. Some of these notes can be accessed via this [repository](https://github.com/salfaris/kcl-notes). Notable ones include:
+
+- [6CCM350A Rings and Modules](https://github.com/salfaris/kcl-notes/raw/main/level-6/rings-modules.pdf) – based on lectures by Prof. Nicholas Shepherd-Barron, Fall 2020.
+- [6CCM359A Numerical and Computational Methods](https://github.com/salfaris/kcl-notes/raw/main/level-6/num-methods.pdf) – based on lectures by Prof. Benjamin Doyon, Fall 2020.
+- [5CCM224A Introduction to Number Theory](https://github.com/salfaris/kcl-notes/raw/main/level-5/num-theory.pdf) – based on lectures by Dr. James Newton, Fall 2019.
+- [5CCM226A Metric Spaces and Topology](https://github.com/salfaris/kcl-notes/raw/main/level-5/MST.pdf) – based on lectures by Dr. Jerry Buckley, Fall 2019.
