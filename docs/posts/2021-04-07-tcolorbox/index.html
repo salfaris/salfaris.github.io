@@ -254,12 +254,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <p>One of the many questions I get when people see my <span class="math inline">\LaTeX</span>-ed math notes is <em>how do you create these nice pastel-colored boxes?</em></p>
-<p><img src="images/example-box.png" class="img-fluid" alt="Example tcolorbox"> <img src="images/example-box-2.png" class="img-fluid" alt="Example 2 tcolorbox"></p>
+<img src="images/example-box.png" class="img-fluid" alt="Example tcolorbox"> <img src="images/example-box-2.png" class="img-fluid" alt="Example 2 tcolorbox">
 <center>
 <em>Two examples of pastel-colored boxes from my math notes</em>
 </center>
-<p>I feel like this is a very relevant and important question, because I asked the exact same thing when I was new to <span class="math inline">\LaTeX</span>.</p>
 <hr>
+<p>I feel like this is a very relevant and important question, because I asked the exact same thing when I was new to <span class="math inline">\LaTeX</span>.</p>
 <section id="simple-box-using-fbox-and-minipage" class="level3">
 <h3 class="anchored" data-anchor-id="simple-box-using-fbox-and-minipage">Simple box using <em>fbox</em> and <em>minipage</em></h3>
 <p>My first exposure to <span class="math inline">\LaTeX</span> box-like environments was my mentor <a href="https://sites.google.com/site/tsoighaleo/">Ghaleo</a>’s genius tutorial notes. He used them for two main reasons:</p>
@@ -268,12 +268,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>an empty space for students to follow along and fill in the blanks live in class.</li>
 </ul>
 <p>I tried to reproduce his box environment when I was writing my very first math notes on <span class="math inline">\LaTeX</span> – my Linear Algebra &amp; Geometry II notes.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/my-first-box.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Linear Algebra &amp; Geometry II notes</figcaption><p></p>
-</figure>
-</div>
+<img src="images/my-first-box.png" class="img-fluid">
 <center>
 <em>A snippet of my Linear Algebra &amp; Geometry II notes</em>
 </center>
@@ -297,12 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>would yield the box:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/plain-box.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">plainbox</figcaption><p></p>
-</figure>
-</div>
+<p><img src="images/plain-box.png" class="img-fluid"></p>
 <p>Now the problem with this simple fbox is that… it’s just plain black and white. I want something more vibrant and colourful, so I decided to start learning the <a href="https://ctan.org/pkg/tcolorbox">tcolorbox</a> package.</p>
 <hr>
 </section>
@@ -315,12 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>or even the tcolorbox documentation itself.</li>
 </ul>
 <p>With my then minimal knowledge, I started writing my Real Analysis notes. I was quite happy with the end product but the overall design felt a bit odd (as you can see in the figure below). Nevertheless, my initial goal was to just make prettier boxes and I think I’ve achieved just that.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/my-second-box.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Real Analysis notes</figcaption><p></p>
-</figure>
-</div>
+<img src="images/my-second-box.png" class="img-fluid">
 <center>
 <em>A snippet of my Real Analysis notes</em>
 </center>
@@ -346,12 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This code should then yield:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/my-third-box.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Blue pastel box</figcaption><p></p>
-</figure>
-</div>
+<p><img src="images/my-third-box.png" class="img-fluid"></p>
 <p>I want to note two things regarding the imports:</p>
 <ol type="1">
 <li><p>The <code>dvipsnames</code> option for xcolor is simply a choice of the set of colors I want from <code>xcolor</code>. It does affect the name of colors you can pass as arguments, for example, here I used <code>Cerulean</code>. For a full set of possible colors in <code>xcolor</code>, see <a href="https://en.wikibooks.org/wiki/LaTeX/Colors">here</a>.</p></li>

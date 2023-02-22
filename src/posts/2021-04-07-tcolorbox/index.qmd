@@ -16,12 +16,12 @@ One of the many questions I get when people see my $\LaTeX$-ed math notes is _ho
 
 ![Example tcolorbox](images/example-box.png)
 ![Example 2 tcolorbox](images/example-box-2.png)
-
 <center>*Two examples of pastel-colored boxes from my math notes*</center>
+
+--- 
 
 I feel like this is a very relevant and important question, because I asked the exact same thing when I was new to $\LaTeX$.
 
----
 
 ### Simple box using _fbox_ and _minipage_
 
@@ -32,8 +32,7 @@ My first exposure to $\LaTeX$ box-like environments was my mentor [Ghaleo](https
 
 I tried to reproduce his box environment when I was writing my very first math notes on $\LaTeX$ – my Linear Algebra & Geometry II notes.
 
-![Linear Algebra & Geometry II notes](images/my-first-box.png)
-
+![](images/my-first-box.png)
 <center>*A snippet of my Linear Algebra & Geometry II notes*</center>
 
 It was achievable using the `fbox` environment alone, but for it to generalize well, I have to throw in a `minipage` usage as well. The code implementation is quite simple and requires no package imports. Just use the following code directly in your document:
@@ -65,7 +64,7 @@ To make the box look cleaner, use the `center` environment as well. Here is a co
 
 would yield the box:
 
-![plainbox](images/plain-box.png)
+![](images/plain-box.png)
 
 Now the problem with this simple fbox is that... it's just plain black and white. I want something more vibrant and colourful, so I decided to start learning the [tcolorbox](https://ctan.org/pkg/tcolorbox) package.
 
@@ -81,8 +80,7 @@ As usual, the best way to learn is to straight dive in and do. After (very) litt
 
 With my then minimal knowledge, I started writing my Real Analysis notes. I was quite happy with the end product but the overall design felt a bit odd (as you can see in the figure below). Nevertheless, my initial goal was to just make prettier boxes and I think I've achieved just that.
 
-![Real Analysis notes](images/my-second-box.png)
-
+![](images/my-second-box.png)
 <center>*A snippet of my Real Analysis notes*</center>
 
 To reproduce the (proof) box above with a Cerulean colour, use the following code in your document's preamble:
@@ -116,7 +114,7 @@ To see this box in action, we instantiate this environment in our document:
 
 This code should then yield:
 
-![Blue pastel box](images/my-third-box.png)
+![](images/my-third-box.png)
 
 I want to note two things regarding the imports:
 

@@ -12,7 +12,7 @@ format:
     html-math-method: katex
 ---
 
-![Post header](images/header-unit-testing-with-pytest.png)
+![](images/header-unit-testing-with-pytest.png)
 
 It is a common scene that we want to test our functions after we've done writing them. In Python, we can usually do this by printing to the console. For example, suppose we are interested in testing the following function:
 
@@ -155,7 +155,7 @@ pytest test_add_positive.py
 
 If the implementation of `add_positive()` is correct (with respect to our tests), you should see a test report like this.
 
-![Unit-test-pass](images/unit-test-1.png)
+![Pass test](images/unit-test-1.png)
 
 Just ignore everything above "collected 4 items" as it is not too important. The breakdown of this test report is the following:
 
@@ -178,7 +178,7 @@ Apparently, he didn't read the short description of the function; he thought tha
 
 If there were no unit tests written to check this modification, this seemingly trivial edit by Gilfoyle could have been merged into the main branch and could possibly crash the whole system! Thankfully, we implemented continuous integration and upon making a pull request, Gilfoyle was bombarded with the following test report:
 
-![Unit-test-fail](images/unit-test-2.png)
+![Fail test](images/unit-test-2.png)
 
 Here is a breakdown of the report:
 
@@ -193,4 +193,4 @@ Sometimes, we just want to run the test up until the first failure. This can be 
 pytest -x test_add_positive.py
 ```
 
-Now you might be wondering, what to do if we have multiple functions to test in the same module given that this one single `add_positive` function alone requires 4 unit tests. Things can start getting really messy right? To solve this issue, we can create a class containing these unit tests for each function we want to test. This will be a topic of a future post on testing, thanks for reading.
+Now you might be wondering, what to do if we have multiple functions to test in the same module given that this one single `add_positive` function alone requires 4 unit tests. Things can start getting really messy right? To solve this issue, we can create a class containing these unit tests for each function we want to test. This will be a topic of a future post on testing.
