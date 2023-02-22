@@ -260,18 +260,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr>
 <section id="newtons-idea-an-overview" class="level3">
 <h3 class="anchored" data-anchor-id="newtons-idea-an-overview">Newton’s idea (an overview)</h3>
-<p>One way of solving this problem is to <em>linearize</em> the function <span class="math inline">f(x)</span> around a certain point <span class="math inline">x_0</span> of our choice so that we can easily solve the resulting linear equation. Say we get <span class="math inline">x_1</span> as a solution, then we repeat linearizing <span class="math inline">f(x)</span> around <span class="math inline">x_1</span>; so on and so forth. The initial point <span class="math inline">x_0</span> is chosen such that it is close to our hoped solution, say, <span class="math inline">x^*</span>. The idea is that if <span class="math inline">x_0</span> is suitably chosen, then the solutions <span class="math inline">x_1, x_2, x_3, \ldots</span> to each linear approximation of <span class="math inline">f(x)</span> approximates <span class="math inline">x^*</span> better and better, and in the limit converges to <span class="math inline">x^*</span>. This whole process is known as the <strong>Newton’s method</strong>. A nice picture of the method can be seen in <a href="#fig-newton">Figure&nbsp;1</a>. Here, Newton’s method is applied to <span class="math inline">f(x) = x^2</span> over <span class="math inline">n = 10</span> iterations, starting at <span class="math inline">x_0 = 1</span>.</p>
-<p>We see from <a href="#fig-newton">Figure&nbsp;1</a> that the Newton’s method converges towards <span class="math inline">x^* = 0</span>, as expected: <span class="math inline">f(x) = 0</span> if and only if <span class="math inline">x = 0</span>.</p>
+<p>One way of solving this problem is to <em>linearize</em> the function <span class="math inline">f(x)</span> around a certain point <span class="math inline">x_0</span> of our choice so that we can easily solve the resulting linear equation. Say we get <span class="math inline">x_1</span> as a solution, then we repeat linearizing <span class="math inline">f(x)</span> around <span class="math inline">x_1</span>; so on and so forth. The initial point <span class="math inline">x_0</span> is chosen such that it is close to our hoped solution, say, <span class="math inline">x^*</span>. The idea is that if <span class="math inline">x_0</span> is suitably chosen, then the solutions <span class="math inline">x_1, x_2, x_3, \ldots</span> to each linear approximation of <span class="math inline">f(x)</span> approximates <span class="math inline">x^*</span> better and better, and in the limit converges to <span class="math inline">x^*</span>. This whole process is known as the <strong>Newton’s method</strong>.</p>
+<p>A nice picture of the Newton’s method can be seen in <a href="#fig-newton">Figure&nbsp;1</a>. Here, Newton’s method is applied to the function <span class="math inline">f(x) = x^2</span> over <span class="math inline">n = 10</span> iterations, starting at <span class="math inline">x_0 = 1</span>. We see from <a href="#fig-newton">Figure&nbsp;1</a> that the <span class="math inline">x_i</span> values converges to <span class="math inline">x^* = 0</span> which is expected since <span class="math inline">x^2 = 0</span> if and only if <span class="math inline">x = 0</span>.</p>
 <hr>
 </section>
 <section id="newtons-idea-the-algebra" class="level3">
 <h3 class="anchored" data-anchor-id="newtons-idea-the-algebra">Newton’s idea (the algebra)</h3>
-<p>Let us make our discussion above more precise. Linearizing <span class="math inline">f(x)</span> around <span class="math inline">x_0</span> simply means Taylor expanding <span class="math inline">f</span> around <span class="math inline">x_0</span> and neglecting <span class="math inline">\mathcal{O}(h^2)</span> terms. Of course, this is assuming that we can actually perform Taylor expansion in the first place! Explicitly, the Taylor expansion of <span class="math inline">f</span> around <span class="math inline">x_0</span> yields</p>
-<p><span class="math display">f(x) = f(x_0) + f'(x_0) (x - x_0) + \mathcal{O}(h^2). </span></p>
-<p>So if we neglect <span class="math inline">\mathcal{O}(h^2)</span> terms, we get (in approximation) the linear equation</p>
+<p>Let us make our discussion above more precise. Linearizing <span class="math inline">f(x)</span> around <span class="math inline">x_0</span> simply means Taylor expanding <span class="math inline">f</span> around <span class="math inline">x_0</span> and neglecting <span class="math inline">\mathcal{O}(h^2)</span> terms. Of course… this is assuming that we can actually perform Taylor expansion in the first place. With that disclaimer out of the way, the Taylor expansion of <span class="math inline">f</span> around <span class="math inline">x_0</span> yields</p>
+<p><span class="math display">f(x) = f(x_0) + f'(x_0) (x - x_0) + \mathcal{O}(h^2) \approx f(x_0) + f'(x_0) (x - x_0). </span></p>
+<p>So if we neglect <span class="math inline">\mathcal{O}(h^2)</span> terms, we get the linear equation</p>
 <p><span class="math display">f(x) = f(x_0) + f'(x_0) (x - x_0).</span></p>
-<p>The solution to this linear equation is thus simply</p>
-<p><span class="math display">x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}.</span></p>
+<p>So a solution <span class="math inline">x_1</span> that satisfy <span class="math inline">f(x_1) = 0</span> is given by</p>
+<p><span class="math display">x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}</span></p>
 <p>We then repeat the process by linearizing <span class="math inline">f</span> around <span class="math inline">x_1</span>. In this case we have</p>
 <p><span class="math display">f(x) = f(x_1) + f'(x_1) (x - x_1) \implies x_2 = x_1 - \frac{f(x_1)}{f'(x_1)}, </span></p>
 <p>with <span class="math inline">x_2</span> being a solution. Doing this iteratively yields a general formula</p>
@@ -410,7 +410,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-display">
 <div id="fig-newton" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="index_files/figure-html/fig-newton-output-1.png" width="821" height="518" class="figure-img"></p>
+<p><img src="index_files/figure-html/fig-newton-output-1.png" width="821" height="527" class="figure-img"></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;1: Newton’s method applied to <span class="math inline">f(x) = x^2</span>, starting at <span class="math inline">x_0 = 1</span>.</figcaption><p></p>
 </figure>
 </div>

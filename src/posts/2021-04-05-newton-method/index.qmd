@@ -20,25 +20,25 @@ If the function $f(x)$ is linear, then the problem is trivial. Explicitly, if $f
 
 ### Newton's idea (an overview)
 
-One way of solving this problem is to _linearize_ the function $f(x)$ around a certain point $x_0$ of our choice so that we can easily solve the resulting linear equation. Say we get $x_1$ as a solution, then we repeat linearizing $f(x)$ around $x_1$; so on and so forth. The initial point $x_0$ is chosen such that it is close to our hoped solution, say, $x^*$. The idea is that if $x_0$ is suitably chosen, then the solutions $x_1, x_2, x_3, \ldots$ to each linear approximation of $f(x)$ approximates $x^*$ better and better, and in the limit converges to $x^*$. This whole process is known as the **Newton's method**. A nice picture of the method can be seen in @fig-newton. Here, Newton's method is applied to $f(x) = x^2$ over $n = 10$ iterations, starting at $x_0 = 1$.
+One way of solving this problem is to _linearize_ the function $f(x)$ around a certain point $x_0$ of our choice so that we can easily solve the resulting linear equation. Say we get $x_1$ as a solution, then we repeat linearizing $f(x)$ around $x_1$; so on and so forth. The initial point $x_0$ is chosen such that it is close to our hoped solution, say, $x^*$. The idea is that if $x_0$ is suitably chosen, then the solutions $x_1, x_2, x_3, \ldots$ to each linear approximation of $f(x)$ approximates $x^*$ better and better, and in the limit converges to $x^*$. This whole process is known as the **Newton's method**. 
 
-We see from @fig-newton that the Newton's method converges towards $x^* = 0$, as expected: $f(x) = 0$ if and only if $x = 0$.
+A nice picture of the Newton's method can be seen in @fig-newton. Here, Newton's method is applied to the function $f(x) = x^2$ over $n = 10$ iterations, starting at $x_0 = 1$. We see from @fig-newton that the $x_i$ values converges to $x^* = 0$ which is expected since $x^2 = 0$ if and only if $x = 0$.
 
 ---
 
 ### Newton's idea (the algebra)
 
-Let us make our discussion above more precise. Linearizing $f(x)$ around $x_0$ simply means Taylor expanding $f$ around $x_0$ and neglecting $\mathcal{O}(h^2)$ terms. Of course, this is assuming that we can actually perform Taylor expansion in the first place! Explicitly, the Taylor expansion of $f$ around $x_0$ yields
+Let us make our discussion above more precise. Linearizing $f(x)$ around $x_0$ simply means Taylor expanding $f$ around $x_0$ and neglecting $\mathcal{O}(h^2)$ terms. Of course... this is assuming that we can actually perform Taylor expansion in the first place. With that disclaimer out of the way, the Taylor expansion of $f$ around $x_0$ yields
 
-$$f(x) = f(x_0) + f'(x_0) (x - x_0) + \mathcal{O}(h^2). $$
+$$f(x) = f(x_0) + f'(x_0) (x - x_0) + \mathcal{O}(h^2) \approx f(x_0) + f'(x_0) (x - x_0). $$
 
-So if we neglect $\mathcal{O}(h^2)$ terms, we get (in approximation) the linear equation
+So if we neglect $\mathcal{O}(h^2)$ terms, we get the linear equation
 
 $$f(x) = f(x_0) + f'(x_0) (x - x_0).$$
 
-The solution to this linear equation is thus simply
+So a solution $x_1$ that satisfy $f(x_1) = 0$ is given by
 
-$$x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}.$$
+$$x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}$$
 
 We then repeat the process by linearizing $f$ around $x_1$. In this case we have
 

@@ -250,7 +250,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ...</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>As you can see, it is in serialized JSON format. The idea now then is to deserialize this layout settings into a JavaScript object literal and pass it into the layout of your plot in Plotly.js. I did the deserialize process manually because I cannot find a way to automate this process (I would love to hear if you are able to do it!). For the default plotly theme, the JavaScript object literal is given below:</p>
-<p>[gist:id=0995e0808a22aca8f4afb5faeb4d79c7]</p>
+<script src="https://gist.github.com/salfaris/0995e0808a22aca8f4afb5faeb4d79c7.js"></script>
 <blockquote class="blockquote">
 <p>Note: Stating the obvious but since the layout setting is extracted from the Plotly documentation, it is the hard work of the people behind Plotly. Thank you for the awesome theme!</p>
 </blockquote>
