@@ -1,6 +1,6 @@
 ---
 title: "Root-hunting algorithm: Newton's method"
-categories: [numerical analysis, algorithm]
+categories: [numerical analysis, algorithms]
 author: "Salman Faris"
 date: "4/5/2021"
 date-modified: "2/19/2023"
