@@ -103,8 +103,11 @@ Once we have the dataset in DataLoader form, we can start inspecting our dataset
 ```python
 print("Train shape:", trainloader.dataset.data.shape)
 print("Test shape:", testloader.dataset.data.shape)
-# >>> Train shape: torch.Size([60000, 28, 28])
-# >>> Test shape: torch.Size([10000, 28, 28])
+```
+
+```text
+>>> Train shape: torch.Size([60000, 28, 28])
+>>> Test shape: torch.Size([10000, 28, 28])
 ```
 
 We can also get the minibatch size as specified when initializing the DataLoader.
@@ -112,8 +115,11 @@ We can also get the minibatch size as specified when initializing the DataLoader
 ```python
 print("Train batch size:", trainloader.batch_size)
 print("Test batch size:", testloader.batch_size)
-# >>> Train batch size: 64
-# >>> Test batch size: 64
+```
+
+```text
+>>> Train batch size: 64
+>>> Test batch size: 64
 ```
 
 For a more advanced inspection, we can even look at the **sampler** and the **collate function** used in the DataLoader. The sampler determines how the data is shuffled and the collate function specifies how the data is batched.
@@ -121,8 +127,11 @@ For a more advanced inspection, we can even look at the **sampler** and the **co
 ```python
 print("Sampler:", trainloader.sampler)
 print("Collate function:", trainloader.collate_fn)
-# >>> Sampler: <torch.utils.data.sampler.RandomSampler object at 0x7fcc02b23b90>
-# >>> Collate function: <function default_collate at 0x7fcc05c9a710>
+```
+
+```text
+>>> Sampler: <torch.utils.data.sampler.RandomSampler object at 0x7fcc02b23b90>
+>>> Collate function: <function default_collate at 0x7fcc05c9a710>
 ```
 
 Since we did not pass anything during initialization, we get the default `RandomSampler` object for the sampler and the default `default_collate` collate function as expected.
@@ -142,4 +151,4 @@ Here, we get a t-shirt which is expected since we are dealing with a fashion dat
 
 ![Plot of image from Fashion MNIST](2021-09-07-tshirt.png)
 
-For the simplified version of this post in jupyter notebook format: [notebook version](https://github.com/salfaris/notebooks/blob/main/2021_09_07_preparing_image_dataset_in_pytorch.ipynb){:target="\_blank"}.
+For the simplified version of this post in jupyter notebook format: [notebook version](https://github.com/salfaris/notebooks/blob/main/2021_09_07_preparing_image_dataset_in_pytorch.ipynb).
