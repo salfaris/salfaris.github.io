@@ -2,7 +2,7 @@
 title: "Clash Series: Checking Number is Prime"
 categories: [clash of code, algorithms]
 author: "Salman Faris"
-date: "05/03/2023"
+date: "05 03 2022"
 jupyter: python3
 format:
   html:

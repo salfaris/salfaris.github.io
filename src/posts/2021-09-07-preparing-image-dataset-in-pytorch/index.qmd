@@ -2,8 +2,8 @@
 title: "Preparing Image Dataset for Neural Networks in PyTorch"
 categories: [machine learning, computer vision, pytorch, data preprocessing]
 author: "Salman Faris"
-date: "09/07/2021"
-date-modified: "09/08/2021"
+date: "07 09 2021"
+date-modified: "08 09 2021"
 jupyter: python3
 format:
   html:

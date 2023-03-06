@@ -2,8 +2,8 @@
 title: "The Coding Kata"
 categories: [software engineering, clean coding]
 author: "Salman Faris"
-date: "8/18/2021"
-date-modified: "8/19/2021"
+date: "18 08 2021"
+date-modified: "19 08 2021"
 jupyter: python3
 image: ""
 ---

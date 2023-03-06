@@ -3,8 +3,8 @@ title: "Unit Testing with pytest"
 description: "Why do we do unit testing and how to do unit testing in python using pytest."
 categories: [python, testing, software engineering]
 author: "Salman Faris"
-date: "5/03/2021"
-date-modified: "5/18/2021"
+date: "03 05 2021"
+date-modified: "18 05 2021"
 jupyter: python3
 format:
   html:

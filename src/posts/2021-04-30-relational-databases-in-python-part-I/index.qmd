@@ -2,8 +2,8 @@
 title: "Relational Databases in Python (part I)"
 categories: [data science, python, sql, sqlalchemy, databases, data handling]
 author: "Salman Faris"
-date: "4/30/2021"
-date-modified: "4/30/2021"
+date: "30 04 2021"
+date-modified: "30 04 2021"
 image: "header-relational-databases-in-python-part-I.png"
 jupyter: python3
 format:

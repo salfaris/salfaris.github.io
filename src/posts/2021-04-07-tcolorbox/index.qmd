@@ -2,8 +2,8 @@
 title: "Making pastel-colored boxes using tcolorbox in LaTeX"
 categories: [latex, writing]
 author: "Salman Faris"
-date: "4/7/2021"
-date-modified: "4/11/2021"
+date: "07 04 2021"
+date-modified: "11 04 2021"
 image: "images/example-box.png"
 jupyter: python3
 format:

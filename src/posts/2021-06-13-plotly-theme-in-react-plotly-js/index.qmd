@@ -2,8 +2,8 @@
 title: "Plotly.py main theme in Plotly.js"
 categories: [javascript, plotly, python, web dev]
 author: "Salman Faris"
-date: "6/13/2021"
-date-modified: "6/13/2021"
+date: "13 06 2021"
+date-modified: "13 06 2021"
 jupyter: python3
 format:
   html:

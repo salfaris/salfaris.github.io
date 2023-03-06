@@ -2,8 +2,8 @@
 title: "Root-hunting algorithm: Newton's method"
 categories: [numerical analysis, algorithms]
 author: "Salman Faris"
-date: "4/5/2021"
-date-modified: "2/19/2023"
+date: "05 04 2021"
+date-modified: "19 02 2023"
 image: "newton-method.png"
 jupyter: python3
 format:
