@@ -309,18 +309,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Once we have the dataset in DataLoader form, we can start inspecting our dataset. For example, we can get the shapes of our trainset.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Train shape:"</span>, trainloader.dataset.data.shape)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test shape:"</span>, testloader.dataset.data.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre class="text"><code>&gt;&gt;&gt; Train shape: torch.Size([60000, 28, 28])
-&gt;&gt;&gt; Test shape: torch.Size([10000, 28, 28])</code></pre>
+<pre class="text"><code>Train shape: torch.Size([60000, 28, 28])
+Test shape: torch.Size([10000, 28, 28])</code></pre>
 <p>We can also get the minibatch size as specified when initializing the DataLoader.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Train batch size:"</span>, trainloader.batch_size)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test batch size:"</span>, testloader.batch_size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre class="text"><code>&gt;&gt;&gt; Train batch size: 64
-&gt;&gt;&gt; Test batch size: 64</code></pre>
+<pre class="text"><code>Train batch size: 64
+Test batch size: 64</code></pre>
 <p>For a more advanced inspection, we can even look at the <strong>sampler</strong> and the <strong>collate function</strong> used in the DataLoader. The sampler determines how the data is shuffled and the collate function specifies how the data is batched.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sampler:"</span>, trainloader.sampler)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Collate function:"</span>, trainloader.collate_fn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre class="text"><code>&gt;&gt;&gt; Sampler: &lt;torch.utils.data.sampler.RandomSampler object at 0x7fcc02b23b90&gt;
-&gt;&gt;&gt; Collate function: &lt;function default_collate at 0x7fcc05c9a710&gt;</code></pre>
+<pre class="text"><code>Sampler: &lt;torch.utils.data.sampler.RandomSampler object at 0x7fcc02b23b90&gt;
+Collate function: &lt;function default_collate at 0x7fcc05c9a710&gt;</code></pre>
 <p>Since we did not pass anything during initialization, we get the default <code>RandomSampler</code> object for the sampler and the default <code>default_collate</code> collate function as expected.</p>
 <p>As we are dealing with an image dataset, it is a shame if we are not plotting anything during inspection. Let’s plot the first image from the first batch in <code>trainloader</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>images, labels <span class="op">=</span> <span class="bu">next</span>(<span class="bu">iter</span>(trainloader))  <span class="co"># Gets a batch of 64 images in the training set</span></span>

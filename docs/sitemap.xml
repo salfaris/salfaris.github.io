@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://salfaris.github.io/index.html</loc>
-    <lastmod>2023-03-06T23:44:32.038Z</lastmod>
+    <lastmod>2023-03-06T23:46:27.800Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/posts/2021-05-03-unit-testing-with-pytest/index.html</loc>
@@ -30,7 +30,7 @@
   </url>
   <url>
     <loc>https://salfaris.github.io/posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html</loc>
-    <lastmod>2023-03-06T23:44:31.322Z</lastmod>
+    <lastmod>2023-03-06T23:46:27.129Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/posts/2021-04-30-relational-databases-in-python-part-I/index.html</loc>
