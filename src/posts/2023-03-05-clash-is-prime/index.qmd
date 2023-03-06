@@ -8,16 +8,17 @@ format:
   html:
     toc: true
     html-math-method: katex
+execute: 
+  enabled: true
+  cache: true
 ---
 
 This is the first of hopefully many more posts on Clash of Code tricks I learn along the way. I call this the Clash Series and in today's series, we look at how to write an efficient script to check for prime numbers, and how to write it fast python for those fastest mode clashes.
 
-::: {#def-prime}
 
-## Prime number
+prime number
+: An integer $p$ is a *prime number* (or simply prime) if $p > 1$ and it is not divisible by any integer except 1 and itself. If $p$ is not prime, we say that it is a *composite*.
 
-An integer $p$ is a *prime number* (or simply prime) if $p > 1$ and it is not divisible by any integer except 1 and itself. If $p$ is not prime, we say that it is a *composite*.
-:::
 
 Equivalently, we say $p$ is *prime* if $p > 1$ and whenever it decomposes into $p = ab$, then either $a=1, b=p$ or $a=p, b=1$. Thus, if $p$ is not prime, then there is a decomposition of $p$ into a product of positive integers $a, b$ that are not necessarily $1$ or $p$; hence, the name *composite*.
 
@@ -27,7 +28,8 @@ Now here is what we are interested in.
 
 ## The problem
 
-**Question**: given an integer $n \in \mathbb{Z}$, how to enumerate all prime numbers less than $n$?
+problem statement
+: Given an integer $n \in \mathbb{Z}$, how to enumerate all prime numbers less than $n$?
 
 A naive enumeration algorithm can be achieved in the following way: For any given integer $n$,
 
@@ -78,7 +80,7 @@ The problem, however, is that the theoretical time complexity of this algorithm 
 
 ## Efficient algorithm (sqrt trick)
 
-So what can we do to make this code faster? Enter... the square root trick.
+So what can we do to make this code faster? Enter... the square root (sqrt) trick.
 
 First, without loss of generality, let's assume that $n$ is a positive integer since if $n < 2$, then it's taken care by the $n < 2$ check. We now make the following claim.
 
@@ -122,7 +124,9 @@ def is_prime_sqrt_trick(n: int) -> bool:
     return True
 ```
 
-The sqrt trick improves time complexity from $\mathcal{O}(n)$ to $\mathcal{O}(\sqrt{n})$ which is massive. To give you an idea of this speedup, we will run the naive and sqrt algorithms to check if $n = 2,147,462,143$ is prime. Note that this is a number on the order of $2^{31}$.
+The sqrt trick improves time complexity from $\mathcal{O}(n)$ to $\mathcal{O}(\sqrt{n})$ which is massive! To give you an idea of this speedup, we will run the naive and sqrt algorithms to check if $$n = 2{,}147{,}462{,}143$$ is prime. Note that this is a prime number on the order of $2^{31}$.
+
+> The sqrt trick improves time complexity from $\mathcal{O}(n)$ to $\mathcal{O}(\sqrt{n})$ which is massive!
 
 ```{python}
 #| code-fold: true
