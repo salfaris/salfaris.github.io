@@ -1,0 +1,80 @@
+---
+title: "How to do `aws s3 ls s3://bucket/` using boto3 in python?"
+categories: [cloud, AWS, python]
+author: "Salman Faris"
+date: "12 03 2023"
+jupyter: python3
+format:
+  html:
+    toc: true
+    html-math-method: katex
+execute: 
+  enabled: true
+  cache: false
+---
+
+Today, we look at how can we perform the following terminal command in python.
+
+```zsh
+aws s3 ls s3://bucket/obj_in_bucket/
+```
+
+```text
+PRE subobj_1/
+PRE subobj_2/
+PRE subobj_3/
+...
+```
+
+## Why do we even care?
+
+A lot of times, you just want to list all the existing subobjects in a given object *without getting its content*. A typical use case is to list all existing objects in the bucket, where here, the bucket is viewed as an object – the *root object*. This list action can be achieved using the simple `aws s3 ls` command in the terminal. 
+
+But what if we want to do it natively as part of a module in python? For example, if we want to trigger a callback on the server whenever a new subobject is found in our bucket. A fast way is to just perform an equivalent `aws s3 ls` in our python module, and this is our goal today.
+
+To ensure clarity, let's kick off with the definition of a path, a bucket and an object prefix.
+
+definition
+: A path is a string that consists of an S3 tag, a **bucket** and an **object prefix**. For example, `s3://bucket/object/subobject/...` is a generic path where `s3://` is the S3 tag, `bucket` is the bucket and `object/subobject/...` is the object prefix. Note the position of `/` carefully.
+
+## `aws s3 ls` in python
+
+I assume that you've done the standard AWS credentials step, storing it at `~/.aws/credentials` for example. We can then initialize an S3 client in Python using `boto3.session.Session`, I hope this step is familiar to you.
+
+```python
+import boto3
+
+session = boto3.session.Session()
+client = session.client("s3")
+```
+
+
+Now that we have our S3 client, define our bucket and object prefix of interest.
+
+```python
+bucket = "bucket_name"
+obj_prefix = "obj_in_bucket/"
+```
+
+Then we can simply list all the existing subobjects of our given object prefix using the following function:
+
+```python
+def aws_s3_ls(bucket: str, obj_prefix: str):
+    params = dict(Bucket=bucket, Prefix=obj_prefix, Delimiter="/")
+
+    paginator = client.get_paginator("list_objects_v2")
+    for page in paginator.paginate(**params):
+        for obj in page.get("CommonPrefix", []):
+            print("PRE", obj["Key"])
+
+aws_s3_ls(bucket, obj_prefix)
+```
+
+```text
+PRE subobj_1/
+PRE subobj_2/
+PRE subobj_3/
+...
+```
+
+And that's it! That was a short one and I hope to cover more AWS things in the future.
