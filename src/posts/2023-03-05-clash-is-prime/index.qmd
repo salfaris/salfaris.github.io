@@ -88,19 +88,34 @@ First, without loss of generality, let's assume that $n$ is a positive integer s
 
 ## Sqrt Decomposition
 
-If $n = ab$ is a composite such that $0 < a < b$, then exactly one of the following is true:
+If $n = ab$ is a composite integer such that $0 < a \leqslant b$, then $a \leqslant \sqrt{n} \leqslant b$.
+:::
 
-1. $a < \sqrt{n}$ and $b > \sqrt{n}$,
-2. $a = b = \sqrt{n}$.
+> Note: in this setting, $a$ and $b$ are any positive real number.
+
+::: {.proof}
+
+If $n$ is a perfect square, then $a = b = \sqrt{n}$. So suppose $n$ is not a perfect square. Then $a < b$ and in this case, we can seek a contradiction. Suppose $a < \sqrt{n}$ but also $b < \sqrt{n}$, then $ab < n$ which is a contradiction. Similarly, if both $a$ and $b$ are $> \sqrt{n}$, then $ab > n$, also a contradiction. So it has to be that $a < \sqrt{n} < b$. $\blacksquare$
+
+:::
+
+So what's the point of @lem-sqrt_decomp? Well the main takeaway is the following: if the number $n$ is composite, then we will at least find one of its divisors before **or equal** its integer square root $\lfloor \sqrt{n} \rfloor$. 
+
+::: {#thm-sqrt_decomp}
+
+Let $n$ be a composite positive integer. Then there exists a prime divisor $p$ of $n$ such that $p \leqslant \lfloor \sqrt{n} \rfloor$.
+
 :::
 
 ::: {.proof}
 
-Suppose $a < \sqrt{n}$ but $b < \sqrt{n}$, then $ab < n$ which is a contradiction. Similarly, if both $a$ and $b$ are $> \sqrt{n}$, then $ab > n$, also a contradiction. So we know that $a \leq \sqrt{n}$ and $b \geq \sqrt{n}$, where equality holds only if $n$ is a perfect square. $\blacksquare$
+By Lemma @lem-sqrt_decomp, we know that if $n = kb$ with $0 < k \leqslant b$, then $k \leqslant \sqrt{n}$. And if this decomposition of $n$ is a decomposition of integers (i.e. $k$ and $b$ are integers), then $k < \sqrt{n}$ or equivalently, we have $k \leqslant \lfloor \sqrt{n} \rfloor$. If $k$ is prime, then we are done. Otherwise, there exists a prime $p$ that divides $k$ (hence, divides $n$) that would also satisfy $p \leqslant \lfloor \sqrt{n} \rfloor$ as desired. $\blacksquare$
 
 :::
 
-So what's the point of @lem-sqrt_decomp? Well the main takeaway is the following: if the number $n$ is composite, then we will at least find one of its divisors before **or equal** its integer square root $\lfloor \sqrt{n} \rfloor$. This speeds up our algorithm tremendously, especially for large $n$. In fact, even for small $n$ like $n=1080$, its integer square root is $32$ which is already two order of magnitudes lower.
+> Note: for a linear traversal check (like we are doing, starting from 3, 4, 5, ...), we know that we will encounter any prime divisor $p$ of any composite divisor $k$ of $n$ first. So the last part of the proof is not necessary for our need, but we put it there for completeness.
+
+So the idea of using sqrt decomposition speeds up our algorithm tremendously, especially for large $n$. In fact, even for small $n$ like $n=1080$, its integer square root is $32$ which is already two order of magnitudes lower.
 
 We now add the sqrt trick to our python implementation.
 
