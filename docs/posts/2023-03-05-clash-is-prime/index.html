@@ -270,7 +270,7 @@ Given an integer <span class="math inline">n \in \mathbb{Z}</span>, how to enume
 <li>Loop over all integers <span class="math inline">k \in [3, n)</span>. If there exists <span class="math inline">k</span> such that <span class="math inline">k \equiv 0 \bmod n</span>, then <span class="math inline">n</span> is not prime. Otherwise <span class="math inline">n</span> is prime.</li>
 </ol>
 <p>A python code for this naive implementation is as follows.</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_prime_naive(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1 and any negative integer are not prime.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">2</span>:</span>
@@ -286,7 +286,7 @@ Given an integer <span class="math inline">n \in \mathbb{Z}</span>, how to enume
 </div>
 <p>The time complexity for this algorithm is <span class="math inline">\mathcal{O}(n)</span> where <span class="math inline">n</span> is the given integer. This is already good in most cases, but can we do better?</p>
 <p>Well any integer <span class="math inline">n &gt; 2</span> is always divisible by 2 if it is even, and therefore cannot be prime. So we can add a step to check if <span class="math inline">n</span> is even or not before doing the looping step. As a result, our algorithm running time is cut in half as we now only have to loop over only odd numbers less than <span class="math inline">n</span>.</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_prime_better(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1 and any negative integer are not prime.</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">2</span>:</span>
@@ -321,7 +321,7 @@ Given an integer <span class="math inline">n \in \mathbb{Z}</span>, how to enume
 </div>
 <p>So what’s the point of <a href="#lem-sqrt_decomp">Lemma&nbsp;1</a>? Well the main takeaway is the following: if the number <span class="math inline">n</span> is composite, then we will at least find one of its divisors before <strong>or equal</strong> its integer square root <span class="math inline">\lfloor \sqrt{n} \rfloor</span>. This speeds up our algorithm tremendously, especially for large <span class="math inline">n</span>. In fact, even for small <span class="math inline">n</span> like <span class="math inline">n=1080</span>, its integer square root is <span class="math inline">32</span> which is already two order of magnitudes lower.</p>
 <p>We now add the sqrt trick to our python implementation.</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_prime_sqrt_trick(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1 and any negative integer are not prime.</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">2</span>:</span>
@@ -344,37 +344,33 @@ Given an integer <span class="math inline">n \in \mathbb{Z}</span>, how to enume
 <blockquote class="blockquote">
 <p>The sqrt trick improves time complexity from <span class="math inline">\mathcal{O}(n)</span> to <span class="math inline">\mathcal{O}(\sqrt{n})</span> which is massive!</p>
 </blockquote>
-<div class="cell" data-execution_count="5">
-<details>
-<summary>speedup comparison ⚡️</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>speedup comparison ⚡️</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-code-fold="false"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">2_147_462_143</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> comp(f: <span class="bu">callable</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> [is_prime_naive, is_prime_sqrt_trick]:</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> time.time()</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    f(n)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Took total of </span><span class="sc">{</span>(time.time()<span class="op">-</span>start)<span class="sc">:.10f}</span><span class="ss"> seconds using </span><span class="sc">{</span>f<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>comp(is_prime_naive)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>comp(is_prime_sqrt_trick)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Took total of 118.3165051937 seconds using is_prime_naive
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Took total of </span><span class="sc">{</span>(time.time()<span class="op">-</span>start)<span class="sc">:.10f}</span><span class="ss"> seconds using </span><span class="sc">{</span>f<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre class="text"><code>Took total of 118.3165051937 seconds using is_prime_naive
 Took total of 0.0010521412 seconds using is_prime_sqrt_trick</code></pre>
-</div>
-</div>
 </section>
 <section id="efficient-writing" class="level2">
 <h2 class="anchored" data-anchor-id="efficient-writing">Efficient writing</h2>
 <p>So the impementation is super efficient <span class="math inline">\mathcal{O}(\sqrt{n})</span>, but how do we make <strong>writing</strong> the code efficient for something like Clash of Code?</p>
 <p>Well first note that when writing in a clash, you don’t care about the 80 char PEP format or readability. So it’s finally time to write one-liner 100 chars fugly code.</p>
 <p>The trick I use is to use <code>all</code> to replace the for-loop and replace the False checks with True statement by “bundling” their evaluation using <code>and</code>. This gives the following one-liner.</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_prime_sqrt_short(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">==</span> <span class="dv">2</span> <span class="kw">or</span> (n <span class="op">&gt;</span> <span class="dv">2</span> <span class="kw">and</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">!=</span> <span class="dv">0</span> <span class="kw">and</span> <span class="bu">all</span>(n <span class="op">%</span> k <span class="op">!=</span> <span class="dv">0</span> <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, <span class="bu">int</span>(n<span class="op">**</span><span class="fl">.5</span>)<span class="op">+</span><span class="dv">1</span>, <span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>In fact, since the modulo operator <code>%</code> in python returns a positive integer, we can save writing one character for each <code>!=</code> by writing <code>&gt;</code> instead.</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_prime_sqrt_super_short(n: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> n <span class="op">==</span> <span class="dv">2</span> <span class="kw">or</span> (n <span class="op">&gt;</span> <span class="dv">2</span> <span class="kw">and</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> <span class="bu">all</span>(n <span class="op">%</span> k <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, <span class="bu">int</span>(n<span class="op">**</span><span class="fl">.5</span>)<span class="op">+</span><span class="dv">1</span>, <span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

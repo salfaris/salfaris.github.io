@@ -10,7 +10,7 @@ format:
     html-math-method: katex
 execute: 
   enabled: true
-  cache: true
+  cache: false
 ---
 
 This is the first of hopefully many more posts on Clash of Code tricks I learn along the way. I call this the Clash Series and in today's series, we look at how to write an efficient script to check for prime numbers, and how to write it fast python for those fastest mode clashes.
@@ -128,20 +128,20 @@ The sqrt trick improves time complexity from $\mathcal{O}(n)$ to $\mathcal{O}(\s
 
 > The sqrt trick improves time complexity from $\mathcal{O}(n)$ to $\mathcal{O}(\sqrt{n})$ which is massive!
 
-```{python}
-#| code-fold: true
-#| code-summary: speedup comparison ⚡️
-
+```{.python filename="speedup comparison ⚡️" code-fold="false"}
 import time
 
 n = 2_147_462_143
 
-def comp(f: callable) -> None:
+for f in [is_prime_naive, is_prime_sqrt_trick]:
     start = time.time()
     f(n)
     print(f"Took total of {(time.time()-start):.10f} seconds using {f.__name__}")
-comp(is_prime_naive)
-comp(is_prime_sqrt_trick)
+```
+
+```text
+Took total of 118.3165051937 seconds using is_prime_naive
+Took total of 0.0010521412 seconds using is_prime_sqrt_trick
 ```
 
 ## Efficient writing
