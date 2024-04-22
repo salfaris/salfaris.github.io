@@ -1,6 +1,6 @@
 ---
 title: "A mathematical take on when to take a loan such as ASB Financing?"
-description: "ASB financing is a financing tool to maximize investment in Malaysia's ASB (Amanah Saham Berhad) unit trust fund."
+description: "We look at formalizing the parity between investing with a disposable capital versus with a financed leveraged capital in ASB."
 categories: [quant, investment, strategies]
 author: "Salman Faris"
 date: "22 04 2024"
