@@ -13,21 +13,18 @@ about:
       href: https://github.com/salfaris
 ---
 
-I am currently studying for an [MSc in Advanced Computer Science](https://www.ox.ac.uk/admissions/graduate/courses/msc-advanced-computer-science) at the University of Oxford. I recently graduated from King's College London with a BSc in Mathematics.
+I am currently a Senior Data Scientist at Dyson, helping decision making at the highest level in Dyson's new Home Business Unit. I spent my 9-5 dealing with Python, SQL, PySpark, GCP (BigQuery, DataProc, Pub/Sub, among others), on top of mentoring and leading the data science aspects in my team. 
 
-Previously, I was an Undergraduate Research Fellow at the [Department of Mathematics, King's College London](https://www.kcl.ac.uk/mathematics), under the supervision of Dr. Izaak Neri. There, I worked on exploring a new method to visualise large food webs, and in more generality, large complex networks.
+Prior to work, I graduated from the University of Oxford with an MSc in Advanced Computer Science. Before that, I graduated from King's College London with a BSc in Mathematics.
 
-I am very passionate about data science and machine learning. I like to view data science as detective work. It starts with a mystery, and you have to think hard of asking the right questions to find potential culprits. You'd then have to collect evidence to verify whether these culprits are guilty or not.
+When I'm not writing code, I practice on the piano and run outdoors nowadays. I also enjoy a good game of table tennis and poker.
 
-It's the same with data – you start with a problem, and you have to ask the right questions in hope of moving towards the potential solution. You'd then have to verify whether these are actually solutions, probably by using some statistical technique.
+My tech stack has changed over the years, with some technologies I haven't used for quite a while now. This is a good overview of what I still have in my mind:
 
-When I'm not writing code, you can find me playing table tennis or poker (and recently, Avalon) in the MCR.
-
-My tech stack includes:
-
-- Programming languages: Python, R, C/C++ (prior experience)
-- Data analysis: SQL, numpy, pandas, matplotlib/seaborn, Plotly
-- ML & stats modelling: RStan, PyMC3, scikit-learn, statsmodels, scipy, PyTorch
+- Programming languages: Python, R, C/C++ (basic experience)
+- Big data and cloud: PySpark, GCP, AWS (I use it a lot, but not manage)
+- Data analysis: SQL, PyData stack, Plotly
+- ML & stats modelling: PyMC3, scikit-learn, statsmodels, scipy, PyTorch, Jax
 - Web & dashboard: HTML/CSS/JavaScript, ReactJS, Flask, Streamlit
 - Others: Git, LaTeX, NetworkX
 
