@@ -8,7 +8,7 @@
 
 <meta name="author" content="Salman Faris">
 <meta name="dcterms.date" content="2024-04-22">
-<meta name="description" content="ASB financing is a financing tool to maximize investment in Malaysia’s ASB (Amanah Saham Berhad) unit trust fund. It is an excellent product for Bumis (controversial… I know). Essentially, it allows for leverage with only interest as a risk; which is great not just for consumers but with such few parameters, it makes modelling easy as well. Unfortunately, albeit expected, there’s not much arbitrage in this space – maybe only reverse arbitrage where financial institutions can screw consumers over.">
+<meta name="description" content="ASB financing is a financing tool to maximize investment in Malaysia’s ASB (Amanah Saham Berhad) unit trust fund.">
 
 <title>salman faris - A mathematical take on when to take a loan such as ASB Financing?</title>
 <style>
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="../../styles.css">
 <meta name="twitter:title" content="salman faris - A mathematical take on when to take a loan such as ASB Financing?">
-<meta name="twitter:description" content="ASB financing is a financing tool to maximize investment in Malaysia's ASB (Amanah Saham Berhad) unit trust fund. It is an excellent product for Bumis (controversial... I know).">
+<meta name="twitter:description" content="ASB financing is a financing tool to maximize investment in Malaysia's ASB (Amanah Saham Berhad) unit trust fund.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -137,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
       <h1 class="title">A mathematical take on when to take a loan such as ASB Financing?</h1>
                   <div>
         <div class="description">
-          ASB financing is a financing tool to maximize investment in Malaysia’s ASB (Amanah Saham Berhad) unit trust fund. It is an excellent product for Bumis (controversial… I know). Essentially, it allows for leverage with only interest as a risk; which is great not just for consumers but with such few parameters, it makes modelling easy as well. Unfortunately, albeit expected, there’s not much arbitrage in this space – maybe only reverse arbitrage where financial institutions can screw consumers over.
+          ASB financing is a financing tool to maximize investment in Malaysia’s ASB (Amanah Saham Berhad) unit trust fund.
         </div>
       </div>
                           <div class="quarto-categories">
@@ -203,7 +203,7 @@ ul.task-list li input[type="checkbox"] {
 <h1>Decision parity</h1>
 <p>I am going to put some numbers down so that the parity justification makes more sense. If I have some disposable $20,000 to invest, an investment in ASB without financing with a dividend rate of 5% would yield me $1000. However, with financing at a 4% interest rate, the same $20,000 would yield me only $200. Ouch, not great. So how do we achieve parity assuming interest and dividend rates are fixed? Well, you would have to take financing with a starting capital of $100,000. So I would have to take a loan that is 5x the value of my disposable starter. Is this worth it?</p>
 <p>Note that you take financing over a set amount of years so the interest rate can change with years. But the dividend rate is the same regardless if you take financing or not so we can essentially treat it as constant. Let’s look at what happens if we perturb the interest rate a bit assuming the dividend rate holds at 5%. Again take a starting capital of $100,000. With each 1% interest rate decrement, we see that the yield doubles from $1000 to $2000 and then to $3000 and eventually to $5000 where the interest rate is zero. So if the interest rate behaves stochastically (as it should), we should see some good years where the returns can get lucrative. Just think about the amount of disposable capital you need to have to attain these returns – it scales 2x with each 1% interest rate decrement. So to attain a $3000 return, you need $60,000 to start with which can be quite a jump.</p>
-<p><em>Just a short disclaimer that there can be terrible years as well if the dividend rate falls below the interest rate. As of 2024, we are seeing ASB stabilizing a bit despite the terrible Malaysian market conditions and <a href="https://www.isaham.my/foreign-funds">insane amount of foreign funds outflow</a>. So we shouldn’t be seeing a crossover between the two rates unless BNM starts to do something funny possibly due to global economy forcing Malaysia to be reactive.</em></p>
+<p><em>Just a short disclaimer that there can be terrible years as well if the dividend rate falls below the interest rate. As of 2024, we are seeing ASB stabilizing a bit despite the terrible Malaysian market conditions and <a href="https://www.isaham.my/foreign-funds">insane amount of foreign funds outflow</a>. So we shouldn’t be seeing a crossover between the two rates anytime soon unless BNM starts to do something funny possibly due to global economy forcing Malaysia to be reactive.</em></p>
 <p>So how do we formalize the parity argument in this context? Can we give answer to questions like “how much starting capital should I need before the risk due to premiums becomes unprofitable so that I can focus on investment without financing”? I aim to answer questions like these in the future where we look into annual movements and observe with a closer lens the dynamics of interest, dividend and reinvested capital – this sounds like a three-body problem and the maths can get musty real quick. This post, however, is a primer to set up a tool so we can reason about what I just said in a logical way.</p>
 </section>
 <section id="mathematical-primer" class="level1">
