@@ -1,5 +1,6 @@
 ---
 title: "A mathematical take on when to take a loan such as ASB Financing?"
+description: "ASB financing is a financing tool to maximize investment in Malaysia's ASB (Amanah Saham Berhad) unit trust fund. It is an excellent product for Bumis (controversial... I know). Essentially, it allows for leverage with only interest as a risk; which is great not just for consumers but with such few parameters, it makes modelling easy as well. Unfortunately, albeit expected, there's not much arbitrage in this space – maybe only reverse arbitrage where financial institutions can screw consumers over."
 categories: [quant, investment, strategies]
 author: "Salman Faris"
 date: "22 04 2024"
