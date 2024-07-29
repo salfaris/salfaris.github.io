@@ -7,20 +7,15 @@ about:
 
 ## **🔍 data science projects**
 
-### ⁍ [**Reducing high fatality accidents in the UK**](https://app.datacamp.com/workspace/w/38945e69-453d-48f2-b384-909c3135d659)
+### ⁍ [**Financial transactions fraud detection using machine learning**](https://github.com/salfaris/financial-fraud-detection)
 
-*Problem statement: What characterises high fatal accidents? Can we find areas of focus to reduce such accidents?*
+This project covers strategy research, experimentation (with reporting) and deployment via Google Cloud.
 
+- Researched and verified the class weight strategy in “Fraud Detection using Machine Learning” (Oza, 2018); and further extended the paper’s analysis with new models and metrics.
 
-- In this project, I have identified 9 improvement opportunities to reduce high fatal accidents and raised key questions to guide the exploration of such opportunities.
+- Trained logistic regression, SVMs and decision trees to perform financial transactions fraud detection in an imbalanced dataset of 6+ million rows and 0.1% sample fraud transactions (Python, scikit-learn).
 
-- The project involves a lot of fun viz techniques such as plotting a dendrogram based on Ward's clustering method to visualise correlated features, and plotting a choropleth map of the UK which get your hands dirty with GeoJSON files.
-
-- To identify 11 key features of high fatal accidents, I applied feature selection using Chi-squared test, mutual information gain, and tree-based MDI. I then take a deeper look at these selected features to see which criteria that separates high fatal accidents and verify these criteria using a 2 proportion Z-test.
-
-- Since the dataset was extremely imbalanced with 200 high fatal accidents in a pool of 91000+ accidents (roughly 0.002 ratio), I implemented SMOTE to oversample the minority label since uniform downsampling is not suitable since location is a key feature.
-
-<span style="font-size:0.8em">_This project is hosted on DataCamp Workspace._</span>
+- Built a web app to visualise streaming transactions data and perform live fraud detection using trained models. (Python, Streamlit, Docker, Google Artifact Registry, Google Cloud Run, Google Cloud Pub/Sub, Google Vertex AI).
 
 ---
 

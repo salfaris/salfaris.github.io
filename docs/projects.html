@@ -128,16 +128,14 @@ ul.task-list li input[type="checkbox"] {
       <div class="about-contents"><main class="content" id="quarto-document-content">
 <section id="data-science-projects" class="level2">
 <h2 data-anchor-id="data-science-projects"><strong>🔍 data science projects</strong></h2>
-<section id="reducing-high-fatality-accidents-in-the-uk" class="level3">
-<h3 data-anchor-id="reducing-high-fatality-accidents-in-the-uk">⁍ <a href="https://app.datacamp.com/workspace/w/38945e69-453d-48f2-b384-909c3135d659"><strong>Reducing high fatality accidents in the UK</strong></a></h3>
-<p><em>Problem statement: What characterises high fatal accidents? Can we find areas of focus to reduce such accidents?</em></p>
+<section id="financial-transactions-fraud-detection-using-machine-learning" class="level3">
+<h3 data-anchor-id="financial-transactions-fraud-detection-using-machine-learning">⁍ <a href="https://github.com/salfaris/financial-fraud-detection"><strong>Financial transactions fraud detection using machine learning</strong></a></h3>
+<p>This project covers strategy research, experimentation (with reporting) and deployment via Google Cloud.</p>
 <ul>
-<li><p>In this project, I have identified 9 improvement opportunities to reduce high fatal accidents and raised key questions to guide the exploration of such opportunities.</p></li>
-<li><p>The project involves a lot of fun viz techniques such as plotting a dendrogram based on Ward’s clustering method to visualise correlated features, and plotting a choropleth map of the UK which get your hands dirty with GeoJSON files.</p></li>
-<li><p>To identify 11 key features of high fatal accidents, I applied feature selection using Chi-squared test, mutual information gain, and tree-based MDI. I then take a deeper look at these selected features to see which criteria that separates high fatal accidents and verify these criteria using a 2 proportion Z-test.</p></li>
-<li><p>Since the dataset was extremely imbalanced with 200 high fatal accidents in a pool of 91000+ accidents (roughly 0.002 ratio), I implemented SMOTE to oversample the minority label since uniform downsampling is not suitable since location is a key feature.</p></li>
+<li><p>Researched and verified the class weight strategy in “Fraud Detection using Machine Learning” (Oza, 2018); and further extended the paper’s analysis with new models and metrics.</p></li>
+<li><p>Trained logistic regression, SVMs and decision trees to perform financial transactions fraud detection in an imbalanced dataset of 6+ million rows and 0.1% sample fraud transactions (Python, scikit-learn).</p></li>
+<li><p>Built a web app to visualise streaming transactions data and perform live fraud detection using trained models. (Python, Streamlit, Docker, Google Artifact Registry, Google Cloud Run, Google Cloud Pub/Sub, Google Vertex AI).</p></li>
 </ul>
-<p><span style="font-size:0.8em"><em>This project is hosted on DataCamp Workspace.</em></span></p>
 <hr>
 </section>
 <section id="measuring-the-impact-of-a-website-redesign-the-bayesian-way" class="level3">
