@@ -9,7 +9,7 @@ about:
 
 - My [dissertation](/downloads/dissertation.pdf){target="_blank"} – Diophantine Equations, supervised by Prof. Payman Kassaei.
 
-I wrote my undergrad math notes in $\LaTeX$ to help me understand better. Most of these notes replaced lecture notes and are around 100 pages long. They can be accessed via this [repository](https://github.com/salfaris/kcl-notes). Notable ones include:
+I wrote my undergrad math notes in $\LaTeX$ to help me understand better. These notes can replace lecture notes and are around 100 pages long each. They can be accessed via this [repository](https://github.com/salfaris/kcl-notes). Notable ones include:
 
 - [6CCM350A Rings and Modules](https://github.com/salfaris/kcl-notes/raw/main/level-6/rings-modules.pdf){target="_blank"} – based on lectures by Prof. Nicholas Shepherd-Barron, Fall 2020.
 - [6CCM359A Numerical and Computational Methods](https://github.com/salfaris/kcl-notes/raw/main/level-6/num-methods.pdf){target="_blank"} – based on lectures by Prof. Benjamin Doyon, Fall 2020.
