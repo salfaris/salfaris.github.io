@@ -5,7 +5,7 @@ about:
   image-width: 10em
 ---
 
-### Undergraduate stuff
+### Undergraduate stuff @ KCL
 
 - My [dissertation](/downloads/dissertation.pdf){target="_blank"} – Diophantine Equations, supervised by Prof. Payman Kassaei.
 
@@ -16,7 +16,7 @@ I wrote my undergrad math notes in $\LaTeX$ to help me understand better. Most o
 - [5CCM224A Introduction to Number Theory](https://github.com/salfaris/kcl-notes/raw/main/level-5/num-theory.pdf){target="_blank"} – based on lectures by Dr. James Newton, Fall 2019.
 - [5CCM226A Metric Spaces and Topology](https://github.com/salfaris/kcl-notes/raw/main/level-5/MST.pdf){target="_blank"} – based on lectures by Dr. Jerry Buckley, Fall 2019.
 
-### Postgraduate stuff
+### Postgraduate stuff @ Oxford
 
 - My [dissertation](https://www.cs.ox.ac.uk/michael.benedikt/thesesadvancedmsc.html){target="_blank"} –  “Enhancing VAE-learning on spatial priors using graph convolutional networks”, supervised by Seth Flaxman, Swapnil Mishra and Elizaveta Semenova.
 - Implemented "Variational Graph Auto-Encoders" (Kipf and Welling, 2016) in JAX for my dissertation. Source code in [this repo](https://github.com/salfaris/vgae-jax).
