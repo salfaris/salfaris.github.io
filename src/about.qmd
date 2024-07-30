@@ -1,6 +1,6 @@
 ---
 title: "about"
-image: avatar_circ.png
+image: avatar_new.jpg
 about:
   template: solana
   image-width: 10em
