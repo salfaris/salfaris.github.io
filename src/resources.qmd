@@ -7,15 +7,15 @@ about:
 
 ### Undergraduate stuff
 
-- My [dissertation](/downloads/dissertation.pdf){:target="_blank"} – Diophantine Equations, supervised by Prof. Payman Kassaei.
+- My [dissertation](/downloads/dissertation.pdf){target="_blank"} – Diophantine Equations, supervised by Prof. Payman Kassaei.
 
 I wrote my undergrad math notes in $\LaTeX$ to help me understand better. Most of these notes replaced lecture notes and are around 100 pages long. They can be accessed via this [repository](https://github.com/salfaris/kcl-notes). Notable ones include:
 
-- [6CCM350A Rings and Modules](https://github.com/salfaris/kcl-notes/raw/main/level-6/rings-modules.pdf){:target="_blank"} – based on lectures by Prof. Nicholas Shepherd-Barron, Fall 2020.
-- [6CCM359A Numerical and Computational Methods](https://github.com/salfaris/kcl-notes/raw/main/level-6/num-methods.pdf){:target="_blank"} – based on lectures by Prof. Benjamin Doyon, Fall 2020.
-- [5CCM224A Introduction to Number Theory](https://github.com/salfaris/kcl-notes/raw/main/level-5/num-theory.pdf){:target="_blank"} – based on lectures by Dr. James Newton, Fall 2019.
-- [5CCM226A Metric Spaces and Topology](https://github.com/salfaris/kcl-notes/raw/main/level-5/MST.pdf){:target="_blank"} – based on lectures by Dr. Jerry Buckley, Fall 2019.
+- [6CCM350A Rings and Modules](https://github.com/salfaris/kcl-notes/raw/main/level-6/rings-modules.pdf){target="_blank"} – based on lectures by Prof. Nicholas Shepherd-Barron, Fall 2020.
+- [6CCM359A Numerical and Computational Methods](https://github.com/salfaris/kcl-notes/raw/main/level-6/num-methods.pdf){target="_blank"} – based on lectures by Prof. Benjamin Doyon, Fall 2020.
+- [5CCM224A Introduction to Number Theory](https://github.com/salfaris/kcl-notes/raw/main/level-5/num-theory.pdf){target="_blank"} – based on lectures by Dr. James Newton, Fall 2019.
+- [5CCM226A Metric Spaces and Topology](https://github.com/salfaris/kcl-notes/raw/main/level-5/MST.pdf){target="_blank"} – based on lectures by Dr. Jerry Buckley, Fall 2019.
 
 ### Postgraduate stuff
 
-- My [dissertation](https://www.cs.ox.ac.uk/michael.benedikt/msctheses/2022/){:target="_blank"} –  “Enhancing VAE-learning on spatial priors using graph convolutional networks”, supervised by Seth Flaxman, Swapnil Mishra and Elizaveta Semenova.
+- My [dissertation](https://www.cs.ox.ac.uk/michael.benedikt/thesesadvancedmsc.html){target="_blank"} –  “Enhancing VAE-learning on spatial priors using graph convolutional networks”, supervised by Seth Flaxman, Swapnil Mishra and Elizaveta Semenova.
