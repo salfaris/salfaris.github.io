@@ -2,9 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/draft_2024-06-02-fraud-detection-primer-01/index.html",
       "/posts/2024-04-22-asbf-primer-01/index.html",
-      "/posts/draft_2023-03-05-revisit-quora-20-math-IA/index.html",
       "/posts/2023-03-06-ls-aws-in-python/index.html",
       "/posts/2023-03-05-clash-is-prime/index.html",
       "/posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html",
