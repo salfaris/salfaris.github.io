@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>salman faris - technical thoughts.</title>
+<title>technical thoughts. – salman faris</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -48,7 +48,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -57,8 +63,10 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script>
@@ -91,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
   })
   </script>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
@@ -106,54 +114,83 @@ ul.task-list li input[type="checkbox"] {
    });
 }}});
   </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
-<meta name="twitter:title" content="salman faris - technical thoughts.">
+<meta name="twitter:title" content="technical thoughts. – salman faris">
 <meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title"><strong>salman faris</strong></span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">
- <span class="menu-text">about</span></a>
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">about</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./projects.html">
- <span class="menu-text">projects</span></a>
+    <a class="nav-link" href="./projects.html"> 
+<span class="menu-text">projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resources.html">
- <span class="menu-text">resources</span></a>
+    <a class="nav-link" href="./resources.html"> 
+<span class="menu-text">resources</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/salfaris/"><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/salfaris/"> <i class="bi bi-linkedin" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/salfaris"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/salfaris"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -166,7 +203,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
     
   
-  <div class="quarto-title-meta">
+  <div class="quarto-title-meta column-page-left">
 
       
     
@@ -179,7 +216,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(11)</span></div><div class="category" data-category="AWS">AWS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="algorithms">algorithms <span class="quarto-category-count">(2)</span></div><div class="category" data-category="clash of code">clash of code <span class="quarto-category-count">(1)</span></div><div class="category" data-category="clean coding">clean coding <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cloud">cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="computer vision">computer vision <span class="quarto-category-count">(1)</span></div><div class="category" data-category="data handling">data handling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="data preprocessing">data preprocessing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="data science">data science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="databases">databases <span class="quarto-category-count">(1)</span></div><div class="category" data-category="general">general <span class="quarto-category-count">(1)</span></div><div class="category" data-category="investment">investment <span class="quarto-category-count">(1)</span></div><div class="category" data-category="javascript">javascript <span class="quarto-category-count">(1)</span></div><div class="category" data-category="latex">latex <span class="quarto-category-count">(1)</span></div><div class="category" data-category="machine learning">machine learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="numerical analysis">numerical analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="plotly">plotly <span class="quarto-category-count">(1)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(4)</span></div><div class="category" data-category="pytorch">pytorch <span class="quarto-category-count">(1)</span></div><div class="category" data-category="quant">quant <span class="quarto-category-count">(1)</span></div><div class="category" data-category="software engineering">software engineering <span class="quarto-category-count">(2)</span></div><div class="category" data-category="sql">sql <span class="quarto-category-count">(1)</span></div><div class="category" data-category="sqlalchemy">sqlalchemy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="strategies">strategies <span class="quarto-category-count">(1)</span></div><div class="category" data-category="testing">testing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="web dev">web dev <span class="quarto-category-count">(1)</span></div><div class="category" data-category="writing">writing <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(13)</span></div><div class="category" data-category="AWS">AWS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="IB">IB <span class="quarto-category-count">(1)</span></div><div class="category" data-category="algorithms">algorithms <span class="quarto-category-count">(2)</span></div><div class="category" data-category="clash of code">clash of code <span class="quarto-category-count">(1)</span></div><div class="category" data-category="clean coding">clean coding <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cloud">cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="computer vision">computer vision <span class="quarto-category-count">(1)</span></div><div class="category" data-category="data handling">data handling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="data preprocessing">data preprocessing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="data science">data science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="databases">databases <span class="quarto-category-count">(1)</span></div><div class="category" data-category="fraud-detection">fraud-detection <span class="quarto-category-count">(1)</span></div><div class="category" data-category="general">general <span class="quarto-category-count">(1)</span></div><div class="category" data-category="investment">investment <span class="quarto-category-count">(1)</span></div><div class="category" data-category="javascript">javascript <span class="quarto-category-count">(1)</span></div><div class="category" data-category="latex">latex <span class="quarto-category-count">(1)</span></div><div class="category" data-category="machine learning">machine learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="machine-learning">machine-learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="mathematics">mathematics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="numerical analysis">numerical analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="plotly">plotly <span class="quarto-category-count">(1)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(4)</span></div><div class="category" data-category="pytorch">pytorch <span class="quarto-category-count">(1)</span></div><div class="category" data-category="quant">quant <span class="quarto-category-count">(1)</span></div><div class="category" data-category="software engineering">software engineering <span class="quarto-category-count">(2)</span></div><div class="category" data-category="sql">sql <span class="quarto-category-count">(1)</span></div><div class="category" data-category="sqlalchemy">sqlalchemy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="strategies">strategies <span class="quarto-category-count">(1)</span></div><div class="category" data-category="testing">testing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="web dev">web dev <span class="quarto-category-count">(1)</span></div><div class="category" data-category="writing">writing <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -190,25 +227,58 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="quant,investment,strategies" data-listing-date-sort="1713740400000" data-listing-file-modified-sort="1714032602907" data-listing-reading-time-sort="8.99">
+<div class="quarto-post image-right" data-index="0" data-categories="fraud-detection,machine-learning" data-listing-date-sort="1717282800000" data-listing-file-modified-sort="1722258997725" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="455">
 <div class="thumbnail">
-<a href="./posts/2024-04-22-asbf-primer-01/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./posts/2024-04-22-asbf-primer-01/index.html"></a></p>
+<p><a href="./posts/draft_2024-06-02-fraud-detection-primer-01/index.html" class="no-external"></a></p><a href="./posts/draft_2024-06-02-fraud-detection-primer-01/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/draft_2024-06-02-fraud-detection-primer-01/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2024-04-22-asbf-primer-01/index.html">
 <h3 class="no-anchor listing-title">
-A mathematical take on when to take a loan such as ASB Financing
+<a href="./posts/draft_2024-06-02-fraud-detection-primer-01/index.html" class="no-external">Basics of payments fraud detection</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/draft_2024-06-02-fraud-detection-primer-01/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('fraud-detection'); return false;">
+fraud-detection
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('machine-learning'); return false;">
+machine-learning
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/draft_2024-06-02-fraud-detection-primer-01/index.html" class="no-external">How can machine learning help make payments fraud detection efficient?</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/draft_2024-06-02-fraud-detection-primer-01/index.html" class="no-external">
+<div class="listing-date">
+Jun 2, 2024
+</div>
+<div class="listing-author">
+Salman Faris
 </div>
 </a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="quant,investment,strategies" data-listing-date-sort="1713740400000" data-listing-file-modified-sort="1714032602907" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1798">
+<div class="thumbnail">
+<p><a href="./posts/2024-04-22-asbf-primer-01/index.html" class="no-external"></a></p><a href="./posts/2024-04-22-asbf-primer-01/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/2024-04-22-asbf-primer-01/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2024-04-22-asbf-primer-01/index.html" class="no-external">A mathematical take on when to take a loan such as ASB Financing</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/2024-04-22-asbf-primer-01/index.html" class="no-external"></a>
+</div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('quant'); return false;">
 quant
@@ -220,14 +290,12 @@ investment
 strategies
 </div>
 </div>
-<a href="./posts/2024-04-22-asbf-primer-01/index.html">
 <div class="listing-description">
-<p>We look at formalizing the parity between investing with a disposable capital versus with a financed leveraged capital in ASB.</p>
+<a href="./posts/2024-04-22-asbf-primer-01/index.html" class="no-external">We look at formalizing the parity between investing with a disposable capital versus with a financed leveraged capital in ASB.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2024-04-22-asbf-primer-01/index.html">
+<a href="./posts/2024-04-22-asbf-primer-01/index.html" class="no-external">
 <div class="listing-date">
 Apr 22, 2024
 </div>
@@ -237,23 +305,55 @@ Salman Faris
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="cloud,AWS,python" data-listing-date-sort="1678579200000" data-listing-file-modified-sort="1713755360321" data-listing-reading-time-sort="1.775">
+<div class="quarto-post image-right" data-index="2" data-categories="IB,mathematics" data-listing-date-sort="1683068400000" data-listing-file-modified-sort="1678048595496" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2493">
 <div class="thumbnail">
-<a href="./posts/2023-03-06-ls-aws-in-python/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./posts/2023-03-06-ls-aws-in-python/index.html"></a></p>
+<p><a href="./posts/draft_2023-03-05-revisit-quora-20-math-IA/index.html" class="no-external"></a></p><a href="./posts/draft_2023-03-05-revisit-quora-20-math-IA/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/draft_2023-03-05-revisit-quora-20-math-IA/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2023-03-06-ls-aws-in-python/index.html">
 <h3 class="no-anchor listing-title">
-How to do <code>aws s3 ls s3://bucket/</code> using boto3 in python?
+<a href="./posts/draft_2023-03-05-revisit-quora-20-math-IA/index.html" class="no-external">Revisit: My Quora Post on “What is an example of an IB math HL 20/20 exploration?”</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/draft_2023-03-05-revisit-quora-20-math-IA/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('IB'); return false;">
+IB
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mathematics'); return false;">
+mathematics
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/draft_2023-03-05-revisit-quora-20-math-IA/index.html" class="no-external">Rigour. Mathematical connections. Presentations.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/draft_2023-03-05-revisit-quora-20-math-IA/index.html" class="no-external">
+<div class="listing-date">
+May 3, 2023
+</div>
+<div class="listing-author">
+Salman Faris
 </div>
 </a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="cloud,AWS,python" data-listing-date-sort="1678579200000" data-listing-file-modified-sort="1713755360321" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="355">
+<div class="thumbnail">
+<p><a href="./posts/2023-03-06-ls-aws-in-python/index.html" class="no-external"></a></p><a href="./posts/2023-03-06-ls-aws-in-python/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/2023-03-06-ls-aws-in-python/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/2023-03-06-ls-aws-in-python/index.html" class="no-external">How to do <code>aws s3 ls s3://bucket/</code> using boto3 in python?</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/2023-03-06-ls-aws-in-python/index.html" class="no-external"></a>
+</div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('cloud'); return false;">
 cloud
@@ -265,14 +365,12 @@ AWS
 python
 </div>
 </div>
-<a href="./posts/2023-03-06-ls-aws-in-python/index.html">
 <div class="listing-description">
-Today, we look at how can we perform the following terminal command in python.
+<a href="./posts/2023-03-06-ls-aws-in-python/index.html" class="no-external">Today, we look at how can we perform the following terminal command in python.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2023-03-06-ls-aws-in-python/index.html">
+<a href="./posts/2023-03-06-ls-aws-in-python/index.html" class="no-external">
 <div class="listing-date">
 Mar 12, 2023
 </div>
@@ -282,23 +380,19 @@ Salman Faris
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="clash of code,algorithms" data-listing-date-sort="1646438400000" data-listing-file-modified-sort="1678721692995" data-listing-reading-time-sort="7.705">
+<div class="quarto-post image-right" data-index="4" data-categories="clash of code,algorithms" data-listing-date-sort="1646438400000" data-listing-file-modified-sort="1678721692995" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1541">
 <div class="thumbnail">
-<a href="./posts/2023-03-05-clash-is-prime/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./posts/2023-03-05-clash-is-prime/index.html"></a></p>
+<p><a href="./posts/2023-03-05-clash-is-prime/index.html" class="no-external"></a></p><a href="./posts/2023-03-05-clash-is-prime/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/2023-03-05-clash-is-prime/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2023-03-05-clash-is-prime/index.html">
 <h3 class="no-anchor listing-title">
-Clash Series: Checking Number is Prime
+<a href="./posts/2023-03-05-clash-is-prime/index.html" class="no-external">Clash Series: Checking Number is Prime</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2023-03-05-clash-is-prime/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('clash of code'); return false;">
 clash of code
@@ -307,14 +401,12 @@ clash of code
 algorithms
 </div>
 </div>
-<a href="./posts/2023-03-05-clash-is-prime/index.html">
 <div class="listing-description">
-This is the first of hopefully many more posts on Clash of Code tricks I learn along the way. I call…
+<a href="./posts/2023-03-05-clash-is-prime/index.html" class="no-external">This is the first of hopefully many more posts on Clash of Code tricks I learn along the way. I call this the Clash Series and in today’s series, we look at how to write an…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2023-03-05-clash-is-prime/index.html">
+<a href="./posts/2023-03-05-clash-is-prime/index.html" class="no-external">
 <div class="listing-date">
 Mar 5, 2022
 </div>
@@ -324,19 +416,19 @@ Salman Faris
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="machine learning,computer vision,pytorch,data preprocessing" data-listing-date-sort="1630969200000" data-listing-file-modified-sort="1678146385065" data-listing-reading-time-sort="6.38">
+<div class="quarto-post image-right" data-index="5" data-categories="machine learning,computer vision,pytorch,data preprocessing" data-listing-date-sort="1630969200000" data-listing-file-modified-sort="1678146385065" data-listing-date-modified-sort="1631055600000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1276">
 <div class="thumbnail">
-<p><a href="./posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html"> <img src="./posts/2021-09-07-preparing-image-dataset-in-pytorch/2021-09-07-tshirt.png" class="thumnail-image"> </a></p>
+<p><a href="./posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html" class="no-external"></a></p><a href="./posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/2021-09-07-preparing-image-dataset-in-pytorch/2021-09-07-tshirt.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html">
 <h3 class="no-anchor listing-title">
-Preparing Image Dataset for Neural Networks in PyTorch
+<a href="./posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html" class="no-external">Preparing Image Dataset for Neural Networks in PyTorch</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('machine learning'); return false;">
 machine learning
@@ -351,14 +443,12 @@ pytorch
 data preprocessing
 </div>
 </div>
-<a href="./posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html">
 <div class="listing-description">
-Preparing and handling data is a core step of any machine learning pipeline. Today, we will look at handling data when the data is an image (or image-like) in PyTorch.
+<a href="./posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html" class="no-external">Preparing and handling data is a core step of any machine learning pipeline. Today, we will look at handling data when the data is an image (or image-like) in PyTorch.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html">
+<a href="./posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html" class="no-external">
 <div class="listing-date">
 Sep 7, 2021
 </div>
@@ -368,23 +458,19 @@ Salman Faris
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="software engineering,clean coding" data-listing-date-sort="1629241200000" data-listing-file-modified-sort="1678145886073" data-listing-reading-time-sort="4.75">
+<div class="quarto-post image-right" data-index="6" data-categories="software engineering,clean coding" data-listing-date-sort="1629241200000" data-listing-file-modified-sort="1678145886073" data-listing-date-modified-sort="1629327600000" data-listing-reading-time-sort="5" data-listing-word-count-sort="950">
 <div class="thumbnail">
-<a href="./posts/2021-08-18-coding-kata/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./posts/2021-08-18-coding-kata/index.html"></a></p>
+<p><a href="./posts/2021-08-18-coding-kata/index.html" class="no-external"></a></p><a href="./posts/2021-08-18-coding-kata/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/2021-08-18-coding-kata" class="thumbnail-image"></p>
+</a><p><a href="./posts/2021-08-18-coding-kata/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-08-18-coding-kata/index.html">
 <h3 class="no-anchor listing-title">
-The Coding Kata
+<a href="./posts/2021-08-18-coding-kata/index.html" class="no-external">The Coding Kata</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-08-18-coding-kata/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('software engineering'); return false;">
 software engineering
@@ -393,14 +479,12 @@ software engineering
 clean coding
 </div>
 </div>
-<a href="./posts/2021-08-18-coding-kata/index.html">
 <div class="listing-description">
-A coding kata is <em>an exercise to sharpen your programming skills and muscle memory via repetition</em>. I learnt this concept when I was reading <strong>The Clean Coder</strong> (highly recommended!) and have since adopted it as part of my programming routine. It helps my hands “know” what to…
+<a href="./posts/2021-08-18-coding-kata/index.html" class="no-external">A coding kata is <em>an exercise to sharpen your programming skills and muscle memory via repetition</em>. I learnt this concept when I was reading <strong>The Clean Coder</strong> (highly…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-08-18-coding-kata/index.html">
+<a href="./posts/2021-08-18-coding-kata/index.html" class="no-external">
 <div class="listing-date">
 Aug 18, 2021
 </div>
@@ -410,19 +494,19 @@ Salman Faris
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="javascript,plotly,python,web dev" data-listing-date-sort="1623538800000" data-listing-file-modified-sort="1678145893598" data-listing-reading-time-sort="1.72">
+<div class="quarto-post image-right" data-index="7" data-categories="javascript,plotly,python,web dev" data-listing-date-sort="1623538800000" data-listing-file-modified-sort="1678145893598" data-listing-date-modified-sort="1623538800000" data-listing-reading-time-sort="2" data-listing-word-count-sort="344">
 <div class="thumbnail">
-<p><a href="./posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html"> <img src="./posts/2021-06-13-plotly-theme-in-react-plotly-js/plotly_py_plot.png" class="thumnail-image"> </a></p>
+<p><a href="./posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html" class="no-external"></a></p><a href="./posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/2021-06-13-plotly-theme-in-react-plotly-js/plotly_py_plot.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html">
 <h3 class="no-anchor listing-title">
-Plotly.py main theme in Plotly.js
+<a href="./posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html" class="no-external">Plotly.py main theme in Plotly.js</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('javascript'); return false;">
 javascript
@@ -437,14 +521,12 @@ python
 web dev
 </div>
 </div>
-<a href="./posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html">
 <div class="listing-description">
-If you’re like me who is used to using Plotly.py…
+<a href="./posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html" class="no-external">If you’re like me who is used to using Plotly.py (i.e.&nbsp;Plotly Python) and then suddenly decided to use Plotly.js directly, you might immediately realize that there are some…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html">
+<a href="./posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html" class="no-external">
 <div class="listing-date">
 Jun 13, 2021
 </div>
@@ -454,19 +536,19 @@ Salman Faris
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="python,testing,software engineering" data-listing-date-sort="1619996400000" data-listing-file-modified-sort="1678145899850" data-listing-reading-time-sort="7.36">
+<div class="quarto-post image-right" data-index="8" data-categories="python,testing,software engineering" data-listing-date-sort="1619996400000" data-listing-file-modified-sort="1678145899850" data-listing-date-modified-sort="1621292400000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1472">
 <div class="thumbnail">
-<p><a href="./posts/2021-05-03-unit-testing-with-pytest/index.html"> <img src="./posts/2021-05-03-unit-testing-with-pytest/images/header-unit-testing-with-pytest.png" class="thumnail-image"> </a></p>
+<p><a href="./posts/2021-05-03-unit-testing-with-pytest/index.html" class="no-external"></a></p><a href="./posts/2021-05-03-unit-testing-with-pytest/index.html" class="no-external">
+<p class="card-img-top"><img src="posts/2021-05-03-unit-testing-with-pytest/images/header-unit-testing-with-pytest.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/2021-05-03-unit-testing-with-pytest/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-05-03-unit-testing-with-pytest/index.html">
 <h3 class="no-anchor listing-title">
-Unit Testing with pytest
+<a href="./posts/2021-05-03-unit-testing-with-pytest/index.html" class="no-external">Unit Testing with pytest</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-05-03-unit-testing-with-pytest/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
 python
@@ -478,14 +560,12 @@ testing
 software engineering
 </div>
 </div>
-<a href="./posts/2021-05-03-unit-testing-with-pytest/index.html">
 <div class="listing-description">
-<p>Why do we do unit testing and how to do unit testing in python using pytest.</p>
+<a href="./posts/2021-05-03-unit-testing-with-pytest/index.html" class="no-external">Why do we do unit testing and how to do unit testing in python using pytest.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-05-03-unit-testing-with-pytest/index.html">
+<a href="./posts/2021-05-03-unit-testing-with-pytest/index.html" class="no-external">
 <div class="listing-date">
 May 3, 2021
 </div>
@@ -495,19 +575,19 @@ Salman Faris
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="data science,python,sql,sqlalchemy,databases,data handling" data-listing-date-sort="1619737200000" data-listing-file-modified-sort="1678145921688" data-listing-reading-time-sort="9.69">
+<div class="quarto-post image-right" data-index="9" data-categories="data science,python,sql,sqlalchemy,databases,data handling" data-listing-date-sort="1619737200000" data-listing-file-modified-sort="1678145921688" data-listing-date-modified-sort="1619737200000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1938">
 <div class="thumbnail">
-<p><a href="./posts/2021-04-30-relational-databases-in-python-part-I/index.html"> <img src="./posts/2021-04-30-relational-databases-in-python-part-I/header-relational-databases-in-python-part-I.png" class="thumnail-image"> </a></p>
+<p><a href="./posts/2021-04-30-relational-databases-in-python-part-I/index.html" class="no-external"></a></p><a href="./posts/2021-04-30-relational-databases-in-python-part-I/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/2021-04-30-relational-databases-in-python-part-I/header-relational-databases-in-python-part-I.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2021-04-30-relational-databases-in-python-part-I/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-04-30-relational-databases-in-python-part-I/index.html">
 <h3 class="no-anchor listing-title">
-Relational Databases in Python (part I)
+<a href="./posts/2021-04-30-relational-databases-in-python-part-I/index.html" class="no-external">Relational Databases in Python (part I)</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-04-30-relational-databases-in-python-part-I/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
 data science
@@ -528,14 +608,12 @@ databases
 data handling
 </div>
 </div>
-<a href="./posts/2021-04-30-relational-databases-in-python-part-I/index.html">
 <div class="listing-description">
-We usually hear the word <em>databases</em> being thrown around especially when talking about data-related things. So what is it, and what is the more precise term <em>relational databases</em>…
+<a href="./posts/2021-04-30-relational-databases-in-python-part-I/index.html" class="no-external">We usually hear the word <em>databases</em> being thrown around especially when talking about data-related things. So what is it, and what is the more precise term <em>relational databases</em>…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-04-30-relational-databases-in-python-part-I/index.html">
+<a href="./posts/2021-04-30-relational-databases-in-python-part-I/index.html" class="no-external">
 <div class="listing-date">
 Apr 30, 2021
 </div>
@@ -545,19 +623,19 @@ Salman Faris
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="latex,writing" data-listing-date-sort="1617750000000" data-listing-file-modified-sort="1678145928410" data-listing-reading-time-sort="3.675">
+<div class="quarto-post image-right" data-index="10" data-categories="latex,writing" data-listing-date-sort="1617750000000" data-listing-file-modified-sort="1678145928410" data-listing-date-modified-sort="1618095600000" data-listing-reading-time-sort="4" data-listing-word-count-sort="735">
 <div class="thumbnail">
-<p><a href="./posts/2021-04-07-tcolorbox/index.html"> <img src="./posts/2021-04-07-tcolorbox/images/example-box.png" class="thumnail-image"> </a></p>
+<p><a href="./posts/2021-04-07-tcolorbox/index.html" class="no-external"></a></p><a href="./posts/2021-04-07-tcolorbox/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/2021-04-07-tcolorbox/images/example-box.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2021-04-07-tcolorbox/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-04-07-tcolorbox/index.html">
 <h3 class="no-anchor listing-title">
-Making pastel-colored boxes using tcolorbox in LaTeX
+<a href="./posts/2021-04-07-tcolorbox/index.html" class="no-external">Making pastel-colored boxes using tcolorbox in LaTeX</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-04-07-tcolorbox/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('latex'); return false;">
 latex
@@ -566,14 +644,12 @@ latex
 writing
 </div>
 </div>
-<a href="./posts/2021-04-07-tcolorbox/index.html">
 <div class="listing-description">
-One of the many questions I get when people see my <span class="math inline">\LaTeX</span>-ed math notes is <em>how do you create these nice pastel-colored boxes?</em>
+<a href="./posts/2021-04-07-tcolorbox/index.html" class="no-external">One of the many questions I get when people see my <span class="math inline">\LaTeX</span>-ed math notes is <em>how do you create these nice pastel-colored boxes?</em></a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-04-07-tcolorbox/index.html">
+<a href="./posts/2021-04-07-tcolorbox/index.html" class="no-external">
 <div class="listing-date">
 Apr 7, 2021
 </div>
@@ -583,19 +659,19 @@ Salman Faris
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="numerical analysis,algorithms" data-listing-date-sort="1617577200000" data-listing-file-modified-sort="1678145941786" data-listing-reading-time-sort="5.915">
+<div class="quarto-post image-right" data-index="11" data-categories="numerical analysis,algorithms" data-listing-date-sort="1617577200000" data-listing-file-modified-sort="1678145941786" data-listing-date-modified-sort="1676764800000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1183">
 <div class="thumbnail">
-<p><a href="./posts/2021-04-05-newton-method/index.html"> <img src="./posts/2021-04-05-newton-method/newton-method.png" class="thumnail-image"> </a></p>
+<p><a href="./posts/2021-04-05-newton-method/index.html" class="no-external"></a></p><a href="./posts/2021-04-05-newton-method/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/2021-04-05-newton-method/newton-method.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/2021-04-05-newton-method/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-04-05-newton-method/index.html">
 <h3 class="no-anchor listing-title">
-Root-hunting algorithm: Newton’s method
+<a href="./posts/2021-04-05-newton-method/index.html" class="no-external">Root-hunting algorithm: Newton’s method</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-04-05-newton-method/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('numerical analysis'); return false;">
 numerical analysis
@@ -604,14 +680,12 @@ numerical analysis
 algorithms
 </div>
 </div>
-<a href="./posts/2021-04-05-newton-method/index.html">
 <div class="listing-description">
-<strong>Problem:</strong> Given a real-valued function <span class="math inline">f(x)</span> in one real variable, what are the values <span class="math inline">x_0 \in \mathbb{R}</span> such that <span class="math inline">f(x_0) = 0</span>?
+<a href="./posts/2021-04-05-newton-method/index.html" class="no-external"><strong>Problem:</strong> Given a real-valued function <span class="math inline">f(x)</span> in one real variable, what are the values <span class="math inline">x_0 \in \mathbb{R}</span> such that <span class="math inline">f(x_0) = 0</span>?</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-04-05-newton-method/index.html">
+<a href="./posts/2021-04-05-newton-method/index.html" class="no-external">
 <div class="listing-date">
 Apr 5, 2021
 </div>
@@ -621,36 +695,30 @@ Salman Faris
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="general" data-listing-date-sort="1617577200000" data-listing-file-modified-sort="1678145949973" data-listing-reading-time-sort="0.615">
+<div class="quarto-post image-right" data-index="12" data-categories="general" data-listing-date-sort="1617577200000" data-listing-file-modified-sort="1678145949973" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="123">
 <div class="thumbnail">
-<a href="./posts/2021-04-05-first-post/index.html">
-<div class="thumbnail-image">
-
-</div>
-</a><p><a href="./posts/2021-04-05-first-post/index.html"></a></p>
+<p><a href="./posts/2021-04-05-first-post/index.html" class="no-external"></a></p><a href="./posts/2021-04-05-first-post/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/2021-04-05-first-post/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/2021-04-05-first-post/index.html">
 <h3 class="no-anchor listing-title">
-Blogging again
+<a href="./posts/2021-04-05-first-post/index.html" class="no-external">Blogging again</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/2021-04-05-first-post/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('general'); return false;">
 general
 </div>
 </div>
-<a href="./posts/2021-04-05-first-post/index.html">
 <div class="listing-description">
-I’ve been an active blogger since 2011 up until 2016 (although most of the earlier contents are now hidden due to cringiness) where I talked about various things – life events, some tech stuff and my…
+<a href="./posts/2021-04-05-first-post/index.html" class="no-external">I’ve been an active blogger since 2011 up until 2016 (although most of the earlier contents are now hidden due to cringiness) where I talked about various things – life…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/2021-04-05-first-post/index.html">
+<a href="./posts/2021-04-05-first-post/index.html" class="no-external">
 <div class="listing-date">
 Apr 5, 2021
 </div>
@@ -692,12 +760,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
     }
-  });
-  clipboard.on('success', function(e) {
+    return false;
+  }
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -729,11 +800,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/salfaris\.github\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -743,8 +853,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -756,9 +875,245 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -799,6 +1154,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

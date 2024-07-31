@@ -6,7 +6,7 @@ about:
 toc: true
 ---
 
-## **🔍 data science projects**
+## **🔍 data science**
 
 ### [Financial transactions fraud detection using machine learning](https://github.com/salfaris/financial-fraud-detection)
 
@@ -54,23 +54,13 @@ The idea of the project is to understand trends in the usage of TfL Santander Cy
 
 <span style="font-size:0.8em">_This project was hosted on Deepnote and then hosted on DataCamp Workspace._</span>
 
----
-
-### [Is handwashing really effective?](https://app.datacamp.com/workspace/w/fed0a2a6-1763-4433-930f-cdfc94072aec)
-
-The Covid-19 pandemic made me want to look back at the history of handwashing when it was originally introduced. In this data exploration, we are able to answer questions like: (i) "How significant was the change between pre-handwashing era and post-handwashing era?" and (ii) "What is the 90% confidence interval of the mean of difference between these eras?".
-
-<span style="font-size:0.8em">_This project was hosted on Deepnote and then hosted on DataCamp Workspace._</span>
-
-<br/>
-
 ## **🔬 research ML**
 
 ### [MSc thesis. "Enhancing VAE-learning on spatial priors using GCN"](https://github.com/salfaris/PriorVGAE)
 
 My Oxford MSc thesis supervised by Seth Flaxman, Swapnil Mishra and Elizaveta Semenova. 
 
-I made the observation that the PriorVAE framework in "_PriorVAE: encoding spatial priors with variational autoencoders for small-area estimation_" (Semenova et. al, 2022) does not make efficient use of the local neighbourhood structure when learning spatial priors for MCMC sampling.
+I made the observation that the PriorVAE framework in "_PriorVAE: encoding spatial priors with variational autoencoders for small-area estimation_" (Semenova et. al, 2022) does not make efficient use of the data's local neighbourhood structure when learning spatial priors for MCMC sampling.
 
 So I proposed a new framework, called PriorVGAE, which exploits the underlying local neighbourhood structure and propagates this information efficiently via the use of graph convolutional networks (GCN). Under this new framework, we were able to perform MCMC inference with far superior performance as compared to PriorVAE while enjoying better sampling speeds. We achieved lower mean squared error (MSE) for our sample reconstructions across all our experiments and attained higher effective sample sizes with lower MCMC sampling time.
 
@@ -78,15 +68,19 @@ The breakthrough. Naively injecting a GCN into a VAE framework would not make th
 
 Some bonus advantages of this framework as compared to PriorVAE include getting computationally cheaper training. We now have fewer learnable parameters since we replace MLPs with GCNs and GCN weights are shared across the support. Out-of-sample predictions are also now tractable as restarting compute training is relatively inexpensive.
 
-### [Reproduction of "_Inference Suboptimality in Variational Autoencoders_" (Cremer et. al, 2018)](https://github.com/ATML-2022-Group6/inference-suboptimality)
+---
+
+### [Reproduction of "_Inference Suboptimality in Variational Autoencoders_" (Cremer et. al, 2018) in JAX](https://github.com/ATML-2022-Group6/inference-suboptimality)
 
 We reproduced some of the key interesting experiments in the paper "_Inference Suboptimality in Variational Autoencoders_" (Cremer et. al, 2018) using JAX and extended the result to the K-MNIST dataset. This work was done jointly with Basim Khajwal, Snehal Raj and Vasileios Ntogram.
 
-### [Reproduction of "_Variational Graph Auto-Encoders_" (Kipf and Welling, 2016)](https://github.com/salfaris/PriorVGAE)
+---
+
+### [Reproduction of "_Variational Graph Auto-Encoders_" (Kipf and Welling, 2016) in JAX](https://github.com/salfaris/PriorVGAE)
 
 I reproduced the variational graph autoencoder (VGAE) deep learning model using JAX to be used as a component in my MSc thesis.
 
-## **💻 pure web app projects**
+## **💻 web app**
 
 ### [TradeLogger](https://github.com/salfaris/tradelogger)
 
@@ -107,6 +101,8 @@ Link to the deployed calculator: click [here](https://salfaris-allpow-app-wejo3u
 ### [EasyPS](https://github.com/salfaris/EasyPS)
 
 A simple, out of the box personal statement LaTeX framework. It helps handling duplicated tex files when writing personal statements for multiple universities, scholarships or jobs.
+
+---
 
 ### [PyEasyPS](https://github.com/salfaris/PyEasyPS)
 
