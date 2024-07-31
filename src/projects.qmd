@@ -60,6 +60,8 @@ The idea of the project is to understand trends in the usage of TfL Santander Cy
 
 My Oxford MSc thesis supervised by Seth Flaxman, Swapnil Mishra and Elizaveta Semenova. 
 
+![](./projects_mscThesis.png)
+
 I made the observation that the PriorVAE framework in "_PriorVAE: encoding spatial priors with variational autoencoders for small-area estimation_" (Semenova et. al, 2022) does not make efficient use of the data's local neighbourhood structure when learning spatial priors for MCMC sampling.
 
 So I proposed a new framework, called PriorVGAE, which exploits the underlying local neighbourhood structure and propagates this information efficiently via the use of graph convolutional networks (GCN). Under this new framework, we were able to perform MCMC inference with far superior performance as compared to PriorVAE while enjoying better sampling speeds. We achieved lower mean squared error (MSE) for our sample reconstructions across all our experiments and attained higher effective sample sizes with lower MCMC sampling time.
