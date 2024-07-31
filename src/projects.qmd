@@ -14,7 +14,7 @@ This project covers strategy research, experimentation (with reporting) and depl
 
 ![](./assets/projects_financialFraud.png)
 
-- Researched and verified the class weight strategy in “Fraud Detection using Machine Learning” (Oza, 2018); and further extended the paper’s analysis with new models and metrics. I wrote a full experiment report on this strategy verification which can be found here: [Replication & extension of "Fraud Detection using Machine Learning" (Oza, 2018)](https://github.com/salfaris/financial-fraud-detection/blob/main/docs/report/report.html).
+- Researched and verified the class weight strategy in “Fraud Detection using Machine Learning” (Oza, 2018); and further extended the paper’s analysis with new models and metrics. I wrote a full experiment report on this strategy verification which can be found here: [Replication & extension of "Fraud Detection using Machine Learning" (Oza, 2018)](https://storage.cloud.google.com/financial-fraud-experiment-docs/replication_oza_2018_report.html).
 
 - Trained logistic regression, SVMs and decision trees to perform financial transactions fraud detection in an imbalanced dataset of 6+ million rows and 0.1% sample fraud transactions (Python, scikit-learn).
 
