@@ -174,8 +174,9 @@ ul.task-list li input[type="checkbox"] {
 <section id="financial-transactions-fraud-detection-using-machine-learning" class="level3">
 <h3 data-anchor-id="financial-transactions-fraud-detection-using-machine-learning"><a href="https://github.com/salfaris/financial-fraud-detection">Financial transactions fraud detection using machine learning</a></h3>
 <p>This project covers strategy research, experimentation (with reporting) and deployment via Google Cloud.</p>
+<p><img src="./assets/projects_financialFraud.png" class="img-fluid"></p>
 <ul>
-<li><p>Researched and verified the class weight strategy in “Fraud Detection using Machine Learning” (Oza, 2018); and further extended the paper’s analysis with new models and metrics.</p></li>
+<li><p>Researched and verified the class weight strategy in “Fraud Detection using Machine Learning” (Oza, 2018); and further extended the paper’s analysis with new models and metrics. I wrote a full experiment report on this strategy verification which can be found here: <a href="https://github.com/salfaris/financial-fraud-detection/blob/main/docs/report/report.html">Replication &amp; extension of “Fraud Detection using Machine Learning” (Oza, 2018)</a>.</p></li>
 <li><p>Trained logistic regression, SVMs and decision trees to perform financial transactions fraud detection in an imbalanced dataset of 6+ million rows and 0.1% sample fraud transactions (Python, scikit-learn).</p></li>
 <li><p>Built a web app to visualise streaming transactions data and perform live fraud detection using trained models. (Python, Streamlit, Docker, Google Artifact Registry, Google Cloud Run, Google Cloud Pub/Sub, Google Vertex AI).</p></li>
 </ul>
@@ -184,6 +185,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="measuring-the-impact-of-a-website-redesign-the-bayesian-way" class="level3">
 <h3 data-anchor-id="measuring-the-impact-of-a-website-redesign-the-bayesian-way"><a href="https://app.datacamp.com/workspace/w/cff27c6e-b68b-42df-ad82-9b0d029b7f0d">Measuring the impact of a website redesign the Bayesian way</a></h3>
 <p><em>Problem statement: How can we determine if the change in observed conversion rates after website redesign is not due to random chance? Moreover, can we get an exact probability of how likely a test group is to perform better/worse than the control group?</em></p>
+<p><img src="./assets/projects_bayesianAbTesting.png" class="img-fluid"></p>
 <ul>
 <li><p>In this mini project, I analysed the conversion rates of four different user groups (one of which is the control group) using pivot tables and bar plots to get a first big picture.</p></li>
 <li><p>Then, using PyMC3, I applied Bayesian A/B testing based on a Metropolis sampler to measure which group is most likely to have a higher conversion rate than the control group. The Bayesian way yields a solid probability unlike the frequentist approach. For example, in this project, I was able to deduce that “there is a 99% probability that user group B has a higher conversion rate than the control group”.</p></li>
@@ -210,7 +212,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="msc-thesis.-enhancing-vae-learning-on-spatial-priors-using-gcn" class="level3">
 <h3 data-anchor-id="msc-thesis.-enhancing-vae-learning-on-spatial-priors-using-gcn"><a href="https://github.com/salfaris/PriorVGAE">MSc thesis. “Enhancing VAE-learning on spatial priors using GCN”</a></h3>
 <p>My Oxford MSc thesis supervised by Seth Flaxman, Swapnil Mishra and Elizaveta Semenova.</p>
-<p><img src="./projects_mscThesis.png" class="img-fluid"></p>
+<p><img src="./assets/projects_mscThesis.png" class="img-fluid"></p>
 <p>I made the observation that the PriorVAE framework in “<em>PriorVAE: encoding spatial priors with variational autoencoders for small-area estimation</em>” (Semenova et. al, 2022) does not make efficient use of the data’s local neighbourhood structure when learning spatial priors for MCMC sampling.</p>
 <p>So I proposed a new framework, called PriorVGAE, which exploits the underlying local neighbourhood structure and propagates this information efficiently via the use of graph convolutional networks (GCN). Under this new framework, we were able to perform MCMC inference with far superior performance as compared to PriorVAE while enjoying better sampling speeds. We achieved lower mean squared error (MSE) for our sample reconstructions across all our experiments and attained higher effective sample sizes with lower MCMC sampling time.</p>
 <p>The breakthrough. Naively injecting a GCN into a VAE framework would not make the architecture work. The key observation was to realize that spatial priors inherently admits global information. To this end, I introduced a local-to-global scheme that consolidates all the local information into a global representation, relying on the universal approximator theorem of MLPs, to efficiently learn the spatial priors.</p>
@@ -220,10 +222,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="reproduction-of-inference-suboptimality-in-variational-autoencoders-cremer-et.-al-2018-in-jax" class="level3">
 <h3 data-anchor-id="reproduction-of-inference-suboptimality-in-variational-autoencoders-cremer-et.-al-2018-in-jax"><a href="https://github.com/ATML-2022-Group6/inference-suboptimality">Reproduction of “<em>Inference Suboptimality in Variational Autoencoders</em>” (Cremer et. al, 2018) in JAX</a></h3>
 <p>We reproduced some of the key interesting experiments in the paper “<em>Inference Suboptimality in Variational Autoencoders</em>” (Cremer et. al, 2018) using JAX and extended the result to the K-MNIST dataset. This work was done jointly with Basim Khajwal, Snehal Raj and Vasileios Ntogram.</p>
+<p><img src="./assets/projects_reproductionChallenge.png" class="img-fluid"></p>
 <hr>
 </section>
 <section id="reproduction-of-variational-graph-auto-encoders-kipf-and-welling-2016-in-jax" class="level3">
-<h3 data-anchor-id="reproduction-of-variational-graph-auto-encoders-kipf-and-welling-2016-in-jax"><a href="https://github.com/salfaris/PriorVGAE">Reproduction of “<em>Variational Graph Auto-Encoders</em>” (Kipf and Welling, 2016) in JAX</a></h3>
+<h3 data-anchor-id="reproduction-of-variational-graph-auto-encoders-kipf-and-welling-2016-in-jax"><a href="https://github.com/salfaris/vgae-jax">Reproduction of “<em>Variational Graph Auto-Encoders</em>” (Kipf and Welling, 2016) in JAX</a></h3>
 <p>I reproduced the variational graph autoencoder (VGAE) deep learning model using JAX to be used as a component in my MSc thesis.</p>
 </section>
 </section>
@@ -232,6 +235,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="tradelogger" class="level3">
 <h3 data-anchor-id="tradelogger"><a href="https://github.com/salfaris/tradelogger">TradeLogger</a></h3>
 <p>This project is written in Python using the Flask framework. One of the <strong>problems with stock traders is that they do not keep the big picture of where they are in their trading journey</strong>. For example. if they are losing, do they realise that they are losing 5 trades consecutively? This tool is designed for traders to trade better. A machine learning pipeline is also added to learn the time series pattern of whether the trader has a good chance on the next trade given the outcomes of the previous trades.</p>
+<p><img src="./assets/projects_tradeLogger.png" class="img-fluid"></p>
 <hr>
 </section>
 <section id="allpow" class="level3">
@@ -246,6 +250,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="easyps" class="level3">
 <h3 data-anchor-id="easyps"><a href="https://github.com/salfaris/EasyPS">EasyPS</a></h3>
 <p>A simple, out of the box personal statement LaTeX framework. It helps handling duplicated tex files when writing personal statements for multiple universities, scholarships or jobs.</p>
+<p><img src="./assets/projects_easyPs.png" class="img-fluid"></p>
 <hr>
 </section>
 <section id="pyeasyps" class="level3">
