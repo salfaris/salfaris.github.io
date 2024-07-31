@@ -64,7 +64,29 @@ The Covid-19 pandemic made me want to look back at the history of handwashing wh
 
 <br/>
 
-## **💻 web app projects**
+## **🔬 research ML**
+
+### [MSc thesis. "Enhancing VAE-learning on spatial priors using GCN"](https://github.com/salfaris/PriorVGAE)
+
+My Oxford MSc thesis supervised by Seth Flaxman, Swapnil Mishra and Elizaveta Semenova. 
+
+I made the observation that the PriorVAE framework in "_PriorVAE: encoding spatial priors with variational autoencoders for small-area estimation_" (Semenova et. al, 2022) does not make efficient use of the local neighbourhood structure when learning spatial priors for MCMC sampling.
+
+So I proposed a new framework, called PriorVGAE, which exploits the underlying local neighbourhood structure and propagates this information efficiently via the use of graph convolutional networks (GCN). Under this new framework, we were able to perform MCMC inference with far superior performance as compared to PriorVAE while enjoying better sampling speeds. We achieved lower mean squared error (MSE) for our sample reconstructions across all our experiments and attained higher effective sample sizes with lower MCMC sampling time.
+
+The breakthrough. Naively injecting a GCN into a VAE framework would not make the architecture work. The key observation was to realize that spatial priors inherently admits global information. To this end, I introduced a local-to-global scheme that consolidates all the local information into a global representation, relying on the universal approximator theorem of MLPs, to efficiently learn the spatial priors.
+
+Some bonus advantages of this framework as compared to PriorVAE include getting computationally cheaper training. We now have fewer learnable parameters since we replace MLPs with GCNs and GCN weights are shared across the support. Out-of-sample predictions are also now tractable as restarting compute training is relatively inexpensive.
+
+### [Reproduction of "_Inference Suboptimality in Variational Autoencoders_" (Cremer et. al, 2018)](https://github.com/ATML-2022-Group6/inference-suboptimality)
+
+We reproduced some of the key interesting experiments in the paper "_Inference Suboptimality in Variational Autoencoders_" (Cremer et. al, 2018) using JAX and extended the result to the K-MNIST dataset. This work was done jointly with Basim Khajwal, Snehal Raj and Vasileios Ntogram.
+
+### [Reproduction of "_Variational Graph Auto-Encoders_" (Kipf and Welling, 2016)](https://github.com/salfaris/PriorVGAE)
+
+I reproduced the variational graph autoencoder (VGAE) deep learning model using JAX to be used as a component in my MSc thesis.
+
+## **💻 pure web app projects**
 
 ### [TradeLogger](https://github.com/salfaris/tradelogger)
 
