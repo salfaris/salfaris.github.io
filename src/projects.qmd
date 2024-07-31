@@ -111,3 +111,9 @@ A simple, out of the box personal statement LaTeX framework. It helps handling d
 ### [PyEasyPS](https://github.com/salfaris/PyEasyPS)
 
 PyEasyPS is EasyPS (see above) ported to Python. It is even easier to use since the manual processes required in EasyPS (e.g. error-handling, targeted-updating of personal statements) are done for you. Essentially, it lets you focus on what's most important – your personal statement content.
+
+## **📭 open source**
+
+### [Jraph](https://github.com/google-deepmind/jraph)
+
+I am a key contributor of Jraph which is Google DeepMind's open source library for graph neural networks using JAX.
