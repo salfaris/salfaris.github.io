@@ -3,11 +3,12 @@ title: "projects"
 about:
   template: solana
   image-width: 10em
+toc: true
 ---
 
 ## **🔍 data science projects**
 
-### ⁍ [**Financial transactions fraud detection using machine learning**](https://github.com/salfaris/financial-fraud-detection)
+### [Financial transactions fraud detection using machine learning](https://github.com/salfaris/financial-fraud-detection)
 
 This project covers strategy research, experimentation (with reporting) and deployment via Google Cloud.
 
@@ -19,7 +20,7 @@ This project covers strategy research, experimentation (with reporting) and depl
 
 ---
 
-### ⁍ [**Measuring the impact of a website redesign the Bayesian way**](https://app.datacamp.com/workspace/w/cff27c6e-b68b-42df-ad82-9b0d029b7f0d)
+### [Measuring the impact of a website redesign the Bayesian way](https://app.datacamp.com/workspace/w/cff27c6e-b68b-42df-ad82-9b0d029b7f0d)
 
 
 *Problem statement: How can we determine if the change in observed conversion rates after website redesign is not due to random chance? Moreover, can we get an exact probability of how likely a test group is to perform better/worse than the control group?*
@@ -35,7 +36,7 @@ This project covers strategy research, experimentation (with reporting) and depl
 
 ---
 
-### ⁍ [**Regression analysis on TfL Santander cycles**](https://app.datacamp.com/workspace/w/697541bd-83ce-4ee7-809c-1bc22b3f1613)
+### [Regression analysis on TfL Santander cycles](https://app.datacamp.com/workspace/w/697541bd-83ce-4ee7-809c-1bc22b3f1613)
 
 
 *Problem statement: To what extent can we use a lightweight, explainable model to predict cycle hires with lowest RMSE?*
@@ -55,7 +56,7 @@ The idea of the project is to understand trends in the usage of TfL Santander Cy
 
 ---
 
-### ⁍ [**Is handwashing really effective?**](https://app.datacamp.com/workspace/w/fed0a2a6-1763-4433-930f-cdfc94072aec)
+### [Is handwashing really effective?](https://app.datacamp.com/workspace/w/fed0a2a6-1763-4433-930f-cdfc94072aec)
 
 The Covid-19 pandemic made me want to look back at the history of handwashing when it was originally introduced. In this data exploration, we are able to answer questions like: (i) "How significant was the change between pre-handwashing era and post-handwashing era?" and (ii) "What is the 90% confidence interval of the mean of difference between these eras?".
 
@@ -65,13 +66,13 @@ The Covid-19 pandemic made me want to look back at the history of handwashing wh
 
 ## **💻 web app projects**
 
-### ⁍ [**TradeLogger**](https://github.com/salfaris/tradelogger)
+### [TradeLogger](https://github.com/salfaris/tradelogger)
 
 This project is written in Python using the Flask framework. One of the **problems with stock traders is that they do not keep the big picture of where they are in their trading journey**. For example. if they are losing, do they realise that they are losing 5 trades consecutively? This tool is designed for traders to trade better. A machine learning pipeline is also added to learn the time series pattern of whether the trader has a good chance on the next trade given the outcomes of the previous trades.
 
 ---
 
-### ⁍ [**allpow**](https://github.com/salfaris/allpow)
+### [allpow](https://github.com/salfaris/allpow)
 
 This project is written in Python using Streamlit. It is a simple calculator to estimate one's monthly budget (in London by default). I originally made it to help my fellow Malaysian students who are coming to London for the first time organise their finances better. The first problem of coming to a new country far away from home (and also most probably first time renting a property in their life) is to estimate the prices of groceries, transport, rent and the like. This calculator solves that problem.
 
@@ -81,10 +82,10 @@ Link to the deployed calculator: click [here](https://salfaris-allpow-app-wejo3u
 
 ## **🔧 utilities**
 
-### ⁍ [**EasyPS**](https://github.com/salfaris/EasyPS)
+### [EasyPS](https://github.com/salfaris/EasyPS)
 
 A simple, out of the box personal statement LaTeX framework. It helps handling duplicated tex files when writing personal statements for multiple universities, scholarships or jobs.
 
-### ⁍ [**PyEasyPS**](https://github.com/salfaris/PyEasyPS)
+### [PyEasyPS](https://github.com/salfaris/PyEasyPS)
 
 PyEasyPS is EasyPS (see above) ported to Python. It is even easier to use since the manual processes required in EasyPS (e.g. error-handling, targeted-updating of personal statements) are done for you. Essentially, it lets you focus on what's most important – your personal statement content.
