@@ -1,5 +1,5 @@
 ---
-title: "technical thoughts."
+title: "random technical thoughts."
 listing:
   contents: posts
   sort: "date desc"
