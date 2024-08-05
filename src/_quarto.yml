@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: "../docs"
+  preview:
+    port: 4200
 
 website:
   title: "**salman faris**"
@@ -18,11 +20,9 @@ website:
         href: https://github.com/salfaris
   # sidebar:
   #   contents: auto
+
 format:
   html:
     theme: cosmo
     fontsize: 1.1em
     css: styles.css
-
-
-
