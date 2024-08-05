@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Salman Faris">
+<meta name="dcterms.date" content="2024-08-04">
+<meta name="description" content="We provide a quantum algorithm that can be used to benchmark quantum computers with Clifford+T hardware and provide a proof of the algorithm using ZX-calculus.">
+
+<title>A benchmark for testing quantum computers with Clifford+T hardware – salman faris</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="A benchmark for testing quantum computers with Clifford+T hardware – salman faris">
+<meta name="twitter:description" content="We provide a quantum algorithm that can be used to benchmark quantum computers with Clifford+T hardware and provide a proof of the algorithm using ZX-calculus.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title"><strong>salman faris</strong></span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">about</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html"> 
+<span class="menu-text">projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources.html"> 
+<span class="menu-text">resources</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/salfaris/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/salfaris"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">A benchmark for testing quantum computers with Clifford+T hardware</h1>
+                  <div>
+        <div class="description">
+          We provide a quantum algorithm that can be used to benchmark quantum computers with Clifford+T hardware and provide a proof of the algorithm using ZX-calculus.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">algorithms</div>
+                <div class="quarto-category">quantum-computing</div>
+                <div class="quarto-category">zx-calculus</div>
+                <div class="quarto-category">benchmarking</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Salman Faris </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 4, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-does-combinatorics-tells-us-about-fibonacci-numbers" id="toc-what-does-combinatorics-tells-us-about-fibonacci-numbers" class="nav-link active" data-scroll-target="#what-does-combinatorics-tells-us-about-fibonacci-numbers">What does combinatorics tells us about Fibonacci numbers?</a></li>
+  <li><a href="#building-a-quantum-routine-for-generating-elements-of-bn" id="toc-building-a-quantum-routine-for-generating-elements-of-bn" class="nav-link" data-scroll-target="#building-a-quantum-routine-for-generating-elements-of-bn">Building a quantum routine for generating elements of <span class="math inline">B^n</span></a></li>
+  <li><a href="#fibonacci-in-the-zx-calculus" id="toc-fibonacci-in-the-zx-calculus" class="nav-link" data-scroll-target="#fibonacci-in-the-zx-calculus">Fibonacci in the ZX-calculus</a></li>
+  <li><a href="#zxfibo-on-an-ibm-quantum-computer" id="toc-zxfibo-on-an-ibm-quantum-computer" class="nav-link" data-scroll-target="#zxfibo-on-an-ibm-quantum-computer"><strong>ZXFibo</strong> on an IBM quantum computer</a>
+  <ul class="collapse">
+  <li><a href="#an-impending-doom" id="toc-an-impending-doom" class="nav-link" data-scroll-target="#an-impending-doom">An impending doom</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p>I was revisiting some of my MSc stuff from two years ago and I came across one of my original work in <a href="https://www.cs.ox.ac.uk/teaching/courses/2022-2023/quantum/"><em>Quantum Processes and Computations</em></a> (QPC). It was one of the funner courses I took – I had a genuine interest in the hype behind quantum computing at the time and the prerequisite for the course was just simple linear algebra. Aleks Kissinger taught the course and he’s incredibly passionate about the subject and is also a good explainer. He was also the one who interviewed me to get into the program where he randomly asked me about my favourite theorem in Galois Theory, really peeking my interest to the point of “what the heck are they cooking in the quantum computing group” but that’s another story.</p>
+<p>In QPC, a part of the take-home “exam” was to produce anything interesting using the ZX-calculus. Bonus points if it’s original, has a strong motivation and/or has a rigorous proof. “Original” here was a bit vague in the sense that various parts can be original – the idea, implementation, proof, etc. I remember just spending several days trying to figure out what to do — really went deep into theorems in number theory, for example, and I manage to land on something original and provided a working proof, but not so much on good motivation I confess. Ultimately, I decided to keep it simple and build on a Fibonacci heuristic proposed in <span class="citation" data-cites="GPG20">(<a href="#ref-GPG20" role="doc-biblioref">Gilliam, Pistoia, and Gonciulea 2020</a>)</span>, where I modified the routine they wrote, implemented it in the ZX-calculus and proved that the algorithm is correct. The routine relies solely on Clifford+T gates and because of the simplicity of the Fibonacci algorithm (as we shall see), it ought to serve as a good benchmarking tool for quantum computers with hardware that accepts only Clifford+T gates.</p>
+<p><em>Before I go any further, I have to warn you that this is neither an introduction to quantum computing nor ZX-calculus. What I can tell you is that ZX-calculus gives you superpowers for reasoning in quantum computing. If you want a primer on both at the same time, check out <span class="citation" data-cites="pqp2017">(<a href="#ref-pqp2017" role="doc-biblioref">Coecke and Kissinger 2017</a>)</span> which is where I learnt all the basics from. Another good resource is John’s ZX-calculus primer <a href="https://arxiv.org/abs/2012.13966">ZX-calculus for the working quantum computer scientist</a>. John van de Wetering is also one of the guys who taught QPC alongside Aleks. I realize that nowadays, there’s also less dense intros to the subject as well like <a href="https://pennylane.ai/qml/demos/tutorial_zx_calculus/">this one at PennyLane</a>.</em></p>
+<section id="what-does-combinatorics-tells-us-about-fibonacci-numbers" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-combinatorics-tells-us-about-fibonacci-numbers">What does combinatorics tells us about Fibonacci numbers?</h2>
+<p>Define a recurrence relation <span class="math inline">F_n = F_{n-1} + F_{n-2}</span> with initial conditions <span class="math inline">F_0=1</span> and <span class="math inline">F_1 = 2</span> where <span class="math inline">n &gt; 1</span>. The positive integers <span class="math inline">F_n</span> generated by this recurrence relation is universally known today as the Fibonacci sequence <span class="math inline">1, 2, 3, 5, 8, 13, ...</span> and so on. At this point, it is not straightforward how we can encode this relation into a quantum circuit. So how do we encode this information to perform quantum computation? If I learn anything from my short stint of constructing quantum algorithms, you can always end up with a working algorithm by converting the problem into a counting problem. If you have a counting problem, you can perform what is called <em>heuristic encoding</em> where you can design a quantum circuit that “generates” the things you want to count, run the circuit repeatedly for a sufficiently long period, and then count the number of measurement outcomes, possibly with some required classical post-processing.</p>
+<p>For the Fibonacci numbers, combinatorics tells us that there is an equivalence between the Fibonacci numbers and the number of length <span class="math inline">n</span> binary sequences with no consecutive ones where this equivalence is given as <span class="math inline">F_n = \left|B^n \right|</span> where</p>
+<p><span class="math display">B^n = \left\{ x \in \{0,1\}^n : x \text{ has no consecutive ones} \right\}.</span></p>
+<p>With this formulation of the Fibonacci numbers, we now have a counting problem rather than a recurrence problem where we can perform heuristic encoding! So let’s now turn our attention to constructing a quantum routine that generates elements of <span class="math inline">B^n</span>.</p>
+</section>
+<section id="building-a-quantum-routine-for-generating-elements-of-bn" class="level2">
+<h2 class="anchored" data-anchor-id="building-a-quantum-routine-for-generating-elements-of-bn">Building a quantum routine for generating elements of <span class="math inline">B^n</span></h2>
+<p>Let’s think about this from the ground up and consider <span class="math inline">n=2</span>. How can we generate elements of <span class="math inline">B^2</span>? Enumerating <span class="math inline">B^2</span> gives us the set</p>
+<p><span class="math display">B^2 = \left\{ 00, 01, 10 \right\},</span></p>
+<p>where it’s missing the sole binary sequence <span class="math inline">11 \in \{ 0, 1\}^2</span>. One way to think about this is to build a quantum routine that generates the outcomes <span class="math inline">\ket {00}</span>, <span class="math inline">\ket {01}</span>, <span class="math inline">\ket {10}</span> but not <span class="math inline">\ket {10}</span>. To achieve this, you want a 2-qubit system such that</p>
+<ul>
+<li>qubit 1 admits equal superposition when measured; but</li>
+<li>qubit 2 to be in equal superposition only if the first qubit is in the state <span class="math inline">\ket {0}</span>.</li>
+</ul>
+<p>An easy way to do this is to use two <span class="math inline">X_{\pi/2}</span> rotation gates together with a single <span class="math inline">CX_{\pi/2}</span> controlled rotation gate where <span class="math inline">X_{\pi/2}</span> is a 2x2 matrix given by</p>
+<p><span class="math display">X_{\pi/2} = \begin{pmatrix} \cos{\pi/4} &amp; -i \sin{\pi/4} \\ -i \sin{\pi/4} &amp; \cos{\pi/4} \end{pmatrix} = \begin{pmatrix} \frac{1}{\sqrt{2}} &amp; 0 \\ 0 &amp; \frac{1}{\sqrt{2}} \end{pmatrix},</span></p>
+<p>and <span class="math inline">CX_{\pi/2}</span> is a 4x4 matrix given by <span class="math display">CX_{\pi/2} = \begin{pmatrix} I_2 &amp; 0 \\ 0 &amp; X_{\pi/2} \end{pmatrix}.</span></p>
+<p>Here <span class="math inline">I_2</span> is the 2x2 identity matrix and <span class="math inline">0</span> is a block 2x2 matrix of zeros. For a sanity check, you can evaluate the product</p>
+<p><span class="math display"> (CX_{\pi/2})  (X_{\pi/2} \otimes X_{\pi/2})  (\ket {0} \otimes \ket {0})</span></p>
+<p>to see that we indeed have a quantum state that yields binary sequences in <span class="math inline">B^2</span>. Here, <span class="math inline">\otimes</span> is the Kronecker product induced by the tensor product of linear maps. If you are lazy, you can skip the sanity check as we are going to prove this using ZX-calculus next anyways which will be much simpler and more elegant, especially for the general case.</p>
+<p>Now we go to <span class="math inline">n=3</span> and enumerate <span class="math inline">B^3</span>. Here we have the set</p>
+<p><span class="math display">B^3 = \left\{ 000, 001, 010, 100, 101 \right\},</span></p>
+<p>where it’s missing the binary sequences <span class="math inline">110</span> and <span class="math inline">111</span> that has two and three consecutive ones respectively. As before, think about state outcomes. It is slightly complicated as you now have <span class="math inline">2^3</span> potential outcomes. However, if you think inductively, there is a pattern here. In this case, we now want</p>
+<ul>
+<li>qubit 1 to be in equal superposition;</li>
+<li>qubit 2 to be in equal superposition only if qubit 1 is in the state <span class="math inline">\ket {0}</span>; and</li>
+<li>qubit 3 to be in equal superposition only if qubit 2 is in the state <span class="math inline">\ket {0}</span>.</li>
+</ul>
+<p>In this case, we end up with outcomes exactly as in <span class="math inline">B^3</span>. Observe that the control on qubit 3 is dependent only on the measurement of qubit 2. This means that we can reuse the same principle we had in the case of <span class="math inline">n=2</span>. In fact, we can simply extend the previous routine by introducing an <span class="math inline">X_{\pi/2}</span> rotation gate on qubit 3 and a single <span class="math inline">CX_{\pi/2}</span> controlled rotation gate which conditions on qubit 2.</p>
+<p>Further observe that qubit 2 is dependent only on the measurement of qubit 1. Thus going from the <span class="math inline">n=2</span> case to <span class="math inline">n=3</span> is simply extending qubit 3 with 2 new rotation gates. It should be clear that we can reuse this same principle to go from <span class="math inline">n=3</span> to <span class="math inline">n=4</span> and so on; so we conjecture the following:</p>
+<blockquote class="blockquote">
+<p><strong>Conjecture:</strong> For <span class="math inline">n &gt; 1</span>, <span class="math inline">B^n</span> can be generated by an <span class="math inline">n</span>-bit quantum routine that performs <span class="math inline">X_{\pi/2}</span> rotation gates to all qubits <span class="math inline">n</span> and then applying <span class="math inline">n-1</span> controlled rotation gates <span class="math inline">CX_{\pi/2}</span> such that the <span class="math inline">j</span>th controlled rotation gate conditions on qubit <span class="math inline">j-1</span> for <span class="math inline">j &gt; 2</span>.</p>
+</blockquote>
+<p>So how do we go about proving this conjecture? Well, it’s time to turn to ZX-calculus.</p>
+</section>
+<section id="fibonacci-in-the-zx-calculus" class="level2">
+<h2 class="anchored" data-anchor-id="fibonacci-in-the-zx-calculus">Fibonacci in the ZX-calculus</h2>
+<p><em>A short note before we proceed. It has been incredibly hard to embed tikz files (which I originally wrote all my ZX diagrams in) into a HTML format, so I will be taking screenshots from my original solution for my sanity – I’ve already wasted 3 hours trying, please believe me. I hate low quality screenshots as well so if you have an elegant solution on how to do this, please let me know.</em></p>
+<p>I claim that the following <strong>ZXFibo</strong> algorithm is a working <span class="math inline">n</span>-bit quantum routine that generates <span class="math inline">B^n</span> for <span class="math inline">n &gt; 1</span>, and hence the Fibonacci sequence <span class="math inline">F_n</span>.</p>
+<blockquote class="blockquote">
+<p><strong>Algorithm.</strong> ZXFibo</p>
+<hr>
+<p><strong>Given.</strong> An integer <span class="math inline">n &gt; 1</span>, for the Fibonacci number <span class="math inline">F_n</span> to be computed.</p>
+<p><strong>Perform.</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/01_process.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%"></p>
+</figure>
+</div>
+<p>where the process <span class="math inline">\widehat{f_n}</span> is given by</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/02_process_fn.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+<p>where</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/03_ybox.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+<p>is called the <span class="math inline">y</span>-box (since it topologically looks like a Y, sorry I’m clearly not creative with my naming).</p>
+<p>Measuring this circuit yields an outcome of 0 up to a number for Z-measurement outcomes <span class="math inline">\ket {k_1 \ldots k_n}</span> with consecutive ones and not 0 (up to a number) otherwise.</p>
+</blockquote>
+<p>It shouldn’t be too difficult to see that the process <span class="math inline">\widehat{f_n}</span> given above is indeed equivalent to spamming <span class="math inline">X_{\pi/2}</span> rotations and putting a control <span class="math inline">CX_{\pi/2}</span> gate on each qubit. But if you’re not convinced or your ZX-calculus is rusty, I’ll probably do it as an appendix at some point. What’s important, however, is to recognize that the process only uses Clifford+T gates.</p>
+<p>Now, let’s prove that the <strong>ZXFibo</strong> algorithm is correct. It’s a counting algorithm, so naturally we prove by induction on <span class="math inline">n</span>. But before we start, let’s recall some of the spider rules in ZX-calculus. Core to this proof are the <em>copy rule</em> <span class="math inline">(c)</span>, <em>commute rule</em> <span class="math inline">(\pi)</span> and the <em>eliminate rule</em> <span class="math inline">(e)</span> given below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/x0_rules.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>The commute rule is especially used when <span class="math inline">k = 0</span>. We can also combine the commute rule, the eliminate rule and phase spider fusion to arrive at what I like to call the <span class="math inline">(\alpha \pi)</span> rule:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/x0_rules_1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>The <span class="math inline">(\alpha \pi)</span> rule is an important one and we will be using it several times in our correctness proof of <strong>ZXFibo</strong>. With these rules refreshed, we are ready to prove the base case.</p>
+<p><em>Base case.</em> For <span class="math inline">n=2</span>, just using definitions of <span class="math inline">\widehat{f_2}</span> and the y-box <span class="math inline">\widehat{y}</span>, and using phase spider fusion, we get</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/04_base_case_01.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>We can then look at individual measurement outcomes. For <span class="math inline">k, \ell \in \{0, 1\}</span> we have</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/04_base_case_02.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>Then using spider fusion, the colour change rule and the copy rule, we end up with</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/04_base_case_03.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>We can now apply the <span class="math inline">(\alpha \pi)</span> rule to end up with</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/04_base_case_04.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>From here, we can evaluate each pair <span class="math inline">(k, \ell)</span> separately. Recall what these spiders actually mean – the representation of an undoubled phase state <span class="math inline">\alpha \in \mathbb{C}^2</span> is given by the matrix</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/04_base_case_05.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>where the phase effect version is simply attained by taking the adjoint of the phase state matrix. This implies that</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/04_base_case_06.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>Consequently, the undoubled number</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/04_base_case_07.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:17.0%"></p>
+</figure>
+</div>
+<p>can be tabulated into the following table of numbers and their corresponding complex amplitudes</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/04_base_case_08.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>In particular the measurement outcome pair <span class="math inline">(k, \ell) = (1, 1)</span> attains a zero complex amplitude. Moreover, where <span class="math inline">k</span> and <span class="math inline">\ell</span> are not both 1, the amplitude is nonzero. This is exactly what we want and so completes the base case. In fact, you can actually get the actual probabilities pretty easily from here, but we leave it as an exercise for the reader.</p>
+<blockquote class="blockquote">
+<p>Exercise. Show that the actual probabilities for each measurement outcome are tabulated as follows: <img src="./images/04_base_case_09.png" class="img-fluid quarto-figure quarto-figure-center" style="width:100.0%"> Hint: look at the complex amplitudes of the doubled version.</p>
+</blockquote>
+<p><em>Inductive step.</em> Now suppose that the <strong>ZXFibo</strong> algorithm is correct for all <span class="math inline">2 \leq n &lt; N + 1</span>. Then for <span class="math inline">n = N+1</span>, we can look at individual measurement outcomes <span class="math inline">k_1, \ldots, k_{N+1} \in \{0, 1\}</span> to have</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/05_inductive_step_01.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>We can apply the copy rule on the <span class="math inline">N</span>-th measurement so that we have</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/05_inductive_step_02.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>The inductive hypothesis takes care of the evaluated <span class="math inline">\widehat{f_N}</span>, so we know that it will not be 0 up to a number for Z-measurement outcomes <span class="math inline">\ket {k_1 \ldots k_N}</span> with no consecutive ones. So now we focus on the rightmost y-box. To complete the inductive step, we just need to prove that if <span class="math inline">k_N = k_{N+1} = 1</span>, then the y-box evaluates to 0, and not 0 otherwise.</p>
+<p>Using the y-box definition, applying phase spider fusion and using the colour change rule, we have</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/05_inductive_step_03.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>We can then apply the eliminate rule and the <span class="math inline">(\alpha \pi)</span> rule to further obtain</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/05_inductive_step_04.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>This number is exactly what we had before with <span class="math inline">\ell = k_{N+1}</span> and <span class="math inline">k = k_N</span>. Thus by using the same logic as we did before, we can conclude that the pair <span class="math inline">(k_N, k_{N+1}) = (1, 1)</span> which gives the only remaining measurement outcome with consecutive ones will evaluate the whole diagram to 0 (up to a number) and not 0 otherwise. This completes the inductive step and the correctness proof of the <strong>ZXFibo</strong> algorithm. As a bonus, we have also implicitly proven that the algorithm terminates for all qubits <span class="math inline">n &gt; 1</span>. <span class="math inline">\blacksquare</span></p>
+</section>
+<section id="zxfibo-on-an-ibm-quantum-computer" class="level2">
+<h2 class="anchored" data-anchor-id="zxfibo-on-an-ibm-quantum-computer"><strong>ZXFibo</strong> on an IBM quantum computer</h2>
+<p>Now that we have proven the correctness of the <strong>ZXFibo</strong> algorithm, let’s see how it performs on an IBM quantum computer simulator. We will implement <strong>ZXFibo</strong> using the IBM Qiskit library <span class="citation" data-cites="qiskit2024">(<a href="#ref-qiskit2024" role="doc-biblioref">Javadi-Abhari et al. 2024</a>)</span> and the PyZX library <span class="citation" data-cites="pyzx2020">(<a href="#ref-pyzx2020" role="doc-biblioref">Kissinger and Wetering 2020</a>)</span> which we import below.</p>
+<div id="bc8934c0" class="cell">
+<details class="code-fold">
+<summary>PyZX and IBM Qiskit base imports</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fractions <span class="im">import</span> Fraction</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyzx <span class="im">as</span> zx</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyzx <span class="im">import</span> print_matrix</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyzx.basicrules <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>zx.settings.drawing_backend <span class="op">=</span> <span class="st">'matplotlib'</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> qiskit</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.test.mock <span class="im">import</span> FakeAthens</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit <span class="im">import</span> QuantumCircuit, Aer, IBMQ, execute</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.compiler <span class="im">import</span> assemble</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qiskit.tools.monitor <span class="im">import</span> job_monitor</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We can then draw <strong>ZXFibo</strong> using PyZX as follows.</p>
+<div id="f0007320" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_cx_alpha_gate(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    circuit: zx.Circuit, alpha: Fraction <span class="op">|</span> <span class="bu">int</span>, control: <span class="bu">int</span>, target: <span class="bu">int</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> zx.Circuit:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    circuit.add_gate(<span class="st">"HAD"</span>, target)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    circuit.add_gate(<span class="st">"ZPhase"</span>, control, phase<span class="op">=</span>alpha <span class="op">*</span> Fraction(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    circuit.add_gate(<span class="st">"ZPhase"</span>, target, phase<span class="op">=</span>alpha <span class="op">*</span> Fraction(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    circuit.add_gate(<span class="st">"CNOT"</span>, control, target)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    circuit.add_gate(<span class="st">"ZPhase"</span>, target, phase<span class="op">=</span>alpha <span class="op">*</span> Fraction(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    circuit.add_gate(<span class="st">"CNOT"</span>, control, target)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    circuit.add_gate(<span class="st">"HAD"</span>, target)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> circuit</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> zxfibo(n: <span class="bu">int</span>, graph: <span class="bu">bool</span> <span class="op">=</span> <span class="va">False</span>) <span class="op">-&gt;</span> zx.Circuit:</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    circ <span class="op">=</span> zx.Circuit(n)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For each qubit, add an X(\pi/2) gate.</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        circ.add_gate(<span class="st">"XPhase"</span>, i, Fraction(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># For each qubit n &gt; 1, add a controlled X(\pi/2) gate.</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">1</span>):</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        add_cx_alpha_gate(circ, Fraction(<span class="op">-</span><span class="dv">1</span>, <span class="dv">2</span>), i, i <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> graph:</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> circ.to_graph()</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> circ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Given a PyZX circuit, we can convert it into a Qiskit circuit using the following function (I believe this was Aleks’s code).</p>
+<div id="a2e88e9f" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pyzx_to_qiskit(circ: zx.Circuit) <span class="op">-&gt;</span> qiskit.QuantumCircuit:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># converts all gates to CNOT, CZ, HAD, ZPhase, and XPhase</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    circ <span class="op">=</span> circ.to_basic_gates()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    q <span class="op">=</span> circ.qubits</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    ibm_circ <span class="op">=</span> QuantumCircuit(q, q)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> g <span class="kw">in</span> circ.gates:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(g, zx.gates.CNOT): ibm_circ.cnot(g.control, g.target)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="bu">isinstance</span>(g, zx.gates.CZ): ibm_circ.cz(g.control, g.target)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="bu">isinstance</span>(g, zx.gates.HAD): ibm_circ.h(g.target)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="bu">isinstance</span>(g, zx.gates.ZPhase): ibm_circ.rz(math.pi <span class="op">*</span> g.phase, g.target)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="bu">isinstance</span>(g, zx.gates.XPhase): ibm_circ.rx(math.pi <span class="op">*</span> g.phase, g.target)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># measure everything</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    ibm_circ.measure(<span class="bu">range</span>(q), <span class="bu">range</span>(q))</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ibm_circ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For the base case <span class="math inline">n=2</span> of <strong>ZXFibo</strong>, we can then obtain its ZX-diagram and Qiskit quantum circuit by running:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>zxfibo2_pyzx <span class="op">=</span> zxfibo(<span class="dv">2</span>)  <span class="co"># PyZX</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>zxfibo2_ibm_circ <span class="op">=</span> pyzx_to_qiskit(zxfibo2_pyzx)  <span class="co"># Qiskit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-fib2" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fib2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fib2" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-fib2-zx" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fib2-zx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/fib2_zx.png" class="img-fluid figure-img" data-ref-parent="fig-fib2">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fib2-zx-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) PyZX
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fib2" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-fib2-qiskit" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fib2-qiskit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/fib2_qiskit.png" class="img-fluid figure-img" data-ref-parent="fig-fib2">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fib2-qiskit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Qiskit
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fib2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: <strong>ZXFibo</strong> for <span class="math inline">n=2</span> in its PyZX and Qiskit circuit representation.
+</figcaption>
+</figure>
+</div>
+<p>Using the Qiskit API, we can then run <strong>ZXFibo</strong> using an IBM backend. To not spend any money, I will be running the algorithm on a non-noisy simulator where we can get ideal counts (suppressing probability 0 events) and on a noisy simulator. For the noisy simulator, I will be using the the <code>FakeAthens</code> backend, which is a 5 qubit fake backend that mimics the IBM Athens device.</p>
+<div id="6cb794f3" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    IBMQ.load_account()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    provider <span class="op">=</span> IBMQ.get_provider(hub<span class="op">=</span><span class="st">"ibm-q"</span>, group<span class="op">=</span><span class="st">"open"</span>, project<span class="op">=</span><span class="st">"main"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    backend <span class="op">=</span> provider.get_backend(<span class="st">'ibmq_qasm_simulator'</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span>:</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Error:"</span>, sys.exc_info()[<span class="dv">1</span>])</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Setting backend to qasm_simulator"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    backend <span class="op">=</span> FakeAthens()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We then run the <strong>ZXFibo</strong> algorithm for 1000 shots.</p>
+<div id="5e610b5b" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    circ: qiskit.QuantumCircuit, backend: qiskit.providers.Backend, shots: <span class="bu">int</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">int</span>]:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    job <span class="op">=</span> execute(circ, backend, shots<span class="op">=</span>shots)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> job.result()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    counts <span class="op">=</span> result.get_counts()</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> counts</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> run(zxfibo2_ibm_circ, backend<span class="op">=</span>backend, shots<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>qiskit.visualization.plot_histogram(counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fig-fib2-hist" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fib2-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fib2-hist" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-fib2-hist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fib2-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/fib2_hist.png" class="img-fluid figure-img" data-ref-parent="fig-fib2-hist">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fib2-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Ideal counts
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fib2-hist" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-fib2-hist-noisy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fib2-hist-noisy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/fib2_hist_noisy.png" class="img-fluid figure-img" data-ref-parent="fig-fib2-hist">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fib2-hist-noisy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Counts on a noisy simulator
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fib2-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Simulation results for <strong>ZXFibo</strong> with <span class="math inline">n=2</span> using the IBM backend with 1000 shots.
+</figcaption>
+</figure>
+</div>
+<p>From the simulation results for <span class="math inline">n=2</span>, we can see that the algorithm works as expected. In fact, it works too well. On the non-noisy simulator, the histogram depicts exactly the probabilities of 0.25, 0.25, 0.5 for the pairs (0, 0), (0, 1) and (1, 0) respectively. On the noisy simulator otoh, we attain a similar distribution but with ~0.5% noise in the (1, 1) measurement outcome which is tiny relative to the minimum probability for the measurement outcomes with non-consecutive ones of 25%. Setting a 5% threshold in post-processing discards the 0.5% noise and gives us the correct distribution and yields <span class="math inline">B^2</span>. We then obtain <span class="math inline">F_2</span> as <span class="math inline">|B^2|</span>.</p>
+<p>We repeat the experiment by running 1000 shots of the <strong>ZXFibo</strong> algorithm but now with <span class="math inline">n=3</span>.</p>
+<div id="fig-fib3-hist" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fib3-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fib3-hist" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-fib3-hist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fib3-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/fib3_hist.png" class="img-fluid figure-img" data-ref-parent="fig-fib3-hist">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fib3-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Ideal counts
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fib3-hist" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-fib3-hist-noisy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fib3-hist-noisy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/fib3_hist_noisy.png" class="img-fluid figure-img" data-ref-parent="fig-fib3-hist">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fib3-hist-noisy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Counts on a noisy simulator
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fib3-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Simulation results for <strong>ZXFibo</strong> with <span class="math inline">n=3</span> using the IBM backend with 1000 shots.
+</figcaption>
+</figure>
+</div>
+<p>We see again that the <strong>ZXFibo</strong> algorithm works extremely well! The noisy measurement outcomes (i.e.&nbsp;with consecutive ones) accounts for only about 1% of the total probabilities with a single sequence attaining a maximum of only 0.7%. This number is significantly tiny compared to the minimum probability for elements in <span class="math inline">B^3</span> of 12.5%. We can again set a 5% threshold in post-processing to get the correct probability distribution and obtain <span class="math inline">F_3</span>.</p>
+<p>Let’s now fire 1000 shots of <strong>ZXFibo</strong> with <span class="math inline">n=5</span> to compute the Fibonacci number <span class="math inline">F_5</span>.</p>
+<div id="fig-fib5-hist" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fib5-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fib5-hist" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-fib5-hist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fib5-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/fib5_hist.png" class="img-fluid figure-img" data-ref-parent="fig-fib5-hist">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fib5-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Ideal counts
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fib5-hist" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-fib5-hist-noisy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fib5-hist-noisy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./images/fib5_hist_noisy.png" class="img-fluid figure-img" data-ref-parent="fig-fib5-hist">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fib5-hist-noisy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Counts on a noisy simulator
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fib5-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Simulation results for <strong>ZXFibo</strong> with <span class="math inline">n=5</span> using the IBM backend with 1000 shots.
+</figcaption>
+</figure>
+</div>
+<p>Again, <strong>ZXFibo</strong> works really well where the noisy measurement outcomes attains less than 1% in probability on average. But we can now start to see an impending doom… the minimum probability for elements in <span class="math inline">B^5</span> is now 3.9%. This is still significantly larger than the maximum attained by the noisy measurement outcome of 0.7% but we can no longer set a 5% threshold in post-processing. Rather, we need to choose a safer threshold, say, at about 2.5% to discard the noisy outcomes and obtain <span class="math inline">F_5</span> with confidence. This phenomenon can seem problematic as we increase <span class="math inline">n</span> so let’s discuss a bit more about it.</p>
+<section id="an-impending-doom" class="level3">
+<h3 class="anchored" data-anchor-id="an-impending-doom">An impending doom</h3>
+<p>Because this is a heuristic approach, we have no reason to conclude that the maximum attained by the noisy measurement outcomes will exceed beyond 1% as we have seen this is not the case even for increasing <span class="math inline">n = 2, 3, 5</span>. The only way to verify this is to run more experiments with higher number of qubits. However, the doom pattern that we can clearly see is that as <span class="math inline">n</span> increases, the minimum probability for elements in <span class="math inline">B^n</span> decreases. This means that the threshold for discarding the noisy measurement outcomes will have to be set lower and lower, and might eventually reach a point where the threshold is lower than the maximum attained by the noisy measurement outcomes. What is this breaking point though?</p>
+<p>Fix <span class="math inline">n &gt; 1</span> and define <span class="math inline">p_{\mathrm{min}}</span> be the expected probability for the element <span class="math inline">B^n</span> with lowest probability (relative to other elements in <span class="math inline">B^n</span>). Assume an error of <span class="math inline">\varepsilon &gt; 0</span> on <span class="math inline">p_{\mathrm{min}}</span>. Suppose the error arising from the noisy measurement outcomes is <span class="math inline">\delta \approx 0</span>. Then a reasonable post-processing probability threshold <span class="math inline">\tau</span> for discarding noisy outcomes should satisfy <span class="math inline">\delta &lt; \tau &lt; p_{\mathrm{min}} - \varepsilon</span>. The problem is that the Fibonacci sequence <span class="math inline">F_n</span> behaves like an exponential function, which equivalently means that the number of elements in <span class="math inline">B^n</span> increases exponentially with <span class="math inline">n</span>. This implies that <span class="math inline">p_{\mathrm{min}}</span> will decrease exponentially fast as <span class="math inline">n</span> increases! Obviously, if <span class="math inline">\delta &lt; p_{\mathrm{min}} - \varepsilon</span>, then we can always take the midpoint</p>
+<p><span class="math display"> \tau = \frac{p_{\mathrm{min}} - \varepsilon + \delta}{2} </span></p>
+<p>to be the count threshold. However, the impending doom is when <span class="math inline">p_{\mathrm{min}} - \varepsilon \approx \delta</span> for some sufficiently large <span class="math inline">N</span>. In this case, there does not exist a stable count threshold <span class="math inline">\tau</span> for any <span class="math inline">n &gt; N + 1</span> as for <span class="math inline">n = N</span>, we have</p>
+<p><span class="math display">\tau = \frac{p_{\mathrm{min}} - \varepsilon + \delta}{2} \approx \frac{2 \delta}{2} = \delta.</span></p>
+<p>So if we are serious in counting large Fibonacci numbers, we ought to think of a better algorithm and this opens room for further research. For our purpose, however, we just want a benchmark for running Clifford+T hardware. This heuristic is excellent in doing exactly that, especially as per our discussion, for benchmarking how noisy a quantum computer is by looking at the noisy measurement outcomes. In fact, one can use the probability threshold <span class="math inline">\tau</span> above as a metric to measure the noise levels.</p>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-pqp2017" class="csl-entry" role="listitem">
+Coecke, Bob, and Aleks Kissinger. 2017. <em>Picturing Quantum Processes: A First Course in Quantum Theory and Diagrammatic Reasoning</em>. Cambridge University Press.
+</div>
+<div id="ref-GPG20" class="csl-entry" role="listitem">
+Gilliam, Austin, Marco Pistoia, and Constantin Gonciulea. 2020. <span>“Canonical Construction of Quantum Oracles.”</span> <em>ArXiv</em> abs/2006.10656.
+</div>
+<div id="ref-qiskit2024" class="csl-entry" role="listitem">
+Javadi-Abhari, Ali, Matthew Treinish, Kevin Krsulich, Christopher J. Wood, Jake Lishman, Julien Gacon, Simon Martiel, et al. 2024. <span>“Quantum Computing with <span>Q</span>iskit.”</span> <a href="https://doi.org/10.48550/arXiv.2405.08810">https://doi.org/10.48550/arXiv.2405.08810</a>.
+</div>
+<div id="ref-pyzx2020" class="csl-entry" role="listitem">
+Kissinger, Aleks, and John van de Wetering. 2020. <span>“<span>PyZX: Large Scale Automated Diagrammatic Reasoning</span>.”</span> In <em><span class="nocase">Proceedings 16th International Conference on</span> Quantum Physics and Logic, <span>Chapman University, Orange, CA, USA., 10-14 June 2019</span></em>, edited by Bob Coecke and Matthew Leifer, 318:229–41. Electronic Proceedings in Theoretical Computer Science. Open Publishing Association. <a href="https://doi.org/10.4204/EPTCS.318.14">https://doi.org/10.4204/EPTCS.318.14</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/salfaris\.github\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
