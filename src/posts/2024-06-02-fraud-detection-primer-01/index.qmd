@@ -1,0 +1,34 @@
+---
+title: "Basics of payments fraud detection"
+description: "How can machine learning help make payments fraud detection efficient?"
+categories: [fraud-detection, machine-learning]
+author: "Salman Faris"
+date: "02 06 2024"
+jupyter: python3
+format:
+  html:
+    toc: true
+    html-math-method: katex
+execute: 
+  enabled: false
+  cache: false
+draft: true
+---
+
+# Is fraud detection all about credit card frauds?
+
+Whenever I hear someone talk about fraud detection, my brain would go "they must be talking about credit card fraud right?". Well, not sure why I'm wired that way, but I just learnt recently that this space covers way more than credit cards and bank transactions. So out of curiosity, I went straight to learning. This post aims to summarize what I've learnt.
+
+So here's an important big disclaimer: **do not take what I wrote here at face value because I'm writing from a complete fraud detection amateur's point of view**. *Ranting moment: when I was writing my master's thesis, I was trying to find a way to make my three-page introduction to variational autoencoders shorter. So I went to the internet and I was appalled at how many wrong articles that exist on VAEs. I do understand that writing **is** part of the learning journey–just as I'm doing now–but please, for the love of God put a disclaimer that you have minimal understanding of what you're writing. And scary to think how LLMs today are essentially being trained on loads of incorrect information!*
+
+With this disclaimer out of the way, let's get cracking.
+
+# So why should we care about fraud?
+
+It turns out that companies are facing losses at about 5% of their revenue each year due to fraud (source: ![Accounting Today](https://www.accountingtoday.com/news/organizations-lost-billions-to-fraudsters)). For a company making a billion dollar in revenue, that translates to 50 million dollars a year in losses. Apple that makes almost 400 billion dollars in revenue a year means they're losing 20 billion a year... That is a lot.
+
+## Examples of fraud
+
+Fraud can be found almost anywhere. The most well-known example is, perhaps, payments fraud which captures cases of stolen credit cards and a variety of identity theft attacks. It also captures the case of chargeback fraud where people make a dispute on a legitimate purchase. This is very similar to insurance fraud.
+
+The problem with fraud is that they're not very common, which from a data science point of view is not great as that means less data to work with. And they're quite hidden among the non-fraudulent cases. Some can be flagged as an anomaly sure, but figuring out whether this anomaly is a customer being irrational or is actual fraud is typically hard. This made me think about the anecdote where Shaq spent 70,000 dollars at Walmart in a single night and got called by Amex because Amex thought his card was stolen. To make things more complex, fraudulent activities are actively changing where fraudsters know they are being monitored, so they change their pattern often making it even harder to detect. And frauds are done in an organized way where you can have multiple accounts colluding into a single fraud.

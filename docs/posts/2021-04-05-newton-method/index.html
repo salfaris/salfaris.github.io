@@ -295,7 +295,7 @@ window.Quarto = {
 <section id="code-implementation" class="level3">
 <h3 class="anchored" data-anchor-id="code-implementation">Code implementation</h3>
 <p>An iterative implementation of the Newton’s method in Python is given below:</p>
-<div class="cell" data-execution_count="1">
+<div id="50d29bb8" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> iterative_newton(f, df, x0, n):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Solves f(x) = 0 using the Newton's method.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -317,7 +317,7 @@ window.Quarto = {
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> xs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Using the same parameters as above, we can also implement a one-liner recursive implementation:</p>
-<div class="cell" data-execution_count="2">
+<div id="e99a4cb6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recursive_newton(f, df, x0, n):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x0 <span class="cf">if</span> n <span class="op">&lt;=</span> <span class="dv">0</span> <span class="cf">else</span> recursive_newton(f, df, x0 <span class="op">-</span> f(x0)<span class="op">/</span>df(x0), n<span class="op">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -326,7 +326,7 @@ window.Quarto = {
 </section>
 <section id="example-usage-finding-root-of-fx-x2" class="level3">
 <h3 class="anchored" data-anchor-id="example-usage-finding-root-of-fx-x2">Example usage: finding root of <span class="math inline">f(x) = x^2</span></h3>
-<div class="cell" data-execution_count="3">
+<div id="5e3700d8" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Library imports</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -334,7 +334,7 @@ window.Quarto = {
 </details>
 </div>
 <p>We first need a helper function to differentiate a function using finite difference approximation.</p>
-<div class="cell" data-execution_count="4">
+<div id="9b45754d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> finite_diff(f):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">""" Returns the derivative of f(x) based on the</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">    finite difference approximation.</span></span>
@@ -345,14 +345,14 @@ window.Quarto = {
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We then define the function <span class="math inline">f(x) = x^2</span>, compute its derivative and apply Newton’s method over <span class="math inline">n = 10</span> iterations, starting at <span class="math inline">x_0 = 1</span>.</p>
-<div class="cell" data-execution_count="5">
+<div id="7bcf99de" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> finite_diff(f)  <span class="co"># Differentiate f(x).</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> iterative_newton(f, df, <span class="dv">1</span>, <span class="dv">10</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>res <span class="op">=</span> np.array(res)  <span class="co"># To utilize numpy broadcasting later.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally, we plot the function.</p>
-<div class="cell" data-execution_count="6">
+<div id="cell-fig-newton" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Plotting code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">'bmh'</span>)</span>
