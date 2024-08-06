@@ -2,6 +2,7 @@
 title: "A benchmark for testing quantum computers with Clifford+T hardware"
 description: "We provide a quantum algorithm that can be used to benchmark quantum computers with Clifford+T hardware and provide a proof of the algorithm using ZX-calculus."
 categories: [algorithms, quantum-computing, zx-calculus, benchmarking]
+image: "./images/01_process.png"
 author: "Salman Faris"
 date: "05 08 2024"
 jupyter: python3
