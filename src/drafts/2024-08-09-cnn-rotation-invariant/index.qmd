@@ -1,0 +1,28 @@
+---
+title: "Why is a convolutional neural net not rotation invariant?"
+description: "This popup in an interview, and I was not happy to not be able to prove it in my head."
+categories: [machine-learning, deep-learning]
+author: "Salman Faris"
+date: "09 08 2024"
+jupyter: python3
+format:
+  html:
+    toc: true
+    html-math-method: katex
+execute: 
+  enabled: false
+  cache: false
+draft: true
+---
+
+Why is a convolutional neural network (CNN) not rotation invariant?
+
+This question popped up in an interview recently. I was able to reason why it is not rotation invariant, especially since it is quite well-known in the literature; but I was not happy to not be able to prove it mathematically in my head. Today I am to put this question to bed with a somewhat acceptable proof.
+
+Let's get one important thing out of the way first because this might confuse some people. The statement "CNN is not rotation invariant" does not imply that a CNN cannot learn filters that recognize rotation of an image. You can do so via data augmentation, 
+
+
+
+## Equivariant or invariant?
+
+<!-- ref: https://datascience.stackexchange.com/a/16077/101162 -->
