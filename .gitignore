@@ -3,5 +3,4 @@
 .DS_Store
 .quarto
 _site/
-draft*/
 /.luarc.json
