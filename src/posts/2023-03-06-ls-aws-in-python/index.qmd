@@ -1,6 +1,6 @@
 ---
 title: "How to do `aws s3 ls s3://bucket/` using boto3 in python?"
-categories: [cloud, AWS, python]
+categories: [cloud development, aws, python]
 author: "Salman Faris"
 date: "12 03 2023"
 jupyter: python3

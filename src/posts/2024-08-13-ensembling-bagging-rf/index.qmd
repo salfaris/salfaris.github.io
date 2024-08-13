@@ -1,6 +1,6 @@
 ---
 title: "Quickest intro to random forest"
-categories: [machine-learning, ensembling, meta-models]
+categories: [machine learning, ensembling]
 author: "Salman Faris"
 date: "13 08 2024"
 jupyter: python3

@@ -1,6 +1,6 @@
 ---
 title: "Clash Series: Checking Number is Prime"
-categories: [clash of code, algorithms]
+categories: [clash of code, algorithms, python]
 author: "Salman Faris"
 date: "05 03 2022"
 jupyter: python3
