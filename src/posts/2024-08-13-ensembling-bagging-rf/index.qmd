@@ -1,0 +1,57 @@
+---
+title: "Quickest intro to random forest"
+categories: [machine-learning, ensembling, meta-models]
+author: "Salman Faris"
+date: "13 08 2024"
+jupyter: python3
+format:
+  html:
+    toc: true
+    html-math-method: katex
+execute: 
+  enabled: false
+  cache: false
+draft: false
+---
+
+## Why ensemble?
+
+As its name suggests, _ensembling_ is quite literally ensembling several machine learning models to create a meta-model that (in theory) is better than any of the individual models. The meta-model is built typically via an averaging procedure. The idea has a natural intuition behind it: if you consider $n$ iid model outputs $X_1, \ldots, X_n$ with variance $\mathrm{Var}(X_i) = \sigma^2$, then the sample mean variance given by $\mathrm{Var}(\bar{X}) = \frac{\sigma^2}{n}$ converges to $0$ as $n \to \infty$.
+
+In reality, however, you don't really get independence so the $X_i$ are at most only identically distributed. This changes the math a bit, so let's derive the sample mean variance again:
+
+$$
+\begin{align*}
+\mathrm{Var}(\bar{X}) 
+&= \frac{1}{n^2} \mathrm{Var}(X_i) + \frac{1}{n^2} \sum_{i, j} \mathrm{Cov}(X_i, X_j) \\
+&= \frac{\sigma^2}{n} + \frac{n-1}{n} \rho \sigma^2 \\
+&= \rho \sigma^2 + \frac{1 - \rho}{n}\sigma^2,
+\end{align*}
+$$
+
+where $\rho$ is the average correlation across the $X_i$. To create a meta-model now, we want two things to happen:
+
+1. We want to consider as many different models as possible so that $n \to \infty$ and hence $(1-\rho)\sigma^2/n \to 0$.
+2. We also want the models to be as decorrelated as possible so that $\rho \to 0$ and hence $\rho \sigma^2 \to 0$ and we are back in the iid case.
+
+This gives rise to several different ways of ensembling machine learning models. One that is quite popular is called _bootstrap aggregation_ or simply _bagging_ and it is a very simple procedure. 
+
+## Bagging and its bias-variance tradeoff
+
+Let $\mathcal{P}$ be the true population, and suppose we have a training set $\mathcal{S}$ sampled from $\mathcal{P}$. Then, we can create $n$ bootstrap samples $Z_1, \ldots, Z_n$ by sampling from $\mathcal{S}$ with replacement. This is the **bootstrap** step. We then train $n$ different models $G_1, \ldots, G_n$ on these bootstrap samples for each $i$. Further, we create a meta-model
+
+$$G(i) = \frac{1}{n} \sum_{i=1}^n G_i(x)$$
+
+that essentially averages the predictions of the $G_i$. This is the **aggregation** step.
+
+Let's consider the bias-variance tradeoff for the bagging procedure. Generally, bootstrapping decreases the average correlation $\rho$ as we perform random subsampling with replacement without accounting for specific features in the dataset. As a consequence, the correlation term $\rho \sigma^2$ decreases. Further, the variance term $(1-\rho)\sigma^2/n$ decreases as we increase $n$. However, as a tradeoff, we have increased the bias since we are training on bootstrap samples $Z_i \subset \mathcal{S}$. This is a classic no free lunch scenario in machine learning where as the variance decreases, you risk increasing the bias.
+
+Having said that, the decision tree is a perfect model to be used in constructing a meta-model via bagging. This is because the decision tree is a high variance, low bias model so the net effect of performing bagging is, in some sense, mitigated.
+
+We can further add an additional step to further decorrelate the decision tree outputs. Rather than considering the entire feature space, we can consider only a fraction of the total features at each split. As a consequence, the correlation term $\rho \sigma^2$ decreases even further! This meta-model that arises from performing bagging using decision trees with this additional procedure is called a random forest.
+
+So a random forest is essentially:
+
+$$
+\mathrm{RandomForest} = \mathrm{Bagging}(\mathrm{DecisionTree}(\mathrm{RandomFeatureSubspace})).
+$$

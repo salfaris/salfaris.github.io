@@ -1,0 +1,35 @@
+---
+title: "Simplest route from decision trees to random forests"
+categories: [machine-learning]
+author: "Salman Faris"
+date: "13 08 2024"
+jupyter: python3
+format:
+  html:
+    toc: true
+    html-math-method: katex
+execute: 
+  enabled: false
+  cache: false
+draft: true
+---
+
+Decision tree is perhaps one of the simplest non-linear machine learning algorithm out there. It is easy to explain, easy to train, easy to use and easy to interpret.
+
+You build a decision tree via a greedy, top-down, recursive partitioning approach. So it seeks a global optimal solution by greedily finding a locally optimal solution over all the possible features starting from the _root_ node which considers the entire feature space. Given a region of the feature space $R_p$, we look for a split
+
+$$S_p(\mathcal{F}, \tau) = (\left{ X \in R_p : X_\mathcal{F} < \tau \right}, \left{ X \in R_p : X_\mathcal{F} \geq \tau \right}) =: (R_1, R_2),$$
+
+where $\mathcal{F}$ is a feature and $\tau$ is a split threshold. We recursively repeat this splitting process on $R_1$ and $R_2$ to obtain $S_1$ and $S_2$ respectively.
+
+## How is the split done?
+
+Define $p_c$ to be the proportion of samples in $R_j$ that belongs to class $c$ and define the misclassification loss
+
+$$L_{\text{misclass}} = 1 - \max_{c} p_c.$$
+
+Then a naive way to perform the split is to maximize the difference in misclassification losses:
+
+$$\max_{\mathcal{F}, \tau} \left[ L_{\text{misclass}}(R_p) - (L_{\text{misclass}}(R_1) + L_{\text{misclass}}(R_2)) \right].$$
+
+The problem with the misclassification loss is that 
