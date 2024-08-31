@@ -16,6 +16,7 @@ draft: false
 
 > TLDR; Keep your playlists small.
 > There's a 50% chance of finding your favourite song in less than or equal to 4 steps in a playlist of length 9.
+> With each additional song in your playlist, you decrease the speed of finding your favourite song by roughly 10%.
 
 I love music. I listen to music all the time and I especially listen to music when I go running, where I would put it on shuffle mode. Now a few runs ago, I was aggressively double tapping my airpods to jump to the next song, skipping a lot of songs in the process until it reaches a song that I was keen on listening to at that moment. That's when I started thinking, given that I started at a particular song in the playlist, can I quantify how many steps do I need to take to reach a particular favourite song in my playlist?
 
