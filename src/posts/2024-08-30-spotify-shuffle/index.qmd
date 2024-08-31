@@ -1,0 +1,97 @@
+---
+title: "Searching for my favorite song in a deep Spotify playlist"
+categories: [combinatorics, spotify]
+author: "Salman Faris"
+date: "30 08 2024"
+jupyter: python3
+format:
+  html:
+    toc: true
+    html-math-method: katex
+execute: 
+  enabled: false
+  cache: false
+draft: false
+---
+
+I love music. I listen to music all the time and specifically stream music via Spotify (Spotify if you read this, please hire me at some point in the future, phenomenal product, happy to relocate to London/Sweden). I especially listen to music when I go running, where I'd put it on shuffle mode. Now a few runs ago, I was aggressively double tapping my airpods to jump to the next song, skipping a lot of songs in the process until it reaches a song that I was keen on listening to at that moment. That's when I started thinking, given that I started at a particular song in the playlist, can I quantify how many steps do I need to take to reach a particular favourite song in my playlist?
+
+There are many ways to approach this problem (which is the beauty of this problem!). For example, one can form a [complete digraph](https://en.wikipedia.org/wiki/Complete_graph) for the songs in the playlist, remove the directed path from your favourite song to any other node (but keep the inverse so that your favourite song is a sink) and then count the number of all possible paths between any node (song) and the target favourite song. Note that this is different to finding a shortest path which we have Dijsktra's algorithm for. That algorithm runs in $O\left(|E| + |V| \log |V| \right)$ where $E$ is the multiset of edges and $V$ the set of nodes. Rather, the problem of finding the number of paths is much harder and would not have an algorithm that enjoy such speeds.
+
+Instead of the graph approach, I will go down the dark hole known as combinatorics. The downside is that the setup will be less natural and will require some level of abstraction. The upside, however, is that once everything is set up nicely, solving the problem essentially amounts to careful counting. Let's start seeing an example on how we can do this.
+
+## A musical picture in mind
+
+Suppose a playlist contains three songs $s_1, s_2, s_T$. Let's ask the most basic question of: _how many paths can I reach the target song $s_T$_? Now the answer is not $3!$ because you can reach $s_T$ without visiting all the other songs in the playlist. For example, you can reach $s_T$ via the route $s_1 \to s_T$ or $s_2 \to s_T$ respectively. In total, you can reach $s_T$ in 5 different ways. These are:
+
+1. $s_T \to s_T$
+2. $s_1 \to s_T$
+3. $s_2 \to s_T$
+4. $s_1 \to s_2 \to s_T$
+5. $s_2 \to s_1 \to s_T$
+
+where the first path $s_T \to s_T$ is the tautological path of starting and ending at $s_T$.
+
+How about if the playlist contain four songs $s_1, s_2, s_3, s_T$, how many paths can I reach the target song $s_T$? You should be convinced by now that the answer is not $4!$, but how many? The answer is that there are 16 paths in total. For your sanity, I will enumerate this long list below:
+
+1. $s_T \to s_T$
+2. $s_1 \to s_T$
+3. $s_2 \to s_T$
+4. $s_3 \to s_T$
+5. $s_1 \to s_2 \to s_T$
+6. $s_2 \to s_1 \to s_T$
+7. $s_3 \to s_2 \to s_T$
+8. $s_2 \to s_3 \to s_T$
+9. $s_1 \to s_3 \to s_T$
+10. $s_3 \to s_1 \to s_T$
+11. $s_1 \to s_2 \to s_3 \to s_T$
+12. $s_2 \to s_1 \to s_3 \to s_T$
+13. $s_3 \to s_2 \to s_1 \to s_T$
+14. $s_2 \to s_3 \to s_1 \to s_T$
+15. $s_1 \to s_3 \to s_2 \to s_T$
+16. $s_3 \to s_1 \to s_2 \to s_T$.
+
+Now you should start to see a pattern. In both cases where the playlist is of length three and four, we observe that the target song $s_T$ remains fixed and the only thing that changes is the order of the songs prior to $s_T$. Further, the number of songs that are reordered is progressively unconstrained to acknowledge that you can reach the target song in an increasing number of steps. Thus, the number of paths to reach the target song $s_T$ is just a sum of $k$-permutations of $n-1$ songs where $k$ is the number of steps allowed to reach $s_T$ and $n$ is the length of the playlist. This sum is done from $0$, which represents the tautological path $s_T \to s_T$, up to $n-1$ which represents a permutation of the path $s_1 \to s_2 \to \cdots \to s_{n-1} \to s_T$. This is essentially a proof of the following result.
+
+--- 
+
+::: {#prp-paths1}
+
+## Number of paths given playlist
+
+The number of paths to reach the target song $s_T$ in a playlist of length $n$ is given by:
+$$\#\mathrm{paths}(n) = \sum_{j=0}^{n-1} P(n-1, j).$$
+
+where $P(N, k)$ is the $k$-permutation of $N$ objects.
+
+:::
+
+---
+
+In the case of $n=4$ that we have just enumerated above, the number of steps is given by:
+
+$$
+\#\mathrm{paths}(4) = P(3, 0) + P(3, 1) + P(3, 2) + P(3, 3) = 1 + 3 + 6 + 6 = 16
+$$
+
+which agrees with our brute-force enumeration. Similarly, you can check that $\#\mathrm{paths}(3) = 5$ as we have enumerated before.
+
+So this is a good result, but it has not answer our main question:
+
+> Given a song $A$ in playlist $\mathcal{P}$, how many ways can you reach your favourite song $s_T \in \mathcal{P}$ in less than or equal to $k \in \mathbb{Z}^+$ steps?
+
+It has, however, answered the easier question:
+
+> Given a playlist $\mathcal{P}$, how many ways can you reach your favourite song $s_T \in \mathcal{P}$ in less than or equal to $k \in \mathbb{Z}^+$ steps?
+
+This question is answered by using @prp-paths1 and simply truncating the summation at $k \leq n-1$.
+
+The difference between the main question and this easier question is that the former essentially wants $\#\mathrm{paths} | A, \mathcal{P}$ whereas what we have at the moment gives $\#\mathrm{paths} | \mathcal{P}$. So let's move towards a solution, suppose we start at a song $A \in \mathcal{P}$, what then?
+
+## Answering the main question
+
+Define a playlist $\mathcal{P}$ to be a set of songs $s_i$ indexed by positive integers.
+
+$$
+\#\mathrm{superPaths}(n) = m! + \sum_{k=0}^m P(m, k) - \sum_{\ell=1}^{g} P(g, \ell-1)
+$$
