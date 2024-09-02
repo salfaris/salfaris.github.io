@@ -141,7 +141,7 @@ Back to our enumeration of the playlist of length $4$, we observe firstly that t
 
 Just focusing on 1-paths here, it is easy to see that the number of 1-paths to reach $s_T$ from $s_3$ is given by $N(n-1)$ because we can "group" $s_3 \to s_T$ together and treat it as a single end point $s_T'$. It is also easy to see that the number of 3-paths is essentially a permutation on songs that are left, which in this case is $2! = 2$. It is tempting now to say that the case of 2-paths is simply $N(n-1) - 1$ since we are discarding the unique $s_3 \to s_T$ case which exists only for 1-paths and that everything else is just a permutation of the remaining songs; and you are not wrong to think so as we shall see! The problem is that it does not give a strong explanation for what a general pattern would be. 
 
-So let's look at a playlist of length $n=5$ and count each $t$-path from $s_4$. At this point enumeration of the playlist can get a bit crazy as we know by @prp-paths1 that there are $N(5) = 65$ paths to reach $s_T$ from $s_4$. I highly recommend you enumerate these paths by writing code (I will provide a fugly one towards the end and it will not be in python). Now if we focus on each $t$-paths, we see that there are
+So let's look at a playlist of length $n=5$ and count each $t$-path from $s_4$. At this point enumeration of the playlist can get a bit crazy as we know by @prp-paths1 that there are $N(5) = 65$ paths to reach $s_T$ from $s_4$. I highly recommend you enumerate these paths by writing code (I've provided a fugly python code to do this in the appendix. See @lst-enum). Now if we focus on each $t$-paths, we see that there are
 
 1. 16 counts of 1-paths,
 2. 15 counts of 2-paths,
@@ -251,3 +251,97 @@ Here are some key directions we can take to explore.
 4. Do a precise analysis on $N_{\leq t}/N(n)$. Seems like there's approximately a ~90% drop for the numbers that we have tabulated as $n$ increases. Finding a bound would be excellent.
 5. I'm pretty sure we can try solving this problem using group theory.
 6. Consider weighted shuffle on playlists now, how would you solve the same problem? Maybe a graph approach is inevitable?
+
+## Appendix
+
+### Enumerating playlist of length $n$
+
+The code below enumerates a playlist of length $n$ but it is highly inefficient. A back of the envelope estimate gives me a rough $O(n!)$ time complexity. Can you do better?
+
+```{#lst-enum .python lst-cap="Enumerate playlist"}
+from itertools import permutations
+
+NULL = 0
+E = -1
+
+
+def enum(seq: list[int]) -> set[tuple[int, ...]]:
+    n = len(seq)
+
+    num_pool = set(range(1, n + 1))
+
+    # Find indexes where values are not empty.
+    # Since we only care about permutations, values are unique at each index (except
+    # for the NULL value). So remove encountered filled values from the permutation
+    # pool.
+    filled_idxs: list[int] = []
+    for idx, v in enumerate(seq):
+        if v != E:
+            filled_idxs.append(idx)
+            num_pool.remove(v)
+
+    pool = list(num_pool)
+    # The least index of filled values determine the number of NULLs possible for
+    # the permutations.
+    for _ in range(min(filled_idxs)):
+        pool.append(NULL)
+    all_perm = list(permutations(pool, r=(n - len(filled_idxs))))
+    all_perm = set(all_perm)  # remove dups
+
+    # Find invalid NULL configurations such as (NULL, 1, NULL, ...). NULLs cannot
+    # appear after valid positive integer.
+    bad_seqs = set()
+    for p in all_perm:
+        num_found = False
+        for i in p:
+            if i != NULL:
+                num_found = True
+                continue
+            if num_found and i == NULL:
+                bad_seqs.add(p)
+                break
+
+    good_seqs = all_perm - bad_seqs
+    return good_seqs
+
+
+if __name__ == "__main__":
+
+    def generate_new_seq(n: int):
+        new_seq = []
+        init = [E] * n
+        init[E] = n
+        for i in range(n - 2, E, E):
+            init[i] = n - 1
+            if i != n - 2:
+                init[i + 1] = E
+            new_seq.append(init.copy())
+        return new_seq
+
+    seqs = generate_new_seq(5)
+
+    full_enumeration = []
+    for seq in seqs:
+        valid_perms = enum(seq)
+        for perm_seq in valid_perms:
+            seq2 = seq.copy()
+            idx = 0
+            for i in perm_seq:
+                while seq2[idx] != E:
+                    idx += 1
+                seq2[idx] = i
+            full_enumeration.append(seq2)
+
+    full_enumeration.sort()
+    N = len(full_enumeration)
+    warn_out = (
+        "WARNING: Note that we use '0' as NULL pointers in the following enumeration."
+    )
+    print("-" * len(warn_out))
+    print(warn_out)
+    print("-" * len(warn_out))
+    for e in full_enumeration:
+        print(e)
+    print()
+    print(f"N_t({len(seq)}) = {N}")
+```
