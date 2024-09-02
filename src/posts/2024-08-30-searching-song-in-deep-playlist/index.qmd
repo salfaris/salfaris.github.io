@@ -258,7 +258,7 @@ Here are some key directions we can take to explore.
 
 The code below enumerates a playlist of length $n$ but it is highly inefficient. A back of the envelope estimate gives me a rough $O(n!)$ time complexity. Can you do better?
 
-```{#lst-enum .python lst-cap="Enumerate playlist"}
+```{#lst-enum .python lst-cap="Enumerate playlist of length $n=4$"}
 from itertools import permutations
 
 NULL = 0
@@ -268,7 +268,7 @@ E = -1
 def enum(seq: list[int]) -> set[tuple[int, ...]]:
     n = len(seq)
 
-    num_pool = set(range(1, n + 1))
+    pool = set(range(1, n + 1))
 
     # Find indexes where values are not empty.
     # Since we only care about permutations, values are unique at each index (except
@@ -278,15 +278,17 @@ def enum(seq: list[int]) -> set[tuple[int, ...]]:
     for idx, v in enumerate(seq):
         if v != E:
             filled_idxs.append(idx)
-            num_pool.remove(v)
+            pool.remove(v)
 
-    pool = list(num_pool)
+    # Make pool into a list because we may append >=1 NULLs to it.
+    pool = list(pool)
     # The least index of filled values determine the number of NULLs possible for
     # the permutations.
     for _ in range(min(filled_idxs)):
         pool.append(NULL)
     all_perm = list(permutations(pool, r=(n - len(filled_idxs))))
     all_perm = set(all_perm)  # remove dups
+
 
     # Find invalid NULL configurations such as (NULL, 1, NULL, ...). NULLs cannot
     # appear after valid positive integer.
@@ -301,6 +303,9 @@ def enum(seq: list[int]) -> set[tuple[int, ...]]:
                 bad_seqs.add(p)
                 break
 
+    # Sucks this is python and you have to do something like this
+    assert isinstance(all_perm, set), "`all_perm` is not a set."
+
     good_seqs = all_perm - bad_seqs
     return good_seqs
 
@@ -310,7 +315,7 @@ if __name__ == "__main__":
     def generate_new_seq(n: int):
         new_seq = []
         init = [E] * n
-        init[E] = n
+        init[-1] = n
         for i in range(n - 2, E, E):
             init[i] = n - 1
             if i != n - 2:

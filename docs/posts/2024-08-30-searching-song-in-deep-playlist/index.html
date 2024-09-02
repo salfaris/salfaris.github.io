@@ -503,7 +503,7 @@ N_{\leq t}(n) = \sum_{\ell=1}^{t} N_{\ell}(n).
 <div id="lst-enum" class="python listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-enum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Listing&nbsp;1: Enumerate playlist
+Listing&nbsp;1: Enumerate playlist of length <span class="math inline">n=4</span>
 </figcaption>
 <div aria-describedby="lst-enum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="sourceCode" id="lst-enum"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="lst-enum-1"><a href="#lst-enum-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> permutations</span>
@@ -515,7 +515,7 @@ Listing&nbsp;1: Enumerate playlist
 <span id="lst-enum-7"><a href="#lst-enum-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> enum(seq: <span class="bu">list</span>[<span class="bu">int</span>]) <span class="op">-&gt;</span> <span class="bu">set</span>[<span class="bu">tuple</span>[<span class="bu">int</span>, ...]]:</span>
 <span id="lst-enum-8"><a href="#lst-enum-8" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(seq)</span>
 <span id="lst-enum-9"><a href="#lst-enum-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-enum-10"><a href="#lst-enum-10" aria-hidden="true" tabindex="-1"></a>    num_pool <span class="op">=</span> <span class="bu">set</span>(<span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="lst-enum-10"><a href="#lst-enum-10" aria-hidden="true" tabindex="-1"></a>    pool <span class="op">=</span> <span class="bu">set</span>(<span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>))</span>
 <span id="lst-enum-11"><a href="#lst-enum-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="lst-enum-12"><a href="#lst-enum-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find indexes where values are not empty.</span></span>
 <span id="lst-enum-13"><a href="#lst-enum-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Since we only care about permutations, values are unique at each index (except</span></span>
@@ -525,73 +525,77 @@ Listing&nbsp;1: Enumerate playlist
 <span id="lst-enum-17"><a href="#lst-enum-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx, v <span class="kw">in</span> <span class="bu">enumerate</span>(seq):</span>
 <span id="lst-enum-18"><a href="#lst-enum-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="op">!=</span> E:</span>
 <span id="lst-enum-19"><a href="#lst-enum-19" aria-hidden="true" tabindex="-1"></a>            filled_idxs.append(idx)</span>
-<span id="lst-enum-20"><a href="#lst-enum-20" aria-hidden="true" tabindex="-1"></a>            num_pool.remove(v)</span>
+<span id="lst-enum-20"><a href="#lst-enum-20" aria-hidden="true" tabindex="-1"></a>            pool.remove(v)</span>
 <span id="lst-enum-21"><a href="#lst-enum-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-enum-22"><a href="#lst-enum-22" aria-hidden="true" tabindex="-1"></a>    pool <span class="op">=</span> <span class="bu">list</span>(num_pool)</span>
-<span id="lst-enum-23"><a href="#lst-enum-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The least index of filled values determine the number of NULLs possible for</span></span>
-<span id="lst-enum-24"><a href="#lst-enum-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the permutations.</span></span>
-<span id="lst-enum-25"><a href="#lst-enum-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">min</span>(filled_idxs)):</span>
-<span id="lst-enum-26"><a href="#lst-enum-26" aria-hidden="true" tabindex="-1"></a>        pool.append(NULL)</span>
-<span id="lst-enum-27"><a href="#lst-enum-27" aria-hidden="true" tabindex="-1"></a>    all_perm <span class="op">=</span> <span class="bu">list</span>(permutations(pool, r<span class="op">=</span>(n <span class="op">-</span> <span class="bu">len</span>(filled_idxs))))</span>
-<span id="lst-enum-28"><a href="#lst-enum-28" aria-hidden="true" tabindex="-1"></a>    all_perm <span class="op">=</span> <span class="bu">set</span>(all_perm)  <span class="co"># remove dups</span></span>
-<span id="lst-enum-29"><a href="#lst-enum-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-enum-30"><a href="#lst-enum-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find invalid NULL configurations such as (NULL, 1, NULL, ...). NULLs cannot</span></span>
-<span id="lst-enum-31"><a href="#lst-enum-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># appear after valid positive integer.</span></span>
-<span id="lst-enum-32"><a href="#lst-enum-32" aria-hidden="true" tabindex="-1"></a>    bad_seqs <span class="op">=</span> <span class="bu">set</span>()</span>
-<span id="lst-enum-33"><a href="#lst-enum-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> all_perm:</span>
-<span id="lst-enum-34"><a href="#lst-enum-34" aria-hidden="true" tabindex="-1"></a>        num_found <span class="op">=</span> <span class="va">False</span></span>
-<span id="lst-enum-35"><a href="#lst-enum-35" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> p:</span>
-<span id="lst-enum-36"><a href="#lst-enum-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">!=</span> NULL:</span>
-<span id="lst-enum-37"><a href="#lst-enum-37" aria-hidden="true" tabindex="-1"></a>                num_found <span class="op">=</span> <span class="va">True</span></span>
-<span id="lst-enum-38"><a href="#lst-enum-38" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
-<span id="lst-enum-39"><a href="#lst-enum-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> num_found <span class="kw">and</span> i <span class="op">==</span> NULL:</span>
-<span id="lst-enum-40"><a href="#lst-enum-40" aria-hidden="true" tabindex="-1"></a>                bad_seqs.add(p)</span>
-<span id="lst-enum-41"><a href="#lst-enum-41" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
-<span id="lst-enum-42"><a href="#lst-enum-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-enum-43"><a href="#lst-enum-43" aria-hidden="true" tabindex="-1"></a>    good_seqs <span class="op">=</span> all_perm <span class="op">-</span> bad_seqs</span>
-<span id="lst-enum-44"><a href="#lst-enum-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> good_seqs</span>
-<span id="lst-enum-45"><a href="#lst-enum-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-enum-46"><a href="#lst-enum-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-enum-22"><a href="#lst-enum-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make pool into a list because we may append &gt;=1 NULLs to it.</span></span>
+<span id="lst-enum-23"><a href="#lst-enum-23" aria-hidden="true" tabindex="-1"></a>    pool <span class="op">=</span> <span class="bu">list</span>(pool)</span>
+<span id="lst-enum-24"><a href="#lst-enum-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The least index of filled values determine the number of NULLs possible for</span></span>
+<span id="lst-enum-25"><a href="#lst-enum-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the permutations.</span></span>
+<span id="lst-enum-26"><a href="#lst-enum-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">min</span>(filled_idxs)):</span>
+<span id="lst-enum-27"><a href="#lst-enum-27" aria-hidden="true" tabindex="-1"></a>        pool.append(NULL)</span>
+<span id="lst-enum-28"><a href="#lst-enum-28" aria-hidden="true" tabindex="-1"></a>    all_perm <span class="op">=</span> <span class="bu">list</span>(permutations(pool, r<span class="op">=</span>(n <span class="op">-</span> <span class="bu">len</span>(filled_idxs))))</span>
+<span id="lst-enum-29"><a href="#lst-enum-29" aria-hidden="true" tabindex="-1"></a>    all_perm <span class="op">=</span> <span class="bu">set</span>(all_perm)  <span class="co"># remove dups</span></span>
+<span id="lst-enum-30"><a href="#lst-enum-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-enum-31"><a href="#lst-enum-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-enum-32"><a href="#lst-enum-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Find invalid NULL configurations such as (NULL, 1, NULL, ...). NULLs cannot</span></span>
+<span id="lst-enum-33"><a href="#lst-enum-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># appear after valid positive integer.</span></span>
+<span id="lst-enum-34"><a href="#lst-enum-34" aria-hidden="true" tabindex="-1"></a>    bad_seqs <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="lst-enum-35"><a href="#lst-enum-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> all_perm:</span>
+<span id="lst-enum-36"><a href="#lst-enum-36" aria-hidden="true" tabindex="-1"></a>        num_found <span class="op">=</span> <span class="va">False</span></span>
+<span id="lst-enum-37"><a href="#lst-enum-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> p:</span>
+<span id="lst-enum-38"><a href="#lst-enum-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">!=</span> NULL:</span>
+<span id="lst-enum-39"><a href="#lst-enum-39" aria-hidden="true" tabindex="-1"></a>                num_found <span class="op">=</span> <span class="va">True</span></span>
+<span id="lst-enum-40"><a href="#lst-enum-40" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="lst-enum-41"><a href="#lst-enum-41" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> num_found <span class="kw">and</span> i <span class="op">==</span> NULL:</span>
+<span id="lst-enum-42"><a href="#lst-enum-42" aria-hidden="true" tabindex="-1"></a>                bad_seqs.add(p)</span>
+<span id="lst-enum-43"><a href="#lst-enum-43" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="lst-enum-44"><a href="#lst-enum-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-enum-45"><a href="#lst-enum-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Sucks this is python and you have to do something like this</span></span>
+<span id="lst-enum-46"><a href="#lst-enum-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> <span class="bu">isinstance</span>(all_perm, <span class="bu">set</span>), <span class="st">"`all_perm` is not a set."</span></span>
 <span id="lst-enum-47"><a href="#lst-enum-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-enum-48"><a href="#lst-enum-48" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
-<span id="lst-enum-49"><a href="#lst-enum-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-enum-50"><a href="#lst-enum-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generate_new_seq(n: <span class="bu">int</span>):</span>
-<span id="lst-enum-51"><a href="#lst-enum-51" aria-hidden="true" tabindex="-1"></a>        new_seq <span class="op">=</span> []</span>
-<span id="lst-enum-52"><a href="#lst-enum-52" aria-hidden="true" tabindex="-1"></a>        init <span class="op">=</span> [E] <span class="op">*</span> n</span>
-<span id="lst-enum-53"><a href="#lst-enum-53" aria-hidden="true" tabindex="-1"></a>        init[E] <span class="op">=</span> n</span>
-<span id="lst-enum-54"><a href="#lst-enum-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">2</span>, E, E):</span>
-<span id="lst-enum-55"><a href="#lst-enum-55" aria-hidden="true" tabindex="-1"></a>            init[i] <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span></span>
-<span id="lst-enum-56"><a href="#lst-enum-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">!=</span> n <span class="op">-</span> <span class="dv">2</span>:</span>
-<span id="lst-enum-57"><a href="#lst-enum-57" aria-hidden="true" tabindex="-1"></a>                init[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> E</span>
-<span id="lst-enum-58"><a href="#lst-enum-58" aria-hidden="true" tabindex="-1"></a>            new_seq.append(init.copy())</span>
-<span id="lst-enum-59"><a href="#lst-enum-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> new_seq</span>
-<span id="lst-enum-60"><a href="#lst-enum-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-enum-61"><a href="#lst-enum-61" aria-hidden="true" tabindex="-1"></a>    seqs <span class="op">=</span> generate_new_seq(<span class="dv">5</span>)</span>
-<span id="lst-enum-62"><a href="#lst-enum-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-enum-63"><a href="#lst-enum-63" aria-hidden="true" tabindex="-1"></a>    full_enumeration <span class="op">=</span> []</span>
-<span id="lst-enum-64"><a href="#lst-enum-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> seq <span class="kw">in</span> seqs:</span>
-<span id="lst-enum-65"><a href="#lst-enum-65" aria-hidden="true" tabindex="-1"></a>        valid_perms <span class="op">=</span> enum(seq)</span>
-<span id="lst-enum-66"><a href="#lst-enum-66" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> perm_seq <span class="kw">in</span> valid_perms:</span>
-<span id="lst-enum-67"><a href="#lst-enum-67" aria-hidden="true" tabindex="-1"></a>            seq2 <span class="op">=</span> seq.copy()</span>
-<span id="lst-enum-68"><a href="#lst-enum-68" aria-hidden="true" tabindex="-1"></a>            idx <span class="op">=</span> <span class="dv">0</span></span>
-<span id="lst-enum-69"><a href="#lst-enum-69" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> perm_seq:</span>
-<span id="lst-enum-70"><a href="#lst-enum-70" aria-hidden="true" tabindex="-1"></a>                <span class="cf">while</span> seq2[idx] <span class="op">!=</span> E:</span>
-<span id="lst-enum-71"><a href="#lst-enum-71" aria-hidden="true" tabindex="-1"></a>                    idx <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="lst-enum-72"><a href="#lst-enum-72" aria-hidden="true" tabindex="-1"></a>                seq2[idx] <span class="op">=</span> i</span>
-<span id="lst-enum-73"><a href="#lst-enum-73" aria-hidden="true" tabindex="-1"></a>            full_enumeration.append(seq2)</span>
-<span id="lst-enum-74"><a href="#lst-enum-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="lst-enum-75"><a href="#lst-enum-75" aria-hidden="true" tabindex="-1"></a>    full_enumeration.sort()</span>
-<span id="lst-enum-76"><a href="#lst-enum-76" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="bu">len</span>(full_enumeration)</span>
-<span id="lst-enum-77"><a href="#lst-enum-77" aria-hidden="true" tabindex="-1"></a>    warn_out <span class="op">=</span> (</span>
-<span id="lst-enum-78"><a href="#lst-enum-78" aria-hidden="true" tabindex="-1"></a>        <span class="st">"WARNING: Note that we use '0' as NULL pointers in the following enumeration."</span></span>
-<span id="lst-enum-79"><a href="#lst-enum-79" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="lst-enum-80"><a href="#lst-enum-80" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="bu">len</span>(warn_out))</span>
-<span id="lst-enum-81"><a href="#lst-enum-81" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(warn_out)</span>
-<span id="lst-enum-82"><a href="#lst-enum-82" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="bu">len</span>(warn_out))</span>
-<span id="lst-enum-83"><a href="#lst-enum-83" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> e <span class="kw">in</span> full_enumeration:</span>
-<span id="lst-enum-84"><a href="#lst-enum-84" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(e)</span>
-<span id="lst-enum-85"><a href="#lst-enum-85" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
-<span id="lst-enum-86"><a href="#lst-enum-86" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"N_t(</span><span class="sc">{</span><span class="bu">len</span>(seq)<span class="sc">}</span><span class="ss">) = </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="lst-enum-48"><a href="#lst-enum-48" aria-hidden="true" tabindex="-1"></a>    good_seqs <span class="op">=</span> all_perm <span class="op">-</span> bad_seqs</span>
+<span id="lst-enum-49"><a href="#lst-enum-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> good_seqs</span>
+<span id="lst-enum-50"><a href="#lst-enum-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-enum-51"><a href="#lst-enum-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-enum-52"><a href="#lst-enum-52" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="lst-enum-53"><a href="#lst-enum-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-enum-54"><a href="#lst-enum-54" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> generate_new_seq(n: <span class="bu">int</span>):</span>
+<span id="lst-enum-55"><a href="#lst-enum-55" aria-hidden="true" tabindex="-1"></a>        new_seq <span class="op">=</span> []</span>
+<span id="lst-enum-56"><a href="#lst-enum-56" aria-hidden="true" tabindex="-1"></a>        init <span class="op">=</span> [E] <span class="op">*</span> n</span>
+<span id="lst-enum-57"><a href="#lst-enum-57" aria-hidden="true" tabindex="-1"></a>        init[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> n</span>
+<span id="lst-enum-58"><a href="#lst-enum-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n <span class="op">-</span> <span class="dv">2</span>, E, E):</span>
+<span id="lst-enum-59"><a href="#lst-enum-59" aria-hidden="true" tabindex="-1"></a>            init[i] <span class="op">=</span> n <span class="op">-</span> <span class="dv">1</span></span>
+<span id="lst-enum-60"><a href="#lst-enum-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">!=</span> n <span class="op">-</span> <span class="dv">2</span>:</span>
+<span id="lst-enum-61"><a href="#lst-enum-61" aria-hidden="true" tabindex="-1"></a>                init[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> E</span>
+<span id="lst-enum-62"><a href="#lst-enum-62" aria-hidden="true" tabindex="-1"></a>            new_seq.append(init.copy())</span>
+<span id="lst-enum-63"><a href="#lst-enum-63" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> new_seq</span>
+<span id="lst-enum-64"><a href="#lst-enum-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-enum-65"><a href="#lst-enum-65" aria-hidden="true" tabindex="-1"></a>    seqs <span class="op">=</span> generate_new_seq(<span class="dv">5</span>)</span>
+<span id="lst-enum-66"><a href="#lst-enum-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-enum-67"><a href="#lst-enum-67" aria-hidden="true" tabindex="-1"></a>    full_enumeration <span class="op">=</span> []</span>
+<span id="lst-enum-68"><a href="#lst-enum-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> seq <span class="kw">in</span> seqs:</span>
+<span id="lst-enum-69"><a href="#lst-enum-69" aria-hidden="true" tabindex="-1"></a>        valid_perms <span class="op">=</span> enum(seq)</span>
+<span id="lst-enum-70"><a href="#lst-enum-70" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> perm_seq <span class="kw">in</span> valid_perms:</span>
+<span id="lst-enum-71"><a href="#lst-enum-71" aria-hidden="true" tabindex="-1"></a>            seq2 <span class="op">=</span> seq.copy()</span>
+<span id="lst-enum-72"><a href="#lst-enum-72" aria-hidden="true" tabindex="-1"></a>            idx <span class="op">=</span> <span class="dv">0</span></span>
+<span id="lst-enum-73"><a href="#lst-enum-73" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> perm_seq:</span>
+<span id="lst-enum-74"><a href="#lst-enum-74" aria-hidden="true" tabindex="-1"></a>                <span class="cf">while</span> seq2[idx] <span class="op">!=</span> E:</span>
+<span id="lst-enum-75"><a href="#lst-enum-75" aria-hidden="true" tabindex="-1"></a>                    idx <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="lst-enum-76"><a href="#lst-enum-76" aria-hidden="true" tabindex="-1"></a>                seq2[idx] <span class="op">=</span> i</span>
+<span id="lst-enum-77"><a href="#lst-enum-77" aria-hidden="true" tabindex="-1"></a>            full_enumeration.append(seq2)</span>
+<span id="lst-enum-78"><a href="#lst-enum-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="lst-enum-79"><a href="#lst-enum-79" aria-hidden="true" tabindex="-1"></a>    full_enumeration.sort()</span>
+<span id="lst-enum-80"><a href="#lst-enum-80" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="bu">len</span>(full_enumeration)</span>
+<span id="lst-enum-81"><a href="#lst-enum-81" aria-hidden="true" tabindex="-1"></a>    warn_out <span class="op">=</span> (</span>
+<span id="lst-enum-82"><a href="#lst-enum-82" aria-hidden="true" tabindex="-1"></a>        <span class="st">"WARNING: Note that we use '0' as NULL pointers in the following enumeration."</span></span>
+<span id="lst-enum-83"><a href="#lst-enum-83" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="lst-enum-84"><a href="#lst-enum-84" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="bu">len</span>(warn_out))</span>
+<span id="lst-enum-85"><a href="#lst-enum-85" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(warn_out)</span>
+<span id="lst-enum-86"><a href="#lst-enum-86" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="bu">len</span>(warn_out))</span>
+<span id="lst-enum-87"><a href="#lst-enum-87" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> e <span class="kw">in</span> full_enumeration:</span>
+<span id="lst-enum-88"><a href="#lst-enum-88" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(e)</span>
+<span id="lst-enum-89"><a href="#lst-enum-89" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span>
+<span id="lst-enum-90"><a href="#lst-enum-90" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"N_t(</span><span class="sc">{</span><span class="bu">len</span>(seq)<span class="sc">}</span><span class="ss">) = </span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </figure>
 </div>
