@@ -230,7 +230,7 @@ window.Quarto = {
 <p>Instead of the graph approach, I will go down the dark hole known as combinatorics. The downside is that the setup will be less natural and will require some level of abstraction. The upside, however, is that once everything is set up nicely, solving the problem essentially amounts to careful counting. Let’s start seeing an example on how we can do this.</p>
 <section id="painting-paths-in-a-playlist" class="level2">
 <h2 class="anchored" data-anchor-id="painting-paths-in-a-playlist">Painting paths in a playlist</h2>
-<p>Suppose a playlist contains three songs <span class="math inline">s_1, s_2, s_T</span>. Let’s ask the most basic question of <em>how many paths can I reach the target song <span class="math inline">s_T</span></em>? Now the answer is not <span class="math inline">3!</span> because you can reach <span class="math inline">s_T</span> without visiting all the other songs in the playlist. For example, you can reach <span class="math inline">s_T</span> via the route <span class="math inline">s_1 \to s_T</span> or <span class="math inline">s_2 \to s_T</span> respectively. In total, you can reach <span class="math inline">s_T</span> in 5 different ways. These are:</p>
+<p>Suppose a playlist contains three songs <span class="math inline">s_1, s_2, s_T</span>. Let’s ask the most basic question of <em>how many paths can I reach the target song <span class="math inline">s_T</span></em>? Now the answer is not <span class="math inline">3!=6</span> because you can reach <span class="math inline">s_T</span> without visiting all the other songs in the playlist. For example, you can reach <span class="math inline">s_T</span> via the route <span class="math inline">s_1 \to s_T</span> or <span class="math inline">s_2 \to s_T</span> respectively. In total, you can reach <span class="math inline">s_T</span> in 5 different ways. These are:</p>
 <ol type="1">
 <li><span class="math inline">s_T \to s_T</span></li>
 <li><span class="math inline">s_1 \to s_T</span></li>
@@ -239,7 +239,7 @@ window.Quarto = {
 <li><span class="math inline">s_2 \to s_1 \to s_T</span></li>
 </ol>
 <p>where the first path <span class="math inline">s_T \to s_T</span> is the tautological path of starting and ending at <span class="math inline">s_T</span>.</p>
-<p>How about if the playlist contain four songs <span class="math inline">s_1, s_2, s_3, s_T</span>, how many paths can I reach the target song <span class="math inline">s_T</span>? You should be convinced by now that the answer is not <span class="math inline">4!</span>, but how many? The answer is that there are 16 paths in total. For your sanity, I will enumerate this long list below:</p>
+<p>How about if the playlist contain four songs <span class="math inline">s_1, s_2, s_3, s_T</span>, how many paths can I reach the target song <span class="math inline">s_T</span>? You should be convinced by now that the answer is not <span class="math inline">4!=24</span>, but how many? The answer is that there are 16 paths in total. For your sanity, I will enumerate this long list below:</p>
 <ol type="1">
 <li><span class="math inline">s_T \to s_T</span></li>
 <li><span class="math inline">s_1 \to s_T</span></li>
@@ -283,7 +283,7 @@ N(4) = P(3, 0) + P(3, 1) + P(3, 2) + P(3, 3) = 1 + 3 + 6 + 6 = 16
 </section>
 <section id="answering-the-main-question" class="level2">
 <h2 class="anchored" data-anchor-id="answering-the-main-question">Answering the main question</h2>
-<p>I have been using the term <em>playlist</em> quite loosely throughout this article so let’s make it concrete. A playlist <span class="math inline">\mathcal{P}</span> of length <span class="math inline">n</span> is simply a finite set of songs <span class="math inline">\{ s_1, s_2, \ldots, s_{n-1}, s_T\}</span>. It does not assume any ordering, and our logic doess not assume ordering unless mentioned otherwise. This definition aligns with what we had before and so the result(s) remain.</p>
+<p>I have been using the term <em>playlist</em> quite loosely throughout this article so let’s make it concrete. A playlist <span class="math inline">\mathcal{P}</span> of length <span class="math inline">n</span> is simply a finite set of songs <span class="math inline">\{ s_1, s_2, \ldots, s_{n-1}, s_T\}</span>. It does not assume any ordering, and our logic does not assume ordering unless mentioned otherwise. This definition aligns with what we had before and so the result(s) remain.</p>
 <p>As per <a href="#prp-paths1" class="quarto-xref">Proposition&nbsp;1</a>, we know that <span class="math inline">N(4) = 16</span> and reaching the target song in less than or equal to <span class="math inline">k \leq n-1</span> steps is given by <span class="math inline">\sum_{j=0}^{k} P(n-1, j)</span>. These makes no assumption on where we start the path at. Suppose now you start at song <span class="math inline">s_3</span> in the playlist. How many paths can you take take to reach your target song <span class="math inline">s_T</span>? Let’s start enumerating all the possible paths to reach <span class="math inline">s_T</span> again, but this time we highlight how many steps it takes to reach <span class="math inline">s_T</span> from <span class="math inline">s_3</span>.</p>
 <ol type="1">
 <li><span class="math inline">s_T \to s_T</span> <strong>(impossible)</strong></li>
@@ -303,7 +303,15 @@ N(4) = P(3, 0) + P(3, 1) + P(3, 2) + P(3, 3) = 1 + 3 + 6 + 6 = 16
 <li><span class="math inline">s_1 \to s_3 \to s_2 \to s_T</span> <strong>(2)</strong></li>
 <li><span class="math inline">s_3 \to s_1 \to s_2 \to s_T</span> <strong>(3)</strong>.</li>
 </ol>
-<p>To make things easier, define a <span class="math inline">t</span>-path from <span class="math inline">s_j</span> to be a path that starts at <span class="math inline">s_j</span> and ends at <span class="math inline">s_T</span> in <span class="math inline">t \in \mathbb{Z}^+</span> steps. <span class="math inline">s_1 \to s_T</span> is an example of a 1-path from <span class="math inline">s_1</span>. From the enumeration above, observe firstly that there are some impossible paths where <span class="math inline">s_3</span> is not visited at all. Then you have five 1-paths to reach <span class="math inline">s_T</span> from <span class="math inline">s_3</span>, four 2-paths and two 3-paths.</p>
+<p>To argue easier, we first make the following definition.</p>
+<hr>
+<div id="def-tpath" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (t-path)</strong></span> Let <span class="math inline">\mathcal{P}</span> be a playlist of length <span class="math inline">n</span>. A <span class="math inline">t</span>-path from <span class="math inline">s_j \in \mathcal{P}</span> is a path that starts at <span class="math inline">s_j</span> and ends at <span class="math inline">s_T \in \mathcal{P}</span> in <span class="math inline">t \in \mathbb{Z}^+</span> steps.</p>
+<p>It is trivially non-unique as we have seen. So we denote the number of <span class="math inline">t</span>-paths from <span class="math inline">s_j</span> by <span class="math inline">N_t(n; s_j)</span>. If the dependence on <span class="math inline">s_j</span> is obvious, we simply write <span class="math inline">N_t(n)</span>.</p>
+<p>Here are some examples. <span class="math inline">s_1 \to s_T</span> is a 1-path from <span class="math inline">s_1</span>. Another example is that <span class="math inline">s_3 \to s_4 \to s_1 \to s_T</span> is a 2-path from <span class="math inline">s_4</span> and a 1-path from <span class="math inline">s_1</span>.</p>
+</div>
+<hr>
+<p>Back to our enumeration of the playlist of length <span class="math inline">4</span>, we observe firstly that there are some impossible paths where <span class="math inline">s_3</span> is not visited at all. Then you have five 1-paths to reach <span class="math inline">s_T</span> from <span class="math inline">s_3</span>, four 2-paths and two 3-paths.</p>
 <p>Just focusing on 1-paths here, it is easy to see that the number of 1-paths to reach <span class="math inline">s_T</span> from <span class="math inline">s_3</span> is given by <span class="math inline">N(n-1)</span> because we can “group” <span class="math inline">s_3 \to s_T</span> together and treat it as a single end point <span class="math inline">s_T'</span>. It is also easy to see that the number of 3-paths is essentially a permutation on songs that are left, which in this case is <span class="math inline">2! = 2</span>. It is tempting now to say that the case of 2-paths is simply <span class="math inline">N(n-1) - 1</span> since we are discarding the unique <span class="math inline">s_3 \to s_T</span> case which exists only for 1-paths and that everything else is just a permutation of the remaining songs; and you are not wrong to think so as we shall see! The problem is that it does not give a strong explanation for what a general pattern would be.</p>
 <p>So let’s look at a playlist of length <span class="math inline">n=5</span> and count each <span class="math inline">t</span>-path from <span class="math inline">s_4</span>. At this point enumeration of the playlist can get a bit crazy as we know by <a href="#prp-paths1" class="quarto-xref">Proposition&nbsp;1</a> that there are <span class="math inline">N(5) = 65</span> paths to reach <span class="math inline">s_T</span> from <span class="math inline">s_4</span>. I highly recommend you enumerate these paths by writing code (I will provide a fugly one towards the end and it will not be in python). Now if we focus on each <span class="math inline">t</span>-paths, we see that there are</p>
 <ol type="1">
@@ -333,16 +341,17 @@ s_4 \to \rule{1.8ex}{1.8ex} \to \rule{1.8ex}{1.8ex} \to \rule{1.8ex}{1.8ex} \to 
 <div id="thm-tpaths" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1 (Number of t-paths)</strong></span> Let <span class="math inline">\mathcal{P}</span> be a playlist of length <span class="math inline">n</span>. Given a starting song <span class="math inline">s \in \mathcal{P}</span> and a target song <span class="math inline">s_T \in \mathcal{P}</span>, the number of <span class="math inline">t</span>-paths from <span class="math inline">s</span> to <span class="math inline">s_T</span> is given by:</p>
 <p><span class="math display">
-N_{\text{t-path}}(t, n; s, s_T) = \sum_{j=0}^{n-1-t} P(n-2, n-2-j).
+% N_{\text{t-path}}(t, n; s, s_T) = \sum_{j=0}^{n-1-t} P(n-2, n-2-j).
+N_{t}(n) = \sum_{j=0}^{n-1-t} P(n-2, n-2-j).
 </span></p>
 </div>
 <hr>
 <p>This is a great result as it gives us a way to compute the number of paths to reach a song in a playlist of length <span class="math inline">n</span> in exactly <span class="math inline">t</span> steps. As a consequence, we can now compute the number of paths to reach a song in a playlist of length <span class="math inline">n</span> in less than or equal to <span class="math inline">t</span> steps.</p>
 <hr>
 <div id="cor-tpaths" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 (Number of paths to reach favourite song in <span class="math inline">\leq</span> t steps)</strong></span> Let <span class="math inline">\mathcal{P}</span> be a playlist of length <span class="math inline">n</span>. Given a starting song <span class="math inline">s \in \mathcal{P}</span> and a target song <span class="math inline">s_T \in \mathcal{P}</span>, the number of paths to reach <span class="math inline">s_T</span> in less than <span class="math inline">t</span> steps is given by:</p>
+<p><span class="theorem-title"><strong>Corollary 1 (Number of paths to reach favourite song in <span class="math inline">\leq</span> t steps)</strong></span> Let <span class="math inline">\mathcal{P}</span> be a playlist of length <span class="math inline">n</span>. Given a starting song <span class="math inline">s \in \mathcal{P}</span> and a target song <span class="math inline">s_T \in \mathcal{P}</span>, the number of paths to reach <span class="math inline">s_T</span> in less than or equal <span class="math inline">t \in \mathbb{Z}^+</span> steps is given by:</p>
 <p><span class="math display">
-N_{\text{paths} \leq t \text{ steps}} = \sum_{\ell=1}^{t} N_{\text{t-path}}(\ell, n; s, s_T).
+N_{\leq t}(n) = \sum_{\ell=1}^{t} N_{\ell}(n).
 </span></p>
 </div>
 <hr>
@@ -350,7 +359,7 @@ N_{\text{paths} \leq t \text{ steps}} = \sum_{\ell=1}^{t} N_{\text{t-path}}(\ell
 <blockquote class="blockquote">
 <p>Given a song <span class="math inline">s</span> in playlist <span class="math inline">\mathcal{P}</span>, how many ways can you reach your favourite song <span class="math inline">s_T \in \mathcal{P}</span> in less than or equal to <span class="math inline">t \in \mathbb{Z}^+</span> steps?</p>
 </blockquote>
-<p>which is all that we wanted. To see this in practice, fix <span class="math inline">t=4</span> to consider the number of paths to reach your favourite song in less than or equal to 4 steps. Then we look at <span class="math inline">N_{\text{paths} \leq t \text{ steps}}</span> with varying <span class="math inline">5 \leq n \leq 14</span>. We will also consider the probability of reaching your favourite song in less than or equal to <span class="math inline">t</span> steps by computing <span class="math inline">N_{\text{paths} \leq t \text{ steps}}/N(n)</span>. The numbers are tabulated below.</p>
+<p>which is all that we wanted. To see this in practice, fix <span class="math inline">t=4</span> to consider the number of paths to reach your favourite song in less than or equal to 4 steps. Then we look at <span class="math inline">N_{\leq t}</span> with varying <span class="math inline">n</span> in the range <span class="math inline">5 \leq n \leq 14</span>. We will also consider the probability of reaching your favourite song in less than or equal to <span class="math inline">t</span> steps by computing <span class="math inline">N_{\leq t}/N(n)</span>. The numbers are tabulated below.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 2%">
@@ -361,9 +370,9 @@ N_{\text{paths} \leq t \text{ steps}} = \sum_{\ell=1}^{t} N_{\text{t-path}}(\ell
 <thead>
 <tr class="header">
 <th><span class="math inline">n</span></th>
-<th><span class="math inline">N_{\text{paths} \leq t \text{ steps}}</span></th>
-<th><span class="math inline">\lfloor \log N_{\text{paths} \leq t \text{ steps}}\rfloor</span></th>
-<th><span class="math inline">N_{\text{paths} \leq t \text{ steps}}/N(n)</span></th>
+<th><span class="math inline">N_{\leq t}</span></th>
+<th><span class="math inline">\lfloor \log N_{\leq t}\rfloor</span></th>
+<th><span class="math inline">N_{\leq t}/N(n)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -429,21 +438,21 @@ N_{\text{paths} \leq t \text{ steps}} = \sum_{\ell=1}^{t} N_{\text{t-path}}(\ell
 </tr>
 </tbody>
 </table>
-<p>It is not suprising to see that with increasing number of playlist length <span class="math inline">n</span>, the number of paths <span class="math inline">N_{\text{paths} \leq t \text{ steps}}</span> increases dramatically. In fact, as we have computed with <span class="math inline">\lfloor \log N_{\text{paths} \leq t \text{ steps}} \rfloor</span>, the order of magnitude increases roughly by one at every increasing length <span class="math inline">n</span>. The probability, however, does not decrease as dramatically, so you still have a good chance of finding your favourite songs with ease.</p>
+<p>It is not suprising to see that with increasing number of playlist length <span class="math inline">n</span>, the number of paths <span class="math inline">N_{\leq t}</span> increases dramatically. In fact, as we have computed with <span class="math inline">\lfloor \log N_{\leq t} \rfloor</span>, the order of magnitude increases roughly by one at every increasing length <span class="math inline">n</span>. The probability, however, does not decrease as dramatically, so you still have a good chance of finding your favourite songs with ease.</p>
 <p>Today, I have a playlist with 53 songs. The number of possible paths to reach my current favourite song in this playlist in less than or equal to <span class="math inline">t=4</span> steps given an abitrary starting song is</p>
 <p><span class="math display">
 16865511683372560412495381946812946399349813999270471596889656524800 \sim 10^{67}
 </span></p>
-<p>paths which is on the order of 67. This is an exorbitantly huge number with 67 zeros. If we were to compute <span class="math inline">N_{\text{paths} \leq t \text{ steps}}/N(n)</span>, we get 7.7% which is honestly not too bad. But still… an 8% chance of finding my favourite song is quite low. Moral of the story? Try to make your playlists small.</p>
+<p>paths which is on the order of 67. This is an exorbitantly huge number with 67 zeros. If we were to compute <span class="math inline">N_{\leq t}/N(n)</span>, we get 7.7% which is honestly not too bad. But still… an 8% chance of finding my favourite song is quite low. Moral of the story? Try to make your playlists small.</p>
 </section>
 <section id="what-next" class="level2">
 <h2 class="anchored" data-anchor-id="what-next">What next?</h2>
 <p>Here are some key directions we can take to explore.</p>
 <ol type="1">
-<li>What if instead of a single target favourite song <span class="math inline">s_T</span>, we have a set of target songs <span class="math inline">\{s_{T_1}, s_{T_2}, ...\}</span>. How will the analysis differ when we start at any arbitrary song?</li>
+<li>What if instead of a single target favourite song <span class="math inline">s_T</span>, we have a set of target songs <span class="math inline">\{s_{T_1}, s_{T_2}, ...\}</span>. How will the analysis differ when we start at any arbitrary song? This seems easy… I think.</li>
 <li>Similarly, what if instead of a single starting song <span class="math inline">s</span>, we have a set of arbitrary starting songs <span class="math inline">\{s_1, s_2, ...\}</span>. How will the number of paths change?</li>
-<li>Do a precise analysis on the order of growth in the number of paths. If you divide <span class="math inline">N_{\text{paths} \leq t \text{ steps}}</span> for <span class="math inline">n</span> with <span class="math inline">n-1</span> successively, you will see that the growth is factorial. This is kind of expected but can you prove it? It is easy to see that the growth in the total number of paths is factorial by using <a href="#prp-paths1" class="quarto-xref">Proposition&nbsp;1</a>, but how about for paths up to <span class="math inline">t</span> steps?</li>
-<li>Do a precise analysis on <span class="math inline">N_{\text{paths} \leq t \text{ steps}}/N(n)</span>. Seems like there’s approximately a ~90% drop for the numbers that we have tabulated as <span class="math inline">n</span> increases. Finding a bound would be excellent.</li>
+<li>Do a precise analysis on the order of growth in the number of paths. If you divide <span class="math inline">N_{\leq t}</span> for <span class="math inline">n</span> with <span class="math inline">n-1</span> successively, you will see that the growth is factorial. This is kind of expected but can you prove it? It is easy to see that the growth in the total number of paths is factorial by using <a href="#prp-paths1" class="quarto-xref">Proposition&nbsp;1</a>, but how about for paths up to <span class="math inline">t</span> steps?</li>
+<li>Do a precise analysis on <span class="math inline">N_{\leq t}/N(n)</span>. Seems like there’s approximately a ~90% drop for the numbers that we have tabulated as <span class="math inline">n</span> increases. Finding a bound would be excellent.</li>
 <li>I’m pretty sure we can try solving this problem using group theory.</li>
 <li>Consider weighted shuffle on playlists now, how would you solve the same problem? Maybe a graph approach is inevitable?</li>
 </ol>

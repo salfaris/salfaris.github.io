@@ -30,7 +30,7 @@ Instead of the graph approach, I will go down the dark hole known as combinatori
 
 ## Painting paths in a playlist
 
-Suppose a playlist contains three songs $s_1, s_2, s_T$. Let's ask the most basic question of _how many paths can I reach the target song $s_T$_? Now the answer is not $3!$ because you can reach $s_T$ without visiting all the other songs in the playlist. For example, you can reach $s_T$ via the route $s_1 \to s_T$ or $s_2 \to s_T$ respectively. In total, you can reach $s_T$ in 5 different ways. These are:
+Suppose a playlist contains three songs $s_1, s_2, s_T$. Let's ask the most basic question of _how many paths can I reach the target song $s_T$_? Now the answer is not $3!=6$ because you can reach $s_T$ without visiting all the other songs in the playlist. For example, you can reach $s_T$ via the route $s_1 \to s_T$ or $s_2 \to s_T$ respectively. In total, you can reach $s_T$ in 5 different ways. These are:
 
 1. $s_T \to s_T$
 2. $s_1 \to s_T$
@@ -40,7 +40,7 @@ Suppose a playlist contains three songs $s_1, s_2, s_T$. Let's ask the most basi
 
 where the first path $s_T \to s_T$ is the tautological path of starting and ending at $s_T$.
 
-How about if the playlist contain four songs $s_1, s_2, s_3, s_T$, how many paths can I reach the target song $s_T$? You should be convinced by now that the answer is not $4!$, but how many? The answer is that there are 16 paths in total. For your sanity, I will enumerate this long list below:
+How about if the playlist contain four songs $s_1, s_2, s_3, s_T$, how many paths can I reach the target song $s_T$? You should be convinced by now that the answer is not $4!=24$, but how many? The answer is that there are 16 paths in total. For your sanity, I will enumerate this long list below:
 
 1. $s_T \to s_T$
 2. $s_1 \to s_T$
@@ -98,7 +98,7 @@ The difference between the main question and this easier question is that the fo
 
 ## Answering the main question
 
-I have been using the term _playlist_ quite loosely throughout this article so let's make it concrete. A playlist $\mathcal{P}$ of length $n$ is simply a finite set of songs $\{ s_1, s_2, \ldots, s_{n-1}, s_T\}$. It does not assume any ordering, and our logic doess not assume ordering unless mentioned otherwise. This definition aligns with what we had before and so the result(s) remain. 
+I have been using the term _playlist_ quite loosely throughout this article so let's make it concrete. A playlist $\mathcal{P}$ of length $n$ is simply a finite set of songs $\{ s_1, s_2, \ldots, s_{n-1}, s_T\}$. It does not assume any ordering, and our logic does not assume ordering unless mentioned otherwise. This definition aligns with what we had before and so the result(s) remain. 
 
 As per @prp-paths1, we know that $N(4) = 16$ and reaching the target song in less than or equal to $k \leq n-1$ steps is given by $\sum_{j=0}^{k} P(n-1, j)$. These makes no assumption on where we start the path at. Suppose now you start at song $s_3$ in the playlist. How many paths can you take take to reach your target song $s_T$? Let's start enumerating all the possible paths to reach $s_T$ again, but this time we highlight how many steps it takes to reach $s_T$ from $s_3$.
 
@@ -119,7 +119,25 @@ As per @prp-paths1, we know that $N(4) = 16$ and reaching the target song in les
 15. $s_1 \to s_3 \to s_2 \to s_T$ **(2)**
 16. $s_3 \to s_1 \to s_2 \to s_T$ **(3)**.
 
-To make things easier, define a $t$-path from $s_j$ to be a path that starts at $s_j$ and ends at $s_T$ in $t \in \mathbb{Z}^+$ steps. $s_1 \to s_T$ is an example of a 1-path from $s_1$. From the enumeration above, observe firstly that there are some impossible paths where $s_3$ is not visited at all. Then you have five 1-paths to reach $s_T$ from $s_3$, four 2-paths and two 3-paths.
+To argue easier, we first make the following definition.
+
+---
+
+::: {#def-tpath}
+
+## t-path
+
+Let $\mathcal{P}$ be a playlist of length $n$. A $t$-path from $s_j \in \mathcal{P}$ is a path that starts at $s_j$ and ends at $s_T \in \mathcal{P}$ in $t \in \mathbb{Z}^+$ steps. 
+
+It is trivially non-unique as we have seen. So we denote the number of $t$-paths from $s_j$ by $N_t(n; s_j)$. If the dependence on $s_j$ is obvious, we simply write $N_t(n)$.
+
+Here are some examples. $s_1 \to s_T$ is a 1-path from $s_1$. Another example is that $s_3 \to s_4 \to s_1 \to s_T$ is a 2-path from $s_4$ and a 1-path from $s_1$. 
+
+:::
+
+---
+
+Back to our enumeration of the playlist of length $4$, we observe firstly that there are some impossible paths where $s_3$ is not visited at all. Then you have five 1-paths to reach $s_T$ from $s_3$, four 2-paths and two 3-paths.
 
 Just focusing on 1-paths here, it is easy to see that the number of 1-paths to reach $s_T$ from $s_3$ is given by $N(n-1)$ because we can "group" $s_3 \to s_T$ together and treat it as a single end point $s_T'$. It is also easy to see that the number of 3-paths is essentially a permutation on songs that are left, which in this case is $2! = 2$. It is tempting now to say that the case of 2-paths is simply $N(n-1) - 1$ since we are discarding the unique $s_3 \to s_T$ case which exists only for 1-paths and that everything else is just a permutation of the remaining songs; and you are not wrong to think so as we shall see! The problem is that it does not give a strong explanation for what a general pattern would be. 
 
@@ -167,7 +185,8 @@ Such a proof would yield the following result.
 Let $\mathcal{P}$ be a playlist of length $n$. Given a starting song $s \in \mathcal{P}$ and a target song $s_T \in \mathcal{P}$, the number of $t$-paths from $s$ to $s_T$ is given by:
 
 $$
-N_{\text{t-path}}(t, n; s, s_T) = \sum_{j=0}^{n-1-t} P(n-2, n-2-j).
+% N_{\text{t-path}}(t, n; s, s_T) = \sum_{j=0}^{n-1-t} P(n-2, n-2-j).
+N_{t}(n) = \sum_{j=0}^{n-1-t} P(n-2, n-2-j).
 $$
 
 :::
@@ -182,10 +201,10 @@ This is a great result as it gives us a way to compute the number of paths to re
 
 ## Number of paths to reach favourite song in $\leq$ t steps
 
-Let $\mathcal{P}$ be a playlist of length $n$. Given a starting song $s \in \mathcal{P}$ and a target song $s_T \in \mathcal{P}$, the number of paths to reach $s_T$ in less than $t$ steps is given by:
+Let $\mathcal{P}$ be a playlist of length $n$. Given a starting song $s \in \mathcal{P}$ and a target song $s_T \in \mathcal{P}$, the number of paths to reach $s_T$ in less than or equal $t \in \mathbb{Z}^+$ steps is given by:
 
 $$
-N_{\text{paths} \leq t \text{ steps}} = \sum_{\ell=1}^{t} N_{\text{t-path}}(\ell, n; s, s_T).
+N_{\leq t}(n) = \sum_{\ell=1}^{t} N_{\ell}(n).
 $$
 
 :::
@@ -196,10 +215,10 @@ What's great about @cor-tpaths? Well it gives a satisfying answer to our main qu
 
 > Given a song $s$ in playlist $\mathcal{P}$, how many ways can you reach your favourite song $s_T \in \mathcal{P}$ in less than or equal to $t \in \mathbb{Z}^+$ steps?
 
-which is all that we wanted. To see this in practice, fix $t=4$ to consider the number of paths to reach your favourite song in less than or equal to 4 steps. Then we look at $N_{\text{paths} \leq t \text{ steps}}$ with varying $5 \leq n \leq 14$. We will also consider the probability of reaching your favourite song in less than or equal to $t$ steps by computing $N_{\text{paths} \leq t \text{ steps}}/N(n)$. The numbers are tabulated below.
+which is all that we wanted. To see this in practice, fix $t=4$ to consider the number of paths to reach your favourite song in less than or equal to 4 steps. Then we look at $N_{\leq t}$ with varying $n$ in the range $5 \leq n \leq 14$. We will also consider the probability of reaching your favourite song in less than or equal to $t$ steps by computing $N_{\leq t}/N(n)$. The numbers are tabulated below.
 
 
-| $n$ | $N_{\text{paths} \leq t \text{ steps}}$ | $\lfloor \log N_{\text{paths} \leq t \text{ steps}}\rfloor$ | $N_{\text{paths} \leq t \text{ steps}}/N(n)$ |
+| $n$ | $N_{\leq t}$ | $\lfloor \log N_{\leq t}\rfloor$ | $N_{\leq t}/N(n)$ |
 | --- | --------------------------------------- | ----------------------------------------------------------- | -------------------------------------------- |
 | 5   | 49                                      | 1                                                           | 0.75                                         |
 | 6   | 237                                     | 2                                                           | 0.73                                         |
@@ -212,7 +231,7 @@ which is all that we wanted. To see this in practice, fix $t=4$ to consider the 
 | 13  | 434020313                               | 8                                                           | 0.33                                         |
 | 14  | 5208245221                              | 9                                                           | 0.31                                         |
 
-It is not suprising to see that with increasing number of playlist length $n$, the number of paths $N_{\text{paths} \leq t \text{ steps}}$ increases dramatically. In fact, as we have computed with $\lfloor \log N_{\text{paths} \leq t \text{ steps}} \rfloor$, the order of magnitude increases roughly by one at every increasing length $n$. The probability, however, does not decrease as dramatically, so you still have a good chance of finding your favourite songs with ease.
+It is not suprising to see that with increasing number of playlist length $n$, the number of paths $N_{\leq t}$ increases dramatically. In fact, as we have computed with $\lfloor \log N_{\leq t} \rfloor$, the order of magnitude increases roughly by one at every increasing length $n$. The probability, however, does not decrease as dramatically, so you still have a good chance of finding your favourite songs with ease.
 
 Today, I have a playlist with 53 songs. The number of possible paths to reach my current favourite song in this playlist in less than or equal to $t=4$ steps given an abitrary starting song is 
 
@@ -220,15 +239,15 @@ $$
 16865511683372560412495381946812946399349813999270471596889656524800 \sim 10^{67}
 $$
 
-paths which is on the order of 67. This is an exorbitantly huge number with 67 zeros. If we were to compute $N_{\text{paths} \leq t \text{ steps}}/N(n)$, we get 7.7% which is honestly not too bad. But still... an 8% chance of finding my favourite song is quite low. Moral of the story? Try to make your playlists small.
+paths which is on the order of 67. This is an exorbitantly huge number with 67 zeros. If we were to compute $N_{\leq t}/N(n)$, we get 7.7% which is honestly not too bad. But still... an 8% chance of finding my favourite song is quite low. Moral of the story? Try to make your playlists small.
 
 ## What next?
 
 Here are some key directions we can take to explore.
 
-1. What if instead of a single target favourite song $s_T$, we have a set of target songs $\{s_{T_1}, s_{T_2}, ...\}$. How will the analysis differ when we start at any arbitrary song?
+1. What if instead of a single target favourite song $s_T$, we have a set of target songs $\{s_{T_1}, s_{T_2}, ...\}$. How will the analysis differ when we start at any arbitrary song? This seems easy... I think.
 2. Similarly, what if instead of a single starting song $s$, we have a set of arbitrary starting songs $\{s_1, s_2, ...\}$. How will the number of paths change?
-3. Do a precise analysis on the order of growth in the number of paths. If you divide $N_{\text{paths} \leq t \text{ steps}}$ for $n$ with $n-1$ successively, you will see that the growth is factorial. This is kind of expected but can you prove it? It is easy to see that the growth in the total number of paths is factorial by using @prp-paths1, but how about for paths up to $t$ steps?
-4. Do a precise analysis on $N_{\text{paths} \leq t \text{ steps}}/N(n)$. Seems like there's approximately a ~90% drop for the numbers that we have tabulated as $n$ increases. Finding a bound would be excellent.
+3. Do a precise analysis on the order of growth in the number of paths. If you divide $N_{\leq t}$ for $n$ with $n-1$ successively, you will see that the growth is factorial. This is kind of expected but can you prove it? It is easy to see that the growth in the total number of paths is factorial by using @prp-paths1, but how about for paths up to $t$ steps?
+4. Do a precise analysis on $N_{\leq t}/N(n)$. Seems like there's approximately a ~90% drop for the numbers that we have tabulated as $n$ increases. Finding a bound would be excellent.
 5. I'm pretty sure we can try solving this problem using group theory.
 6. Consider weighted shuffle on playlists now, how would you solve the same problem? Maybe a graph approach is inevitable?
