@@ -2,7 +2,7 @@
 title: "Convolutional neural networks are not rotation invariant... since when?"
 categories: [machine-learning, deep-learning, computer-vision]
 author: "Salman Faris"
-date: "09 08 2024"
+date: "12 09 2024"
 jupyter: python3
 format:
   html:
@@ -19,23 +19,23 @@ _"Why is a convolutional neural network not rotation invariant?"_.
 
 This question popped up in an interview recently, and it is surprisingly deeper than I initially thought. For a start, the statement "a convolutional neural network is not rotation invariant" is not entirely true, but only half-true, maybe a quarter-true. So why is this a popular statement being asked in the machine learning domain? I feel like this is mainly due to a poor understanding of the convolutional neural net architecture.
 
-What's surprising is how little I have been able to find on the internet about this question. The articles that I have found are poor derivatives of what was written in [@deepLearning2016] and like any good mathematics textbook, they do not really do a deep dive into the mathematical reasoning behind the statement – which make interpretations written around it even worse. In fact, @deepLearning2016 mentions that a convolutional neural net is rotation invariant with the right layers... so what's going on here?
+What's surprising is how little I have been able to find on the internet about this question. The articles that I have found are unoriginal and poor derivatives of what was written in [@deepLearning2016]; and like any good mathematics textbook, they do not really do a deep dive into the mathematical reasoning behind the statement – which make interpretations written around it even worse. In fact, @deepLearning2016 mentions that a convolutional neural net is rotation invariant with the right layers... so what the heck is going on here?
 
 Today, I am putting this question to bed with a somewhat acceptable mathematical reasoning. Let's get one important thing out of the way first because this might confuse some people. The statement "convolutional net is not rotation invariant" is somewhat misleading; and this is a consequence of people not understanding the difference betwen a _convolutional neural net_, a _convolutional layer_ and a _convolutional operator_. So what is actually "convolution" in convolutional neural net?
 
-## What is actually a convolutional neural net?
+## Convolutional neural net, convolution operators
 
-A convolutional neural network is simply a neural network where at least one of its layers utilize the convolutional operator rather than a full-blown matrix multiplication [@deepLearning2016]. This definition is so general that it renders the statement _"why is a convolutional neural network (CNN) not rotation invariant?"_ to be false, especially with our breadth of understanding in deep learning today. I will demonstrate why precisely in the rest of this article.
+A convolutional neural network is simply a neural network where at least one of its layers utilize the convolutional operator rather than a full-blown matrix multiplication [@deepLearning2016]. This definition is so general that it renders the statement _"why is a convolutional neural network (CNN) not rotation invariant?"_ to be false, especially with our breadth of understanding on deep learning today. I will demonstrate why precisely in the rest of this article.
 
-So we go down one step in the rabbit hole, what is a convolution? a convolution $*$ of two complex-valued functions $I$ and $K$ is simply the integral transform
+So let's go down one step in the rabbit hole... what is a convolution? A convolution $*$ of two complex-valued functions $I$ and $K$ is simply the integral transform
 
 $$J(t) := (I * K)(t) = \int_{\mathbb{R}^d} I(\tau) K(t - \tau) d\tau = \int_{\mathbb{R}^d} I(t - \tau) K(t) d\tau.$$
 
-In computer vision, we are, at the most basic level, concerned with the discrete convolution of real-valued objects (i.e. images) over a finite two-dimensional integer support. Although, this is not exactly true because with modern convolutional neural nets, you actually perform multi-channel convolution which is typically modelled with a four-dimensional kernel tensor instead. Let's focus on the basics though. In the two-dimensional case, the convolution above reduces (and simplifies) to
+In computer vision, we are, at the most basic level, concerned with the discrete convolution of real-valued objects (i.e. images) over a finite two-dimensional integer support. Although, this is not exactly true because with modern convolutional neural nets, you actually perform multi-channel convolution which is typically modelled with a four-dimensional kernel tensor instead. Let's focus only on the basics though. In the two-dimensional case, the convolution above reduces (and simplifies) to
 
 $$J[i, j] = \sum_{m, n} I[i- m, j- n] K[m, n],$$
 
-where $I, K$ are real-valued functions over $\mathbb{Z}^2$ and the summation is done over the support of $K$.
+where $I, K$ are real-valued functions over $\mathbb{Z}^2$ and the summation is done over the support of $K$. Here, I use square brackets instead of parentheses to align with literature on discrete convolution.
 
 Now, I claim that the convolution operator is not rotation invariant. But before that, let's look at something even simpler. I claim that the convolution operator is not even translation invariant!
 
@@ -66,13 +66,13 @@ $$
 
 over $\{ 0, 1, 2\} \times \{ 0, 1, 2 \} \subseteq \mathbb{Z}^2$. Then evaluating $J$ at $(i, j) = (0, 1)$ gives $J[i, j] = 0$ but $J[i+1, j] = 1$.
 
-Now was that surprising? Did you feel lied to all your life that convolutional neural nets are translation invariant? Well, we'll get to why that statement is commonly made later. For now, let me show you that the convolution operator is not rotation invariant.
+Now was that surprising? Did you feel lied to all your life that convolutional neural nets are translation invariant? Well, we'll get to why that statement is commonly made later at the end of this post. For now, let me show you that the convolution operator is not rotation invariant.
 
 ## Convolution is not rotation invariant
 
 Now that you've got a basic idea on how to disprove convolution being translation invariant, it should be straightforward to see that convolution is not rotation invariant... at least a sketch proof should be present in your mind. Reasoning it formally, however, takes a bit more effort as we need to do some setup first. For a start, I am going to make things simple by expanding the domain back to $\mathbb{R}^2$ because I do not want to talk about rotation matrices in $\mathbb{Z}^2$ which is not pretty. As a bonus to doing this, we are now back in the world of vector spaces... although we can always make an extra effort and start talking about $\mathbb{Z}^2$ as a module over itself. Let's now start putting the pieces together.
 
-Let $p_{\mathrm{center}} = (0, 0) \in \mathbb{R}^2$ be the image center; and define a two-dimensional Cartesian coordinate system centered at $p_{\mathrm{center}}$ and fix the standard basis. This defines the axes that we will play around to perform rotation. Now that we have that set up, for any vector $x \in \mathbb{R}^2$, we can perform a counterclockwise rotation of $\theta$ degrees around $p_{\mathrm{center}}$ by applying the rotation matrix
+Let $p_{\mathrm{center}} = (0, 0) \in \mathbb{R}^2$ be the image center; then define a two-dimensional Cartesian coordinate system centered at $p_{\mathrm{center}}$ and fix the standard basis. This defines the axes that we will play around to perform rotation. Now that we have that set up, for any vector $x \in \mathbb{R}^2$, we can perform a counterclockwise rotation of $\theta$ degrees around $p_{\mathrm{center}}$ by applying the rotation matrix
 
 $$R_\theta = \begin{pmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix}.$$
 
@@ -95,12 +95,12 @@ $$
 
 In other words, convolution is not rotation invariant. $\blacksquare$
 
-## Convolutional net can learn to be translation & rotation invariant
+## Seems like convolutional neural nets are not rotation invariant at all...?
 
-So the convolution operator is neither translation nor rotation invariant. So why did I say the the statement "a convolutional neural network is not rotation invariant" is only partially true? Well there's a difference between a _convolution operator_ and a _convolutional neural net_. The latter utilizes the convolution operator but is much more complex. 
+So the convolution operator is neither translation nor rotation invariant. So why did I say the statement "a convolutional neural network is not rotation invariant" is only partially true? It should be borderline false now, no? Well there's a stark difference between a _convolution operator_ and a _convolutional neural net_. What we have shown is that the former is not translation/rotation invariant but the latter is a different beast completely, it is much more complex.
 
-A convolutional neural net typically composes of multiple kernel convolutions, pooling operators and activation functions. The activation function introduces non-linearity and the kernel convolutions are learnable but as we have seen, they are neither translation nor rotation invariant. From that breakdown, can you now guess what would help the neural net learn to be translation and/or rotation invariant? Yup, the secret sauce is the learnt kernel together with the pooling operator... assuming a sufficiently broad dataset.
+A convolutional neural net typically composes of multiple kernel convolution operators, pooling operators and activation functions. See the difference now? A convolutional neural net has a convolution operator as a layer. So in its most basic form where the net only has convolutional layers, it is neither translation nor rotation invariant. But... since we have other layers, we can actually make the net learn these invariances by combining the right layers (and the right data).
 
-
+As in MLPs, the activation function introduces non-linearity so it's not really a bonus. So based on the layers I have mentioned, it should be obvious now. A convolutional operator and the activation function themselves alone will not be helpful; so the secret sauce must be the pooling operator... plus a sufficiently broad dataset. I'll prove why this is true in a later post.
 
 <!-- ref: https://datascience.stackexchange.com/a/16077/101162 -->
