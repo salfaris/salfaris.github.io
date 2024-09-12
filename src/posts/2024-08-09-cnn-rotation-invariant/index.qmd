@@ -1,6 +1,6 @@
 ---
 title: "Convolutional neural networks are not rotation invariant... since when?"
-categories: [machine-learning, deep-learning, computer-vision]
+categories: [machine learning, deep learning, computer vision]
 author: "Salman Faris"
 date: "12 09 2024"
 jupyter: python3
