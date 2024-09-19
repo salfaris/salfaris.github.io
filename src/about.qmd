@@ -15,7 +15,7 @@ about:
 
 I am currently a gardener 🪴 in the tech space.
 
-I was a Senior Data Scientist at Dyson where I've helped critical decision-making for 10+ Dyson products including supporting the 5-year Home strategy plan. I've also brought an estimate of 4m+ people into the Dyson comms funnel through Dyson's first-ever [Global Air Quality Research project](https://www.youtube.com/watch?v=PD-x8FiFQ-M) and various Dyson Air Quality backpack projects. I was also the tech lead for the data science team in the Home Business Unit and have consulted on mathematical modelling and data science across various teams within Dyson.
+I was a Senior Data Scientist at Dyson where I've helped critical decision-making for ~10 Dyson products including supporting the 5-year Home strategy plan. I've also brought an estimate of 4m+ people into the Dyson comms funnel through Dyson's first-ever [Global Air Quality Research project](https://www.youtube.com/watch?v=PD-x8FiFQ-M) and various Dyson Air Quality backpack projects. I was also the tech lead for the data science team in the Home Business Unit and have consulted on mathematical modelling, general data science and data acquisition across various different teams within Dyson.
 
 Prior to work, I studied Mathematics at King's College London, and then Computer Science at Keble College, University of Oxford.
 
