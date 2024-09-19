@@ -3,6 +3,7 @@ title: "Convolutional neural networks are not rotation invariant... since when?"
 categories: [machine learning, deep learning, computer vision]
 author: "Salman Faris"
 date: "12 09 2024"
+date-modified: "19 09 2024"
 jupyter: python3
 format:
   html:
@@ -101,8 +102,10 @@ So the convolution operator is neither translation nor rotation invariant. So wh
 
 A convolutional neural net typically composes of multiple kernel convolution operators, pooling operators and activation functions. See the difference now? A convolutional neural net has a convolution operator as a layer. So in its most basic form where the net only has convolutional layers, it is neither translation nor rotation invariant. But... since we have other layers, we can actually make the net learn these invariances by combining the right layers (and the right data).
 
-As in MLPs, the activation function introduces non-linearity so it's not really a bonus. So based on the layers I have mentioned, it should be obvious now. A convolutional operator and the activation function themselves alone will not be helpful; so the secret sauce must be the pooling operator... plus a sufficiently broad dataset... ish. Read on in [part II](https://salfaris.github.io/posts/2024-08-09-cnn-rotation-invariant-part-ii/).
+As in MLPs, the activation function introduces non-linearity so it's not really a bonus. So based on the layers I have mentioned, it should be obvious now. A convolutional operator and the activation function themselves alone will not be helpful; so the secret sauce must be the pooling operator... plus a sufficiently broad dataset... ish. Read on in [part II](https://salfaris.github.io/posts/2024-09-18-cnn-rotation-invariant-part-ii/).
 
-Edit: Added link to part II.
+Edit (19/09/2024): Added link to part II.
+
+
 
 <!-- ref: https://datascience.stackexchange.com/a/16077/101162 -->

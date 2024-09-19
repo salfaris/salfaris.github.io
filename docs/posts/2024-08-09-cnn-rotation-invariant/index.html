@@ -216,6 +216,12 @@ window.Quarto = {
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">September 19, 2024</p>
+      </div>
+    </div>
       
     </div>
     
@@ -301,8 +307,8 @@ J_\theta(q') &amp;= \sum_{p \in \Omega} I_{\theta}(q'-p) K(p) \\
 <h2 class="anchored" data-anchor-id="seems-like-convolutional-neural-nets-are-not-rotation-invariant-at-all">Seems like convolutional neural nets are not rotation invariant at all…?</h2>
 <p>So the convolution operator is neither translation nor rotation invariant. So why did I say the statement “a convolutional neural network is not rotation invariant” is only partially true? It should be borderline false now, no? Well there’s a stark difference between a <em>convolution operator</em> and a <em>convolutional neural net</em>. What we have shown is that the former is not translation/rotation invariant but the latter is a different beast completely, it is much more complex.</p>
 <p>A convolutional neural net typically composes of multiple kernel convolution operators, pooling operators and activation functions. See the difference now? A convolutional neural net has a convolution operator as a layer. So in its most basic form where the net only has convolutional layers, it is neither translation nor rotation invariant. But… since we have other layers, we can actually make the net learn these invariances by combining the right layers (and the right data).</p>
-<p>As in MLPs, the activation function introduces non-linearity so it’s not really a bonus. So based on the layers I have mentioned, it should be obvious now. A convolutional operator and the activation function themselves alone will not be helpful; so the secret sauce must be the pooling operator… plus a sufficiently broad dataset… ish. Read on in <a href="https://salfaris.github.io/posts/2024-08-09-cnn-rotation-invariant-part-ii/">part II</a>.</p>
-<p>Edit: Added link to part II.</p>
+<p>As in MLPs, the activation function introduces non-linearity so it’s not really a bonus. So based on the layers I have mentioned, it should be obvious now. A convolutional operator and the activation function themselves alone will not be helpful; so the secret sauce must be the pooling operator… plus a sufficiently broad dataset… ish. Read on in <a href="https://salfaris.github.io/posts/2024-09-18-cnn-rotation-invariant-part-ii/">part II</a>.</p>
+<p>Edit (19/09/2024): Added link to part II.</p>
 <!-- ref: https://datascience.stackexchange.com/a/16077/101162 -->
 
 
