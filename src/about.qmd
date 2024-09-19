@@ -13,17 +13,21 @@ about:
       href: https://github.com/salfaris
 ---
 
-I am a Senior Data Scientist at Dyson, helping decision making at the highest level in Dyson's new Home Business Unit. I spend my 9-5 dealing with Python, SQL, PySpark, GCP (BigQuery, DataProc, Pub/Sub, App Engine, Vertex AI, among others), on top of mentoring and leading the data scientists in my team.
+I am currently a gardener 🪴 in the tech space.
 
-Prior to work, I studied Mathematics at King's College London, and then went on to study Computer Science at the University of Oxford where I was awarded an MSc.
+I was a Senior Data Scientist at Dyson where I've helped critical decision-making for 10+ Dyson products including supporting the 5-year Home strategy plan. I've also brought an estimate of 4m+ people into the Dyson comms funnel through Dyson's first-ever [Global Air Quality Research project](https://www.youtube.com/watch?v=PD-x8FiFQ-M) and various Dyson Air Quality backpack projects. I was also the tech lead for the data science team in the Home Business Unit and have consulted on mathematical modelling and data science across various teams within Dyson.
 
-When I'm not writing code, I like to explore new hobbies. Most recently, I picked up cycling and running. I enjoy good acoustic music and am always down for a game of table tennis or poker.
+Prior to work, I studied Mathematics at King's College London, and then Computer Science at Keble College, University of Oxford.
 
-My tech stack has changed over the years, with some technologies I haven't used for quite a while now. This is a good overview of what I still have in my mind:
+When I'm not writing code, I like to explore new hobbies. Most recently, I picked up cycling and running. I enjoy good acoustic music and am always down for a game of table tennis, poker or chess.
 
-- Programming languages: Python, R, C/C++ (prior experience), Swift (prior experience).
-- Data analysis: SQL, PySpark, PyData stack, Plotly, NetworkX, Google BigQuery, AWS Redshift (yes, I've used both).
+My tech stack has changed over the years, with some technologies I haven't used for quite a while now. I've done a good chunk of web dev, a bit of iOS mobile dev and a lot of research and applied machine learning. Here are some of them:
+
+- Programming languages: Python, R, C/C++ (prior experience), Swift (prior experience), SQL
+- Data analysis: SQL, PySpark, PyData stack, Plotly, NetworkX, Google BigQuery, AWS Redshift
 - ML & stats modelling: scikit-learn, statsmodels, scipy, PyMC3, PyTorch, Jax
-- Web & dashboard: HTML/CSS/JavaScript, Tableau, ReactJS, Flask, Streamlit
-- Deployment: Git, Docker, Google Cloud Platform (GCP) stack, AWS Redshift
+- Web & dashboard: HTML/CSS/JavaScript, ReactJS, Flask, Streamlit, Tableau
+- Deployment: Git, Docker, Google Cloud (GCP) stack
 - Others: LaTeX
+
+I've basically worked with almost the entire GCP stack including BigQuery, DataProc, Pub/Sub, App Engine, Vertex AI, among others.
