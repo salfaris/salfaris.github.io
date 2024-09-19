@@ -1,0 +1,86 @@
+---
+title: "Part II: pooling makes convolutional neural net rotation invariant"
+categories: [machine learning, deep learning, computer vision]
+author: "Salman Faris"
+date: "19 09 2024"
+jupyter: python3
+format:
+  html:
+    toc: true
+    html-math-method: katex
+execute: 
+  enabled: false
+  cache: false
+# bibliography: references.bib
+draft: false
+---
+
+In [part I](https://salfaris.github.io/posts/2024-08-09-cnn-rotation-invariant/), I've shown that the convolutional operator is not rotation invariant and argued that if a convolutional neural network is to be made rotation invariant, then the magic happens at the pooling layer. In this part II post, I'll show why.
+
+## Pooling as a functional operator
+
+Let's first agree on a definition. There are hundreds of ways to define a pooling layer or operator and they converge on the same concept. For the sake of this post, here is mine. A pooling operator is basically an operator that performs statistical aggregation such as a mean or a max over the outputs (of a subset) of a function. So given a function $J: \mathcal{D} \subseteq \mathbb{Z}^2 \to \mathbb{R}$ and a subset $\mathcal{P} \subseteq \mathcal{D}$ called a _patch_, the max pooling is defined as
+
+$$
+\mathrm{MaxPool}_{\mathcal{P}}(J) = \max_{x \in \mathcal{P}}\{ J(x) \}.
+$$
+
+The mean pooling is similarly defined as
+
+$$
+\mathrm{MeanPool}_{\mathcal{P}}(J) = \frac{1}{|\mathcal{P}|} \sum_{x \in \mathcal{P}} J(x).
+$$
+
+When the patch that we are pooling over is clear, we will drop the subscript and simply write $\mathrm{MaxPool}$ and $\mathrm{MeanPool}$.
+
+That's it, nothing fancy. The essence is that these operators take a patch of data and reduces it to a single value. Of course one can guess that in practice, there will be a finite number of patches $\{ \mathcal{P}_i \}$ of $\mathcal{D}$ such that they form a partition of $\mathcal{D}$; and so there will be $\left| \{ \mathcal{P}_i \} \right|$ reductions. In fact, we will define _patches_ of $\mathcal{D}$ to be exactly that.
+
+> If your math is rusty: a countable subset $\{ A_i \}$ of $\mathcal{D}$ forms a partition of $\mathcal{D}$ if $A_i \cap A_j = \varnothing$ for all $i \neq j$ and $\bigcup_{i} A_i = \mathcal{D}$.
+
+To make our argument simpler, let's just focus on the max pooling operator although what we will discuss will be relevant to any appropriate pooling operator. 
+
+## Max pooling and invariance
+
+Now here's the magic trick right. Define a 3 x 1 domain $\mathcal{D} = \{ 0, 1, 2, 3, 4\} \times \{ 0 \}$ and consider the image $J_k: \mathcal{D} \to \mathbb{R}$ defined as $J_k(x) = \mathbb{1}_{\{ x = (k, 0) \}}(x)$ for a fix $k \in \{ 0, 1, 2, 3, 4 \}$. If we identify 0 with $\textcolor{black}{\rule{1.8ex}{1.8ex}}$ and 1 with $\textcolor{blue}{\rule{1.8ex}{1.8ex}}$, then we have the following image output:
+
+$$
+J_0(x) = \textcolor{blue}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}},  
+\; J_1(x) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{blue}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}}\,\textcolor{black}{\rule{1.8ex}{1.8ex}}\,\textcolor{black}{\rule{1.8ex}{1.8ex}},
+\; J_2(x) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{blue}{\rule{1.8ex}{1.8ex}}\,\textcolor{black}{\rule{1.8ex}{1.8ex}}\,\textcolor{black}{\rule{1.8ex}{1.8ex}},\\[10pt]
+\; J_3(x) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}}\,\textcolor{blue}{\rule{1.8ex}{1.8ex}}\,\textcolor{black}{\rule{1.8ex}{1.8ex}},
+\; J_4(x) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}}\,\textcolor{black}{\rule{1.8ex}{1.8ex}}\,\textcolor{blue}{\rule{1.8ex}{1.8ex}}.
+$$
+
+It should be clear that this is a linear translation of the blue pixel here, translating from left to right, although in principal all five $J_k$ are entirely different images. But what happens if we were to apply the max pooling operator over the patch $\mathcal{P} = \mathcal{D}$? Well they result in the same reduction!
+
+$$
+\mathrm{MaxPool}(J_0) = \mathrm{MaxPool}(J_1) = \mathrm{MaxPool}(J_2) = \mathrm{MaxPool}(J_3) = \mathrm{MaxPool}(J_4) = \textcolor{blue}{\rule{1.8ex}{1.8ex}} =1.
+$$
+
+If we consider 2 x 1 patches $\{ \{i, i+1\} \times \{0\} \}$ and _slide_ max pooling over the patches, we would end up with the following reductions:
+
+$$
+\mathrm{MaxPool}(J_0(x)) = \textcolor{blue}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}},
+\; \mathrm{MaxPool}(J_1(x)) = \textcolor{blue}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}},
+\; \mathrm{MaxPool}(J_2(x)) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{blue}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}},\\[10pt]
+\; \mathrm{MaxPool}(J_3(x)) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{blue}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}},
+\; \mathrm{MaxPool}(J_4(x)) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{blue}{\rule{1.8ex}{1.8ex}}.
+$$
+
+That is, we have
+
+$$
+\mathrm{MaxPool}(J_0) = \mathrm{MaxPool}(J_1) = \textcolor{blue}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}};\\[10pt]
+\mathrm{MaxPool}(J_2) = \mathrm{MaxPool}(J_3) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{blue}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}};\\[10pt]
+\mathrm{MaxPool}(J_4) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{blue}{\rule{1.8ex}{1.8ex}}.
+$$
+
+Can you start seeing how max pooling can help learn translation invariance?
+
+To make this mathematically precise is a bit more work and pain, but essentially max pooling  gives rise to an equivalence relation on the set $\mathcal{I}$ of images. So if $\mathcal{I}$ contains the full translation of a particular image, then they can be made equivalent under the max pooling operator. 
+
+This means that if we inject a max pooling layer in a convolutional neural net and assuming we have the complete full translation set of an image, the net can learn to recognize the image up to translation. In fact, we don't have to provide the full set of translation, if we have a layer that kind of shifts the image pixel by pixel, then we can learn the image up to a certain amount of translation. Theoretically, it would be great to augment $\mathcal{I}$ with the full image translation though.
+
+And it should be clear that this idea extends quite easily to the rotation invariance as well.
+
+> Someone hungrier and smarter can you please formalize the idea of max pooling as an equivalence relation? I am very invested to see what sort of interesting things we can get when looking at the quotient space $\mathcal{I} / \mathrm{MaxPool}$ of images modulo the max pooling operator.

@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Salman Faris">
-<meta name="dcterms.date" content="2024-09-12">
+<meta name="dcterms.date" content="2024-09-19">
 
-<title>Convolutional neural networks are not rotation invariant… since when? – **salman faris**</title>
+<title>Part II: pooling makes convolutional neural net rotation invariant – salman faris</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,27 +22,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -135,7 +115,7 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="Convolutional neural networks are not rotation invariant… since when? – salman faris">
+<meta name="twitter:title" content="Part II: pooling makes convolutional neural net rotation invariant – salman faris">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -190,7 +170,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Convolutional neural networks are not rotation invariant… since when?</h1>
+      <h1 class="title">Part II: pooling makes convolutional neural net rotation invariant</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">machine learning</div>
                 <div class="quarto-category">deep learning</div>
@@ -212,7 +192,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 12, 2024</p>
+        <p class="date">September 19, 2024</p>
       </div>
     </div>
     
@@ -228,10 +208,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#convolutional-neural-net-convolution-operators" id="toc-convolutional-neural-net-convolution-operators" class="nav-link active" data-scroll-target="#convolutional-neural-net-convolution-operators">Convolutional neural net, convolution operators</a></li>
-  <li><a href="#convolution-is-not-translation-invariant" id="toc-convolution-is-not-translation-invariant" class="nav-link" data-scroll-target="#convolution-is-not-translation-invariant">Convolution is not translation invariant</a></li>
-  <li><a href="#convolution-is-not-rotation-invariant" id="toc-convolution-is-not-rotation-invariant" class="nav-link" data-scroll-target="#convolution-is-not-rotation-invariant">Convolution is not rotation invariant</a></li>
-  <li><a href="#seems-like-convolutional-neural-nets-are-not-rotation-invariant-at-all" id="toc-seems-like-convolutional-neural-nets-are-not-rotation-invariant-at-all" class="nav-link" data-scroll-target="#seems-like-convolutional-neural-nets-are-not-rotation-invariant-at-all">Seems like convolutional neural nets are not rotation invariant at all…?</a></li>
+  <li><a href="#pooling-as-a-functional-operator" id="toc-pooling-as-a-functional-operator" class="nav-link active" data-scroll-target="#pooling-as-a-functional-operator">Pooling as a functional operator</a></li>
+  <li><a href="#max-pooling-and-invariance" id="toc-max-pooling-and-invariance" class="nav-link" data-scroll-target="#max-pooling-and-invariance">Max pooling and invariance</a></li>
   </ul>
 </nav>
     </div>
@@ -242,78 +220,64 @@ window.Quarto = {
 
 
 
-<p><em>“Why is a convolutional neural network not rotation invariant?”</em>.</p>
-<p>This question popped up in an interview recently, and it is surprisingly deeper than I initially thought. For a start, the statement “a convolutional neural network is not rotation invariant” is not entirely true, but only half-true, maybe a quarter-true. So why is this a popular statement being asked in the machine learning domain? I feel like this is mainly due to a poor understanding of the convolutional neural net architecture.</p>
-<p>What’s surprising is how little I have been able to find on the internet about this question. The articles that I have found are unoriginal and poor derivatives of what was written in <span class="citation" data-cites="deepLearning2016">(<a href="#ref-deepLearning2016" role="doc-biblioref">Goodfellow, Bengio, and Courville 2016</a>)</span>; and like any good mathematics textbook, they do not really do a deep dive into the mathematical reasoning behind the statement – which make interpretations written around it even worse. In fact, <span class="citation" data-cites="deepLearning2016">Goodfellow, Bengio, and Courville (<a href="#ref-deepLearning2016" role="doc-biblioref">2016</a>)</span> mentions that a convolutional neural net is rotation invariant with the right layers… so what the heck is going on here?</p>
-<p>Today, I am putting this question to bed with a somewhat acceptable mathematical reasoning. Let’s get one important thing out of the way first because this might confuse some people. The statement “convolutional net is not rotation invariant” is somewhat misleading; and this is a consequence of people not understanding the difference betwen a <em>convolutional neural net</em>, a <em>convolutional layer</em> and a <em>convolutional operator</em>. So what is actually “convolution” in convolutional neural net?</p>
-<section id="convolutional-neural-net-convolution-operators" class="level2">
-<h2 class="anchored" data-anchor-id="convolutional-neural-net-convolution-operators">Convolutional neural net, convolution operators</h2>
-<p>A convolutional neural network is simply a neural network where at least one of its layers utilize the convolutional operator rather than a full-blown matrix multiplication <span class="citation" data-cites="deepLearning2016">(<a href="#ref-deepLearning2016" role="doc-biblioref">Goodfellow, Bengio, and Courville 2016</a>)</span>. This definition is so general that it renders the statement <em>“why is a convolutional neural network (CNN) not rotation invariant?”</em> to be false, especially with our breadth of understanding on deep learning today. I will demonstrate why precisely in the rest of this article.</p>
-<p>So let’s go down one step in the rabbit hole… what is a convolution? A convolution <span class="math inline">*</span> of two complex-valued functions <span class="math inline">I</span> and <span class="math inline">K</span> is simply the integral transform</p>
-<p><span class="math display">J(t) := (I * K)(t) = \int_{\mathbb{R}^d} I(\tau) K(t - \tau) d\tau = \int_{\mathbb{R}^d} I(t - \tau) K(t) d\tau.</span></p>
-<p>In computer vision, we are, at the most basic level, concerned with the discrete convolution of real-valued objects (i.e.&nbsp;images) over a finite two-dimensional integer support. Although, this is not exactly true because with modern convolutional neural nets, you actually perform multi-channel convolution which is typically modelled with a four-dimensional kernel tensor instead. Let’s focus only on the basics though. In the two-dimensional case, the convolution above reduces (and simplifies) to</p>
-<p><span class="math display">J[i, j] = \sum_{m, n} I[i- m, j- n] K[m, n],</span></p>
-<p>where <span class="math inline">I, K</span> are real-valued functions over <span class="math inline">\mathbb{Z}^2</span> and the summation is done over the support of <span class="math inline">K</span>. Here, I use square brackets instead of parentheses to align with literature on discrete convolution.</p>
-<p>Now, I claim that the convolution operator is not rotation invariant. But before that, let’s look at something even simpler. I claim that the convolution operator is not even translation invariant!</p>
-</section>
-<section id="convolution-is-not-translation-invariant" class="level2">
-<h2 class="anchored" data-anchor-id="convolution-is-not-translation-invariant">Convolution is not translation invariant</h2>
-<p>To prove that convolution is not translation invariant, it suffices to look at a single nonzero shift <span class="math inline">s</span> in the x-coordinate where we observe that</p>
+<p>In <a href="https://salfaris.github.io/posts/2024-08-09-cnn-rotation-invariant/">part I</a>, I’ve shown that the convolutional operator is not rotation invariant and argued that if a convolutional neural network is to be made rotation invariant, then the magic happens at the pooling layer. In this part II post, I’ll show why.</p>
+<section id="pooling-as-a-functional-operator" class="level2">
+<h2 class="anchored" data-anchor-id="pooling-as-a-functional-operator">Pooling as a functional operator</h2>
+<p>Let’s first agree on a definition. There are hundreds of ways to define a pooling layer or operator and they converge on the same concept. For the sake of this post, here is mine. A pooling operator is basically an operator that performs statistical aggregation such as a mean or a max over the outputs (of a subset) of a function. So given a function <span class="math inline">J: \mathcal{D} \subseteq \mathbb{Z}^2 \to \mathbb{R}</span> and a subset <span class="math inline">\mathcal{P} \subseteq \mathcal{D}</span> called a <em>patch</em>, the max pooling is defined as</p>
 <p><span class="math display">
-\begin{align*}
-J[i, j]
-&amp;= \sum_{m, n} I[i-m, j-n] K[m, n] \\
-&amp;\neq \sum_{m, n} I[i-m+s, j-n] K[m, n] \\
-&amp;= J[i + s, j].
-\end{align*}
+\mathrm{MaxPool}_{\mathcal{P}}(J) = \max_{x \in \mathcal{P}}\{ J(x) \}.
 </span></p>
-<p>Obviously, this is a sum of (a lot of) product terms so there are several ways where equality <span class="math inline">J[i,j] = J[i + s, j]</span> can be achieved; but it is not a guarantee. <span class="math inline">\blacksquare</span></p>
-<p>Here’s a simple concrete example to see where they are not equal. Define <span class="math inline">I</span> to be the function <span class="math inline">[m, n] \mapsto 1</span> and let <span class="math inline">K</span> be defined by</p>
+<p>The mean pooling is similarly defined as</p>
 <p><span class="math display">
-[m, n] \mapsto
-\begin{cases}
-1 &amp; \text{if } m = n \text{ and } m, n \neq 0, \\
-0 &amp; \text{otherwise}
-\end{cases}
+\mathrm{MeanPool}_{\mathcal{P}}(J) = \frac{1}{|\mathcal{P}|} \sum_{x \in \mathcal{P}} J(x).
 </span></p>
-<p>over <span class="math inline">\{ 0, 1, 2\} \times \{ 0, 1, 2 \} \subseteq \mathbb{Z}^2</span>. Then evaluating <span class="math inline">J</span> at <span class="math inline">(i, j) = (0, 1)</span> gives <span class="math inline">J[i, j] = 0</span> but <span class="math inline">J[i+1, j] = 1</span>.</p>
-<p>Now was that surprising? Did you feel lied to all your life that convolutional neural nets are translation invariant? Well, we’ll get to why that statement is commonly made later at the end of this post. For now, let me show you that the convolution operator is not rotation invariant.</p>
+<p>When the patch that we are pooling over is clear, we will drop the subscript and simply write <span class="math inline">\mathrm{MaxPool}</span> and <span class="math inline">\mathrm{MeanPool}</span>.</p>
+<p>That’s it, nothing fancy. The essence is that these operators take a patch of data and reduces it to a single value. Of course one can guess that in practice, there will be a finite number of patches <span class="math inline">\{ \mathcal{P}_i \}</span> of <span class="math inline">\mathcal{D}</span> such that they form a partition of <span class="math inline">\mathcal{D}</span>; and so there will be <span class="math inline">\left| \{ \mathcal{P}_i \} \right|</span> reductions. In fact, we will define <em>patches</em> of <span class="math inline">\mathcal{D}</span> to be exactly that.</p>
+<blockquote class="blockquote">
+<p>If your math is rusty: a countable subset <span class="math inline">\{ A_i \}</span> of <span class="math inline">\mathcal{D}</span> forms a partition of <span class="math inline">\mathcal{D}</span> if <span class="math inline">A_i \cap A_j = \varnothing</span> for all <span class="math inline">i \neq j</span> and <span class="math inline">\bigcup_{i} A_i = \mathcal{D}</span>.</p>
+</blockquote>
+<p>To make our argument simpler, let’s just focus on the max pooling operator although what we will discuss will be relevant to any appropriate pooling operator.</p>
 </section>
-<section id="convolution-is-not-rotation-invariant" class="level2">
-<h2 class="anchored" data-anchor-id="convolution-is-not-rotation-invariant">Convolution is not rotation invariant</h2>
-<p>Now that you’ve got a basic idea on how to disprove convolution being translation invariant, it should be straightforward to see that convolution is not rotation invariant… at least a sketch proof should be present in your mind. Reasoning it formally, however, takes a bit more effort as we need to do some setup first. For a start, I am going to make things simple by expanding the domain back to <span class="math inline">\mathbb{R}^2</span> because I do not want to talk about rotation matrices in <span class="math inline">\mathbb{Z}^2</span> which is not pretty. As a bonus to doing this, we are now back in the world of vector spaces… although we can always make an extra effort and start talking about <span class="math inline">\mathbb{Z}^2</span> as a module over itself. Let’s now start putting the pieces together.</p>
-<p>Let <span class="math inline">p_{\mathrm{center}} = (0, 0) \in \mathbb{R}^2</span> be the image center; then define a two-dimensional Cartesian coordinate system centered at <span class="math inline">p_{\mathrm{center}}</span> and fix the standard basis. This defines the axes that we will play around to perform rotation. Now that we have that set up, for any vector <span class="math inline">x \in \mathbb{R}^2</span>, we can perform a counterclockwise rotation of <span class="math inline">\theta</span> degrees around <span class="math inline">p_{\mathrm{center}}</span> by applying the rotation matrix</p>
-<p><span class="math display">R_\theta = \begin{pmatrix} \cos \theta &amp; -\sin \theta \\ \sin \theta &amp; \cos \theta \end{pmatrix}.</span></p>
-<p>Then for an image <span class="math inline">I_0(x): \mathcal{D} \subseteq \mathbb{R}^2 \to \mathbb{R}</span>, the corresponding image <span class="math inline">I_\theta</span> rotated by <span class="math inline">\theta</span> degrees around <span class="math inline">p_{\mathrm{center}}</span> is given by the image <span class="math inline">I_\theta(y): \mathcal{D}' \subseteq \mathbb{R}^2 \to \mathbb{R}</span> where <span class="math inline">I_\theta(y) = I_0(x)</span> and <span class="math inline">y = R_\theta x</span> (or equivalently, <span class="math inline">x = R_\theta^{-1} y</span>).</p>
-<p>Now fix a finite canvas to draw our images on so let <span class="math inline">\Omega \subseteq \mathbb{R}^2</span> be a bounded domain such that <span class="math inline">\mathcal{D}, \mathcal{D'} \subseteq \Omega</span>. Suppose now that the point <span class="math inline">q \in \mathcal{D}</span> is mapped (bijectively) to <span class="math inline">q' \in \mathcal{D}'</span> under the rotation <span class="math inline">R_\theta</span>. Then we can now see that the convolution with rotation is <em>not</em> equal to the convolution without rotation as follows</p>
+<section id="max-pooling-and-invariance" class="level2">
+<h2 class="anchored" data-anchor-id="max-pooling-and-invariance">Max pooling and invariance</h2>
+<p>Now here’s the magic trick right. Define a 3 x 1 domain <span class="math inline">\mathcal{D} = \{ 0, 1, 2, 3, 4\} \times \{ 0 \}</span> and consider the image <span class="math inline">J_k: \mathcal{D} \to \mathbb{R}</span> defined as <span class="math inline">J_k(x) = \mathbb{1}_{\{ x = (k, 0) \}}(x)</span> for a fix <span class="math inline">k \in \{ 0, 1, 2, 3, 4 \}</span>. If we identify 0 with <span class="math inline">\textcolor{black}{\rule{1.8ex}{1.8ex}}</span> and 1 with <span class="math inline">\textcolor{blue}{\rule{1.8ex}{1.8ex}}</span>, then we have the following image output:</p>
 <p><span class="math display">
-\begin{align*}
-J_\theta(q') &amp;= \sum_{p \in \Omega} I_{\theta}(q'-p) K(p) \\
-&amp;= \sum_{p \in \Omega} I_0(R_{-\theta} q' - R_{-\theta} p) K(p) \\
-&amp;= \sum_{p \in \Omega} I_0(q - R_{-\theta} p) K(p) \\
-&amp;\neq \sum_{p \in \Omega} I_0(q - p) K(p) \\
-&amp;= J_0(q).
-\end{align*}
+J_0(x) = \textcolor{blue}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}},  
+\; J_1(x) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{blue}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}}\,\textcolor{black}{\rule{1.8ex}{1.8ex}}\,\textcolor{black}{\rule{1.8ex}{1.8ex}},
+\; J_2(x) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{blue}{\rule{1.8ex}{1.8ex}}\,\textcolor{black}{\rule{1.8ex}{1.8ex}}\,\textcolor{black}{\rule{1.8ex}{1.8ex}},\\[10pt]
+\; J_3(x) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}}\,\textcolor{blue}{\rule{1.8ex}{1.8ex}}\,\textcolor{black}{\rule{1.8ex}{1.8ex}},
+\; J_4(x) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}}\,\textcolor{black}{\rule{1.8ex}{1.8ex}}\,\textcolor{blue}{\rule{1.8ex}{1.8ex}}.
 </span></p>
-<p>In other words, convolution is not rotation invariant. <span class="math inline">\blacksquare</span></p>
+<p>It should be clear that this is a linear translation of the blue pixel here, translating from left to right, although in principal all five <span class="math inline">J_k</span> are entirely different images. But what happens if we were to apply the max pooling operator over the patch <span class="math inline">\mathcal{P} = \mathcal{D}</span>? Well they result in the same reduction!</p>
+<p><span class="math display">
+\mathrm{MaxPool}(J_0) = \mathrm{MaxPool}(J_1) = \mathrm{MaxPool}(J_2) = \mathrm{MaxPool}(J_3) = \mathrm{MaxPool}(J_4) = \textcolor{blue}{\rule{1.8ex}{1.8ex}} =1.
+</span></p>
+<p>If we consider 2 x 1 patches <span class="math inline">\{ \{i, i+1\} \times \{0\} \}</span> and <em>slide</em> max pooling over the patches, we would end up with the following reductions:</p>
+<p><span class="math display">
+\mathrm{MaxPool}(J_0(x)) = \textcolor{blue}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}},
+\; \mathrm{MaxPool}(J_1(x)) = \textcolor{blue}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}},
+\; \mathrm{MaxPool}(J_2(x)) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{blue}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}},\\[10pt]
+\; \mathrm{MaxPool}(J_3(x)) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{blue}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}},
+\; \mathrm{MaxPool}(J_4(x)) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{blue}{\rule{1.8ex}{1.8ex}}.
+</span></p>
+<p>That is, we have</p>
+<p><span class="math display">
+\mathrm{MaxPool}(J_0) = \mathrm{MaxPool}(J_1) = \textcolor{blue}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}};\\[10pt]
+\mathrm{MaxPool}(J_2) = \mathrm{MaxPool}(J_3) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{blue}{\rule{1.8ex}{1.8ex}} \,\textcolor{black}{\rule{1.8ex}{1.8ex}};\\[10pt]
+\mathrm{MaxPool}(J_4) = \textcolor{black}{\rule{1.8ex}{1.8ex}} \, \textcolor{black}{\rule{1.8ex}{1.8ex}} \,\textcolor{blue}{\rule{1.8ex}{1.8ex}}.
+</span></p>
+<p>Can you start seeing how max pooling can help learn translation invariance?</p>
+<p>To make this mathematically precise is a bit more work and pain, but essentially max pooling gives rise to an equivalence relation on the set <span class="math inline">\mathcal{I}</span> of images. So if <span class="math inline">\mathcal{I}</span> contains the full translation of a particular image, then they can be made equivalent under the max pooling operator.</p>
+<p>This means that if we inject a max pooling layer in a convolutional neural net and assuming we have the complete full translation set of an image, the net can learn to recognize the image up to translation. In fact, we don’t have to provide the full set of translation, if we have a layer that kind of shifts the image pixel by pixel, then we can learn the image up to a certain amount of translation. Theoretically, it would be great to augment <span class="math inline">\mathcal{I}</span> with the full image translation though.</p>
+<p>And it should be clear that this idea extends quite easily to the rotation invariance as well.</p>
+<blockquote class="blockquote">
+<p>Someone hungrier and smarter can you please formalize the idea of max pooling as an equivalence relation? I am very invested to see what sort of interesting things we can get when looking at the quotient space <span class="math inline">\mathcal{I} / \mathrm{MaxPool}</span> of images modulo the max pooling operator.</p>
+</blockquote>
+
+
 </section>
-<section id="seems-like-convolutional-neural-nets-are-not-rotation-invariant-at-all" class="level2">
-<h2 class="anchored" data-anchor-id="seems-like-convolutional-neural-nets-are-not-rotation-invariant-at-all">Seems like convolutional neural nets are not rotation invariant at all…?</h2>
-<p>So the convolution operator is neither translation nor rotation invariant. So why did I say the statement “a convolutional neural network is not rotation invariant” is only partially true? It should be borderline false now, no? Well there’s a stark difference between a <em>convolution operator</em> and a <em>convolutional neural net</em>. What we have shown is that the former is not translation/rotation invariant but the latter is a different beast completely, it is much more complex.</p>
-<p>A convolutional neural net typically composes of multiple kernel convolution operators, pooling operators and activation functions. See the difference now? A convolutional neural net has a convolution operator as a layer. So in its most basic form where the net only has convolutional layers, it is neither translation nor rotation invariant. But… since we have other layers, we can actually make the net learn these invariances by combining the right layers (and the right data).</p>
-<p>As in MLPs, the activation function introduces non-linearity so it’s not really a bonus. So based on the layers I have mentioned, it should be obvious now. A convolutional operator and the activation function themselves alone will not be helpful; so the secret sauce must be the pooling operator… plus a sufficiently broad dataset… ish. Read on in <a href="https://salfaris.github.io/posts/2024-08-09-cnn-rotation-invariant-part-ii/">part II</a>.</p>
-<p>Edit: Added link to part II.</p>
-<!-- ref: https://datascience.stackexchange.com/a/16077/101162 -->
 
-
-
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-deepLearning2016" class="csl-entry" role="listitem">
-Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. 2016. <em>Deep Learning</em>. MIT Press.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
