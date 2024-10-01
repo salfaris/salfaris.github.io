@@ -6,6 +6,40 @@ about:
 toc: true
 ---
 
+## **🔬 research ML**
+
+### [MSc thesis. "Enhancing VAE-learning on spatial priors using GCN"](https://github.com/salfaris/PriorVGAE)
+
+My Oxford MSc thesis supervised by Seth Flaxman, Swapnil Mishra and Elizaveta Semenova. 
+
+![](./assets/projects_mscThesis.png)
+
+I made the observation that the PriorVAE framework in "_PriorVAE: encoding spatial priors with variational autoencoders for small-area estimation_" (Semenova et. al, 2022) does not make efficient use of the data's local neighbourhood structure when learning spatial priors for MCMC sampling.
+
+So I proposed a new framework, called PriorVGAE, which exploits the underlying local neighbourhood structure and propagates this information efficiently via the use of graph convolutional networks (GCN). Under this new framework, we were able to perform MCMC inference with far superior performance as compared to PriorVAE while enjoying better sampling speeds.
+
+The breakthrough: naively injecting a GCN into a VAE framework would not make the architecture work. The key observation was to realize that spatial priors inherently admits global information. To this end, I introduced a local-to-global scheme that consolidates all the local information into a global representation, relying on the universal approximator theorem of MLPs, to efficiently learn the spatial priors.
+
+Some bonus advantages of this framework as compared to PriorVAE include getting computationally cheaper training. We now have fewer learnable parameters since we replace MLPs with GCNs and GCN weights are shared across the support. Out-of-sample predictions are also now tractable as restarting compute training is relatively inexpensive.
+
+---
+
+### [Reproduction of "_Inference Suboptimality in Variational Autoencoders_" (Cremer et. al, 2018) in JAX](https://github.com/ATML-2022-Group6/inference-suboptimality)
+
+We reproduced some of the key interesting experiments in the paper "_Inference Suboptimality in Variational Autoencoders_" (Cremer et. al, 2018) using JAX and extended the result to the Kuzushiji-MNIST dataset. This work was done jointly with Basim Khajwal, Snehal Raj and Vasileios Ntogram.
+
+![](./assets/projects_reproductionChallenge.png)
+
+---
+
+### [Reproduction of "_Variational Graph Auto-Encoders_" (Kipf and Welling, 2016) in JAX](https://github.com/salfaris/vgae-jax)
+
+I reproduced the variational graph autoencoder (VGAE) deep learning model using JAX to be used as a component in my MSc thesis.
+
+---
+
+<br>
+
 ## **🔍 data science**
 
 ### [Financial transactions fraud detection using machine learning](https://github.com/salfaris/financial-fraud-detection)
@@ -40,71 +74,21 @@ This project covers strategy research, experimentation (with reporting) and depl
 
 ---
 
-### [Regression analysis on TfL Santander cycles](https://app.datacamp.com/workspace/w/697541bd-83ce-4ee7-809c-1bc22b3f1613)
-
-
-*Problem statement: To what extent can we use a lightweight, explainable model to predict cycle hires with lowest RMSE?*
-
-
-The idea of the project is to understand trends in the usage of TfL Santander Cycles (aka Boris bikes) and then predict cycle hires using linear models which are scalable and lightweight. In this project, I have
-
-- Investigated suitability of fitting a linear model by checking existence of trends in the residuals vs fitted plot.
-
-- Verified normality of cycle hires after Yeo-Johnson normalisation using a density, histogram and QQ plot.
-
-- Applied feature engineering methods such as forward search model selection, one-hot encoding, moving average, and Yeo-Johnson normalisation.
-
-- Implemented a linear model with 99% lower RMSE (935.5 to 3.5) and 155% higher R 2 score (0.27 to 0.69) relative to the baseline naive linear model.
-
-<span style="font-size:0.8em">_This project was hosted on Deepnote and then hosted on DataCamp Workspace._</span>
-
-## **🔬 research ML**
-
-### [MSc thesis. "Enhancing VAE-learning on spatial priors using GCN"](https://github.com/salfaris/PriorVGAE)
-
-My Oxford MSc thesis supervised by Seth Flaxman, Swapnil Mishra and Elizaveta Semenova. 
-
-![](./assets/projects_mscThesis.png)
-
-I made the observation that the PriorVAE framework in "_PriorVAE: encoding spatial priors with variational autoencoders for small-area estimation_" (Semenova et. al, 2022) does not make efficient use of the data's local neighbourhood structure when learning spatial priors for MCMC sampling.
-
-So I proposed a new framework, called PriorVGAE, which exploits the underlying local neighbourhood structure and propagates this information efficiently via the use of graph convolutional networks (GCN). Under this new framework, we were able to perform MCMC inference with far superior performance as compared to PriorVAE while enjoying better sampling speeds. We achieved lower mean squared error (MSE) for our sample reconstructions across all our experiments and attained higher effective sample sizes with lower MCMC sampling time.
-
-The breakthrough. Naively injecting a GCN into a VAE framework would not make the architecture work. The key observation was to realize that spatial priors inherently admits global information. To this end, I introduced a local-to-global scheme that consolidates all the local information into a global representation, relying on the universal approximator theorem of MLPs, to efficiently learn the spatial priors.
-
-Some bonus advantages of this framework as compared to PriorVAE include getting computationally cheaper training. We now have fewer learnable parameters since we replace MLPs with GCNs and GCN weights are shared across the support. Out-of-sample predictions are also now tractable as restarting compute training is relatively inexpensive.
-
----
-
-### [Reproduction of "_Inference Suboptimality in Variational Autoencoders_" (Cremer et. al, 2018) in JAX](https://github.com/ATML-2022-Group6/inference-suboptimality)
-
-We reproduced some of the key interesting experiments in the paper "_Inference Suboptimality in Variational Autoencoders_" (Cremer et. al, 2018) using JAX and extended the result to the K-MNIST dataset. This work was done jointly with Basim Khajwal, Snehal Raj and Vasileios Ntogram.
-
-![](./assets/projects_reproductionChallenge.png)
-
----
-
-### [Reproduction of "_Variational Graph Auto-Encoders_" (Kipf and Welling, 2016) in JAX](https://github.com/salfaris/vgae-jax)
-
-I reproduced the variational graph autoencoder (VGAE) deep learning model using JAX to be used as a component in my MSc thesis.
+<br>
 
 ## **💻 web app**
 
 ### [TradeLogger](https://github.com/salfaris/tradelogger)
 
-This project is written in Python using the Flask framework. One of the **problems with stock traders is that they do not keep the big picture of where they are in their trading journey**. For example. if they are losing, do they realise that they are losing 5 trades consecutively? This tool is designed for traders to trade better. A machine learning pipeline is also added to learn the time series pattern of whether the trader has a good chance on the next trade given the outcomes of the previous trades.
+One of the problems with stock traders is that they do not keep the big picture of where they are in their trading journey. For example. if they are losing, do they realise that they are losing 5 trades consecutively? This tool is designed for traders to trade better.
+
+Written with Flask.
 
 ![](./assets/projects_tradeLogger.png)
 
 ---
 
-### [allpow](https://github.com/salfaris/allpow)
-
-This project is written in Python using Streamlit. It is a simple calculator to estimate one's monthly budget (in London by default). I originally made it to help my fellow Malaysian students who are coming to London for the first time organise their finances better. The first problem of coming to a new country far away from home (and also most probably first time renting a property in their life) is to estimate the prices of groceries, transport, rent and the like. This calculator solves that problem.
-
-Link to the deployed calculator: click [here](https://salfaris-allpow-app-wejo3u.streamlit.app)
-
-<br/>
+<br>
 
 ## **🔧 utilities**
 
@@ -119,6 +103,10 @@ A simple, out of the box personal statement LaTeX framework. It helps handling d
 ### [PyEasyPS](https://github.com/salfaris/PyEasyPS)
 
 PyEasyPS is EasyPS (see above) ported to Python. It is even easier to use since the manual processes required in EasyPS (e.g. error-handling, targeted-updating of personal statements) are done for you. Essentially, it lets you focus on what's most important – your personal statement content.
+
+---
+
+<br>
 
 ## **📭 open source**
 
