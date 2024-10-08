@@ -1,6 +1,6 @@
 ---
 title: "Searching for my favorite song in a deep playlist"
-categories: [combinatorics, spotify]
+categories: [combinatorics, spotify, mathematical modelling]
 author: "Salman Faris"
 date: "31 08 2024"
 jupyter: python3

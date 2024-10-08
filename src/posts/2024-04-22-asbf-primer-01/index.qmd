@@ -1,7 +1,7 @@
 ---
 title: "A mathematical take on when to take a loan such as ASB Financing"
 description: "We look at formalizing the parity between investing with a disposable capital versus with a financed leveraged capital in ASB."
-categories: [quant, investment, strategies]
+categories: [quant, investment, strategies, personal finance]
 author: "Salman Faris"
 date: "22 04 2024"
 jupyter: python3
