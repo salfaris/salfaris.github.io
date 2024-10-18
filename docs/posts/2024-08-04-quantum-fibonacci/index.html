@@ -455,7 +455,7 @@ window.Quarto = {
 <section id="zxfibo-on-an-ibm-quantum-computer" class="level2">
 <h2 class="anchored" data-anchor-id="zxfibo-on-an-ibm-quantum-computer"><strong>ZXFibo</strong> on an IBM quantum computer</h2>
 <p>Now that we have proven the correctness of the <strong>ZXFibo</strong> algorithm, let’s see how it performs on an IBM quantum computer simulator. We will implement <strong>ZXFibo</strong> using the IBM Qiskit library <span class="citation" data-cites="qiskit2024">(<a href="#ref-qiskit2024" role="doc-biblioref">Javadi-Abhari et al. 2024</a>)</span> and the PyZX library <span class="citation" data-cites="pyzx2020">(<a href="#ref-pyzx2020" role="doc-biblioref">Kissinger and Wetering 2020</a>)</span> which we import below.</p>
-<div id="a385cce6" class="cell">
+<div id="15008b97" class="cell">
 <details class="code-fold">
 <summary>PyZX and IBM Qiskit base imports</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
@@ -476,7 +476,7 @@ window.Quarto = {
 </details>
 </div>
 <p>We can then draw <strong>ZXFibo</strong> using PyZX as follows.</p>
-<div id="7841cd3f" class="cell">
+<div id="7a07d592" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_cx_alpha_gate(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    circuit: zx.Circuit, alpha: Fraction <span class="op">|</span> <span class="bu">int</span>, control: <span class="bu">int</span>, target: <span class="bu">int</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> zx.Circuit:</span>
@@ -503,7 +503,7 @@ window.Quarto = {
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> circ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Given a PyZX circuit, we can convert it into a Qiskit circuit using the following function (I believe this was Aleks’s code).</p>
-<div id="96993e1f" class="cell">
+<div id="de54176b" class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> pyzx_to_qiskit(circ: zx.Circuit) <span class="op">-&gt;</span> qiskit.QuantumCircuit:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># converts all gates to CNOT, CZ, HAD, ZPhase, and XPhase</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    circ <span class="op">=</span> circ.to_basic_gates()</span>
@@ -559,7 +559,7 @@ Figure&nbsp;1: <strong>ZXFibo</strong> for <span class="math inline">n=2</span> 
 </figure>
 </div>
 <p>Using the Qiskit API, we can then run <strong>ZXFibo</strong> using an IBM backend. To not spend any money, I will be running the algorithm on a non-noisy simulator where we can get ideal counts (suppressing probability 0 events) and on a noisy simulator. For the noisy simulator, I will be using the the <code>FakeAthens</code> backend, which is a 5 qubit fake backend that mimics the IBM Athens device.</p>
-<div id="5ba5b6f3" class="cell">
+<div id="bf7a9169" class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    IBMQ.load_account()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    provider <span class="op">=</span> IBMQ.get_provider(hub<span class="op">=</span><span class="st">"ibm-q"</span>, group<span class="op">=</span><span class="st">"open"</span>, project<span class="op">=</span><span class="st">"main"</span>)</span>
@@ -570,7 +570,7 @@ Figure&nbsp;1: <strong>ZXFibo</strong> for <span class="math inline">n=2</span> 
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    backend <span class="op">=</span> FakeAthens()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We then run the <strong>ZXFibo</strong> algorithm for 1000 shots.</p>
-<div id="d6e1decd" class="cell">
+<div id="7d33cda4" class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    circ: qiskit.QuantumCircuit, backend: qiskit.providers.Backend, shots: <span class="bu">int</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>) <span class="op">-&gt;</span> <span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">int</span>]:</span>

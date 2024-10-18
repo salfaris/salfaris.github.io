@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Salman Faris">
-<meta name="dcterms.date" content="2024-09-16">
+<meta name="dcterms.date" content="2024-10-17">
 
-<title>TIL: latte art and light/dark roasts – salman faris</title>
+<title>Is Costco fuel cheaper overall given the membership premium? – salman faris</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -42,9 +42,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,9 +70,52 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="TIL: latte art and light/dark roasts – salman faris">
+<meta name="twitter:title" content="Is Costco fuel cheaper overall given the membership premium? – salman faris">
 <meta name="twitter:description" content="">
 <meta name="twitter:card" content="summary">
 </head>
@@ -130,10 +170,12 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">TIL: latte art and light/dark roasts</h1>
+      <h1 class="title">Is Costco fuel cheaper overall given the membership premium?</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">TIL</div>
-                <div class="quarto-category">coffee</div>
+                <div class="quarto-category">mathematical modelling</div>
+                <div class="quarto-category">personal finance</div>
+                <div class="quarto-category">pricing</div>
+                <div class="quarto-category">car talk</div>
               </div>
                   </div>
   </div>
@@ -151,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 16, 2024</p>
+        <p class="date">October 17, 2024</p>
       </div>
     </div>
     
@@ -167,8 +209,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#latte-art-is-a-function-of-coffee-crema-and-milk-texture" id="toc-latte-art-is-a-function-of-coffee-crema-and-milk-texture" class="nav-link active" data-scroll-target="#latte-art-is-a-function-of-coffee-crema-and-milk-texture">Latte art is a function of coffee crema and milk texture</a></li>
-  <li><a href="#taste-converges-with-roast-timing" id="toc-taste-converges-with-roast-timing" class="nav-link" data-scroll-target="#taste-converges-with-roast-timing">Taste converges with roast timing</a></li>
+  <li><a href="#modelling-the-problem" id="toc-modelling-the-problem" class="nav-link active" data-scroll-target="#modelling-the-problem">Modelling the problem</a></li>
+  <li><a href="#some-actual-numbers" id="toc-some-actual-numbers" class="nav-link" data-scroll-target="#some-actual-numbers">Some actual numbers</a>
+  <ul class="collapse">
+  <li><a href="#direct-compute" id="toc-direct-compute" class="nav-link" data-scroll-target="#direct-compute">Direct compute</a></li>
+  <li><a href="#using-the-p-criterion." id="toc-using-the-p-criterion." class="nav-link" data-scroll-target="#using-the-p-criterion.">Using the <span class="math inline">p^*</span> criterion.</a></li>
+  </ul></li>
+  <li><a href="#so-is-costco-truly-worth-it" id="toc-so-is-costco-truly-worth-it" class="nav-link" data-scroll-target="#so-is-costco-truly-worth-it">So is Costco truly worth it?</a></li>
   </ul>
 </nav>
     </div>
@@ -179,26 +226,196 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>When I said I’m gonna write about my random technical thoughts, I never said it has to be software or mathematical. Brewing coffee is pretty technical I reckon.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="./bristol-coffee-festival.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./bristol-coffee-festival.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></a></p>
-</figure>
+<p>Today, let’s talk about petrol prices. It is well known that there’s no petrol cheaper than Costco’s with several pence in difference, sometimes up to 5p. The problem is there’s a membership premium to even start purchasing Costco petrol and that Costco tends to be located significantly far away from the city centre.</p>
+<p>So this begs the question: if we forget the add-on benefit of being able to shop at Costco with the membership, is it worth it to fuel your car at Costco despite the premium and the distance? That is, from the worst case scenario perspective of “I just want to get out, fill my car and go back home”, is it worth it?</p>
+<p>Let’s dive straight into modelling this problem and find the breakeven.</p>
+<section id="modelling-the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="modelling-the-problem">Modelling the problem</h2>
+<p>This is blatantly obvious but remember that getting to the petrol station and back is not free, it costs money on its own. Costco tends to be in the outskirts, so to fill our car there requires a distance <span class="math inline">d^*</span> that is much further than the distance <span class="math inline">d</span> to our nearest petrol station (in my case, is an Esso). But remember the advantage is that the petrol cost <span class="math inline">p^*</span> at Costco is much cheaper compared to the petrol cost <span class="math inline">p</span> at our nearest station. Here, <span class="math inline">d</span> and <span class="math inline">d^*</span> are measured in miles, and <span class="math inline">p</span> and <span class="math inline">p^*</span> are measured in pence/litres. Naturally, <span class="math inline">d</span> and <span class="math inline">d^*</span> are not measured in the Euclidean distance, but rather measured as the sum of distances on the roads taken (think a path integral).</p>
+<p>Now fix a fuel economy <span class="math inline">e</span> for the car you are driving. Typically, car makers report this in litres/100km or miles/gallon. I will be thinking of this in terms of litres/miles, and the conversion should be straightforward. With the fuel economy fixed, the total petrol we need to fill to cover the distance alone are</p>
+<p><span class="math display">
+\begin{align*}
+\text{Costco:} &amp;\quad v_{\mathrm{cover}}^{*} = 2{d^*}e, \\
+\text{Nearest:} &amp;\quad v_{\mathrm{cover}} = 2de.
+\end{align*}
+</span></p>
+<p>Observe that we slapped a 2 in front since you have to go to the petrol station and back. If you want to be pedantic, this is not really accurate as the route back might be different (shorter/longer) but I think this is a fair enough assumption. After all, I just want an estimation.</p>
+<p>Suppose that I want a volume <span class="math inline">V</span> petrol when I reach back home after fuelling regardless of which petrol station I go to, then we want to fill in <span class="math display">
+\begin{align*}
+\text{Costco:} &amp;\quad V + v_{\mathrm{cover}}^{*}, \\
+\text{Nearest:} &amp;\quad V + v_{\mathrm{cover}},
+\end{align*}
+</span></p>
+<p>respectively at the petrol station. This implies that the total cost for filling in petrol is given by</p>
+<p><span class="math display">
+\begin{align*}
+\text{Costco:} &amp;\quad (V + v_{\mathrm{cover}}^{*})p^*, \\
+\text{Nearest:} &amp;\quad (V + v_{\mathrm{cover}})p,
+\end{align*}
+</span></p>
+<p>respectively. This will be our total cost for the nearest petrol station. For Costco, however, we need to include the membership premium <span class="math inline">M</span> which, as of 2024, is £33.60 annually. To bake this premium into the fuelling cost, I am going to multiply <span class="math inline">M</span> with an annual fuelling frequency <span class="math inline">\phi</span>. Now <span class="math inline">\phi</span> is not Costco-dependent (although it can be biased) but really user-dependent – it depends on how much you use car the car. For example, if I’m thinking of methodical use, I would put a fuelling frequency of once a week which puts <span class="math inline">\phi = 1/52</span> for the 52 weeks in the year. Adding this premium implies the total cost to be:</p>
+<p><span class="math display">
+\begin{align*}
+\text{Costco:} &amp;\quad C^* = \phi M + (V + v_{\mathrm{cover}}^{*})p^*, \\
+\text{Nearest:} &amp;\quad C = (V + v_{\mathrm{cover}})p.
+\end{align*}
+</span></p>
+<p>We are almost there, there is one little thing to take care of. Now fuel prices changes all the time, so it’s not really right to think them as constants. So assume <span class="math inline">p</span> and <span class="math inline">p^*</span> are sampled from probability distributions <span class="math inline">\mathcal{P}(.)</span> and <span class="math inline">\mathcal{P}^*</span> respectively.</p>
+<p>To answer our question, I am going to somehow bound <span class="math inline">p^*</span>. Well, this is easy.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
-<p>I attended the Bristol Coffee Festival last Saturday (14 September 2024) and drank almost enough espresso to make my general admission ticket worth it. While being super caffeinated, I had a good amount of chat with some of the 100+ coffee roasters and baristas that were there. Needless to say, I learnt a lot. Now I’m sure I could find this knowledge on YouTube if I spend enough time watching James Hoffman’s videos or simply in <code>r/Coffee</code> or <code>r/JamesHoffman</code> if I spend enough time there. However, nothing beats a good conversation with a knowledgable person where you can ask questions and get direct feedback.</p>
-<p>Here are several things I learnt.</p>
-<section id="latte-art-is-a-function-of-coffee-crema-and-milk-texture" class="level2">
-<h2 class="anchored" data-anchor-id="latte-art-is-a-function-of-coffee-crema-and-milk-texture">Latte art is a function of coffee crema and milk texture</h2>
-<p>I’ve been trying to learn latte art for a long time now, stretching all the way back to December 2020, wasting a lot of milk in the process. I never had professional guidance, I just kind of do it by trial and error, and it just never worked out nicely. I had suspicions for <em>why</em> it didn’t work out though, and I’m glad I finally confirmed my suspicions with professional baristas.</p>
-<p>It turns out that the body of the coffee matters. Pulling a latte art on runny espresso is difficult; on a filter coffee even worse. So step one is to pull a good shot of espresso – which translates to first getting a decent espresso machine.</p>
-<p>Secondly, the milk texture is crucial. This means, the milk has to be aerated properly – so not only the surface that you can see but also the body beneath it too. I finally have someone telling me how to do it properly. It turns out, heating the milk to 65 degrees is key, and 65 is quite hot. This means that the milk pitcher will be <em>hot</em> and you can just know when to stop steaming by feel. The milk pitcher will be hot. It was very hot when I did the run. It was hot. It was very hot.</p>
+<div class="callout-title-container flex-fill">
+<span class="math inline">p^*</span> criterion
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The total cost is bounded <span class="math inline">C^* &lt; C</span> iff <span class="math display">
+p^*
+&lt; \frac{(V + v_{\mathrm{cover}}) p - \phi M}{V+v^*_{\mathrm{cover}}}
+= \frac{V + v_{\mathrm{cover}}}{V+v^*_{\mathrm{cover}}} p - \frac{\phi}{V+v^*_{\mathrm{cover}}} M
+</span></p>
+</div>
+</div>
+<p>The bound itself is useful (e.g.&nbsp;for algorithms), but the interpretation is much more interesting. Since <span class="math inline">d^* &gt; d</span>, we have <span class="math inline">(V + v_{\mathrm{cover}})/(V + v^*_{\mathrm{cover}}) &lt; 1</span>. The <span class="math inline">p^*</span> criterion tells us that for Costco to be worth it, it is not enough that <span class="math inline">p^* &lt; p</span>, but it needs to be less than <span class="math inline">p</span> discounted by <span class="math inline">(V + v_{\mathrm{cover}})/(V + v^*_{\mathrm{cover}})</span>, further tightened by a fraction of the premium <span class="math inline">\phi/(V + v^*_{\mathrm{cover}}) \cdot M</span>.</p>
+<p>The good thing is we know how much it is being tightened by. Let’s first isolate constant-like terms. Since the premium <span class="math inline">M</span> is beyond our control, we can treat it as a constant. In fact, we can view the distance <span class="math inline">d^*</span> to the nearest Costco petrol station as fixed since there’s really one Costco station you can go to within the proximity of your house (at least in GB). This is in contrast to the distance <span class="math inline">d</span> to the nearest petrol station which can be plenty – as we have plenty of nearest petrol stations to choose from. We can also view the fuel economy <span class="math inline">e</span> as fixed as it’s not like we change cars every time we fill in the tank. This implies that we can view the term <span class="math inline">V + v^*_{\mathrm{cover}}</span> as a constant.</p>
+<p>Thus the tightness of the bound is really controlled by the fuelling frequency <span class="math inline">\phi</span>. The less time you go and fill your car at Costco, the bigger <span class="math inline">\phi</span> is and hence, the bigger the effect of the premium term. This implies a tighter bound! I guess this is sort of intuitive (?) I’m trying really hard to convince myself that this is the case. And note that the multipliers on <span class="math inline">p</span> and <span class="math inline">M</span> does not add up to <span class="math inline">1</span>, i.e.&nbsp;they’re not “weights” per se, so a bigger premium effect does mean pricier total cost.</p>
 </section>
-<section id="taste-converges-with-roast-timing" class="level2">
-<h2 class="anchored" data-anchor-id="taste-converges-with-roast-timing">Taste converges with roast timing</h2>
-<p>The people at Clifton Coffee Roasters taught me a good chunk about coffee notes. I came in with the universal skeptic question of “are coffee notes even real?”. You know this question can trip some coffee snobs for sure, but the peeps at CCR were very cool in explaining it.</p>
-<p>It turns out that the coffee notes are indeed real, and they proved it to me by giving me a taste of their range of filter coffees which were processed in different ways – natural, washed and a mixed process. You see, coffee meant for filter are usually lighter roasted and so the notes are preserved. Otoh, coffee meant for espresso is darker roasted so that is is more soluble, inducing a thicker body. If you go to a specialty coffee shop where there is some expectation that people order espresso for the sake of espresso, they will have a range of roasts for you to choose from, but most importantly, they will be mindful that some people will be ordering the espresso for the taste and not the milk.</p>
-<p>Otoh, the thing with coffee chains like Pret, Costa or Nero is that there is an almost universal understanding that people will come for milk-based coffee; and milk-based coffee has an espresso a base (has to be a truly shitty coffee chain if they use filter coffee as a base, right *cough* Greggs *cough*?). But for milk-based coffee, the milk will almost always dominate the coffee taste right. So in that sense, it doesn’t really matter how dark the roast is for the espresso, you just need it to be dark. How dark? Well, it’s easier to just roast them super dark rather than trying to find the right amount of darkness. As long as it’s dark, it’s soluble, so you can extract an espresso done. And this is what coffee chains do, which explains why their espresso tastes more or less the same – terrible.</p>
-<p>And what’s the price of doing a very dark roast? You lose the coffee notes.</p>
+<section id="some-actual-numbers" class="level2">
+<h2 class="anchored" data-anchor-id="some-actual-numbers">Some actual numbers</h2>
+<p>Now it’s just a matter of plugging in numbers. Here, I’ll deal with hard numbers but coding this should be straightforward. I’ll demo this using my specs, using the Esso in front of my house as my <em>nearest</em> petrol station which is 0.2 miles away. Let’s put some numbers to the constants.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Annual fuelling frequency
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>I’ll be fixing the annual fuelling frequency to <span class="math inline">\phi = 1/52</span> as before.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nearest petrol station
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Esso nearest to my house is <span class="math inline">d=0.2</span> miles away and they sell petrol at <span class="math inline">p = 132.9/100</span> £/litre.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Costco petrol station
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The nearest Costco to my house is <span class="math inline">d^*=4.8</span> miles away and they sell petrol at <span class="math inline">p = 126.9/100</span> £/litre. As of 2024, the annual Costco individual membership is priced at <span class="math inline">M = 33.60</span> pounds.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Car fuel economy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>My car’s fuel economy is about 40 mpg. That converts to about 5.9 litres/100km or 0.059 litres/km or 0.095 litres/mile. So put <span class="math inline">e = 0.095</span> litres/mile.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Petrol volume to fill
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let’s say I want to fill in about <span class="math inline">V = 60</span> litres of petrol, which is about 80% into my full tank capacity.</p>
+</div>
+</div>
+<section id="direct-compute" class="level3">
+<h3 class="anchored" data-anchor-id="direct-compute">Direct compute</h3>
+<p>Now we are ready to compute. The total volume we want to fill in at the petrol station is</p>
+<p><span class="math display">
+\begin{align*}
+\text{Costco:} &amp;\quad V + v_{\mathrm{cover}}^{*} = V + 2{d^*}e = 60 + 0.9120 \text{ litres}, \\
+\text{Nearest:} &amp;\quad V + v_{\mathrm{cover}} = V + 2de = 60 + 0.0019 \text{ litres}.
+\end{align*}
+</span></p>
+<p>This gives the total fuelling cost to be</p>
+<p><span class="math display">
+\begin{align*}
+\text{Costco:} &amp;\quad C^* = \phi M + (V + v_{\mathrm{cover}}^{*})p^* = £77.33, \\
+\text{Nearest:} &amp;\quad C = (V + v_{\mathrm{cover}})p = £79.74,
+\end{align*}
+</span></p>
+<p>and we see that fuelling at Costco today is much cheaper despite the premium and the distance!</p>
+</section>
+<section id="using-the-p-criterion." class="level3">
+<h3 class="anchored" data-anchor-id="using-the-p-criterion.">Using the <span class="math inline">p^*</span> criterion.</h3>
+<p>We could have equivalently compute the <span class="math inline">p^*</span> criterion and see that</p>
+<p><span class="math display">
+\frac{V + v_{\mathrm{cover}}}{V+v^*_{\mathrm{cover}}} p - \frac{\phi}{V+v^*_{\mathrm{cover}}} M = 1.29120 &gt; 1.329 = p^*.
+</span></p>
+<p>Indeed, the criterion is met and we did see lower Costco total cost as opposed to the cost using our nearest Esso station.</p>
+</section>
+</section>
+<section id="so-is-costco-truly-worth-it" class="level2">
+<h2 class="anchored" data-anchor-id="so-is-costco-truly-worth-it">So is Costco truly worth it?</h2>
+<p>Based on today’s petrol price computation, it seems that we save <span class="math inline">\Delta := C - C^* = 2.41</span> pounds. Is it really worth it that extra time to go to Costco and save £2.41? Well, for a start, recall that <span class="math inline">p</span>, <span class="math inline">p^*</span> are random variables. This means that the savings will be a random variable as well by linearity. Now suppose we are modelling for the expectation <span class="math inline">\mathbb{E}[p]</span> and <span class="math inline">\mathbb{E}[p^*]</span> instead, what then? Well long-term savings still pile up in my opinion as the annual savings is given by <span class="math inline">\mathbb{E}[\Delta]/\phi</span>. Assuming <span class="math inline">\mathbb{E}[\Delta] = 2.41</span>, then annually we would have saved about £125. That is significant.</p>
+<p>I’m buying that membership card yesterday. This is not a Costco ad.</p>
+<!-- ```python
+# Annual fuelling frequency
+F = 1/52
+
+# Nearest petrol station
+p = 132.9 / 100  # Petrol/litre (£)
+d = 0.02 # Distance to station (miles)
+
+# Costco petrol station
+M = 33.60  # Annual Costco premium (£)
+p = 132.9 / 100  # Petrol/litre (£)
+d = 4.8 # Distance to station (miles)
+
+# Car fuel economy.
+# 5.88036 litres/100km is my car's. Change this to yours.
+E = (
+    5.88036 / 100  # litres/km
+    * 1.60934  # km/mile
+)  # litres/mile
+
+V = 60  # Petrol volume @ home after fuelling (litres)
+
+v = 2*d*E
+v_costco = 2*d_costco*E
+
+v_filled = v + V
+v_filled_costco = v_costco + V
+
+# Total costs
+C_costco = M*F + v_filled_costco*p_costco
+C = v_filled*p
+print(f"Costco: £{C_costco:,.2f}")
+print(f"Nearest: £{C:,.2f}")
+``` -->
 
 
 </section>
@@ -625,38 +842,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":false,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 

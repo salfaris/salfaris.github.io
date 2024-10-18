@@ -1,0 +1,205 @@
+---
+title: "Is Costco fuel cheaper overall given the membership premium?"
+categories: [mathematical modelling, personal finance, pricing, car talk]
+author: "Salman Faris"
+date: "17 10 2024"
+jupyter: python3
+format:
+  html:
+    toc: true
+    html-math-method: katex
+execute: 
+  enabled: false
+  cache: false
+# bibliography: references.bib
+draft: false
+---
+
+Today, let's talk about petrol prices. It is well known that there's no petrol cheaper than Costco's with several pence in difference, sometimes up to 5p. The problem is there's a membership premium to even start purchasing Costco petrol and that Costco tends to be located significantly far away from the city centre. 
+
+So this begs the question: if we forget the add-on benefit of being able to shop at Costco with the membership, is it worth it to fuel your car at Costco despite the premium and the distance? That is, from the worst case scenario perspective of "I just want to get out, fill my car and go back home", is it worth it?
+
+Let's dive straight into modelling this problem and find the breakeven. 
+
+## Modelling the problem
+
+This is blatantly obvious but remember that getting to the petrol station and back is not free, it costs money on its own. Costco tends to be in the outskirts, so to fill our car there requires a distance $d^*$ that is much further than the distance $d$ to our nearest petrol station (in my case, is an Esso). But remember the advantage is that the petrol cost $p^*$ at Costco is much cheaper compared to the petrol cost $p$ at our nearest station. Here, $d$ and $d^*$ are measured in miles, and $p$ and $p^*$ are measured in pence/litres. Naturally, $d$ and $d^*$ are not measured in the Euclidean distance, but rather measured as the sum of distances on the roads taken (think a path integral).
+
+Now fix a fuel economy $e$ for the car you are driving. Typically, car makers report this in litres/100km or miles/gallon. I will be thinking of this in terms of litres/miles, and the conversion should be straightforward. With the fuel economy fixed, the total petrol we need to fill to cover the distance alone are
+
+$$
+\begin{align*}
+\text{Costco:} &\quad v_{\mathrm{cover}}^{*} = 2{d^*}e, \\
+\text{Nearest:} &\quad v_{\mathrm{cover}} = 2de.
+\end{align*}
+$$
+
+Observe that we slapped a 2 in front since you have to go to the petrol station and back. If you want to be pedantic, this is not really accurate as the route back might be different (shorter/longer) but I think this is a fair enough assumption. After all, I just want an estimation.
+
+Suppose that I want a volume $V$ petrol when I reach back home after fuelling regardless of which petrol station I go to, then we want to fill in
+$$
+\begin{align*}
+\text{Costco:} &\quad V + v_{\mathrm{cover}}^{*}, \\
+\text{Nearest:} &\quad V + v_{\mathrm{cover}},
+\end{align*}
+$$
+
+respectively at the petrol station. This implies that the total cost for filling in petrol is given by
+
+$$
+\begin{align*}
+\text{Costco:} &\quad (V + v_{\mathrm{cover}}^{*})p^*, \\
+\text{Nearest:} &\quad (V + v_{\mathrm{cover}})p,
+\end{align*}
+$$
+
+respectively. This will be our total cost for the nearest petrol station. For Costco, however, we need to include the membership premium $M$ which, as of 2024, is £33.60 annually. To bake this premium into the fuelling cost, I am going to multiply $M$ with an annual fuelling frequency $\phi$. Now $\phi$ is not Costco-dependent (although it can be biased) but really user-dependent – it depends on how much you use car the car. For example, if I'm thinking of methodical use, I would put a fuelling frequency of once a week which puts $\phi = 1/52$ for the 52 weeks in the year. Adding this premium implies the total cost to be:
+
+$$
+\begin{align*}
+\text{Costco:} &\quad C^* = \phi M + (V + v_{\mathrm{cover}}^{*})p^*, \\
+\text{Nearest:} &\quad C = (V + v_{\mathrm{cover}})p.
+\end{align*}
+$$
+
+We are almost there, there is one little thing to take care of. Now fuel prices changes all the time, so it's not really right to think them as constants. So assume $p$ and $p^*$ are sampled from probability distributions $\mathcal{P}(.)$ and $\mathcal{P}^*$ respectively.
+
+To answer our question, I am going to somehow bound $p^*$. Well, this is easy. 
+
+::: {.callout-note icon=false}
+
+## $p^*$ criterion
+
+The total cost is bounded $C^* < C$ iff 
+$$
+p^* 
+< \frac{(V + v_{\mathrm{cover}}) p - \phi M}{V+v^*_{\mathrm{cover}}}
+= \frac{V + v_{\mathrm{cover}}}{V+v^*_{\mathrm{cover}}} p - \frac{\phi}{V+v^*_{\mathrm{cover}}} M
+$$
+
+:::
+
+The bound itself is useful (e.g. for algorithms), but the interpretation is much more interesting. Since $d^* > d$, we have $(V + v_{\mathrm{cover}})/(V + v^*_{\mathrm{cover}}) < 1$. The $p^*$ criterion tells us that for Costco to be worth it, it is not enough that $p^* < p$, but it needs to be less than $p$ discounted by $(V + v_{\mathrm{cover}})/(V + v^*_{\mathrm{cover}})$, further tightened by a fraction of the premium $\phi/(V + v^*_{\mathrm{cover}}) \cdot M$. 
+
+The good thing is we know how much it is being tightened by. Let's first isolate constant-like terms. Since the premium $M$ is beyond our control, we can treat it as a constant. In fact, we can view the distance $d^*$ to the nearest Costco petrol station as fixed since there's really one Costco station you can go to within the proximity of your house (at least in GB). This is in contrast to the distance $d$ to the nearest petrol station which can be plenty – as we have plenty of nearest petrol stations to choose from. We can also view the fuel economy $e$ as fixed as it's not like we  change cars every time we fill in the tank. This implies that we can view the term $V + v^*_{\mathrm{cover}}$ as a constant. 
+
+Thus the tightness of the bound is really controlled by the fuelling frequency $\phi$. The less time you go and fill your car at Costco, the bigger $\phi$ is and hence, the bigger the effect of the premium term. This implies a tighter bound! I guess this is sort of intuitive (?) I'm trying really hard to convince myself that this is the case. And note that the multipliers on $p$ and $M$ does not add up to $1$, i.e. they're not "weights" per se, so a bigger premium effect does mean pricier total cost.
+
+## Some actual numbers
+
+Now it's just a matter of plugging in numbers. Here, I'll deal with hard numbers but coding this should be straightforward. I'll demo this using my specs, using the Esso in front of my house as my _nearest_ petrol station which is 0.2 miles away. Let's put some numbers to the constants.
+
+::: {.callout-note icon="false"}
+
+## Annual fuelling frequency
+
+I'll be fixing the annual fuelling frequency to $\phi = 1/52$ as before.
+
+:::
+
+::: {.callout-note icon="false"}
+
+## Nearest petrol station
+
+The Esso nearest to my house is $d=0.2$ miles away and they sell petrol at $p = 132.9/100$ £/litre.
+
+:::
+
+::: {.callout-note icon="false"}
+
+## Costco petrol station
+
+The nearest Costco to my house is $d^*=4.8$ miles away and they sell petrol at $p = 126.9/100$ £/litre. As of 2024, the annual Costco individual membership is priced at $M = 33.60$ pounds.
+
+:::
+
+::: {.callout-note icon="false"}
+
+## Car fuel economy
+
+My car's fuel economy is about 40 mpg. That converts to about 5.9 litres/100km or 0.059 litres/km or 0.095 litres/mile. So put $e = 0.095$ litres/mile.
+
+:::
+
+::: {.callout-note icon="false"}
+
+## Petrol volume to fill
+
+Let's say I want to fill in about $V = 60$ litres of petrol, which is about 80% into my full tank capacity. 
+
+:::
+
+### Direct compute
+
+Now we are ready to compute. The total volume we want to fill in at the petrol station is
+
+$$
+\begin{align*}
+\text{Costco:} &\quad V + v_{\mathrm{cover}}^{*} = V + 2{d^*}e = 60 + 0.9120 \text{ litres}, \\
+\text{Nearest:} &\quad V + v_{\mathrm{cover}} = V + 2de = 60 + 0.0019 \text{ litres}.
+\end{align*}
+$$
+
+This gives the total fuelling cost to be
+
+$$
+\begin{align*}
+\text{Costco:} &\quad C^* = \phi M + (V + v_{\mathrm{cover}}^{*})p^* = £77.33, \\
+\text{Nearest:} &\quad C = (V + v_{\mathrm{cover}})p = £79.74,
+\end{align*}
+$$
+
+and we see that fuelling at Costco today is much cheaper despite the premium and the distance!
+
+### Using the $p^*$ criterion.
+
+We could have equivalently compute the $p^*$ criterion and see that
+
+$$
+\frac{V + v_{\mathrm{cover}}}{V+v^*_{\mathrm{cover}}} p - \frac{\phi}{V+v^*_{\mathrm{cover}}} M = 1.29120 > 1.329 = p^*.
+$$
+
+Indeed, the criterion is met and we did see lower Costco total cost as opposed to the cost using our nearest Esso station.
+
+## So is Costco truly worth it?
+
+Based on today's petrol price computation, it seems that we save $\Delta := C - C^* = 2.41$ pounds. Is it really worth it that extra time to go to Costco and save £2.41? Well, for a start, recall that $p$, $p^*$ are random variables. This means that the savings will be a random variable as well by linearity. Now suppose we are modelling for the expectation $\mathbb{E}[p]$ and $\mathbb{E}[p^*]$ instead, what then? Well long-term savings still pile up in my opinion as the annual savings is given by $\mathbb{E}[\Delta]/\phi$. Assuming $\mathbb{E}[\Delta] = 2.41$, then annually we would have saved about £125. That is significant.
+
+I'm buying that membership card yesterday. This is not a Costco ad.
+
+
+
+<!-- ```python
+# Annual fuelling frequency
+F = 1/52
+
+# Nearest petrol station
+p = 132.9 / 100  # Petrol/litre (£)
+d = 0.02 # Distance to station (miles)
+
+# Costco petrol station
+M = 33.60  # Annual Costco premium (£)
+p = 132.9 / 100  # Petrol/litre (£)
+d = 4.8 # Distance to station (miles)
+
+# Car fuel economy.
+# 5.88036 litres/100km is my car's. Change this to yours.
+E = (
+    5.88036 / 100  # litres/km
+    * 1.60934  # km/mile
+)  # litres/mile
+
+V = 60  # Petrol volume @ home after fuelling (litres)
+
+v = 2*d*E
+v_costco = 2*d_costco*E
+
+v_filled = v + V
+v_filled_costco = v_costco + V
+
+# Total costs
+C_costco = M*F + v_filled_costco*p_costco
+C = v_filled*p
+print(f"Costco: £{C_costco:,.2f}")
+print(f"Nearest: £{C:,.2f}")
+``` -->
