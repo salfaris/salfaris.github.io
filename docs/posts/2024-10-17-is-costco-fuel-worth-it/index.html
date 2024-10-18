@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Salman Faris">
-<meta name="dcterms.date" content="2024-10-17">
+<meta name="dcterms.date" content="2024-10-18">
 
 <title>Is Costco fuel cheaper overall given the membership premium? – salman faris</title>
 <style>
@@ -193,7 +193,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 17, 2024</p>
+        <p class="date">October 18, 2024</p>
       </div>
     </div>
     
@@ -231,7 +231,7 @@ window.Quarto = {
 <p>Let’s dive straight into modelling this problem and find the breakeven.</p>
 <section id="modelling-the-problem" class="level2">
 <h2 class="anchored" data-anchor-id="modelling-the-problem">Modelling the problem</h2>
-<p>This is blatantly obvious but remember that getting to the petrol station and back is not free, it costs money on its own. Costco tends to be in the outskirts, so to fill our car there requires a distance <span class="math inline">d^*</span> that is much further than the distance <span class="math inline">d</span> to our nearest petrol station (in my case, is an Esso). But remember the advantage is that the petrol cost <span class="math inline">p^*</span> at Costco is much cheaper compared to the petrol cost <span class="math inline">p</span> at our nearest station. Here, <span class="math inline">d</span> and <span class="math inline">d^*</span> are measured in miles, and <span class="math inline">p</span> and <span class="math inline">p^*</span> are measured in pence/litres. Naturally, <span class="math inline">d</span> and <span class="math inline">d^*</span> are not measured in the Euclidean distance, but rather measured as the sum of distances on the roads taken (think a path integral).</p>
+<p>This is blatantly obvious but remember that getting to the petrol station and back is not free, it costs money on its own. Costco tends to be on the outskirts, so to fill our car there requires a distance <span class="math inline">d^*</span> that is much further than the distance <span class="math inline">d</span> to our nearest petrol station (in my case, is an Esso). But remember, the advantage is that the petrol cost <span class="math inline">p^*</span> at Costco is much cheaper compared to the petrol cost <span class="math inline">p</span> at our nearest station. Here, <span class="math inline">d</span> and <span class="math inline">d^*</span> are measured in miles, and <span class="math inline">p</span> and <span class="math inline">p^*</span> are measured in £/litres. Naturally, <span class="math inline">d</span> and <span class="math inline">d^*</span> are not measured in the Euclidean distance, but rather measured as the sum of distances on the roads taken (think a path integral).</p>
 <p>Now fix a fuel economy <span class="math inline">e</span> for the car you are driving. Typically, car makers report this in litres/100km or miles/gallon. I will be thinking of this in terms of litres/miles, and the conversion should be straightforward. With the fuel economy fixed, the total petrol we need to fill to cover the distance alone are</p>
 <p><span class="math display">
 \begin{align*}
@@ -253,7 +253,7 @@ window.Quarto = {
 \text{Nearest:} &amp;\quad (V + v_{\mathrm{cover}})p,
 \end{align*}
 </span></p>
-<p>respectively. This will be our total cost for the nearest petrol station. For Costco, however, we need to include the membership premium <span class="math inline">M</span> which, as of 2024, is £33.60 annually. To bake this premium into the fuelling cost, I am going to multiply <span class="math inline">M</span> with an annual fuelling frequency <span class="math inline">\phi</span>. Now <span class="math inline">\phi</span> is not Costco-dependent (although it can be biased) but really user-dependent – it depends on how much you use car the car. For example, if I’m thinking of methodical use, I would put a fuelling frequency of once a week which puts <span class="math inline">\phi = 1/52</span> for the 52 weeks in the year. Adding this premium implies the total cost to be:</p>
+<p>respectively. This will be our total cost for the nearest petrol station. For Costco, however, we need to include the membership premium <span class="math inline">M</span> which, as of 2024, is £33.60 annually. To bake this premium into the fuelling cost, I am going to multiply <span class="math inline">M</span> with an annual fuelling frequency <span class="math inline">\phi</span>. This is essentially the cost of the premium per filling petrol. Now <span class="math inline">\phi</span> is not Costco-dependent (although it can be biased by wanting to make the most of the membership) but really user-dependent – it depends on how much you use your car and hence, how much you fill the car tank. For example, if I’m thinking of methodical use, I would put a fuelling frequency of once a week which puts <span class="math inline">\phi = 1/52</span> for the 52 weeks in the year. Adding this premium implies the total cost to be:</p>
 <p><span class="math display">
 \begin{align*}
 \text{Costco:} &amp;\quad C^* = \phi M + (V + v_{\mathrm{cover}}^{*})p^*, \\
@@ -280,7 +280,7 @@ p^*
 </div>
 </div>
 <p>The bound itself is useful (e.g.&nbsp;for algorithms), but the interpretation is much more interesting. Since <span class="math inline">d^* &gt; d</span>, we have <span class="math inline">(V + v_{\mathrm{cover}})/(V + v^*_{\mathrm{cover}}) &lt; 1</span>. The <span class="math inline">p^*</span> criterion tells us that for Costco to be worth it, it is not enough that <span class="math inline">p^* &lt; p</span>, but it needs to be less than <span class="math inline">p</span> discounted by <span class="math inline">(V + v_{\mathrm{cover}})/(V + v^*_{\mathrm{cover}})</span>, further tightened by a fraction of the premium <span class="math inline">\phi/(V + v^*_{\mathrm{cover}}) \cdot M</span>.</p>
-<p>The good thing is we know how much it is being tightened by. Let’s first isolate constant-like terms. Since the premium <span class="math inline">M</span> is beyond our control, we can treat it as a constant. In fact, we can view the distance <span class="math inline">d^*</span> to the nearest Costco petrol station as fixed since there’s really one Costco station you can go to within the proximity of your house (at least in GB). This is in contrast to the distance <span class="math inline">d</span> to the nearest petrol station which can be plenty – as we have plenty of nearest petrol stations to choose from. We can also view the fuel economy <span class="math inline">e</span> as fixed as it’s not like we change cars every time we fill in the tank. This implies that we can view the term <span class="math inline">V + v^*_{\mathrm{cover}}</span> as a constant.</p>
+<p>The good thing is we know how much it is being tightened by. Let’s first isolate constant-like terms. Since the premium <span class="math inline">M</span> is beyond our control, we can treat it as a constant. In fact, we can view the distance <span class="math inline">d^*</span> to the nearest Costco petrol station as fixed since there’s really one Costco station you can go to within the proximity of your house (at least in GB). This is in contrast to the distance <span class="math inline">d</span> to the nearest petrol station which can be plenty – as we can have plenty of nearest petrol stations to choose from. We can also view the fuel economy <span class="math inline">e</span> as fixed as it’s not like we change cars every time we fill in the tank. This implies that we can view the term <span class="math inline">V + v^*_{\mathrm{cover}}</span> as a constant.</p>
 <p>Thus the tightness of the bound is really controlled by the fuelling frequency <span class="math inline">\phi</span>. The less time you go and fill your car at Costco, the bigger <span class="math inline">\phi</span> is and hence, the bigger the effect of the premium term. This implies a tighter bound! I guess this is sort of intuitive (?) I’m trying really hard to convince myself that this is the case. And note that the multipliers on <span class="math inline">p</span> and <span class="math inline">M</span> does not add up to <span class="math inline">1</span>, i.e.&nbsp;they’re not “weights” per se, so a bigger premium effect does mean pricier total cost.</p>
 </section>
 <section id="some-actual-numbers" class="level2">
@@ -380,8 +380,8 @@ Petrol volume to fill
 </section>
 <section id="so-is-costco-truly-worth-it" class="level2">
 <h2 class="anchored" data-anchor-id="so-is-costco-truly-worth-it">So is Costco truly worth it?</h2>
-<p>Based on today’s petrol price computation, it seems that we save <span class="math inline">\Delta := C - C^* = 2.41</span> pounds. Is it really worth it that extra time to go to Costco and save £2.41? Well, for a start, recall that <span class="math inline">p</span>, <span class="math inline">p^*</span> are random variables. This means that the savings will be a random variable as well by linearity. Now suppose we are modelling for the expectation <span class="math inline">\mathbb{E}[p]</span> and <span class="math inline">\mathbb{E}[p^*]</span> instead, what then? Well long-term savings still pile up in my opinion as the annual savings is given by <span class="math inline">\mathbb{E}[\Delta]/\phi</span>. Assuming <span class="math inline">\mathbb{E}[\Delta] = 2.41</span>, then annually we would have saved about £125. That is significant.</p>
-<p>I’m buying that membership card yesterday. This is not a Costco ad.</p>
+<p>Based on today’s petrol price computation, it seems that we save <span class="math inline">\Delta := C - C^* = 2.41</span> pounds. Is it really worth it that extra time to go to Costco and save £2.41? Well, for a start, recall that <span class="math inline">p</span>, <span class="math inline">p^*</span> are random variables. This means that the savings will be a random variable as well. Now suppose we are modelling for the expectation <span class="math inline">\mathbb{E}[p]</span> and <span class="math inline">\mathbb{E}[p^*]</span> instead, what then? Well long-term savings still pile up in my opinion as the annual savings is given by <span class="math inline">\mathbb{E}[\Delta]/\phi</span>. Assuming <span class="math inline">\mathbb{E}[\Delta] = 2.41</span>, then annually we would have saved about £125. That is significant.</p>
+<p>So yes, Costco solely for the fuel is worth it in my opinion. I’m buying that membership card yesterday. And this is not a Costco ad.</p>
 <!-- ```python
 # Annual fuelling frequency
 F = 1/52
