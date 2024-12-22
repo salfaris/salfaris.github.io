@@ -3,6 +3,7 @@ title: "Is Costco fuel cheaper overall given the membership premium?"
 categories: [mathematical modelling, personal finance, pricing, car talk]
 author: "Salman Faris"
 date: "18 10 2024"
+date-modified: "28 10 2024"
 jupyter: python3
 format:
   html:
@@ -84,6 +85,26 @@ The bound itself is useful (e.g. for algorithms), but the interpretation is much
 The good thing is we know how much it is being tightened by. Let's first isolate constant-like terms. Since the premium $M$ is beyond our control, we can treat it as a constant. In fact, we can view the distance $d^*$ to the nearest Costco petrol station as fixed since there's really one Costco station you can go to within the proximity of your house (at least in GB). This is in contrast to the distance $d$ to the nearest petrol station which can be plenty – as we can have plenty of nearest petrol stations to choose from. We can also view the fuel economy $e$ as fixed as it's not like we  change cars every time we fill in the tank. This implies that we can view the term $V + v^*_{\mathrm{cover}}$ as a constant. 
 
 Thus the tightness of the bound is really controlled by the fuelling frequency $\phi$. The less time you go and fill your car at Costco, the bigger $\phi$ is and hence, the bigger the effect of the premium term. This implies a tighter bound! I guess this is sort of intuitive (?) I'm trying really hard to convince myself that this is the case. And note that the multipliers on $p$ and $M$ does not add up to $1$, i.e. they're not "weights" per se, so a bigger premium effect does mean pricier total cost.
+
+We can get another interesting interpretation when we look at changes in the prices. Computing partial derivatives gives us
+$$
+\frac{\partial C^*}{\partial p^*} = V + v^*_{\mathrm{cover}}; \quad \frac{\partial C}{\partial p} = V + v_{\mathrm{cover}}.
+$$
+
+and we can rewrite the $p^*$ criterion with partial derivatives as follows.
+
+::: {.callout-note icon=false}
+
+## $p^*$ criterion (rate of change version)
+
+The total cost is bounded $C^* < C$ iff 
+$$
+p^* \frac{\partial C^*}{\partial p^*} < p \frac{\partial C}{\partial p} - \phi M.
+$$
+
+:::
+
+Now this, in my opinion, is just as interesting as the interpretation we have before. This is especially true as we shall see when we consider the difference in $C^*$ and $C$ later below. The $p^*$ criterion now tells us that we can bound $C^*$ by $C$ iff the sensitivity in $C^*$ with respect to $p^*$ is bounded by the sensitivity in $C$ with respect to $p$ further tightened by the annual premium $M$. This makes sense, and gives an extra human intuition into the criterion.
 
 ## Some actual numbers
 
@@ -167,7 +188,15 @@ Based on today's petrol price computation, it seems that we save $\Delta := C - 
 
 So yes, Costco solely for the fuel is worth it in my opinion. I'm buying that membership card yesterday. And this is not a Costco ad.
 
+## Price sensitivity
 
+One useful metric to compute is how sensitive is $\Delta$ to price changes in $p$ and $p^*$. To measure this, we can compute the total differential assuming $\Delta$ is only a function of price $\Delta(p, p^*$). The total differential can then be computed:
+
+$$
+d\Delta = \frac{\partial \Delta}{\partial p^*} dp^* + \frac{\partial \Delta}{\partial p} dp =  - (V + v^*_{\mathrm{cover}}) dp^* + (V + v_{\mathrm{cover}}) dp.
+$$
+
+Naturally, since $d^* > d$, then $v^*_{\mathrm{cover}} > v_{\mathrm{cover}}$. Consequently, a tiny change in $p^*$ would affect $\Delta$ more significantly as compared to $p$. This is somewhat expected but it's just nice to see our intuition being confirmed by the mathematics.
 
 <!-- ```python
 # Annual fuelling frequency

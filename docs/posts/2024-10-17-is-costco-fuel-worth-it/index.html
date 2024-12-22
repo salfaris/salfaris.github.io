@@ -197,6 +197,12 @@ window.Quarto = {
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">October 28, 2024</p>
+      </div>
+    </div>
       
     </div>
     
@@ -216,6 +222,7 @@ window.Quarto = {
   <li><a href="#using-the-p-criterion." id="toc-using-the-p-criterion." class="nav-link" data-scroll-target="#using-the-p-criterion.">Using the <span class="math inline">p^*</span> criterion.</a></li>
   </ul></li>
   <li><a href="#so-is-costco-truly-worth-it" id="toc-so-is-costco-truly-worth-it" class="nav-link" data-scroll-target="#so-is-costco-truly-worth-it">So is Costco truly worth it?</a></li>
+  <li><a href="#price-sensitivity" id="toc-price-sensitivity" class="nav-link" data-scroll-target="#price-sensitivity">Price sensitivity</a></li>
   </ul>
 </nav>
     </div>
@@ -282,6 +289,26 @@ p^*
 <p>The bound itself is useful (e.g.&nbsp;for algorithms), but the interpretation is much more interesting. Since <span class="math inline">d^* &gt; d</span>, we have <span class="math inline">(V + v_{\mathrm{cover}})/(V + v^*_{\mathrm{cover}}) &lt; 1</span>. The <span class="math inline">p^*</span> criterion tells us that for Costco to be worth it, it is not enough that <span class="math inline">p^* &lt; p</span>, but it needs to be less than <span class="math inline">p</span> discounted by <span class="math inline">(V + v_{\mathrm{cover}})/(V + v^*_{\mathrm{cover}})</span>, further tightened by a fraction of the premium <span class="math inline">\phi/(V + v^*_{\mathrm{cover}}) \cdot M</span>.</p>
 <p>The good thing is we know how much it is being tightened by. Let’s first isolate constant-like terms. Since the premium <span class="math inline">M</span> is beyond our control, we can treat it as a constant. In fact, we can view the distance <span class="math inline">d^*</span> to the nearest Costco petrol station as fixed since there’s really one Costco station you can go to within the proximity of your house (at least in GB). This is in contrast to the distance <span class="math inline">d</span> to the nearest petrol station which can be plenty – as we can have plenty of nearest petrol stations to choose from. We can also view the fuel economy <span class="math inline">e</span> as fixed as it’s not like we change cars every time we fill in the tank. This implies that we can view the term <span class="math inline">V + v^*_{\mathrm{cover}}</span> as a constant.</p>
 <p>Thus the tightness of the bound is really controlled by the fuelling frequency <span class="math inline">\phi</span>. The less time you go and fill your car at Costco, the bigger <span class="math inline">\phi</span> is and hence, the bigger the effect of the premium term. This implies a tighter bound! I guess this is sort of intuitive (?) I’m trying really hard to convince myself that this is the case. And note that the multipliers on <span class="math inline">p</span> and <span class="math inline">M</span> does not add up to <span class="math inline">1</span>, i.e.&nbsp;they’re not “weights” per se, so a bigger premium effect does mean pricier total cost.</p>
+<p>We can get another interesting interpretation when we look at changes in the prices. Computing partial derivatives gives us <span class="math display">
+\frac{\partial C^*}{\partial p^*} = V + v^*_{\mathrm{cover}}; \quad \frac{\partial C}{\partial p} = V + v_{\mathrm{cover}}.
+</span></p>
+<p>and we can rewrite the <span class="math inline">p^*</span> criterion with partial derivatives as follows.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="math inline">p^*</span> criterion (rate of change version)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The total cost is bounded <span class="math inline">C^* &lt; C</span> iff <span class="math display">
+p^* \frac{\partial C^*}{\partial p^*} &lt; p \frac{\partial C}{\partial p} - \phi M.
+</span></p>
+</div>
+</div>
+<p>Now this, in my opinion, is just as interesting as the interpretation we have before. This is especially true as we shall see when we consider the difference in <span class="math inline">C^*</span> and <span class="math inline">C</span> later below. The <span class="math inline">p^*</span> criterion now tells us that we can bound <span class="math inline">C^*</span> by <span class="math inline">C</span> iff the sensitivity in <span class="math inline">C^*</span> with respect to <span class="math inline">p^*</span> is bounded by the sensitivity in <span class="math inline">C</span> with respect to <span class="math inline">p</span> further tightened by the annual premium <span class="math inline">M</span>. This makes sense, and gives an extra human intuition into the criterion.</p>
 </section>
 <section id="some-actual-numbers" class="level2">
 <h2 class="anchored" data-anchor-id="some-actual-numbers">Some actual numbers</h2>
@@ -382,6 +409,14 @@ Petrol volume to fill
 <h2 class="anchored" data-anchor-id="so-is-costco-truly-worth-it">So is Costco truly worth it?</h2>
 <p>Based on today’s petrol price computation, it seems that we save <span class="math inline">\Delta := C - C^* = 2.41</span> pounds. Is it really worth it that extra time to go to Costco and save £2.41? Well, for a start, recall that <span class="math inline">p</span>, <span class="math inline">p^*</span> are random variables. This means that the savings will be a random variable as well. Now suppose we are modelling for the expectation <span class="math inline">\mathbb{E}[p]</span> and <span class="math inline">\mathbb{E}[p^*]</span> instead, what then? Well long-term savings still pile up in my opinion as the annual savings is given by <span class="math inline">\mathbb{E}[\Delta]/\phi</span>. Assuming <span class="math inline">\mathbb{E}[\Delta] = 2.41</span>, then annually we would have saved about £125. That is significant.</p>
 <p>So yes, Costco solely for the fuel is worth it in my opinion. I’m buying that membership card yesterday. And this is not a Costco ad.</p>
+</section>
+<section id="price-sensitivity" class="level2">
+<h2 class="anchored" data-anchor-id="price-sensitivity">Price sensitivity</h2>
+<p>One useful metric to compute is how sensitive is <span class="math inline">\Delta</span> to price changes in <span class="math inline">p</span> and <span class="math inline">p^*</span>. To measure this, we can compute the total differential assuming <span class="math inline">\Delta</span> is only a function of price <span class="math inline">\Delta(p, p^*</span>). The total differential can then be computed:</p>
+<p><span class="math display">
+d\Delta = \frac{\partial \Delta}{\partial p^*} dp^* + \frac{\partial \Delta}{\partial p} dp =  - (V + v^*_{\mathrm{cover}}) dp^* + (V + v_{\mathrm{cover}}) dp.
+</span></p>
+<p>Naturally, since <span class="math inline">d^* &gt; d</span>, then <span class="math inline">v^*_{\mathrm{cover}} &gt; v_{\mathrm{cover}}</span>. Consequently, a tiny change in <span class="math inline">p^*</span> would affect <span class="math inline">\Delta</span> more significantly as compared to <span class="math inline">p</span>. This is somewhat expected but it’s just nice to see our intuition being confirmed by the mathematics.</p>
 <!-- ```python
 # Annual fuelling frequency
 F = 1/52
