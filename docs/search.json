@@ -453,5 +453,12 @@
     "title": "Is Costco fuel cheaper overall given the membership premium?",
     "section": "Price sensitivity",
     "text": "Price sensitivity\nOne useful metric to compute is how sensitive is \\Delta to price changes in p and p^*. To measure this, we can compute the total differential assuming \\Delta is only a function of price \\Delta(p, p^*). The total differential can then be computed:\n\nd\\Delta = \\frac{\\partial \\Delta}{\\partial p^*} dp^* + \\frac{\\partial \\Delta}{\\partial p} dp =  - (V + v^*_{\\mathrm{cover}}) dp^* + (V + v_{\\mathrm{cover}}) dp.\n\nNaturally, since d^* &gt; d, then v^*_{\\mathrm{cover}} &gt; v_{\\mathrm{cover}}. Consequently, a tiny change in p^* would affect \\Delta more significantly as compared to p. This is somewhat expected but it’s just nice to see our intuition being confirmed by the mathematics."
+  },
+  {
+    "objectID": "posts/2024-10-17-is-costco-fuel-worth-it/index.html#one-last-thing-price-sensitivity",
+    "href": "posts/2024-10-17-is-costco-fuel-worth-it/index.html#one-last-thing-price-sensitivity",
+    "title": "Is Costco fuel cheaper overall given the membership premium?",
+    "section": "One last thing: price sensitivity",
+    "text": "One last thing: price sensitivity\nOne metric that can be important is to look at how sensitive \\Delta is relative to price changes in p and p^*. To measure this, we can compute the total differential assuming \\Delta is only a function of price \\Delta(p, p^*). The total differential can then be computed:\n\nd\\Delta = \\frac{\\partial \\Delta}{\\partial p^*} dp^* + \\frac{\\partial \\Delta}{\\partial p} dp =  - (V + v^*_{\\mathrm{cover}}) dp^* + (V + v_{\\mathrm{cover}}) dp.\n\nNaturally, since d^* &gt; d, then v^*_{\\mathrm{cover}} &gt; v_{\\mathrm{cover}}. Consequently, a tiny change in p^* would affect \\Delta more significantly as compared to p. This is somewhat expected but it’s just nice to see our intuition being confirmed by the mathematics."
   }
 ]

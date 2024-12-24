@@ -222,7 +222,7 @@ window.Quarto = {
   <li><a href="#using-the-p-criterion." id="toc-using-the-p-criterion." class="nav-link" data-scroll-target="#using-the-p-criterion.">Using the <span class="math inline">p^*</span> criterion.</a></li>
   </ul></li>
   <li><a href="#so-is-costco-truly-worth-it" id="toc-so-is-costco-truly-worth-it" class="nav-link" data-scroll-target="#so-is-costco-truly-worth-it">So is Costco truly worth it?</a></li>
-  <li><a href="#price-sensitivity" id="toc-price-sensitivity" class="nav-link" data-scroll-target="#price-sensitivity">Price sensitivity</a></li>
+  <li><a href="#one-last-thing-price-sensitivity" id="toc-one-last-thing-price-sensitivity" class="nav-link" data-scroll-target="#one-last-thing-price-sensitivity">One last thing: price sensitivity</a></li>
   </ul>
 </nav>
     </div>
@@ -410,9 +410,9 @@ Petrol volume to fill
 <p>Based on today’s petrol price computation, it seems that we save <span class="math inline">\Delta := C - C^* = 2.41</span> pounds. Is it really worth it that extra time to go to Costco and save £2.41? Well, for a start, recall that <span class="math inline">p</span>, <span class="math inline">p^*</span> are random variables. This means that the savings will be a random variable as well. Now suppose we are modelling for the expectation <span class="math inline">\mathbb{E}[p]</span> and <span class="math inline">\mathbb{E}[p^*]</span> instead, what then? Well long-term savings still pile up in my opinion as the annual savings is given by <span class="math inline">\mathbb{E}[\Delta]/\phi</span>. Assuming <span class="math inline">\mathbb{E}[\Delta] = 2.41</span>, then annually we would have saved about £125. That is significant.</p>
 <p>So yes, Costco solely for the fuel is worth it in my opinion. I’m buying that membership card yesterday. And this is not a Costco ad.</p>
 </section>
-<section id="price-sensitivity" class="level2">
-<h2 class="anchored" data-anchor-id="price-sensitivity">Price sensitivity</h2>
-<p>One useful metric to compute is how sensitive is <span class="math inline">\Delta</span> to price changes in <span class="math inline">p</span> and <span class="math inline">p^*</span>. To measure this, we can compute the total differential assuming <span class="math inline">\Delta</span> is only a function of price <span class="math inline">\Delta(p, p^*</span>). The total differential can then be computed:</p>
+<section id="one-last-thing-price-sensitivity" class="level2">
+<h2 class="anchored" data-anchor-id="one-last-thing-price-sensitivity">One last thing: price sensitivity</h2>
+<p>One metric that can be important is to look at how sensitive <span class="math inline">\Delta</span> is relative to price changes in <span class="math inline">p</span> and <span class="math inline">p^*</span>. To measure this, we can compute the total differential assuming <span class="math inline">\Delta</span> is only a function of price <span class="math inline">\Delta(p, p^*</span>). The total differential can then be computed:</p>
 <p><span class="math display">
 d\Delta = \frac{\partial \Delta}{\partial p^*} dp^* + \frac{\partial \Delta}{\partial p} dp =  - (V + v^*_{\mathrm{cover}}) dp^* + (V + v_{\mathrm{cover}}) dp.
 </span></p>

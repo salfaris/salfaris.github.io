@@ -188,9 +188,9 @@ Based on today's petrol price computation, it seems that we save $\Delta := C - 
 
 So yes, Costco solely for the fuel is worth it in my opinion. I'm buying that membership card yesterday. And this is not a Costco ad.
 
-## Price sensitivity
+## One last thing: price sensitivity
 
-One useful metric to compute is how sensitive is $\Delta$ to price changes in $p$ and $p^*$. To measure this, we can compute the total differential assuming $\Delta$ is only a function of price $\Delta(p, p^*$). The total differential can then be computed:
+One metric that can be important is to look at how sensitive $\Delta$ is relative to price changes in $p$ and $p^*$. To measure this, we can compute the total differential assuming $\Delta$ is only a function of price $\Delta(p, p^*$). The total differential can then be computed:
 
 $$
 d\Delta = \frac{\partial \Delta}{\partial p^*} dp^* + \frac{\partial \Delta}{\partial p} dp =  - (V + v^*_{\mathrm{cover}}) dp^* + (V + v_{\mathrm{cover}}) dp.
