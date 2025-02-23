@@ -1,6 +1,6 @@
 ---
 title: "Migrant pension mathematics"
-description: "To pension or not to pension as a migrant. This is a common question among migrants so let's explore both these scenarios at the extremes. In particular, I'll be looking at the extreme case of contributing to pension, get the company matching but then perform an early withdrawal. This comes at a cost of a penalty, so what would it look like then?"
+description: "To pension or not to pension as a migrant—this is a common question I get asked. So, let's explore both scenarios at the extremes. In particular, I'll examine the extreme case of contributing to a pension, receiving the company match, but then making an early withdrawal. This comes at a cost—a penalty—so what would that look like?"
 categories: [mathematical modelling, personal finance, pension]
 author: "Salman Faris"
 date: "22 02 2025"
@@ -154,12 +154,12 @@ vmax = 20
 sns.heatmap(Z*100, 
             xticklabels=[f"{val*100:.0f}" for val in c1s],
             yticklabels=[f"{val*100:.0f}" for val in ys_perc],
-            cmap=custom_cmap,  # You can change the colormap
-            annot=True,      # Show values in cells
+            cmap=custom_cmap,
+            annot=True, # Show values in cells
             fmt='.0f',
             vmax=vmax)
 
-plt.title('Company matching $c_2$ bound that makes Scenario 2 more worth it')
+plt.title('Company matching $c_2$ (%) bound that makes Scenario 2 more worth it')
 plt.xlabel('Your pension contribution $c_1$ (%)')
 plt.ylabel('Lawyer fees (as % of annual income)')
 plt.show()
