@@ -1,0 +1,97 @@
+---
+title: "Subnetwork expansion for idiots (me)"
+categories: [networks, gcp]
+author: "Salman Faris"
+date: "24 02 2025"
+jupyter: python3
+engine: python3
+format:
+  html:
+    toc: true
+    html-math-method: katex
+execute: 
+  enabled: false
+  cache: true
+# bibliography: references.bib
+draft: false
+---
+
+I am currently studying for the Associate Cloud Engineer GCP (Google Cloud Platform) certification and am battling with the virtual networks topic. There seems to be a rather modest assumption that every cloud engineer has a background in computer networking. For example, one might take a formal networks class in university. Unfortunately, I am a mathematician by training and have never taken a single class of computer networking; only YouTube is my teacher.
+
+As part of learning virtual networks, I had to learn about the IPv4 CIDR chart and subnetwork expansion via the slash notation.
+
+Now I'm pretty sure there's some kind of mathematical logic behind the relation between the slash prefixes and the number of bits that yield the number of available IP addresses. But like I said, I have never learnt this. However, I need to pass the exam and what I can do is pattern matching.
+
+Here's a CIDR chart I found from [RIPE NCC](https://www.ripe.net/about-us/press-centre/understanding-ip-addressing/).
+
+| IP Addresses | Bits | Prefix | Subnet Mask |
+|-------------|------|---------|-------------|
+| 1 | 0 | /32 | 255.255.255.255 |
+| 2 | 1 | /31 | 255.255.255.254 |
+| 4 | 2 | /30 | 255.255.255.252 |
+| 8 | 3 | /29 | 255.255.255.248 |
+| 16 | 4 | /28 | 255.255.255.240 |
+| 32 | 5 | /27 | 255.255.255.224 |
+| 64 | 6 | /26 | 255.255.255.192 |
+| 128 | 7 | /25 | 255.255.255.128 |
+| 256 | 8 | /24 | 255.255.255.0 |
+| 512 | 9 | /23 | 255.255.254.0 |
+| 1K | 10 | /22 | 255.255.252.0 |
+| 2K | 11 | /21 | 255.255.248.0 |
+| 4K | 12 | /20 | 255.255.240.0 |
+| 8K | 13 | /19 | 255.255.224.0 |
+| 16K | 14 | /18 | 255.255.192.0 |
+| 32K | 15 | /17 | 255.255.128.0 |
+| 64K | 16 | /16 | 255.255.0.0 |
+| 128K | 17 | /15 | 255.254.0.0 |
+| 256K | 18 | /14 | 255.252.0.0 |
+| 512K | 19 | /13 | 255.248.0.0 |
+| 1M | 20 | /12 | 255.240.0.0 |
+| 2M | 21 | /11 | 255.224.0.0 |
+| 4M | 22 | /10 | 255.192.0.0 |
+| 8M | 23 | /9 | 255.128.0.0 |
+| 16M | 24 | /8 | 255.0.0.0 |
+| 32M | 25 | /7 | 254.0.0.0 |
+| 64M | 26 | /6 | 252.0.0.0 |
+| 128M | 27 | /5 | 248.0.0.0 |
+| 256M | 28 | /4 | 240.0.0.0 |
+| 512M | 29 | /3 | 224.0.0.0 |
+| 1024M | 30 | /2 | 192.0.0.0 |
+| 2048M | 31 | /1 | 128.0.0.0 |
+| 4096M | 32 | /0 | 0.0.0.0 |
+
+What I observe is that the lower the forward slash prefixes, the bigger the number of IP addresses that we have available; and with each integer decrement, you gain one bit worth of IP address. So they grow exponentially in twos. I discover that the pattern is:
+
+$$
+/\sigma \mapsto 2^{32-\sigma}
+$$
+
+where $/\sigma$ is the forward slash prefix. But the first IP address (.0) is reserved for the network, and the last address is reserved for broadcast. This implies that the available number of IP addresses is:
+
+::: {.callout-note icon=false}
+
+## Subnet expansion
+
+The number of IP addresses available for a slash prefix $/\sigma$ is given by
+$$
+/\sigma \longmapsto 2^{32-\sigma} - 2
+$$
+
+:::
+
+In GCP, two additional addresses are reserved. The second IP address (.1) is reserved for the subnet gateway and the second last address is also reserved for broadcast (together with the last address). This implies that in GCP,
+
+::: {.callout-note icon=false}
+
+## GCP subnet expansion
+
+The number of IP addresses available for a slash prefix $/\sigma$ in GCP is given by
+$$
+/\sigma \longmapsto \begin{cases}
+2^{32-\sigma} - 4, & \text{if } \sigma \in \{ 0 \ldots 29 \}, \\
+0, & \text{if } \sigma \in \{ 30, 31, 32\}.
+\end{cases}
+$$
+
+:::
+
