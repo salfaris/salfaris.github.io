@@ -19,7 +19,7 @@ I was a data scientist at Dyson where I've helped critical decision-making for ~
 
 Prior to work, I studied Mathematics at King's College London, and then Computer Science at Keble College, University of Oxford.
 
-When I'm not writing code, I like to learn new things. Most recently, I'm learning to speak the Saudi dialect and aiming to get GCP-certified by the end of March. I enjoy good acoustic music and am always down for a game of table tennis, poker or chess.
+When I'm not writing code, I like to learn new things. Most recently, I'm learning to speak the Saudi dialect, learning how to play the drums and also aiming to get GCP-certified by the end of March. I enjoy good acoustic music and am always down for a game of table tennis, poker or chess.
 
 My tech stack has changed over the years, with some technologies I haven't used for quite a while now. I've done a good chunk of web dev, a bit of iOS mobile dev and a lot of research and applied machine learning. Here's my active stack:
 
