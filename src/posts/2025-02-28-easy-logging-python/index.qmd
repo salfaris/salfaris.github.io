@@ -1,0 +1,42 @@
+---
+title: "Easy logging in python"
+categories: [python, software engineering]
+author: "Salman Faris"
+date: "28 02 2025"
+jupyter: python3
+engine: python3
+format:
+  html:
+    toc: true
+    html-math-method: katex
+execute: 
+  enabled: false
+  cache: true
+# bibliography: references.bib
+draft: false
+---
+
+Don't print. Log. The easiest way to log in python has to be to add this ~~junk~~ chunk at the top of your script.
+
+```python
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,  # Set the logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    format="%(asctime)s - %(levelname)s - %(message)s",  # Define the log format
+    handlers=[
+        logging.FileHandler("logfile.txt"),  # Log to a file
+        logging.StreamHandler(),  # Log to the console
+    ],
+)
+```
+
+No package installs, everything straight out of the box. Then, you can just use
+
+```python
+logging.info(...)
+```
+
+to log. The beautiful thing about this approach is that it logs to a specified file **and** logs to the console. Want even better coverage? Write a parallel cron job that pushes the updated log file to github in a scheduled period.
+
+The days of training neural networks overnight and waking up to a dead computer with lost console logs are gone – yes, this was me in 2021... pathetic I know.
