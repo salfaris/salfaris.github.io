@@ -1,6 +1,6 @@
 ---
 title: "Easy logging in python"
-categories: [python, software engineering]
+categories: [python, software engineering, snippets]
 author: "Salman Faris"
 date: "28 02 2025"
 jupyter: python3

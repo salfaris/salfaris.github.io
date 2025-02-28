@@ -25,56 +25,72 @@
     <lastmod>2024-10-28T12:52:13.523Z</lastmod>
   </url>
   <url>
-    <loc>https://salfaris.github.io/posts/2023-03-06-ls-aws-in-python/index.html</loc>
-    <lastmod>2024-10-28T12:52:13.528Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2024-08-13-ensembling-bagging-rf/index.html</loc>
-    <lastmod>2024-10-28T12:52:13.540Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2023-03-05-clash-is-prime/index.html</loc>
-    <lastmod>2024-10-28T12:52:13.528Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2024-09-16-naivety-and-desperation-in-math-modelling/index.html</loc>
-    <lastmod>2025-02-24T19:47:35.154Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2021-04-05-newton-method/index.html</loc>
+    <loc>https://salfaris.github.io/posts/2021-04-05-first-post/index.html</loc>
     <lastmod>2024-10-28T12:52:13.520Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2024-09-16-latte-art-light-dark-roasts/index.html</loc>
-    <lastmod>2024-10-28T12:52:13.542Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2024-08-04-quantum-fibonacci/index.html</loc>
-    <lastmod>2024-10-28T12:52:13.539Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2021-05-03-unit-testing-with-pytest/index.html</loc>
-    <lastmod>2024-10-28T12:52:13.526Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2024-08-30-searching-song-in-deep-playlist/index.html</loc>
-    <lastmod>2024-10-28T12:52:13.540Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2024-10-03-how-to-ask-amex-retention-offer/index.html</loc>
-    <lastmod>2024-10-28T12:52:13.542Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2021-08-18-coding-kata/index.html</loc>
-    <lastmod>2024-10-28T12:52:13.526Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/posts/2021-06-13-plotly-theme-in-react-plotly-js/index.html</loc>
     <lastmod>2024-10-28T12:52:13.526Z</lastmod>
   </url>
   <url>
-    <loc>https://salfaris.github.io/posts/2021-04-05-first-post/index.html</loc>
+    <loc>https://salfaris.github.io/posts/2021-08-18-coding-kata/index.html</loc>
+    <lastmod>2024-10-28T12:52:13.526Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2024-10-03-how-to-ask-amex-retention-offer/index.html</loc>
+    <lastmod>2024-10-28T12:52:13.542Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2025-01-05-migrant-pension-mathematics/index.html</loc>
+    <lastmod>2025-02-28T08:00:40.127Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2024-08-30-searching-song-in-deep-playlist/index.html</loc>
+    <lastmod>2024-10-28T12:52:13.540Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2021-05-03-unit-testing-with-pytest/index.html</loc>
+    <lastmod>2024-10-28T12:52:13.526Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2025-02-28-easy-logging-python/index.html</loc>
+    <lastmod>2025-02-28T16:29:50.582Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2024-08-04-quantum-fibonacci/index.html</loc>
+    <lastmod>2024-10-28T12:52:13.539Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2024-09-16-latte-art-light-dark-roasts/index.html</loc>
+    <lastmod>2024-10-28T12:52:13.542Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2021-04-05-newton-method/index.html</loc>
     <lastmod>2024-10-28T12:52:13.520Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2024-09-16-naivety-and-desperation-in-math-modelling/index.html</loc>
+    <lastmod>2025-02-24T19:47:35.154Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2025-02-24-subnet-expansion-for-idiots/index.html</loc>
+    <lastmod>2025-02-24T19:30:53.714Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2023-03-05-clash-is-prime/index.html</loc>
+    <lastmod>2025-02-28T16:29:40.463Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2024-08-13-ensembling-bagging-rf/index.html</loc>
+    <lastmod>2025-02-28T16:29:47.983Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2023-03-06-ls-aws-in-python/index.html</loc>
+    <lastmod>2025-02-28T16:29:45.968Z</lastmod>
+  </url>
+  <url>
+    <loc>https://salfaris.github.io/posts/2025-02-27-another-mensa-puzzle/index.html</loc>
+    <lastmod>2025-02-28T07:59:22.908Z</lastmod>
   </url>
   <url>
     <loc>https://salfaris.github.io/posts/2021-09-07-preparing-image-dataset-in-pytorch/index.html</loc>
@@ -95,25 +111,5 @@
   <url>
     <loc>https://salfaris.github.io/about.html</loc>
     <lastmod>2025-02-28T08:23:04.981Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2025-01-05-to-pension-or-not/index.html</loc>
-    <lastmod>2025-02-23T09:50:21.158Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2025-01-05-migrant-pension-mathematics/index.html</loc>
-    <lastmod>2025-02-28T08:00:40.127Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2025-02-24-subnet-expansion-for-idiots/index.html</loc>
-    <lastmod>2025-02-24T19:30:53.714Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2025-02-27-another-mensa-puzzle/index.html</loc>
-    <lastmod>2025-02-28T07:59:22.908Z</lastmod>
-  </url>
-  <url>
-    <loc>https://salfaris.github.io/posts/2025-02-28-easy-logging-python/index.html</loc>
-    <lastmod>2025-02-28T08:20:57.174Z</lastmod>
   </url>
 </urlset>
