@@ -18,15 +18,15 @@ draft: false
 
 My friend Zatyhan dropped me with yet another Menza puzzle so I decided to attempt it.
 
-This is Menza Puzzle 877 from the Jan/Feb 2025 The Actuary edition titled Windfall win.
+This is Menza Puzzle 877 from the The Actuary Jan/Feb 2025 edition titled Windfall win.
 
 > **Windfall win**. "A bank cashier making a payment to a customer transposed the pounds and pence, which gave the customer far too much money. After the customer had spent £18.85, he still had twice the amount he should have received from the cashier. How much should they have received if there hadn't been an error?"
 
 Now I was quite furious with how the puzzle was written since it felt confusing at first, second and even a third glance. It felt like Mensa is testing for my English skills rather than my problem solving ability.
 
-What we settled on is that there are four parts to focus on here:
+What I settled on is that there are four parts to focus on here:
 
-1. "A bank cashier making a payment to a customer transposed the pounds and pence, which gave the customer far too much money" – OK. Note the word _bank cashier_ pays to a _customer_. It is also unsettling for me that _transpose_ is not properly defined.
+1. "A bank cashier making a payment to a customer transposed the pounds and pence, which gave the customer far too much money" – OK. Note the word _bank cashier_ pays to a _customer_. It is also unsettling for me that _transpose_ is not properly defined, and this will lead to problems as we shall see.
 2. "After the customer had spent £18.85" – this money was spent elsewhere by the _customer_!
 3. "he still had twice the amount he should have received from the cashier." – cashier here is referring to the _bank cashier_! Yeah wth?!
 4. "How much should they have received if there hadn't been an error?" – he should received from the _bank cashier_ had there not been an error.
@@ -35,9 +35,9 @@ What we settled on is that there are four parts to focus on here:
 
 So modelling this, we have:
 
-1. The bank cashier pays the customer a sum $S = 100p + x$ where $x$ is the number in pounds and $p$ in pence. Here I convert the pounds part to pence by multiplying by 100. The paid sum was done by mistake and the bank cashier should have paid the customer $S' = 100x + p$ instead which is the transposed amount but written in only pence.
+1. The bank cashier is supposed to pay the customer a sum $S' = 100x + p$ where $x$ is the number in pounds and $p$ in pence. Here I convert the pounds part to pence by multiplying by 100. The paid sum was done by a mistake, where the pounds and pence are transposed (i.e. swapped), so the bank cashier paid the customer an error sum of $S = 100p + x$ instead.
 2. The customer spends £18.85 and gets a change $C = S - 18.85$.
-3. But the change is still twice the amount he should have received from the bank cashier. So he obtained $C = 2S'$ when it should have been $S' - 18.85$.
+3. But the change is still twice the amount he should have received from the bank cashier. So he obtained $2S'$ when it should have been $S' - 18.85$.
 4. The question is, what is $S'$?
 
 ## Solving the problem
@@ -84,18 +84,22 @@ $$
 
 for any integer $k \in \mathbb{Z}$.
 
-Now $x$ and $p$ have to be positive numbers since we are dealing with money remember. We found that $x \geqslant 0$ and $p \geqslant 0$ iff $k \geqslant 635$.
+Now $x$ and $p$ have to be positive numbers since we are dealing with money. We found that both $x \geqslant 0$ and $p \geqslant 0$ are satisfied iff
 
-So with $k = 635$, we obtain the first solution to the problem is $x = 25, p = 70$ or equivalently, £25.70.
+$$
+k > \left\lfloor \max \left\{ \frac{62205}{98}, \frac{126295}{199} \right\} \right\rfloor = 634.
+$$
 
-In fact, this is the unique solution to the problem... in some sense... which I don't really agree to. 
+So putting $k = 635$, we obtain the first solution to the problem which is $x = 25, p = 70$ or equivalently, £25.70.
 
-Here's the argument. If $k = 636$, we obtain the pair $x = 123, p = 269$ or equivalently £125.69. In this case, the bank cashier mistakenly gave £270.23 to our customer and we can verify that indeed this number satisfies our problem
+In fact, this is the unique solution to the problem... in some sense... which I only partially agree to. 
+
+Here's the argument. If $k = 636$, we obtain the next solution pair of $x = 123, p = 269$ or equivalently, £125.69. In this case, the bank cashier mistakenly gave £270.23 to our customer and we can verify that indeed this number satisfies our problem
 
 $$
 \underbrace{270.23}_{=S} - 18.85 = 251.38 = 2 ( \underbrace{125.69}_{=S'}).
 $$
 
-The problem is that the mistake that bank cashier made was _transposing_ the pounds and the pence, and that the act of transposing only makes sense if both the pounds and the pence are two digits. So £125.69 being the supposed change being "directly" transposed would have given £69.125. Whereas I would have appropriated the transpose to be £69 and 125 pence which gives £70.25. 
+The problem is that the mistake that the bank cashier made was _transposing_ the pounds and the pence, and that you can argue that the act of transposing only makes sense if both the pounds and the pence are two digits. So £125.69 being the supposed change being "directly" transposed would have given £69.125. Whereas I would have appropriated the transpose to be £69 and 125 pence which gives £70.25. 
 
 So there's this ambiguity that would have been resolved had "transpose" been properly defined. In this sense, any solution with more than two digits in $x$ or $p$ would have been disregarded. And it's obvious then that only $x = 25, p = 70$ gives the correct solution within the problem's (not very well-defined) constraints.

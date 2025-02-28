@@ -220,14 +220,14 @@ window.Quarto = {
 
 
 <p>My friend Zatyhan dropped me with yet another Menza puzzle so I decided to attempt it.</p>
-<p>This is Menza Puzzle 877 from the Jan/Feb 2025 The Actuary edition titled Windfall win.</p>
+<p>This is Menza Puzzle 877 from the The Actuary Jan/Feb 2025 edition titled Windfall win.</p>
 <blockquote class="blockquote">
 <p><strong>Windfall win</strong>. “A bank cashier making a payment to a customer transposed the pounds and pence, which gave the customer far too much money. After the customer had spent £18.85, he still had twice the amount he should have received from the cashier. How much should they have received if there hadn’t been an error?”</p>
 </blockquote>
 <p>Now I was quite furious with how the puzzle was written since it felt confusing at first, second and even a third glance. It felt like Mensa is testing for my English skills rather than my problem solving ability.</p>
-<p>What we settled on is that there are four parts to focus on here:</p>
+<p>What I settled on is that there are four parts to focus on here:</p>
 <ol type="1">
-<li>“A bank cashier making a payment to a customer transposed the pounds and pence, which gave the customer far too much money” – OK. Note the word <em>bank cashier</em> pays to a <em>customer</em>. It is also unsettling for me that <em>transpose</em> is not properly defined.</li>
+<li>“A bank cashier making a payment to a customer transposed the pounds and pence, which gave the customer far too much money” – OK. Note the word <em>bank cashier</em> pays to a <em>customer</em>. It is also unsettling for me that <em>transpose</em> is not properly defined, and this will lead to problems as we shall see.</li>
 <li>“After the customer had spent £18.85” – this money was spent elsewhere by the <em>customer</em>!</li>
 <li>“he still had twice the amount he should have received from the cashier.” – cashier here is referring to the <em>bank cashier</em>! Yeah wth?!</li>
 <li>“How much should they have received if there hadn’t been an error?” – he should received from the <em>bank cashier</em> had there not been an error.</li>
@@ -236,9 +236,9 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="modelling-this">Modelling this</h2>
 <p>So modelling this, we have:</p>
 <ol type="1">
-<li>The bank cashier pays the customer a sum <span class="math inline">S = 100p + x</span> where <span class="math inline">x</span> is the number in pounds and <span class="math inline">p</span> in pence. Here I convert the pounds part to pence by multiplying by 100. The paid sum was done by mistake and the bank cashier should have paid the customer <span class="math inline">S' = 100x + p</span> instead which is the transposed amount but written in only pence.</li>
+<li>The bank cashier is supposed to pay the customer a sum <span class="math inline">S' = 100x + p</span> where <span class="math inline">x</span> is the number in pounds and <span class="math inline">p</span> in pence. Here I convert the pounds part to pence by multiplying by 100. The paid sum was done by a mistake, where the pounds and pence are transposed (i.e.&nbsp;swapped), so the bank cashier paid the customer an error sum of <span class="math inline">S = 100p + x</span> instead.</li>
 <li>The customer spends £18.85 and gets a change <span class="math inline">C = S - 18.85</span>.</li>
-<li>But the change is still twice the amount he should have received from the bank cashier. So he obtained <span class="math inline">C = 2S'</span> when it should have been <span class="math inline">S' - 18.85</span>.</li>
+<li>But the change is still twice the amount he should have received from the bank cashier. So he obtained <span class="math inline">2S'</span> when it should have been <span class="math inline">S' - 18.85</span>.</li>
 <li>The question is, what is <span class="math inline">S'</span>?</li>
 </ol>
 </section>
@@ -273,14 +273,17 @@ p &amp;= -126295 + 199k,
 \end{align*}
 </span></p>
 <p>for any integer <span class="math inline">k \in \mathbb{Z}</span>.</p>
-<p>Now <span class="math inline">x</span> and <span class="math inline">p</span> have to be positive numbers since we are dealing with money remember. We found that <span class="math inline">x \geqslant 0</span> and <span class="math inline">p \geqslant 0</span> iff <span class="math inline">k \geqslant 635</span>.</p>
-<p>So with <span class="math inline">k = 635</span>, we obtain the first solution to the problem is <span class="math inline">x = 25, p = 70</span> or equivalently, £25.70.</p>
-<p>In fact, this is the unique solution to the problem… in some sense… which I don’t really agree to.</p>
-<p>Here’s the argument. If <span class="math inline">k = 636</span>, we obtain the pair <span class="math inline">x = 123, p = 269</span> or equivalently £125.69. In this case, the bank cashier mistakenly gave £270.23 to our customer and we can verify that indeed this number satisfies our problem</p>
+<p>Now <span class="math inline">x</span> and <span class="math inline">p</span> have to be positive numbers since we are dealing with money. We found that both <span class="math inline">x \geqslant 0</span> and <span class="math inline">p \geqslant 0</span> are satisfied iff</p>
+<p><span class="math display">
+k &gt; \left\lfloor \max \left\{ \frac{62205}{98}, \frac{126295}{199} \right\} \right\rfloor = 634.
+</span></p>
+<p>So putting <span class="math inline">k = 635</span>, we obtain the first solution to the problem which is <span class="math inline">x = 25, p = 70</span> or equivalently, £25.70.</p>
+<p>In fact, this is the unique solution to the problem… in some sense… which I only partially agree to.</p>
+<p>Here’s the argument. If <span class="math inline">k = 636</span>, we obtain the next solution pair of <span class="math inline">x = 123, p = 269</span> or equivalently, £125.69. In this case, the bank cashier mistakenly gave £270.23 to our customer and we can verify that indeed this number satisfies our problem</p>
 <p><span class="math display">
 \underbrace{270.23}_{=S} - 18.85 = 251.38 = 2 ( \underbrace{125.69}_{=S'}).
 </span></p>
-<p>The problem is that the mistake that bank cashier made was <em>transposing</em> the pounds and the pence, and that the act of transposing only makes sense if both the pounds and the pence are two digits. So £125.69 being the supposed change being “directly” transposed would have given £69.125. Whereas I would have appropriated the transpose to be £69 and 125 pence which gives £70.25.</p>
+<p>The problem is that the mistake that the bank cashier made was <em>transposing</em> the pounds and the pence, and that you can argue that the act of transposing only makes sense if both the pounds and the pence are two digits. So £125.69 being the supposed change being “directly” transposed would have given £69.125. Whereas I would have appropriated the transpose to be £69 and 125 pence which gives £70.25.</p>
 <p>So there’s this ambiguity that would have been resolved had “transpose” been properly defined. In this sense, any solution with more than two digits in <span class="math inline">x</span> or <span class="math inline">p</span> would have been disregarded. And it’s obvious then that only <span class="math inline">x = 25, p = 70</span> gives the correct solution within the problem’s (not very well-defined) constraints.</p>
 
 
