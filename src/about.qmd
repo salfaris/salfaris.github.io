@@ -23,10 +23,11 @@ When I'm not writing code, I like to learn new things. Most recently, I'm learni
 
 My tech stack has changed over the years, with some technologies I haven't used for quite a while now. I've done a good chunk of web dev, a bit of iOS mobile dev and a lot of research and applied machine learning. Here's my active stack:
 
-- Programming languages: **Python**. _Prior experiences - R, C, Swift_
-- DevOps: Git, Docker, **Terraform**
-- Cloud dev: **GCP**
-- Data analysis: **SQL**, **PySpark**, PyData stack, Plotly, NetworkX, Google BigQuery, AWS Redshift
+- Programming languages: Python. // _Prior experiences - R, C, Swift_
+- Cloud dev: GCP
+- Data engineering: Apache Airflow & Google Cloud Composer, SQL, PySpark
+- DevOps: Git, Docker, Terraform
+- Data analysis: PyData stack, Plotly, NetworkX, Google BigQuery, AWS Redshift
 - Machine learning: scikit-learn, statsmodels, scipy, PyMC3, PyTorch, Jax
 - Web & dashboard: HTML/CSS/JavaScript, ReactJS, Flask, Streamlit, Tableau
 - Others: LaTeX
