@@ -1,6 +1,6 @@
 ---
 title: "about"
-image: avatar_new.jpg
+image: avatar_new2.jpg
 about:
   template: solana
   image-width: 10em
@@ -35,7 +35,7 @@ I enjoy good acoustic music and am always down for a game of table tennis, poker
 
 My tech stack has changed over the years, with some technologies I haven't used for quite a while now. I've done a good chunk of web dev, a bit of iOS mobile dev and a lot of research and applied machine learning. Here's my active stack:
 
-- Languages: Python, SQL // _Prior experiences - R, C, Swift_
+- Languages: Python, SQL // _Prior experiences in R, C, Swift_
 - Data pipelines: Apache Airflow & Google Cloud Composer, PySpark, Vertex AI Pipelines 
 - Machine learning: Scikit-Learn, PyTorch, JAX, PyMC  
 - Deployment: Git, Docker, Terraform
