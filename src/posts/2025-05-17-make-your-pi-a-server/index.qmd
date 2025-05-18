@@ -1,5 +1,5 @@
 ---
-title: "Let's host an Apache server on a Raspberry Pi" 
+title: "How to SSH into a Raspberry Pi" 
 categories: [networking, raspberry pi]
 author: "Salman Faris"
 date: "17 05 2025"
@@ -28,7 +28,7 @@ Hardware
 
 We can use the Raspberry Pi Imager to do this. Download the imager (https://www.raspberrypi.com/software/)[here].
 
-Once you have the Raspberry Pi Imager downloaded, plug in your SD card into your machine and verify that your machine finds it.
+Once you have the Raspberry Pi Imager downloaded, plug in your SD card into your machine (i.e. your Mac/Windows/Linux) and verify that your machine finds it.
 
 Then open the Imager, choose your Raspberry Pi device, mine is a 4. Then choose the Raspbian 64 OS and proceed to use your SD card as your storage.
 
@@ -37,3 +37,24 @@ When you hit next, it will ask if you want to apply OS customisation settings. T
 Here, you can set a username and password if you don't want the default username:pi password:raspberry. Most importantly you want to enter your wifi SSID and password here so that your machine can find your Pi over private IP. On the services section, you can let the default settings which basically says to use your Pi authentication to allow for SSH.
 
 Now wait maybe around 45 minutes for the Imager to write (or overwrite) your SD card and verify the installation.
+
+## Boot the Pi
+
+The next step is pretty straightforward. Insert the SD card into the Pi and plug in the power cable. You want to wait maybe like 5 minutes for your Pi to boot and connect to your wifi network that you have setup during flashing.
+
+## Find the Raspberry Pi IP address
+
+Now that it's hopefully connected to your wifi network, go back to your machine. You now have two options to find your Pi's private IP address:
+
+1. Manual router approach: Find all the connected devices on your router's dashboard and look for a hostname like `raspberrypi` or something that has the word Raspberry or Pi in it. 
+2. nmap: Open your terminal. Use the network scanner `nmap`. Find your IP by running something like `ifconfig | grep en0 -A 2`. Infer your IP range from your private IP to get something like 192.168.0.0/24. Then run `sudo nmap -sn 192.168.0.0/24` and find anything that has the word Raspberry on it.
+
+In both methods, get the private IP address, something like 192.168.0.XXX and then export this as a variable `export PI_IP=192.168.0.XXX` in your terminal.
+
+## SSH into your Pi
+
+Optional but try to ping your Pi. What happened to me was that I copied the wrong IP address when I was network scanning. So send three packets by running `ping -c 3 $PI_IP`.
+
+Then ssh into your pi by running `ssh pi@$PI_IP`. If you didn't set a username and password, your username is `pi` and your password is `raspberry`. Change this after successfully ssh-ing into your Pi using the `passwd` command.
+
+And there you have it, your are now in your Pi!
