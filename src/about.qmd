@@ -25,7 +25,7 @@ Prior to work, I studied Mathematics at King's College London, and then Computer
 
 When I'm not writing code, I like to learn new things and sharpen my skills.
 
-Most recently, I'm learning ice skating and trying to aim for Skate Excellence Grade 3. I am also sharpening my chess knowledge on openings - currently ~memorizing~ mastering the Scotch gambit.
+Most recently, I'm learning ice skating and trying to aim for Skate Excellence Grade 3. I am also sharpening my chess knowledge on openings - currently ~memorizing~ mastering the Scotch game.
 
 In 2025 so far, I've been learning to speak the Saudi dialect, playing around with a Raspberry Pi, did 30+ hours of Google Cloud training and strengthening my Vim skills among many other things.
 
