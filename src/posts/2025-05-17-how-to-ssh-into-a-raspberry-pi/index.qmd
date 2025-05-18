@@ -1,6 +1,6 @@
 ---
-title: "How to SSH into a Raspberry Pi" 
-categories: [networking, raspberry pi]
+title: "How to ssh into a Raspberry Pi" 
+categories: [raspberry pi, networks]
 author: "Salman Faris"
 date: "17 05 2025"
 jupyter: python3
