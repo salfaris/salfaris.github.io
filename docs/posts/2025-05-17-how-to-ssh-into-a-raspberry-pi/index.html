@@ -167,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#flash-the-raspberry-pi-os-onto-the-sd-card" id="toc-flash-the-raspberry-pi-os-onto-the-sd-card" class="nav-link active" data-scroll-target="#flash-the-raspberry-pi-os-onto-the-sd-card">Flash the Raspberry Pi OS onto the SD card</a></li>
   <li><a href="#boot-the-pi" id="toc-boot-the-pi" class="nav-link" data-scroll-target="#boot-the-pi">Boot the Pi</a></li>
   <li><a href="#find-the-raspberry-pi-ip-address" id="toc-find-the-raspberry-pi-ip-address" class="nav-link" data-scroll-target="#find-the-raspberry-pi-ip-address">Find the Raspberry Pi IP address</a></li>
-  <li><a href="#ssh-into-your-pi" id="toc-ssh-into-your-pi" class="nav-link" data-scroll-target="#ssh-into-your-pi">SSH into your Pi</a></li>
+  <li><a href="#ssh-into-your-pi" id="toc-ssh-into-your-pi" class="nav-link" data-scroll-target="#ssh-into-your-pi">ssh into your Pi</a></li>
   </ul>
 </nav>
     </div>
@@ -178,8 +178,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>I have a spare Raspberry Pi 4 that my brother gave to me about 4 years ago. I rarely get gifts in my family, so it’s something that I quite treasure. I just never had the time to do anything meaningful with it… until now.</p>
-<p>In the coming weeks, we’ll be looking into hosting an Apache server on a Pi and possibly do something more (I have some interesting ideas in plan). The first step to all that is to be able to setup the Pi and SSH into it - I don’t want to use an extra monitor just for using my Pi so we shall look at how to do a headless setup for our Pi.</p>
+<p>I have a spare Raspberry Pi 4 that my brother Zubair gave to me almost 5 years ago. I rarely get gifts in my family, so it’s something that I quite treasure. I just never had the time to do anything meaningful with it because I was so busy with first university, then starting a new job… until now.</p>
+<p>In the coming weeks, I’ll be looking into hosting an Apache server on a Pi and possibly do something more (I have some interesting ideas in plan). The first step to all that is to be able to setup the Pi and ssh into it - I don’t want to use an extra monitor just for using my Pi so we shall look at how to do a headless setup for our Pi.</p>
 <p>Before we proceed, here’s a list of hardware that we will need:</p>
 <ul>
 <li>Raspberry Pi (obviously) + SD card</li>
@@ -191,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Once you have the Raspberry Pi Imager downloaded, plug in your SD card into your machine (i.e.&nbsp;your Mac/Windows/Linux) and verify that your machine finds it.</p>
 <p>Then open the Imager, choose your Raspberry Pi device, mine is a 4. Then choose the Raspbian 64 OS and proceed to use your SD card as your storage.</p>
 <p>When you hit next, it will ask if you want to apply OS customisation settings. This is an important step, so click EDIT SETTINGS.</p>
-<p>Here, you can set a username and password if you don’t want the default <code>username:pi</code> and <code>password:raspberry</code>. Most importantly you want to enter your wifi SSID and password here so that your machine can find your Pi over private IP. On the services section, you can let the default settings which basically says to use your Pi authentication to allow for SSH.</p>
+<p>Here, you can set a username and password if you don’t want the default <code>username:pi</code> and <code>password:raspberry</code>. Most importantly you want to enter your wifi SSID and password here so that your machine can find your Pi over private IP. On the services section, you can let the default settings which basically says to use your Pi authentication to allow for ssh.</p>
 <p>Now wait maybe around 45 minutes for the Imager to write (or overwrite) your SD card and verify the installation.</p>
 </section>
 <section id="boot-the-pi" class="level2">
@@ -208,7 +208,7 @@ ul.task-list li input[type="checkbox"] {
 <p>In both methods, get the private IP address, something like 192.168.0.XXX and then export this as a variable <code>export PI_IP=192.168.0.XXX</code> in your terminal.</p>
 </section>
 <section id="ssh-into-your-pi" class="level2">
-<h2 class="anchored" data-anchor-id="ssh-into-your-pi">SSH into your Pi</h2>
+<h2 class="anchored" data-anchor-id="ssh-into-your-pi">ssh into your Pi</h2>
 <p>Optional but try to ping your Pi. What happened to me was that I copied the wrong IP address when I was network scanning. So send three packets by running <code>ping -c 3 $PI_IP</code>. If this is successful, it’s time to ssh into the Pi.</p>
 <p>You can ssh into your pi by running <code>ssh pi@$PI_IP</code>. If you didn’t set a username and password, your username is <code>pi</code> and your password is <code>raspberry</code>. Change this after successfully ssh-ing into your Pi using the <code>passwd</code> command. Otherwise, use the username and password that you have setup during flashing.</p>
 <p>And there you have it, your are now in your Pi!</p>
