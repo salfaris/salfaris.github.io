@@ -18,15 +18,16 @@ draft: false
 
 I have a spare Raspberry Pi 4 that my brother gave to me about 4 years ago. I rarely get gifts in my family, so it's something that I quite treasure. I just never had the time to do anything meaningful with it... until now.
 
-Today, we'll be looking into hosting an Apache server on a Pi. The important bit is that we will be using a *headless* setup which means that we will not need an extra monitor screen; rather, we will just ssh into the Pi.
+In the coming weeks, we'll be looking into hosting an Apache server on a Pi and possibly do something more (I have some interesting ideas in plan). The first step to all that is to be able to setup the Pi and SSH into it - I don't want to use an extra monitor just for using my Pi so we shall look at how to do a headless setup for our Pi.
 
-Hardware
+Before we proceed, here's a list of hardware that we will need: 
+
 - Raspberry Pi (obviously) + SD card
 - SD Card Reader (!)
 
 ## Flash the Raspberry Pi OS onto the SD card
 
-We can use the Raspberry Pi Imager to do this. Download the imager (https://www.raspberrypi.com/software/)[here].
+We can use the Raspberry Pi Imager to do this. Download the imager [here](https://www.raspberrypi.com/software/).
 
 Once you have the Raspberry Pi Imager downloaded, plug in your SD card into your machine (i.e. your Mac/Windows/Linux) and verify that your machine finds it.
 
@@ -34,7 +35,7 @@ Then open the Imager, choose your Raspberry Pi device, mine is a 4. Then choose 
 
 When you hit next, it will ask if you want to apply OS customisation settings. This is an important step, so click EDIT SETTINGS.
 
-Here, you can set a username and password if you don't want the default username:pi password:raspberry. Most importantly you want to enter your wifi SSID and password here so that your machine can find your Pi over private IP. On the services section, you can let the default settings which basically says to use your Pi authentication to allow for SSH.
+Here, you can set a username and password if you don't want the default `username:pi` and `password:raspberry`. Most importantly you want to enter your wifi SSID and password here so that your machine can find your Pi over private IP. On the services section, you can let the default settings which basically says to use your Pi authentication to allow for SSH.
 
 Now wait maybe around 45 minutes for the Imager to write (or overwrite) your SD card and verify the installation.
 
@@ -53,8 +54,10 @@ In both methods, get the private IP address, something like 192.168.0.XXX and th
 
 ## SSH into your Pi
 
-Optional but try to ping your Pi. What happened to me was that I copied the wrong IP address when I was network scanning. So send three packets by running `ping -c 3 $PI_IP`.
+Optional but try to ping your Pi. What happened to me was that I copied the wrong IP address when I was network scanning. So send three packets by running `ping -c 3 $PI_IP`. If this is successful, it's time to ssh into the Pi.
 
-Then ssh into your pi by running `ssh pi@$PI_IP`. If you didn't set a username and password, your username is `pi` and your password is `raspberry`. Change this after successfully ssh-ing into your Pi using the `passwd` command.
+You can ssh into your pi by running `ssh pi@$PI_IP`. If you didn't set a username and password, your username is `pi` and your password is `raspberry`. Change this after successfully ssh-ing into your Pi using the `passwd` command. Otherwise, use the username and password that you have setup during flashing.
 
 And there you have it, your are now in your Pi!
+
+In the upcoming posts, we shall look into how we can host a server on our up-and-running Pi.
