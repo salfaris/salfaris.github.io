@@ -1,0 +1,39 @@
+---
+title: "Let's host an Apache server on a Raspberry Pi" 
+categories: [networking, raspberry pi]
+author: "Salman Faris"
+date: "17 05 2025"
+jupyter: python3
+engine: python3
+format:
+  html:
+    toc: true
+    html-math-method: katex
+execute: 
+  enabled: false
+  cache: true
+# bibliography: references.bib
+draft: false
+---
+
+I have a spare Raspberry Pi 4 that my brother gave to me about 4 years ago. I rarely get gifts in my family, so it's something that I quite treasure. I just never had the time to do anything meaningful with it... until now.
+
+Today, we'll be looking into hosting an Apache server on a Pi. The important bit is that we will be using a *headless* setup which means that we will not need an extra monitor screen; rather, we will just ssh into the Pi.
+
+Hardware
+- Raspberry Pi (obviously) + SD card
+- SD Card Reader (!)
+
+## Flash the Raspberry Pi OS onto the SD card
+
+We can use the Raspberry Pi Imager to do this. Download the imager (https://www.raspberrypi.com/software/)[here].
+
+Once you have the Raspberry Pi Imager downloaded, plug in your SD card into your machine and verify that your machine finds it.
+
+Then open the Imager, choose your Raspberry Pi device, mine is a 4. Then choose the Raspbian 64 OS and proceed to use your SD card as your storage.
+
+When you hit next, it will ask if you want to apply OS customisation settings. This is an important step, so click EDIT SETTINGS.
+
+Here, you can set a username and password if you don't want the default username:pi password:raspberry. Most importantly you want to enter your wifi SSID and password here so that your machine can find your Pi over private IP. On the services section, you can let the default settings which basically says to use your Pi authentication to allow for SSH.
+
+Now wait maybe around 45 minutes for the Imager to write (or overwrite) your SD card and verify the installation.
